@@ -16,6 +16,7 @@ prototypeFunction(Array, 'randomIndex', function () {
     return Math.floor(Math.random() * this.length);
 })
 
+
 function prototypeFunction (type, name, func) {
     Object.defineProperty(type['prototype'], name, {
         value: func

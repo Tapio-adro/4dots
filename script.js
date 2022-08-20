@@ -42,7 +42,7 @@ let teams, cellsGrid;
 setupGridAndTeams();
 checkOnStart();
 
-console.log(teams[0]);
+// console.log(teams[0]);
 nextTeam(); 
 document.addEventListener('keydown', checkKeyInput)
 

@@ -3,7 +3,7 @@
 :root {
     --cellTransition: 0.5s;
 
-    --zoomLevel: 0.7;
+    --zoomLevel: 1;
 }
 #window {
     zoom: var(--zoomLevel);
