@@ -4,7 +4,7 @@ function Cells(size) {
 	this.grid = [];
 	this.array = [];
     this.misc = {
-        resetBorderWidth: modules.betterBorders ? '1px' : '2px'
+        resetBorderWidth: gameOptionsValues.betterBorders ? '1px' : '2px'
     }
     this.modules = {
         betterBorders: {
@@ -97,7 +97,7 @@ Cells.prototype.setTeams = function(teams, start_dots, playersCoords) {
         cell.borderColor = `rgb(${color})`;
         cell.color = color;
         cell.dots = start_dots;
-        cell.borderWidth = modules.betterBorders ? '5px' : '3px';
+        cell.borderWidth = gameOptionsValues.betterBorders ? '5px' : '3px';
 
         team.coreCell = cell;
         team.dotsAmount = start_dots;
@@ -157,7 +157,7 @@ Cells.prototype.createField = function(field) {
         field.append(tr);
     }
 
-    gameModes.homeDef.createHomeAreaElements(); 
+    gameRules.homeDef.createHomeAreaElements(); 
 
 
     // for (let i = 0; i < this.grid.length; i++) {
@@ -455,7 +455,7 @@ Cell.prototype.addDot = function (cellParent) {
     this.setInner(this.dots);
     this.setStyle();
     if (this.dots <= 3) {
-        gameModules.betterBorders.setCellBorder(this);
+        gameOptions.betterBorders.setCellBorder(this);
     }
 };
 

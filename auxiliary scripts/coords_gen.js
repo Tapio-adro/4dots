@@ -106,7 +106,6 @@ function getPlayerCoords (size, playersNum) {
     return grid.getBySymbol(SYMBOLS.player);
 }
 
-
 function getCoordsAround (dotX, dotY, rd) {
     let coordsDot = {x: -rd + dotX, y: rd + dotY};
     let coords = [];

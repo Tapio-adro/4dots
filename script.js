@@ -20,9 +20,12 @@ let recording = [];
 let doRecording;
 let doStatistics;
 var maxOptimization;
-var modules = {
-    betterBorders: 1
-}
+var gameOptionsValues = {
+    betterBorders: 0
+};
+var gameRulesValues = {
+    homeDef: 0
+};
 
 
 // doRecording = true;
@@ -33,8 +36,7 @@ let speedMode = 0;
 
 let gridSize = 9;
 let playersAmount = 4;
-let botsAmount = 3;
-var gameMode = 'home_def';
+let botsAmount = 4;
 
 let teams, cellsGrid;
 
@@ -63,7 +65,7 @@ function nextTeam () {
         curTeam.canDot = true;
 
         highlightTeam();
-        gameModes.homeDef.hideHomeAreaOnPlayerTurn(teams);
+        gameRules.homeDef.hideHomeAreaOnPlayerTurn(teams);
     
         checkIfBot();
     }, teamChangeSpeed)
@@ -95,7 +97,7 @@ function updateGameState () {
             checkCellsState();
         }, cellsCheckSpeed) : 
             (function () {
-                gameModules.betterBorders.updateBorders(cellsGrid);
+                gameOptions.betterBorders.updateBorders(cellsGrid);
                 if (curTeamIndex == teams.length) {nextCycle();};
                 nextTeam();
             })();
@@ -107,7 +109,7 @@ function tryAddDot () {
     let cell = cellsGrid.cell(x, y);
     if (cell && cell.color == curTeam.color) {
         unlightPreviousTeam();
-        gameModes.homeDef.showHomeAreaOnPlayerTurn(teams);
+        gameRules.homeDef.showHomeAreaOnPlayerTurn(teams);
         curTeam.canDot = false;
         cell.addDot();
         return true;
@@ -134,9 +136,9 @@ function checkOnStart () {
     checkStatisticsElems();
     updateStatistics();
 
-    setTimeout(() => {gameModes.homeDef.resizeHomeAreaElements();}, 10)
+    setTimeout(() => {gameRules.homeDef.resizeHomeAreaElements();}, 10)
     
-    gameModules.betterBorders.setStyles();
+    gameOptions.betterBorders.setStyles();
 
 }
 
@@ -174,13 +176,13 @@ function nextCycle () {
 }
 
 function checkIsTeams () {
-    gameModes.homeDef.checkHomelands(teams)
+    gameRules.homeDef.checkHomelands(teams)
 
     let lostTeams = teams.filter(team => cellsGrid.getByColor(team.color).length == 0);
     if (lostTeams.length != 0) {
         teams = teams.filter(team => cellsGrid.getByColor(team.color).length > 0);
 
-        gameModes.homeDef.removeHomeAreaElement(lostTeams);
+        gameRules.homeDef.removeHomeAreaElement(lostTeams);
     }
 
     if (teams.length == 1) {
@@ -267,32 +269,31 @@ function setContainerColor (color) {
 }
 
 window.onresize = function() {
-   gameModes.homeDef.resizeHomeAreaElements();
+   gameRules.homeDef.resizeHomeAreaElements();
 }
 
-
-// MODULES -------------------------------------------
+// OPTIONS -------------------------------------------
 
 // player teams highlighting
 function highlightTeam () {
-    if (curTeam.isPlayer && gameIsRunnning) {
-        let cells = cellsGrid.getByTeam(curTeam);
-        if (!modules.betterBorders) {
-            for (let cell of cells) {
-                if (!modules.betterBorders) {
-                    cell.style.borderWidth = '4px';
-                    cell.style.borderColor = 'orange';
-                } 
+    if (!(curTeam.isPlayer && gameIsRunnning)) return;
+
+    let cells = cellsGrid.getByTeam(curTeam);
+    if (!gameOptionsValues.betterBorders) {
+        for (let cell of cells) {
+            if (!gameOptionsValues.betterBorders) {
+                cell.style.borderWidth = '4px';
+                cell.style.borderColor = 'orange';
             } 
-        } else {
-            gameModules.betterBorders.highlightTeamBorder(cellsGrid, curTeam, 'orange');
-        }
+        } 
+    } else {
+        gameOptions.betterBorders.highlightTeamBorder(cellsGrid, curTeam, 'orange');
     }
 }
 function unlightPreviousTeam () {
     if (curTeam && curTeam.isPlayer) {
-        if (modules.betterBorders) {
-            gameModules.betterBorders.highlightTeamBorder(cellsGrid, curTeam, curTeam.colorRGB);
+        if (gameOptionsValues.betterBorders) {
+            gameOptions.betterBorders.highlightTeamBorder(cellsGrid, curTeam, curTeam.colorRGB);
         } else {
             let cells = cellsGrid.getByTeam(curTeam);
             for (let cell of cells) {
@@ -333,7 +334,7 @@ function playRecording () {
         for (let cell of array) {
             cell.setStyle();
             cell.setInner(cell.dots);
-            gameModules.betterBorders.setCellBorder(cell);
+            gameOptions.betterBorders.setCellBorder(cell);
         }
         if(index == recording.length){
             clearInterval(interval);
