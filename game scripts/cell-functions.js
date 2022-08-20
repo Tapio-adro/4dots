@@ -104,20 +104,6 @@ Cells.prototype.setTeams = function(teams, start_dots, playersCoords) {
         team.cellsAmount = 1;
     });
 };
-
-Cells.prototype.cell = function(x, y) {
-    let cellExists = checkExistitngCoords(x, y, this.size);
-    return cellExists ? this.grid[x][y] : false;
-
-
-    function checkExistitngCoords(x, y, size) {
-        return x >= 0 
-            && x <= size - 1
-            && y >= 0
-            && y <= size - 1;
-    }
-};
-
 Cells.prototype.createField = function(field) {
     for (let row of this.grid) {
         let tr = document.createElement('tr');
@@ -199,6 +185,19 @@ Cells.prototype.createField = function(field) {
     // }
 };
 
+Cells.prototype.cell = function(x, y) {
+    let cellExists = checkExistitngCoords(x, y, this.size);
+    return cellExists ? this.grid[x][y] : false;
+
+
+    function checkExistitngCoords(x, y, size) {
+        return x >= 0 
+            && x <= size - 1
+            && y >= 0
+            && y <= size - 1;
+    }
+};
+
 Cells.prototype.getByColor = function (color, cellsToCheck = false) {
     let cells = [];
     if (!cellsToCheck) {
@@ -218,7 +217,7 @@ Cells.prototype.getByTeam = function (team) {
     return cells;
 };
 
-Cells.prototype.findFull = function () {
+Cells.prototype.findFours = function () {
     let cells = [];
     for (let cell of this.array) {
         if (cell.dots >= 4) {
@@ -227,8 +226,7 @@ Cells.prototype.findFull = function () {
     }
     return cells;
 };
-
-Cells.prototype.activateFull = function (cells) {
+Cells.prototype.activateFours = function (cells) {
     if (cells.length != 0) {
         for (let cell of cells) {
             if (cell.dots == 4) {
@@ -256,6 +254,7 @@ Cells.prototype.activateFull = function (cells) {
         return true;
     }
 };
+
 
 Cells.prototype.findBotTurn = function(botCells, behavior) {
 
@@ -361,12 +360,6 @@ Cells.prototype.findBotTurn = function(botCells, behavior) {
     }
 };
 
-Cell.prototype.addDotsAround = function () {
-    let cellsPairs = this.cellsAroundWithParent();
-    for (let cell of cellsPairs.cells) {
-        cell.addDot(cellsPairs.parent);
-    }
-};
 
 
 function Cell(x, y, cells) {
@@ -387,6 +380,29 @@ Cell.prototype.cellsAround = function(coordsArray = this.cells.AROUND_PLUS) {
         }
     }
     return cellsAround;
+};
+Cell.prototype.cellsAroundWithParent = function() {
+    let result = {cells: [], parent: this};
+
+    let x = this.x;
+    let y = this.y;
+    let cells = this.cells;
+
+    for (let coords of cells.AROUND_PLUS) {
+        let thisX = x + coords.x;
+        let thisY = y + coords.y;
+
+        if (cells.cell(thisX, thisY)) {
+            result.cells.push(cells.cell(thisX, thisY));
+        }
+    }
+    return result;
+};
+Cell.prototype.addDotsAround = function () {
+    let cellsPairs = this.cellsAroundWithParent();
+    for (let cell of cellsPairs.cells) {
+        cell.addDot(cellsPairs.parent);
+    }
 };
 
 Cell.prototype.reset = function (toNeutral = false) {
@@ -410,24 +426,6 @@ Cell.prototype.setStyle = function () {
     this.elem.style.backgroundColor = fillColor;
     this.elem.style.borderColor = this.borderColor;
     this.elem.style.borderWidth = this.borderWidth;
-};
-
-Cell.prototype.cellsAroundWithParent = function() {
-    let result = {cells: [], parent: this};
-
-    let x = this.x;
-    let y = this.y;
-    let cells = this.cells;
-
-    for (let coords of cells.AROUND_PLUS) {
-        let thisX = x + coords.x;
-        let thisY = y + coords.y;
-
-        if (cells.cell(thisX, thisY)) {
-            result.cells.push(cells.cell(thisX, thisY));
-        }
-    }
-    return result;
 };
 
 Cell.prototype.addDot = function (cellParent) {
@@ -458,8 +456,3 @@ Cell.prototype.addDot = function (cellParent) {
         gameOptions.betterBorders.setCellBorder(this);
     }
 };
-
-Cell.prototype.checkColor = function (color) {
-    return this.color == color;
-};
-

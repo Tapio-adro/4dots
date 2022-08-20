@@ -21,7 +21,7 @@ let doRecording;
 let doStatistics;
 var maxOptimization;
 var gameOptionsValues = {
-    betterBorders: 0
+    betterBorders: 1
 };
 var gameRulesValues = {
     homeDef: 0
@@ -80,16 +80,16 @@ function updateGameState () {
 
     if (!dotAdded) {return;}
 
-    let fullCells = cellsGrid.findFull();
+    let fullCells = cellsGrid.findFours();
     let delay = fullCells.length ? cellsCheckSpeed : 0;
     setTimeout(() => {
         checkCellsState();
     }, delay)
 
     function checkCellsState () {
-        let fullCells = cellsGrid.findFull();
+        let fullCells = cellsGrid.findFours();
 
-        let doCheck = cellsGrid.activateFull(fullCells);
+        let doCheck = cellsGrid.activateFours(fullCells);
 
 
 
@@ -277,18 +277,18 @@ window.onresize = function() {
 // player teams highlighting
 function highlightTeam () {
     if (!(curTeam.isPlayer && gameIsRunnning)) return;
+    
+    gameOptions.betterBorders.highlightTeamBorder(cellsGrid, curTeam, 'orange');
 
+    if (gameOptionsValues.betterBorders) return;
+    
     let cells = cellsGrid.getByTeam(curTeam);
-    if (!gameOptionsValues.betterBorders) {
-        for (let cell of cells) {
-            if (!gameOptionsValues.betterBorders) {
-                cell.style.borderWidth = '4px';
-                cell.style.borderColor = 'orange';
-            } 
+    for (let cell of cells) {
+        if (!gameOptionsValues.betterBorders) {
+            cell.style.borderWidth = '4px';
+            cell.style.borderColor = 'orange';
         } 
-    } else {
-        gameOptions.betterBorders.highlightTeamBorder(cellsGrid, curTeam, 'orange');
-    }
+    } 
 }
 function unlightPreviousTeam () {
     if (curTeam && curTeam.isPlayer) {
@@ -341,21 +341,6 @@ function playRecording () {
         }
     }, 100)
 }
-function countTeamsDots () {
-    let dotsArray = [];
-    for (let team of teams) {
-        team.dotsAmount = 0;
-        let cells = cellsGrid.getByTeam(team);
-        for (let cell of cells) {
-            team.dotsAmount += cell.dots;
-        }
-        dotsArray.push({
-            color: team.color,
-            amount: team.dotsAmount
-        });
-    }
-    return dotsArray;
-}
 
 // statistics
 function checkStatisticsElems () {
@@ -406,6 +391,21 @@ function updateStatistics () {
     
         }
     }, waitTime)
+}
+function countTeamsDots () {
+    let dotsArray = [];
+    for (let team of teams) {
+        team.dotsAmount = 0;
+        let cells = cellsGrid.getByTeam(team);
+        for (let cell of cells) {
+            team.dotsAmount += cell.dots;
+        }
+        dotsArray.push({
+            color: team.color,
+            amount: team.dotsAmount
+        });
+    }
+    return dotsArray;
 }
 
 // max optimiztion
