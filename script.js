@@ -2,7 +2,7 @@
 let table = document.querySelector('#table');
 let container = document.querySelector('#container');
 
-let start_dots = 3;
+let start_dots = 20;
 let curSelection = {'x': -1, 'y': -1};
 let cellsCheckSpeed = 500,
     teamChangeSpeed = 200;
@@ -20,7 +20,7 @@ let doRecording;
 let doStatistics;
 var maxOptimization;
 var gameOptionsValues = {
-    betterBorders: 1
+    betterBorders: 0
 };
 var gameRulesValues = {
     homeDef: 0
@@ -34,8 +34,8 @@ let speedMode = 0;
 // maxOptimization = true;
 
 let gridSize = 9;
-let playersAmount = 10;
-let botsAmount = 10;
+let playersAmount = 8;
+let botsAmount = 0;
 
 let teams, cellsGrid;
 
@@ -240,12 +240,14 @@ function getTeamIndex () {
 function createTeams(amount, colors) {
     let teams = [];
     for (let i = 0; i < amount; i++) {
+        let [color, invertedColor] = colors.shift();
         teams.push({
-            color: colors.shift(), 
+            color: color, 
             isPlayer: true,
-            canDot: true
+            canDot: true,
+            highlightColor: `rgb(${invertedColor})`
         });
-        teams[i].colorRGB = 'rgb(' + teams[i].color + ')';
+        teams[i].colorRGB = `rgb(${teams[i].color})`;
     }
     return teams;
 }
@@ -278,7 +280,7 @@ window.onresize = function() {
 function highlightTeam () {
     if (!(curTeam.isPlayer && gameIsRunnning)) return;
     
-    gameOptions.betterBorders.highlightTeamBorder(cellsGrid, curTeam, 'orange');
+    gameOptions.betterBorders.highlightTeamBorder(cellsGrid, curTeam, curTeam.highlightColor);
 
     if (gameOptionsValues.betterBorders) return;
     
@@ -286,7 +288,7 @@ function highlightTeam () {
     for (let cell of cells) {
         if (!gameOptionsValues.betterBorders) {
             cell.style.borderWidth = '4px';
-            cell.style.borderColor = 'orange';
+            cell.style.borderColor = curTeam.highlightColor;
         } 
     } 
 }

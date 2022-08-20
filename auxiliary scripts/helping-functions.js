@@ -25,12 +25,24 @@ function AF_getTeamColors (amount) {
         huesArray.push(Math.floor(colorFraction * i));
     }
     let rgbArray = [];
+    let rgbInvertedArray = [];
+    let s = 100, l = 70;
     for (let hueColor of huesArray) {
-        let rgbColor = HSLToRGB(hueColor, 100, 70);
+        let rgbColor = HSLToRGB(hueColor, s, l);
         rgbColor = rgbColor.map(num => Math.floor(num)).join(', ');
         rgbArray.push(rgbColor)
+
+        let hslInverted = invertHSL(hueColor, 70, 70);
+        let rgbInvertedColor = HSLToRGB(...hslInverted);
+        rgbInvertedColor = rgbInvertedColor.map(num => Math.floor(num)).join(', ');
+        rgbInvertedArray.push(rgbInvertedColor)
     }
-    return rgbArray;
+    let colorsArray = [];
+    for (let key in rgbArray) {
+        let color = rgbArray[key];
+        colorsArray.push([color, rgbInvertedArray[key]]);
+    }
+    return colorsArray;
 
     function HSLToRGB(h, s, l) {
         s /= 100;
@@ -41,8 +53,15 @@ function AF_getTeamColors (amount) {
           l - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1)));
         return [255 * f(0), 255 * f(8), 255 * f(4)];
     };
+    function invertHSL (h, s, l) {
+        if (h < 180) {
+            h += 180;
+        } else {
+            h -= 180;
+        }
+        return [h, s, l];
+    }
 }
-AF_getTeamColors(12);
 
 function prototypeFunction (type, name, func) {
     Object.defineProperty(type['prototype'], name, {
