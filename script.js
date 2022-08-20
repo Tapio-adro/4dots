@@ -6,8 +6,7 @@ let start_dots = 3;
 let curSelection = {'x': -1, 'y': -1};
 let cellsCheckSpeed = 500,
     teamChangeSpeed = 200;
-let TEAM_COLORS = ['255, 97, 97', '255, 97, 215', '255, 176, 97', '136, 97, 255', 
-    '255, 255, 97', '97, 215, 255', '176, 255, 97', '97, 255, 136'].shuffleArray();
+
 var curTeam;
 let curTeamIndex;
 let cycles = 0;
@@ -35,8 +34,8 @@ let speedMode = 0;
 // maxOptimization = true;
 
 let gridSize = 9;
-let playersAmount = 4;
-let botsAmount = 4;
+let playersAmount = 10;
+let botsAmount = 10;
 
 let teams, cellsGrid;
 
@@ -121,7 +120,8 @@ function tryAddDot () {
 
 
 function setupGridAndTeams () {
-    teams = createTeams(playersAmount);
+    let teamColors = AF_getTeamColors(playersAmount).shuffleArray();
+    teams = createTeams(playersAmount, teamColors);
     createBots(botsAmount);
     teams = teams.shuffleArray();
 
@@ -237,11 +237,11 @@ function getTeamIndex () {
     }
     return index;
 }
-function createTeams(amount) {
+function createTeams(amount, colors) {
     let teams = [];
     for (let i = 0; i < amount; i++) {
         teams.push({
-            color: TEAM_COLORS.shift(), 
+            color: colors.shift(), 
             isPlayer: true,
             canDot: true
         });
