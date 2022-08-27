@@ -1,7 +1,14 @@
 var gameOptions = {
-    betterBorders: {
+    betterBorders: {},
+    maxOptimization: {}
+}
 
-    }
+gameOptions.maxOptimization.setMaxOptimization = function() {
+    if (!gameOptionsValues.maxOptimization) return;
+
+    let root = document.querySelector(':root');
+
+    root.style.setProperty('--cellTransition', 'none');
 }
 
 gameOptions.betterBorders.setCellBorder = function(cell) {

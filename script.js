@@ -2,7 +2,7 @@
 let table = document.querySelector('#table');
 let container = document.querySelector('#container');
 
-let start_dots = 20;
+let start_dots = 3;
 let curSelection = {'x': -1, 'y': -1};
 let cellsCheckSpeed = 500,
     teamChangeSpeed = 200;
@@ -18,9 +18,9 @@ let gameIsRunnning = true;
 let recording = []; 
 let doRecording;
 let doStatistics;
-var maxOptimization;
 var gameOptionsValues = {
-    betterBorders: 0
+    betterBorders: 1,
+    maxOptimization: 0
 };
 var gameRulesValues = {
     homeDef: 0
@@ -31,11 +31,10 @@ var gameRulesValues = {
 // doStatistics = true;
 
 let speedMode = 0;
-// maxOptimization = true;
 
 let gridSize = 9;
-let playersAmount = 8;
-let botsAmount = 0;
+let playersAmount = 4;
+let botsAmount = 3;
 
 let teams, cellsGrid;
 
@@ -132,7 +131,7 @@ function setupGridAndTeams () {
 // on START
 function checkOnStart () {
     checkSpeedMode();
-    checkMaxOptimization();
+    gameOptions.maxOptimization.setMaxOptimization();
     checkStatisticsElems();
     updateStatistics();
 
@@ -265,7 +264,7 @@ function resetCurrentSelection () {
     curSelection.y = -1;
 }
 function setContainerColor (color) {
-    if (maxOptimization) return;
+    if (gameOptionsValues.maxOptimization) return;
     container.style.borderColor = `rgba(${color}, 0.5)`;
     container.style.backgroundColor = `rgba(${color}, 0.2)`;
 }
@@ -408,15 +407,6 @@ function countTeamsDots () {
         });
     }
     return dotsArray;
-}
-
-// max optimiztion
-function checkMaxOptimization () {
-    if (maxOptimization) {
-        let root = document.querySelector(':root');
-
-        root.style.setProperty('--cellTransition', 'none');
-    }
 }
 
 // boom

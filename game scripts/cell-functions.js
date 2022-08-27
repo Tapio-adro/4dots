@@ -240,7 +240,7 @@ Cells.prototype.activateFours = function (cells) {
                 cell.setInner(cell.dots);
                 cell.addDotsAround(cell);
             }
-            if (!maxOptimization && (speedMode != 2 || curBoomCirclesAmount <= maxBoomCirclesAmount)) {
+            if (!gameOptionsValues.maxOptimization && (speedMode != 2 || curBoomCirclesAmount <= maxBoomCirclesAmount)) {
                 let elemRect = cell.elem.getBoundingClientRect(),
                 y = elemRect.y,
                 x = elemRect.x;
