@@ -119,7 +119,6 @@ Cells.prototype.createField = function(field) {
             tdDiv.style.borderColor = cell.borderColor;
             tdDiv.style.borderColor = cell.borderWidth;
 
-            cell.td = tdDiv;
             cell.elem = tdDiv;
             cell.style = tdDiv.style;
             cell.setInner = function (value) {
@@ -240,12 +239,7 @@ Cells.prototype.activateFours = function (cells) {
                 cell.setInner(cell.dots);
                 cell.addDotsAround(cell);
             }
-            if (!gameOptionsValues.maxOptimization && (speedMode != 2 || curBoomCirclesAmount <= maxBoomCirclesAmount)) {
-                let elemRect = cell.elem.getBoundingClientRect(),
-                y = elemRect.y,
-                x = elemRect.x;
-                newBoomCircle(x, y, 'rgb(' + cell.color + ')');
-            }
+            gameOptions.boomCircles.spawnBoomCircle(cell);
             for (let cell2 of cell.cellsAround(Cells.prototype.UPDATE_BORDER_CELLS)) {
                 cell2.shouldUpdateBorder = true;
             }

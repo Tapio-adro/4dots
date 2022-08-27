@@ -4,14 +4,10 @@ let container = document.querySelector('#container');
 
 let start_dots = 3;
 let curSelection = {'x': -1, 'y': -1};
-let cellsCheckSpeed = 500,
-    teamChangeSpeed = 200;
 
 var curTeam;
 let curTeamIndex;
 let cycles = 0;
-var curBoomCirclesAmount = 0;
-var maxBoomCirclesAmount = 20;
 let gamePaused = false;
 let gameIsRunnning = true;
 
@@ -20,7 +16,9 @@ let doRecording;
 let doStatistics;
 var gameOptionsValues = {
     betterBorders: 1,
-    maxOptimization: 0
+    maxOptimization: 0,
+    boomCircles: 1,
+    gameSpeed: 0
 };
 var gameRulesValues = {
     homeDef: 0
@@ -29,8 +27,6 @@ var gameRulesValues = {
 
 // doRecording = true;
 // doStatistics = true;
-
-let speedMode = 0;
 
 let gridSize = 9;
 let playersAmount = 4;
@@ -66,7 +62,7 @@ function nextTeam () {
         gameRules.homeDef.hideHomeAreaOnPlayerTurn(teams);
     
         checkIfBot();
-    }, teamChangeSpeed)
+    }, gameOptions.gameSpeed.teamChangeSpeed)
 }
 function updateGameState () {
 
@@ -79,7 +75,7 @@ function updateGameState () {
     if (!dotAdded) {return;}
 
     let fullCells = cellsGrid.findFours();
-    let delay = fullCells.length ? cellsCheckSpeed : 0;
+    let delay = fullCells.length ? gameOptions.gameSpeed.activateFoursSpeed : 0;
     setTimeout(() => {
         checkCellsState();
     }, delay)
@@ -93,7 +89,7 @@ function updateGameState () {
 
         doCheck ? setTimeout(() => {
             checkCellsState();
-        }, cellsCheckSpeed) : 
+        }, gameOptions.gameSpeed.activateFoursSpeed) : 
             (function () {
                 gameOptions.betterBorders.updateBorders(cellsGrid);
                 if (curTeamIndex == teams.length) {nextCycle();};
@@ -130,12 +126,12 @@ function setupGridAndTeams () {
 }
 // on START
 function checkOnStart () {
-    checkSpeedMode();
+    gameOptions.gameSpeed.setGameSpeed();
     gameOptions.maxOptimization.setMaxOptimization();
     checkStatisticsElems();
     updateStatistics();
 
-    setTimeout(() => {gameRules.homeDef.resizeHomeAreaElements();}, 10)
+    setTimeout(() => {gameRules.homeDef.resizeHomeAreaElements();}, 1000)
     
     gameOptions.betterBorders.setStyles();
 
@@ -203,7 +199,7 @@ function checkKeyInput(e) {
         return;
     }
 }
-function checkCellClick (e) {
+function checkCellClick () {
     if (!curTeam.isPlayer || !curTeam.canDot) {return;}
 
     resetCurrentSelection ();
@@ -407,37 +403,4 @@ function countTeamsDots () {
         });
     }
     return dotsArray;
-}
-
-// boom
-function newBoomCircle (x, y, color) {
-    curBoomCirclesAmount++;
-    let circle = document.createElement('div');
-    circle.classList.add('boom_circle');
-
-    circle.style.top = y + 'px';
-    circle.style.left = x + 'px';
-    circle.style.backgroundColor = color;
-
-    container.appendChild(circle);
-
-    setTimeout(() => {
-        circle.classList.add('scale_circle');
-    }, 0)
-
-    setTimeout(() => {
-        circle.remove();
-        curBoomCirclesAmount--;
-    }, 2000)
-}
-
-// fast mode
-function checkSpeedMode () {
-    let speeds = {
-        0: [500, 200],
-        1: [100, 0],
-        2: [10, 0]
-    }
-    cellsCheckSpeed = speeds[speedMode][0];
-    teamChangeSpeed = speeds[speedMode][1];
 }

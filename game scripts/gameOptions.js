@@ -1,6 +1,44 @@
 var gameOptions = {
     betterBorders: {},
-    maxOptimization: {}
+    maxOptimization: {},
+    boomCircles: {},
+    gameSpeed: {}
+}
+
+gameOptions.gameSpeed.setGameSpeed = function() {
+    let speeds = {
+        0: [500, 200],
+        1: [100, 0],
+        2: [10, 0]
+    }
+    gameOptions.gameSpeed.activateFoursSpeed = speeds[gameOptionsValues.gameSpeed][0];
+    gameOptions.gameSpeed.teamChangeSpeed = speeds[gameOptionsValues.gameSpeed][1];
+}
+
+gameOptions.boomCircles.spawnBoomCircle = function(cell) {
+    if (!gameOptionsValues.boomCircles || gameOptionsValues.maxOptimization) return;
+    
+    let elemRect = cell.elem.getBoundingClientRect(),
+    y = elemRect.y,
+    x = elemRect.x;
+    let color = 'rgb(' + cell.color + ')';
+
+    let circle = document.createElement('div');
+    circle.classList.add('boom_circle');
+
+    circle.style.top = y + 'px';
+    circle.style.left = x + 'px';
+    circle.style.backgroundColor = color;
+
+    container.appendChild(circle);
+
+    setTimeout(() => {
+        circle.classList.add('scale_circle');
+    }, 10)
+
+    setTimeout(() => {
+        circle.remove();
+    }, 3000)
 }
 
 gameOptions.maxOptimization.setMaxOptimization = function() {

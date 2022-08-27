@@ -90,7 +90,7 @@
     flex-wrap: wrap;
     justify-content: center;
     align-content: center;
-    z-index: 1;
+    z-index: 2;
 }
 .cell .dot {
     width: 10px;
@@ -99,6 +99,7 @@
     border-radius: 50%;
     margin: 0 3px;
     margin: 2.5px;
+    pointer-events: none;
 }
 .nums_holder {
     position: absolute;
