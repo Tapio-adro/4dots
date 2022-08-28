@@ -1,0 +1,119 @@
+\:root
+  --cell_transition: 0.5s
+
+  --zoomLevel: 1
+
+#window
+  width: 100%
+  display: flex
+  align-items: center
+  justify-content: center
+  width: 100%
+  height: 100vh
+#wrapper
+  padding: 20px
+  zoom: var(--zoomLevel)
+#container
+  border: 5px solid rgba(0, 0, 0, 0.479)
+  border-radius: 10px
+  padding: 15px
+  transition: 1s
+#table
+  margin: 0 auto
+  background-color: rgb(255, 255, 255)
+  border-radius: 5px
+
+.cell
+  width: 50px
+  height: 50px
+  border: 2px solid #000
+  border-radius: 5px
+  text-align: center
+  user-select: none
+  transition: var(--cell_transition)
+  display: flex
+  flex-wrap: wrap
+  justify-content: center
+  align-content: center
+  z-index: 2
+
+  .dot
+    width: 10px
+    height: 10px
+    background: #404040
+    border-radius: 50%
+    margin: 0 3px
+    margin: 2.5px
+    pointer-events: none
+
+.boom_circle
+  position: absolute
+  top: 100px
+  left: 100px
+  width: 50px
+  height: 50px
+  border-radius: 50%
+  transform-origin: center
+  opacity: 0.8
+  transition: 1s
+
+  &.scale_circle
+    transform: scale(3)
+    opacity: 0
+
+
+.better_borders
+  border-spacing: 0
+
+  td
+    padding: 0
+
+  .cell
+    border: 1px solid #000
+    border-radius: 0
+
+.homeland_area
+  border: 6px dashed #000
+  border-radius: 4px
+  position: absolute
+  width: 160px
+  height: 160px
+  pointer-events: none
+  zoom: var(--zoomLevel)
+
+  &.hiden
+    opacity: 0
+    transition: 1s
+
+  &.on_player_turn
+    border-width: 3px
+    transition: 0.2s
+
+  &.after_player_turn
+    border-width: 6px
+    transition: 0.2s
+
+
+#statistics
+  margin-left: 50px
+  width: 600px
+  height: 300px
+  border: 3px solid #000
+  border-radius: 30px
+  padding: 20px
+.stats
+  width: 100%
+  height: 100%
+
+  display: flex
+  justify-content: space-evenly
+  align-items: flex-end
+  transition: 0.3s
+
+  &.hiden
+    opacity: 0
+.st_col
+  height: 100%
+  border: 1px solid #000
+  width: 50px
+  transition: 1s

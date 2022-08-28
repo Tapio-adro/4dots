@@ -17,7 +17,6 @@ gameFeatures.ScaleGameElements = function () {
     zoomLevel = windowHeight / rect.height;
   } else {
     zoomLevel = windowWidth / rect.width;
-    console.log(zoomLevel);
   }
 
   root.style.setProperty('--zoomLevel', zoomLevel);
