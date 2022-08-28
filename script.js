@@ -21,7 +21,7 @@ var gameOptionsValues = {
     gameSpeed: 0
 };
 var gameRulesValues = {
-    homeDef: 0
+    homeDef: 1
 };
 
 
@@ -130,8 +130,13 @@ function checkOnStart () {
     gameOptions.maxOptimization.setMaxOptimization();
     checkStatisticsElems();
     updateStatistics();
-
-    setTimeout(() => {gameRules.homeDef.resizeHomeAreaElements();}, 1000)
+    
+    gameRules.homeDef.createHomeAreaElements(); 
+    setTimeout(() => {
+        gameFeatures.ScaleGameElements();
+        gameRules.homeDef.resizeHomeAreaElements();
+    }, 10)
+    
     
     gameOptions.betterBorders.setStyles();
 
@@ -266,7 +271,8 @@ function setContainerColor (color) {
 }
 
 window.onresize = function() {
-   gameRules.homeDef.resizeHomeAreaElements();
+    gameFeatures.ScaleGameElements();
+    gameRules.homeDef.resizeHomeAreaElements();
 }
 
 // OPTIONS -------------------------------------------

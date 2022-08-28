@@ -142,7 +142,6 @@ Cells.prototype.createField = function(field) {
         field.append(tr);
     }
 
-    gameRules.homeDef.createHomeAreaElements(); 
 
 
     // for (let i = 0; i < this.grid.length; i++) {

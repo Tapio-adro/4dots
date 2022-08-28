@@ -5,16 +5,7 @@
 
     --zoomLevel: 1;
 }
-#window {
-    zoom: var(--zoomLevel);
-    width: 100%;
-    height: calc(100vh / var(--zoomLevel));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100vh;
-}
+
 
 #statistics {
     margin-left: 50px;
@@ -52,6 +43,7 @@
     width: 160px;
     height: 160px;
     pointer-events: none;
+    zoom: var(--zoomLevel);
 }
 .homeland_area.hiden {
     opacity: 0;
@@ -66,7 +58,18 @@
     transition: 0.2s;
 }
 
-
+#window {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+}
+#wrapper {
+    padding: 20px;
+    zoom: var(--zoomLevel);
+}
 #container {
     border: 5px solid rgba(0, 0, 0, 0.479);
     border-radius: 10px;
