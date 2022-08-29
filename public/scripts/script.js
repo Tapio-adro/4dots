@@ -1,4 +1,3 @@
-
 let table = document.querySelector('#table');
 let container = document.querySelector('#container');
 
@@ -38,7 +37,6 @@ let teams, cellsGrid;
 setupGridAndTeams();
 checkOnStart();
 
-// console.log(teams[0]);
 nextTeam(); 
 document.addEventListener('keydown', checkKeyInput)
 
