@@ -1,5 +1,5 @@
 let table = document.querySelector('#table');
-let container = document.querySelector('#container');
+let container = document.querySelector('.container');
 
 let start_dots = 3;
 let curSelection = {'x': -1, 'y': -1};
@@ -23,6 +23,9 @@ var gameRulesValues = {
     homeDef: 1
 };
 
+let appData = {
+    curWindow: ''
+};
 
 // doRecording = true;
 // doStatistics = true;
@@ -110,8 +113,28 @@ function tryAddDot () {
     return false;
 }
 
-
+function setAppData (key, value) {
+    appData[key] = value;
+}
+function startGame () {
+    setupGridAndTeams();
+    checkOnStart();
+    nextTeam();  
+}
+function setSettings (settings) {
+    playersAmount = settings.playersAmount;
+    botsAmount = playersAmount - settings.humansAmount;
+    for (let [key, value] of Object.entries(settings.gameOptions)) {
+        gameOptionsValues[key] = value;
+    }
+    for (let [key, value] of Object.entries(settings.gameRules)) {
+        gameRulesValues[key] = value;
+    }
+}
 function setupGridAndTeams () {
+    table = document.querySelector('#table');
+    container = document.querySelector('.container');
+
     let teamColors = gameFeatures.getTeamColors(playersAmount).shuffleArray();
     teams = createTeams(playersAmount, teamColors);
     createBots(botsAmount);
@@ -132,7 +155,8 @@ function checkOnStart () {
     setTimeout(() => {
         gameFeatures.ScaleGameElements();
         gameRules.homeDef.resizeHomeAreaElements();
-    }, 10)
+        gameRules.homeDef.resizeHomeAreaElements();
+    }, 0)
     
     
     gameOptions.betterBorders.setStyles();

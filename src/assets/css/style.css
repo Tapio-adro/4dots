@@ -9,8 +9,8 @@
   height: 100vh;
 }
 
-#window > .wrapper {
-  padding: 20px;
+#window .wrapper {
+  zoom: var(--zoomLevel);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -20,10 +20,9 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  zoom: var(--zoomLevel);
 }
 
-#window #container {
+#window .container {
   border: 5px solid rgba(0, 0, 0, 0.479);
   border-radius: 10px;
   padding: 15px;
@@ -31,10 +30,15 @@
   transition: 1s;
 }
 
+#window .outer_container {
+  padding: 20px;
+}
+
 #table {
   margin: 0 auto;
   background-color: white;
   border-radius: 5px;
+  pointer-events: none;
 }
 
 .cell {
@@ -60,6 +64,7 @@
   -ms-flex-line-pack: center;
       align-content: center;
   z-index: 2;
+  pointer-events: auto;
 }
 
 .cell .dot {

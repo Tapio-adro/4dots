@@ -12,21 +12,24 @@ $textgrey: #666
   font-family: sans-serif
   width: 100%
   height: 100vh
-  >.wrapper
-    padding: 20px
+  .wrapper
+    zoom: var(--zoomLevel)
     display: flex
     align-items: center
     justify-content: center
-    zoom: var(--zoomLevel)
-  #container
+    // height: calc(100vh / var(--zoomLevel))
+  .container
     border: 5px solid rgba(0, 0, 0, 0.479)
     border-radius: 10px
     padding: 15px
     transition: 1s
+  .outer_container
+    padding: 20px
 #table
   margin: 0 auto
   background-color: rgb(255, 255, 255)
   border-radius: 5px
+  pointer-events: none
 
 .cell
   width: 50px
@@ -41,6 +44,7 @@ $textgrey: #666
   justify-content: center
   align-content: center
   z-index: 2
+  pointer-events: auto
 
   .dot
     width: 10px

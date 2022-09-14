@@ -17,6 +17,7 @@ gameRules.homeDef.createHomeAreaElements = function () {
 }
 gameRules.homeDef.resizeHomeAreaElements = function () {
     if (!gameRulesValues.homeDef) return;
+    if (appData.curWindow != 'game') return 
 
     for (let team of teams) {
         let div = team.homelandArea;

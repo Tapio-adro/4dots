@@ -4,9 +4,11 @@
       v-if="curWindow == 'game'"
       class="wrapper"
     >
-      <div id="container">
-        <table id="table">
-        </table>
+      <div class="outer_container">
+        <div class="container">
+          <table id="table">
+          </table>
+        </div>
       </div>
     </div>
     <div 
@@ -27,8 +29,13 @@
       <div class="menu_wrapper">
         <div class="menu_container">
           <div class="menu">
-            <div id="quick_game">Quick Game</div>
-            <div id="set_own_game">Set own Game</div>
+            <div
+              @click="setQuickGame()"
+              id="quick_game"
+            >Quick Game</div>
+            <div
+              id="set_own_game"
+            >Set own Game</div>
           </div>
         </div>
       </div>
@@ -55,10 +62,39 @@ export default {
       }
     }
   },
+  methods: {
+    setQuickGame() {
+      let settings = {
+        gameOptions: {
+          betterBorders: 1,
+          maxOptimization: 0,
+          boomCircles: 1,
+          gameSpeed: 0
+        },
+        gameRules: {
+          homeDef: 1
+        },
+        playersAmount: 4,
+        humansAmount: 1
+      };
+      this.curWindow = 'game';
+      setTimeout(() => {
+        setSettings(settings);
+        startGame();
+      }, 10)
+    }
+  },
   mounted() {
-  }
+    setTimeout(() => {
+      setAppData('curWindow', this.curWindow);
+    }, 100)
+  },
+  watch: {
+    curWindow () {
+      setAppData('curWindow', this.curWindow);
+    }
+  },
 };
-
 </script>
 
 <style scoped></style>
