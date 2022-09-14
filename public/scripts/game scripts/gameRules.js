@@ -59,7 +59,7 @@ gameRules.homeDef.hideHomeAreaOnPlayerTurn = function (teams) {
         areaElem.classList.add('on_player_turn');
     }
 }
-gameRules.homeDef.showHomeAreaOnPlayerTurn = function (teams) {
+gameRules.homeDef.showHomeAreaAfterPlayerTurn = function (teams) {
     if (!gameRulesValues.homeDef || !curTeam.isPlayer) return;
 
     for (let team of teams) {

@@ -34,10 +34,10 @@ let botsAmount = 3;
 let teams, cellsGrid;
 
 
-setupGridAndTeams();
-checkOnStart();
+// setupGridAndTeams();
+// checkOnStart();
+// nextTeam(); 
 
-nextTeam(); 
 document.addEventListener('keydown', checkKeyInput)
 
 function nextTeam () {
@@ -97,11 +97,10 @@ function updateGameState () {
 }
 function tryAddDot () {
     [x, y] = [curSelection.x, curSelection.y];
-
     let cell = cellsGrid.cell(x, y);
     if (cell && cell.color == curTeam.color) {
         unlightPreviousTeam();
-        gameRules.homeDef.showHomeAreaOnPlayerTurn(teams);
+        gameRules.homeDef.showHomeAreaAfterPlayerTurn(teams);
         curTeam.canDot = false;
         cell.addDot();
         return true;
@@ -113,7 +112,7 @@ function tryAddDot () {
 
 
 function setupGridAndTeams () {
-    let teamColors = AF_getTeamColors(playersAmount).shuffleArray();
+    let teamColors = gameFeatures.getTeamColors(playersAmount).shuffleArray();
     teams = createTeams(playersAmount, teamColors);
     createBots(botsAmount);
     teams = teams.shuffleArray();
