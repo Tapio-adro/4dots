@@ -86,8 +86,6 @@ function updateGameState () {
 
         let doCheck = cellsGrid.activateFours(fullCells);
 
-
-
         doCheck ? setTimeout(() => {
             checkCellsState();
         }, gameOptions.gameSpeed.activateFoursSpeed) : 
@@ -133,6 +131,7 @@ function setSettings (settings) {
 }
 function setupGridAndTeams () {
     table = document.querySelector('#table');
+    console.log(table);
     container = document.querySelector('.container');
 
     let teamColors = gameFeatures.getTeamColors(playersAmount).shuffleArray();
@@ -154,7 +153,6 @@ function checkOnStart () {
     gameRules.homeDef.createHomeAreaElements(); 
     setTimeout(() => {
         gameFeatures.ScaleGameElements();
-        gameRules.homeDef.resizeHomeAreaElements();
         gameRules.homeDef.resizeHomeAreaElements();
     }, 0)
     
