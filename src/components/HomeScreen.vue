@@ -55,7 +55,6 @@ export default {
         humansAmount: 1
       };
       this.$emit('changeWindowToGame');
-      this.curWindow = 'game';
       setTimeout(() => {
         setSettings(settings);
         startGame();

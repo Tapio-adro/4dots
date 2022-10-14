@@ -8,23 +8,19 @@ $lightgrey: #f3f3f3
 $grey: #ddd
 $textgrey: #666
 
-#window
-  font-family: sans-serif
-  width: 100%
-  height: 100vh
-  .wrapper
-    zoom: var(--zoomLevel)
-    display: flex
-    align-items: center
-    justify-content: center
-    // height: calc(100vh / var(--zoomLevel))
+
+.wrapper
+  zoom: var(--zoomLevel)
+  display: flex
+  align-items: center
+  justify-content: center
+  height: calc(100vh / var(--zoomLevel))
   .container
     border: 5px solid rgba(0, 0, 0, 0.479)
     border-radius: 10px
     padding: 15px
+    margin: 20px
     transition: 1s
-  .outer_container
-    padding: 20px
 #table
   margin: 0 auto
   background-color: rgb(255, 255, 255)

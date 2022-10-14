@@ -4,11 +4,9 @@ var gameFeatures = {
 }
 
 gameFeatures.ScaleGameElements = function () {
-  if (appData.curWindow != 'game') return 
+  if (appData.curWindow != 'game') return
 
   let root = document.querySelector(':root');
-  let wrapper = document.querySelector('#window .wrapper');
-  let container = document.querySelector('#window .outer_container');
 
   let windowHeight = window.innerHeight;
   let windowWidth = window.innerWidth;
@@ -17,16 +15,15 @@ gameFeatures.ScaleGameElements = function () {
 
   let zoomLevel;
 
+  width = gameFieldWidth;
+  height = gameFieldHeight;
+
   if (windowWidth > windowHeight) {
-    width = wrapper.offsetWidth;
-    height = wrapper.offsetHeight;
     zoomLevel = windowHeight / height;
-    wrapper.style.height = 'auto';
+    // wrapper.style.height = 'calc(100vh / var(--zoomLevel))';
   } else {
-    width = container.offsetWidth;
-    height = wrapper.offsetHeight;
     zoomLevel = windowWidth / width;
-    wrapper.style.height = 'calc(100vh / var(--zoomLevel))';
+    // wrapper.style.height = 'calc(100vh / var(--zoomLevel))';
   }
 
   root.style.setProperty('--zoomLevel', zoomLevel);
