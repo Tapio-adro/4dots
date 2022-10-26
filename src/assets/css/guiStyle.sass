@@ -1,0 +1,119 @@
+$green: #04AA6D
+$lightgrey: #f3f3f3
+$grey: #ddd
+$textgrey: #666
+
+.box_shadow
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19)
+
+
+#home
+  padding: 50px
+  .title_wrapper
+    display: flex
+    justify-content: center
+    .title_container
+      border-radius: 10px
+      border-bottom: 5px solid $green
+      display: flex
+      align-items: center
+      background-color: $lightgrey
+      padding: 10px 0
+      padding-right: 20px
+    .title
+      font-size: 4rem
+      color: $textgrey
+      padding: 0 20px
+      margin-right: 20px
+    .dots
+      display: grid
+      grid-template-columns: 1fr 1fr
+      row-gap: 10px
+      column-gap: 10px
+      border: 3px solid $green
+      padding: 5px
+      width: 60px
+      height: 60px
+      border-radius: 10px
+      div
+        background-color: $green
+        border-radius: 50%
+  .menu_wrapper
+    font-family: Verdana,sans-serif
+    margin-top: 50px
+    width: 100%
+    display: flex
+    justify-content: center
+    .menu_container
+      width: 600px
+      background-color: $lightgrey
+      border-radius: 20px
+      padding: 50px
+    .menu
+      display: flex
+      justify-content: center
+      align-items: center
+      flex-direction: column
+      row-gap: 50px
+      div
+        width: 350px
+        text-align: center
+        font-size: 2.5rem
+        cursor: pointer
+        padding: 10px
+        border: 10px solid $green
+        border-radius: 20px
+        background-color: $green
+        color: #fff
+        &:hover
+          color: $green 
+          background-color: #fff
+
+  #quick_game
+  #set_own_game
+
+#settings
+  font-family: sans-serif
+  display: flex
+  align-items: center
+  flex-direction: column
+  header
+    display: flex
+    justify-content: center
+    margin: 20px 0
+    div
+      font-size: 2.5rem
+      padding: 10px
+      color: $green
+      text-align: center
+      border-radius: 20px
+      border: 7px solid $grey
+  #container
+    width: 90%
+    border: 10px solid $grey
+    border-radius: 20px
+    height: 500px
+    display: grid
+    grid-template-columns: 1fr 1fr
+    background-color: $lightgrey
+  #settings_ui
+    border-right: 5px solid $grey
+    @extend .sections_holder
+  #settings_description
+    border-left: 5px solid $grey
+    @extend .sections_holder
+  .sections_holder
+    padding: 10px
+    display: flex
+    flex-direction: column
+    row-gap: 10px
+
+
+#settings section
+  width: 100%
+  border-radius: 10px
+  background-color: #fff
+  padding: 10px
+  h3
+    color: $green
+    text-align: center

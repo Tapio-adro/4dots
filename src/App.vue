@@ -6,23 +6,28 @@
     v-if="curWindow == 'home'"
     @change-window-to-game="curWindow = 'game'"
   />
+  <OptionsScreen
+    v-if="curWindow == 'options'"
+  />
 </template>
 
 <script>
 import Game from './components/Game.vue'
 import HomeScreen from './components/HomeScreen.vue'
+import OptionsScreen from './components/OptionsScreen.vue'
 
 export default {
   name: 'App',
   data() {
     return {
-      curWindow: 'home',
+      curWindow: 'options',
       devMode: 0
     }
   },
   components: {
     Game,
-    HomeScreen
+    HomeScreen,
+    OptionsScreen
   },
   mounted() {
     if (this.devMode) {
