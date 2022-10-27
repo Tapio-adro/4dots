@@ -6,7 +6,8 @@
       <div id="settings_ui">
         <section>
           <h3>Grid & Players</h3>
-
+          
+          <Slider/>
         </section>
         <section>
           <h3>Game Options</h3>
@@ -27,6 +28,7 @@
 </template>
 
 <script>
+import Slider from './Slider.vue'
 
 export default {
   name: "OptionsScreen",
@@ -42,6 +44,9 @@ export default {
   },
   mounted() {
 
+  },
+  components: {
+    Slider
   }
 };
 </script>
