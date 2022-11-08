@@ -3,6 +3,14 @@
   --zoomLevel: 1;
 }
 
+#window {
+  opacity: 1;
+  transition: 0.5s;
+}
+#window.hiden {
+  opacity: 0;
+}
+
 .wrapper {
   zoom: var(--zoomLevel);
   display: flex;

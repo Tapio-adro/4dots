@@ -54,7 +54,8 @@ export default {
         playersAmount: 4,
         humansAmount: 1
       };
-      this.$emit('changeWindowToGame');
+      setAppData('curWindow', 'game');
+      this.$router.push('/game')
       setTimeout(() => {
         setSettings(settings);
         startGame();

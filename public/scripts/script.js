@@ -161,7 +161,6 @@ function checkOnStart() {
   updateStatistics();
 
   assignWidthAndHeight();
-  console.log(gameFieldHeight, gameFieldWidth);
 
   gameRules.homeDef.createHomeAreaElements();
   setTimeout(() => {
@@ -171,6 +170,10 @@ function checkOnStart() {
   }, 0);
 
   gameOptions.betterBorders.setStyles();
+
+  setTimeout(() => {
+    document.querySelector('#window').classList.remove('hiden');
+  }, 300)
 }
 
 function checkIfBot() {

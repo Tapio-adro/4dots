@@ -8,7 +8,11 @@ $lightgrey: #f3f3f3
 $grey: #ddd
 $textgrey: #666
 
-
+#window
+  opacity: 1
+  transition: 0.5s
+  &.hiden
+    opacity: 0
 .wrapper
   zoom: var(--zoomLevel)
   display: flex
@@ -21,6 +25,7 @@ $textgrey: #666
     padding: 15px
     margin: 20px
     transition: 1s
+
 #table
   margin: 0 auto
   background-color: rgb(255, 255, 255)

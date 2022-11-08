@@ -1,4 +1,3 @@
-
 <template>
   <!-- <nav>
     <router-link to="/">Home</router-link> |
@@ -7,42 +6,15 @@
   <router-view />
 </template>
 
-<script>
-
-
-</script>
-
-
-<template>
-  <Game
-    v-if="curWindow == 'game'"
-  />
-  <HomeScreen
-    v-if="curWindow == 'home'"
-    @change-window-to-game="curWindow = 'game'"
-  />
-  <OptionsScreen
-    v-if="curWindow == 'options'"
-  />
-</template>
 
 <script>
-import Game from './components/Game.vue'
-import HomeScreen from './components/HomeScreen.vue'
-import OptionsScreen from './components/OptionsScreen.vue'
 
 export default {
   name: 'App',
   data() {
     return {
-      curWindow: 'options',
       devMode: 0
     }
-  },
-  components: {
-    Game,
-    HomeScreen,
-    OptionsScreen
   },
   mounted() {
     if (this.devMode) {
@@ -67,11 +39,6 @@ export default {
         startGame();
       }, 10)
     } 
-  },
-  watch: {
-    curWindow () {
-      setAppData('curWindow', this.curWindow);
-    }
   }
 }
 </script>

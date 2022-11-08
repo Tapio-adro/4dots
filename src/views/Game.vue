@@ -1,5 +1,5 @@
 <template>
-  <div id="window">
+  <div id="window" class="hiden">
     <div class="wrapper">
       <div class="outer_container">
         <div class="container">
