@@ -1,4 +1,3 @@
-
 <template>
   <div id="settings">
     <header><div>Game settings</div></header>
@@ -7,15 +6,27 @@
         <section>
           <h3>Grid & Players</h3>
           
-          <Slider/>
+          grid size
+          <br>
+          players amount
+          <br>
+          humans amount
+
         </section>
         <section>
           <h3>Game Options</h3>
+
+          game speed
+          <br>
+          border type
+          <br>
+          max optimization
 
         </section>
         <section>
           <h3>Game Rules</h3>
 
+          homeland defense 
         </section>
       </div>
       <div id="settings_description">
@@ -28,7 +39,6 @@
 </template>
 
 <script>
-import Slider from './Slider.vue'
 
 export default {
   name: "OptionsScreen",
@@ -39,14 +49,11 @@ export default {
       }
     }
   },
-  methods: {
-
-  },
   mounted() {
 
   },
-  components: {
-    Slider
+  methods: {
+
   }
 };
 </script>
