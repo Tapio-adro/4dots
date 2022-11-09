@@ -20,13 +20,13 @@ export default {
     if (this.devMode) {
       let settings = {
         gameOptions: {
-          betterBorders: 1,
+          betterBorders: 0,
           maxOptimization: 0,
-          boomCircles: 1,
+          boomCircles: 0,
           gameSpeed: 0
         },
         gameRules: {
-          homeDef: 1
+          homeDef: 0
         },
         playersAmount: 4,
         humansAmount: 1

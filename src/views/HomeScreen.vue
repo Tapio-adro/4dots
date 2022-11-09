@@ -17,7 +17,7 @@
       <div class="menu_container">
         <div class="menu">
           <div
-            @click="setQuickGame()"
+            @click="this.$router.push('/game')"
             id="quick_game"
           >Quick Game</div>
           <div
@@ -40,27 +40,7 @@ export default {
     }
   },
   methods: {
-    setQuickGame() {
-      let settings = {
-        gameOptions: {
-          betterBorders: 1,
-          maxOptimization: 0,
-          boomCircles: 1,
-          gameSpeed: 0
-        },
-        gameRules: {
-          homeDef: 1
-        },
-        playersAmount: 4,
-        humansAmount: 1
-      };
-      setAppData('curWindow', 'game');
-      this.$router.push('/game')
-      setTimeout(() => {
-        setSettings(settings);
-        startGame();
-      }, 10)
-    }
+
   }
 };
 </script>

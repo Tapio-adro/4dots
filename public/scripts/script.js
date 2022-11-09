@@ -127,6 +127,7 @@ function startGame() {
   nextTeam();
 }
 function setSettings(settings) {
+  gridSize = settings.gridSize;
   playersAmount = settings.playersAmount;
   botsAmount = playersAmount - settings.humansAmount;
   for (let [key, value] of Object.entries(settings.gameOptions)) {

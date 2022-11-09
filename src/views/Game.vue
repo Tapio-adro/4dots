@@ -21,9 +21,32 @@ export default {
 
     }
   },
-  methods: {
-
+  mounted() {
+    this.setQuickGame();
   },
+  methods: {
+    setQuickGame() {
+      let settings = {
+        gameOptions: {
+          betterBorders: 1,
+          maxOptimization: 0,
+          boomCircles: 1,
+          gameSpeed: 0
+        },
+        gameRules: {
+          homeDef: 1
+        },
+        playersAmount: 4,
+        humansAmount: 1,
+        gridSize: 9
+      };
+      setTimeout(() => {
+        setAppData('curWindow', 'game');
+        setSettings(settings);
+        startGame();
+      }, 0)
+    }
+  }
 };
 </script>
 
