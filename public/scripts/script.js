@@ -311,6 +311,7 @@ function assignWidthAndHeight () {
 }
 
 window.onresize = function () {
+  if (appData.curWindow != 'game') return;
   gameFeatures.ScaleGameElements();
   gameRules.homeDef.resizeHomeAreaElements();
 };

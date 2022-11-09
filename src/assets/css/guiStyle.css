@@ -40,8 +40,9 @@
   background-color: #04AA6D;
   border-radius: 50%;
 }
+
 #home .menu_wrapper {
-  font-family: Verdana, sans-serif;
+  font-family: system-ui;
   margin-top: 50px;
   width: 100%;
   display: flex;
@@ -53,14 +54,16 @@
   border-radius: 20px;
   padding: 50px;
 }
-#home .menu_wrapper .menu {
+
+#home .menu {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   row-gap: 50px;
 }
-#home .menu_wrapper .menu div {
+#home .menu .router_link {
+  text-decoration: none;
   width: 350px;
   text-align: center;
   font-size: 2.5rem;
@@ -71,9 +74,8 @@
   background-color: #04AA6D;
   color: #fff;
 }
-#home .menu_wrapper .menu div:hover {
-  color: #04AA6D;
-  background-color: #fff;
+#home .menu .router_link:hover {
+  opacity: 0.8;
 }
 #settings {
   font-family: sans-serif;

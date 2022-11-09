@@ -38,36 +38,36 @@ $textgrey: #666
       div
         background-color: $green
         border-radius: 50%
-  .menu_wrapper
-    font-family: Verdana,sans-serif
-    margin-top: 50px
-    width: 100%
-    display: flex
-    justify-content: center
-    .menu_container
-      width: 600px
-      background-color: $lightgrey
-      border-radius: 20px
-      padding: 50px
-    .menu
-      display: flex
-      justify-content: center
-      align-items: center
-      flex-direction: column
-      row-gap: 50px
-      div
-        width: 350px
-        text-align: center
-        font-size: 2.5rem
-        cursor: pointer
-        padding: 10px
-        border: 10px solid $green
-        border-radius: 20px
-        background-color: $green
-        color: #fff
-        &:hover
-          color: $green 
-          background-color: #fff
+#home .menu_wrapper
+  font-family: system-ui
+  margin-top: 50px
+  width: 100%
+  display: flex
+  justify-content: center
+  .menu_container
+    width: 600px
+    background-color: $lightgrey
+    border-radius: 20px
+    padding: 50px
+#home .menu
+  display: flex
+  justify-content: center
+  align-items: center
+  flex-direction: column
+  row-gap: 50px
+  .router_link
+    text-decoration: none
+    width: 350px
+    text-align: center
+    font-size: 2.5rem
+    cursor: pointer
+    padding: 10px
+    border: 10px solid $green
+    border-radius: 20px
+    background-color: $green
+    color: #fff
+    &:hover
+     opacity: 0.8
 
   #quick_game
   #set_own_game

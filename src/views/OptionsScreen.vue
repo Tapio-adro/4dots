@@ -21,6 +21,8 @@
           border type
           <br>
           max optimization
+          <br>
+          boom circles
 
         </section>
         <section>

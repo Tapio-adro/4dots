@@ -4,8 +4,6 @@ var gameFeatures = {
 }
 
 gameFeatures.ScaleGameElements = function () {
-  if (appData.curWindow != 'game') return
-
   let root = document.querySelector(':root');
 
   let windowHeight = window.innerHeight;

@@ -41,7 +41,6 @@ export default {
         gridSize: 9
       };
       setTimeout(() => {
-        setAppData('curWindow', 'game');
         setSettings(settings);
         startGame();
       }, 0)

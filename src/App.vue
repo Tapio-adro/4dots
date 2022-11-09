@@ -16,6 +16,13 @@ export default {
       devMode: 0
     }
   },
+  watch: {
+    $route (to, from){
+      setTimeout(() => {
+        setAppData('curWindow', to.name);
+      }, 10)
+    }
+  },
   mounted() {
     if (this.devMode) {
       let settings = {

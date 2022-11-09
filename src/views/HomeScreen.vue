@@ -16,13 +16,8 @@
     <div class="menu_wrapper">
       <div class="menu_container">
         <div class="menu">
-          <div
-            @click="this.$router.push('/game')"
-            id="quick_game"
-          >Quick Game</div>
-          <div
-            id="set_own_game"
-          >Set own Game</div>
+          <router-link id="quick_game" class="router_link" to="/game">Quick Game</router-link>
+          <router-link id="set_own_game" class="router_link" to="/options">Set own Game</router-link>
         </div>
       </div>
     </div>
