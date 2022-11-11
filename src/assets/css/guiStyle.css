@@ -77,18 +77,18 @@
 #home .menu .router_link:hover {
   opacity: 0.8;
 }
-#settings {
+#options {
   font-family: sans-serif;
   display: flex;
   align-items: center;
   flex-direction: column;
 }
-#settings header {
+#options header {
   display: flex;
   justify-content: center;
   margin: 20px 0;
 }
-#settings header div {
+#options header div {
   font-size: 2.5rem;
   padding: 10px;
   color: #04AA6D;
@@ -96,7 +96,7 @@
   border-radius: 20px;
   border: 7px solid #ddd;
 }
-#settings #container {
+#options #container {
   width: 90%;
   border: 10px solid #ddd;
   border-radius: 20px;
@@ -105,26 +105,47 @@
   grid-template-columns: 1fr 1fr;
   background-color: #f3f3f3;
 }
-#settings #settings_ui {
+#options #options_ui {
   border-right: 5px solid #ddd;
 }
-#settings #settings_description {
+#options #options_description {
   border-left: 5px solid #ddd;
 }
-#settings .sections_holder, #settings #settings_ui, #settings #settings_description {
+#options .sections_holder, #options #options_ui, #options #options_description {
   padding: 10px;
   display: flex;
   flex-direction: column;
   row-gap: 10px;
 }
 
-#settings section {
+#options section {
   width: 100%;
   border-radius: 10px;
   background-color: #fff;
   padding: 10px;
 }
-#settings section h3 {
+#options section h3 {
   color: #04AA6D;
   text-align: center;
+}
+
+#options .vue-slider {
+  margin: 0 20px;
+}
+#options .vue-slider .vue-slider-process {
+  background-color: #04AA6D;
+}
+#options .vue-slider .vue-slider-mark-label {
+  font-size: 12px;
+}
+#options .vue-slider .vue-slider-dot-handle-focus {
+  background-color: #fff;
+  box-shadow: 0.5px 0.5px 2px 1px #04AA6D;
+}
+
+#options fieldset {
+  padding-bottom: 25px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border-color: rgba(102, 102, 102, 0.2);
 }/*# sourceMappingURL=guiStyle.css.map */

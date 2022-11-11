@@ -1,14 +1,35 @@
 <template>
-  <div id="settings">
-    <header><div>Game settings</div></header>
+  <div id="options">
+    <header><div>Game options</div></header>
     <main id="container">
-      <div id="settings_ui">
+      <div id="options_ui">
         <section>
           <h3>Grid & Players</h3>
-          
-          grid size
+          <fieldset>
+            <legend>Grid size</legend>
+            <vue-slider 
+              :min="5"
+              :max="21"
+              :interval="2"
+              :marks="true"
+              v-model="options.gridSize"
+              :tooltip="'none'"
+              :drag-on-click="true"
+            ></vue-slider>
+          </fieldset>
+          <fieldset>
+            <legend>Players amount</legend>
+            <vue-slider 
+              :min="5"
+              :max="21"
+              :marks="true"
+              v-model="options.gridSize"
+              :tooltip="'none'"
+              :drag-on-click="true"
+            ></vue-slider>
+          </fieldset>
           <br>
-          players amount
+          
           <br>
           humans amount
 
@@ -31,7 +52,7 @@
           homeland defense 
         </section>
       </div>
-      <div id="settings_description">
+      <div id="options_description">
         <section>
 
         </section>
@@ -41,15 +62,19 @@
 </template>
 
 <script>
+import VueSlider from 'vue-slider-component'
 
 export default {
   name: "OptionsScreen",
   data() {
     return {
-      gui: {
-
+      options: {
+        gridSize: 9,
       }
     }
+  },
+  components: {
+    VueSlider
   },
   mounted() {
 
