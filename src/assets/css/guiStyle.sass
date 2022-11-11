@@ -92,7 +92,6 @@ $textgrey: #666
     width: 90%
     border: 10px solid $grey
     border-radius: 20px
-    height: 500px
     display: grid
     grid-template-columns: 1fr 1fr
     background-color: $lightgrey
@@ -127,8 +126,14 @@ $textgrey: #666
     background-color: #fff
     box-shadow: 0.5px 0.5px 2px 1px $green
 #options fieldset
-  padding-bottom: 25px
   margin-bottom: 10px
   border-radius: 10px
   border-color: transparentize($textgrey, 0.8)
-  legend
+  &.slider_holder
+    padding-bottom: 25px
+
+#options .dropdown
+  button
+    cursor: pointer
+  .button
+  .content

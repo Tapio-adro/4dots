@@ -5,9 +5,14 @@
       <div id="options_ui">
         <section>
           <h3>Grid & Players</h3>
-          <fieldset>
+          <Dropdown
+            label="Players position"
+            v-model:value="options.playersPosition"
+            :options="['Default', 'Random']"
+          />
+          <fieldset class="slider_holder">
             <legend>Grid size</legend>
-            <vue-slider 
+            <VueSlider 
               :min="5"
               :max="21"
               :interval="2"
@@ -15,24 +20,30 @@
               v-model="options.gridSize"
               :tooltip="'none'"
               :drag-on-click="true"
-            ></vue-slider>
+            />
           </fieldset>
-          <fieldset>
+          <fieldset class="slider_holder">
             <legend>Players amount</legend>
-            <vue-slider 
-              :min="5"
-              :max="21"
+            <VueSlider 
+              :min="2"
+              :max="options.maxPlayersAmount"
               :marks="true"
-              v-model="options.gridSize"
+              v-model="options.playersAmount"
               :tooltip="'none'"
               :drag-on-click="true"
-            ></vue-slider>
+            />
           </fieldset>
-          <br>
-          
-          <br>
-          humans amount
-
+          <fieldset class="slider_holder">
+            <legend>Humans amount</legend>
+            <VueSlider 
+              :min="0"
+              :max="options.playersAmount"
+              :marks="true"
+              v-model="options.humansAmount"
+              :tooltip="'none'"
+              :drag-on-click="true"
+            />
+          </fieldset>
         </section>
         <section>
           <h3>Game Options</h3>
@@ -63,18 +74,35 @@
 
 <script>
 import VueSlider from 'vue-slider-component'
+import Dropdown from '../components/Dropdown.vue'
 
 export default {
   name: "OptionsScreen",
+  components: {
+    VueSlider,
+    Dropdown
+  },
   data() {
     return {
       options: {
+        playersPosition: 'Default',
         gridSize: 9,
+        playersAmount: 4,
+        maxPlayersAmount: 8,
+        humansAmount: 1
       }
     }
   },
-  components: {
-    VueSlider
+  computed: {
+    playersAmount() {
+      return this.options.playersAmount;
+    }
+  },
+  watch: {
+    playersAmount() {
+      if (!(this.options.playersAmount < this.options.humansAmount)) return;
+      this.options.humansAmount = this.options.playersAmount;
+    }
   },
   mounted() {
 

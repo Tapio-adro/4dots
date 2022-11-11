@@ -100,7 +100,6 @@
   width: 90%;
   border: 10px solid #ddd;
   border-radius: 20px;
-  height: 500px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   background-color: #f3f3f3;
@@ -144,8 +143,14 @@
 }
 
 #options fieldset {
-  padding-bottom: 25px;
   margin-bottom: 10px;
   border-radius: 10px;
   border-color: rgba(102, 102, 102, 0.2);
+}
+#options fieldset.slider_holder {
+  padding-bottom: 25px;
+}
+
+#options .dropdown button {
+  cursor: pointer;
 }/*# sourceMappingURL=guiStyle.css.map */
