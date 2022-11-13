@@ -3,31 +3,49 @@
 <fieldset class="dropdown">
   <legend>{{ label }}</legend>
   <button 
-    class="button"
+    class="dropdown_button"
+    :class="{active: showDropdownContent}"
     @click="showDropdownContent = !showDropdownContent"
-  >{{ value }}</button>
+    ref="dropdownButton"
+    v-click-outside="toggle"
+  >
+    {{ value }}
+    <i class="fa fa-chevron-down" aria-hidden="true"></i>
+  </button>
   <div 
     class="content"
     v-if="showDropdownContent"
   >
-    <button 
+    <div 
+      class="dropdown_option"
       v-for="(option, index) in options" :key="index"
       @click="changeValueTo(option)"
+      
     >
       {{ option }}
-    </button>
+    </div>
   </div>
 </fieldset>
 
 </template>
 
 <script>
+import vClickOutside from 'v-click-outside';
+
 export default {
   name: "Dropdown",
   data() {
     return {
-      showDropdownContent: false
+      showDropdownContent: false,
+      clickOutsideConfig: {
+        handler: this.toggle(),
+        middleware: this.middleware,
+        events: ["dblclick", "click"]
+      }
     }
+  },
+  directives: {
+    clickOutside: vClickOutside.directive
   },
   props: {
     label: String,
@@ -39,6 +57,13 @@ export default {
     changeValueTo(option) {
       this.$emit('update:value', option)
       this.showDropdownContent = false;
+    },
+    middleware(event) {
+      // return event.target != this.$refs.dropdownButton; 
+      return false;
+    },
+    toggle() {
+      console.log('obj');
     }
   }
 };

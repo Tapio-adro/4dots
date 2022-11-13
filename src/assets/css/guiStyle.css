@@ -151,6 +151,37 @@
   padding-bottom: 25px;
 }
 
-#options .dropdown button {
+#options .dropdown .dropdown_button {
   cursor: pointer;
+  font-size: 16px;
+  background: none;
+  border: 2px solid rgba(102, 102, 102, 0.2);
+  color: #666;
+  border-radius: 5px;
+  transition: 0.5s;
+  padding: 0 5px;
+}
+#options .dropdown .dropdown_button:hover, #options .dropdown .dropdown_button.active {
+  border-color: #04AA6D;
+}
+#options .dropdown .dropdown_button i {
+  color: #04AA6D;
+}
+#options .dropdown .content {
+  position: absolute;
+  background-color: #f3f3f3;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  border-radius: 5px;
+  z-index: 6;
+  min-width: 160px;
+}
+#options .dropdown .content .dropdown_option {
+  cursor: pointer;
+  padding: 4px;
+  padding-left: 10px;
+  margin: 3px;
+  border-radius: 5px;
+}
+#options .dropdown .content .dropdown_option:hover {
+  background-color: #e6e6e6;
 }/*# sourceMappingURL=guiStyle.css.map */
