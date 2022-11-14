@@ -42,7 +42,6 @@ function Cells(size) {
     { x: edge, y: middle },
     { x: middle, y: 1 },
   ];
-
   Cells.prototype.BLACK = "64, 64, 64";
   Cells.prototype.AROUND_PLUS = [
     { x: 0, y: -1 },
@@ -84,8 +83,8 @@ function Cells(size) {
 Cells.prototype.setTeams = function (teams, start_dots, playersCoords) {
   this.teams = teams;
   playersCoords = (
-    playersCoords ? playersCoords : Cells.prototype.TEAM__START_COORDS
-  ).shuffleArray();
+    playersCoords ? playersCoords.shuffleArray() : Cells.prototype.TEAM__START_COORDS
+  );
   teams.forEach((team) => {
     color = team.color;
     let coords = playersCoords.shift();

@@ -1,6 +1,5 @@
 <template>
   <div id="options">
-    <header><div>Game options</div></header>
     <main id="container">
       <div id="options_ui">
         <section>
@@ -96,12 +95,33 @@ export default {
   computed: {
     playersAmount() {
       return this.options.playersAmount;
+    },
+    gridSize() {
+      return this.options.gridSize;
     }
   },
   watch: {
     playersAmount() {
       if (!(this.options.playersAmount < this.options.humansAmount)) return;
       this.options.humansAmount = this.options.playersAmount;
+    },
+    gridSize() {
+      let playersToSize = [
+        [7, 4],
+        [9, 8]
+      ]
+      let playersPosition = this.options.playersPosition.toLowerCase();
+      let gridSize = this.options.gridSize;
+      if (playersPosition == 'default') {
+        console.log('obj');
+        if (gridSize > 9) {
+          this.options.maxPlayersAmount = 8
+        } else {
+          this.options.maxPlayersAmount = playersToSize.find(elem => elem[0] >= this.options.gridSize)[1]
+        }
+        if (!(this.options.maxPlayersAmount < this.options.playersAmount)) return;
+        this.options.playersAmount = this.options.maxPlayersAmount;
+      }
     }
   },
   mounted() {

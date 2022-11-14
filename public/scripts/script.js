@@ -15,6 +15,8 @@ let gameIsRunnning = true;
 let recording = [];
 let doRecording;
 let doStatistics;
+// doRecording = true;
+// doStatistics = true;
 var gameOptionsValues = {
   betterBorders: 1,
   maxOptimization: 0,
@@ -24,24 +26,17 @@ var gameOptionsValues = {
 var gameRulesValues = {
   homeDef: 1,
 };
-
 let appData = {
   curWindow: "",
 };
 
-// doRecording = true;
-// doStatistics = true;
-
 let gridSize = 9;
 let playersAmount = 4;
+let playersPosition;
 let botsAmount = 3;
 
+
 let teams, cellsGrid;
-
-// setupGridAndTeams();
-// checkOnStart();
-// nextTeam();
-
 document.addEventListener("keydown", checkKeyInput);
 
 function nextTeam() {
@@ -130,6 +125,9 @@ function setSettings(settings) {
   gridSize = settings.gridSize;
   playersAmount = settings.playersAmount;
   botsAmount = playersAmount - settings.humansAmount;
+  console.log(settings.playersPosition);
+  playersPosition = settings.playersPosition == 'random' ? getPlayerCoords(gridSize, playersAmount) : false;
+  console.log(playersPosition);
   for (let [key, value] of Object.entries(settings.gameOptions)) {
     gameOptionsValues[key] = value;
   }
@@ -150,7 +148,7 @@ function setupGridAndTeams() {
   cellsGrid.setTeams(
     teams,
     start_dots,
-    getPlayerCoords(gridSize, playersAmount)
+    playersPosition
   );
   cellsGrid.createField(table);
 }
