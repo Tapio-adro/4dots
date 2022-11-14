@@ -24,6 +24,9 @@ let Grid = function (size, symEmpty, symCore) {
     }
     this.grid.push(row);
   }
+  if (size == 5) {
+    this.grid[2][2] = '#'
+  }
 };
 Grid.prototype.changeCells = function (coordsArr, symbol) {
   let size = this.size;
@@ -101,10 +104,32 @@ function getPlayerCoords(size, playersNum) {
       && grid.getBySymbol(SYMBOLS.empty).length == 0) {break}
     let cd = grid.getPlayerCoords();
     grid.addPlayer(cd.x, cd.y);
-    // grid.print();
   }
+  // grid.print();
   return grid.getBySymbol(SYMBOLS.player);
 }
+let testData = [];
+for (let j = 5; j < 21; j += 2) {
+  let oneSizeData = {};
+  for (let i = 0; i < 100; i++) {
+    let amount = getPlayerCoords(j, 30).length;
+    if (oneSizeData[amount] == undefined) {
+      oneSizeData[amount] = {amount: 1}
+    } else {
+      oneSizeData[amount].amount += 1
+    }
+  }
+  testData.push({size: j, data: oneSizeData});
+}
+let someArray = [];
+for (let dataPart of testData) {
+  someArray.push([
+    dataPart.size,
+    Object.keys(dataPart.data)[0]
+  ]);
+}
+console.log(someArray);
+// 5 - 2, 7 - 4, 9 - 9,
 function getCoordsAround(dotX, dotY, rd) {
   let coordsDot = { x: -rd + dotX, y: rd + dotY };
   let coords = [];

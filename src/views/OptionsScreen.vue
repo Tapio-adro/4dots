@@ -98,6 +98,9 @@ export default {
     },
     gridSize() {
       return this.options.gridSize;
+    },
+    playersPosition() {
+      return this.options.playersPosition;
     }
   },
   watch: {
@@ -106,28 +109,43 @@ export default {
       this.options.humansAmount = this.options.playersAmount;
     },
     gridSize() {
-      let playersToSize = [
-        [7, 4],
-        [9, 8]
-      ]
+     this.updateMaxPlayersAmount()
+    },
+    playersPosition() {
+     this.updateMaxPlayersAmount()
+    }
+  },
+  mounted() {
+  },
+  methods: {
+    updateMaxPlayersAmount() {
       let playersPosition = this.options.playersPosition.toLowerCase();
       let gridSize = this.options.gridSize;
       if (playersPosition == 'default') {
-        console.log('obj');
+        let playersToSize = [
+          [7, 4],
+          [9, 8]
+        ]
         if (gridSize > 9) {
           this.options.maxPlayersAmount = 8
         } else {
           this.options.maxPlayersAmount = playersToSize.find(elem => elem[0] >= this.options.gridSize)[1]
         }
-        if (!(this.options.maxPlayersAmount < this.options.playersAmount)) return;
-        this.options.playersAmount = this.options.maxPlayersAmount;
+      } else {
+        let playersToSize = [
+        [ 7, 4 ],
+        [ 9, 9 ],
+        [ 11, 14 ]
+        ]
+        if (gridSize > 11) {
+          this.options.maxPlayersAmount = 20
+        } else {
+          this.options.maxPlayersAmount = playersToSize.find(elem => elem[0] >= this.options.gridSize)[1]
+        }
       }
+      if (!(this.options.maxPlayersAmount < this.options.playersAmount)) return;
+      this.options.playersAmount = this.options.maxPlayersAmount;
     }
-  },
-  mounted() {
-
-  },
-  methods: {
 
   }
 };

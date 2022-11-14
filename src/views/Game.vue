@@ -36,10 +36,10 @@ export default {
         gameRules: {
           homeDef: 1
         },
-        playersAmount: 2,
+        playersAmount: 9,
+        gridSize: 9,
         humansAmount: 0,
-        gridSize: 5,
-        playersPosition: 'default'
+        playersPosition: 'random'
       };
       setTimeout(() => {
         setSettings(settings);
