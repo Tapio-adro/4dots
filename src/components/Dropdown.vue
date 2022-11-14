@@ -7,7 +7,6 @@
     :class="{active: showDropdownContent}"
     @click="showDropdownContent = !showDropdownContent"
     ref="dropdownButton"
-    v-click-outside="toggle"
   >
     {{ value }}
     <i class="fa fa-chevron-down" aria-hidden="true"></i>
@@ -15,12 +14,12 @@
   <div 
     class="content"
     v-if="showDropdownContent"
+    v-click-outside="clickOutsideConfig"
   >
     <div 
       class="dropdown_option"
       v-for="(option, index) in options" :key="index"
       @click="changeValueTo(option)"
-      
     >
       {{ option }}
     </div>
@@ -30,22 +29,17 @@
 </template>
 
 <script>
-import vClickOutside from 'v-click-outside';
-
 export default {
   name: "Dropdown",
   data() {
     return {
       showDropdownContent: false,
       clickOutsideConfig: {
-        handler: this.toggle(),
+        handler: this.toggle,
         middleware: this.middleware,
         events: ["dblclick", "click"]
       }
     }
-  },
-  directives: {
-    clickOutside: vClickOutside.directive
   },
   props: {
     label: String,
@@ -59,11 +53,10 @@ export default {
       this.showDropdownContent = false;
     },
     middleware(event) {
-      // return event.target != this.$refs.dropdownButton; 
-      return false;
+      return event.target != this.$refs.dropdownButton; 
     },
     toggle() {
-      console.log('obj');
+      this.showDropdownContent = false;
     }
   }
 };
