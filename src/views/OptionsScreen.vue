@@ -21,9 +21,10 @@
               :drag-on-click="true"
             />
           </fieldset>
-          <fieldset class="slider_holder">
+          <fieldset :class="{'slider_holder': options.maxPlayersAmount != 2}">
             <legend>Players amount</legend>
             <VueSlider 
+              v-if="options.maxPlayersAmount != 2"
               :min="2"
               :max="options.maxPlayersAmount"
               :marks="true"
@@ -31,6 +32,11 @@
               :tooltip="'none'"
               :drag-on-click="true"
             />
+            <div v-else class="slider_replacement">
+              <div class="half_line"></div>
+              <div class="number"><div>{{ 2 }}</div></div>
+              <div class="half_line"></div>
+            </div>
           </fieldset>
           <fieldset class="slider_holder">
             <legend>Humans amount</legend>
@@ -123,6 +129,7 @@ export default {
       let gridSize = this.options.gridSize;
       if (playersPosition == 'default') {
         let playersToSize = [
+          [5, 2],
           [7, 4],
           [9, 8]
         ]
@@ -133,6 +140,7 @@ export default {
         }
       } else {
         let playersToSize = [
+        [ 5, 2 ],
         [ 7, 4 ],
         [ 9, 9 ],
         [ 11, 14 ]

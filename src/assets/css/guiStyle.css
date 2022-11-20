@@ -116,6 +116,15 @@
   text-align: center;
 }
 
+#options fieldset {
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border-color: rgba(102, 102, 102, 0.2);
+}
+#options fieldset.slider_holder {
+  padding-bottom: 25px;
+}
+
 #options .vue-slider {
   margin: 0 20px;
 }
@@ -130,13 +139,31 @@
   box-shadow: 0.5px 0.5px 2px 1px #04AA6D;
 }
 
-#options fieldset {
-  margin-bottom: 10px;
-  border-radius: 10px;
-  border-color: rgba(102, 102, 102, 0.2);
+#options .slider_replacement {
+  display: grid;
+  grid-template-columns: auto 30px auto;
 }
-#options fieldset.slider_holder {
-  padding-bottom: 25px;
+#options .slider_replacement .half_line {
+  border-bottom: 2px solid #04AA6D;
+  margin: 0 10px;
+  align-self: center;
+}
+#options .slider_replacement .number {
+  color: rgba(0, 0, 0, 0.8);
+  border: 3px solid rgba(4, 170, 109, 0.5);
+  background: rgba(4, 170, 109, 0.2);
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transform-origin: center;
+  transform: rotate(45deg);
+}
+#options .slider_replacement .number div {
+  transform-origin: center;
+  transform: rotate(-45deg);
 }
 
 #options .dropdown .dropdown_button {
