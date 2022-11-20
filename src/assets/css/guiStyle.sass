@@ -113,6 +113,9 @@ $textgrey: #666
   border-color: transparentize($textgrey, 0.8)
   &.slider_holder
     padding-bottom: 25px
+  &.no_slider
+    padding-bottom: 15px
+
 #options .vue-slider
   margin: 0 20px
   .vue-slider-process
@@ -132,8 +135,8 @@ $textgrey: #666
     align-self: center
   .number
     color: transparentize(black, 0.2)
-    border: 3px solid transparentize($green, 0.5)
-    background: transparentize($green, 0.8)
+    border: 3px solid transparentize($green, 0.2)
+    background: transparentize($green, 0.85)
     width: 30px
     height: 30px
     display: flex
@@ -145,6 +148,7 @@ $textgrey: #666
     div
       transform-origin: center
       transform: rotate(-45deg)
+
 #options .dropdown
   .dropdown_button
     cursor: pointer
@@ -174,3 +178,13 @@ $textgrey: #666
       border-radius: 5px
       &:hover
         background-color: #e6e6e6
+
+#options .summary
+  margin-top: 15px
+  margin-bottom: 5px
+  margin-left: 15px
+  color: #737373
+
+
+
+

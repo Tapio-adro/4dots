@@ -124,6 +124,9 @@
 #options fieldset.slider_holder {
   padding-bottom: 25px;
 }
+#options fieldset.no_slider {
+  padding-bottom: 15px;
+}
 
 #options .vue-slider {
   margin: 0 20px;
@@ -150,8 +153,8 @@
 }
 #options .slider_replacement .number {
   color: rgba(0, 0, 0, 0.8);
-  border: 3px solid rgba(4, 170, 109, 0.5);
-  background: rgba(4, 170, 109, 0.2);
+  border: 3px solid rgba(4, 170, 109, 0.8);
+  background: rgba(4, 170, 109, 0.15);
   width: 30px;
   height: 30px;
   display: flex;
@@ -199,4 +202,11 @@
 }
 #options .dropdown .content .dropdown_option:hover {
   background-color: #e6e6e6;
+}
+
+#options .summary {
+  margin-top: 15px;
+  margin-bottom: 5px;
+  margin-left: 15px;
+  color: #737373;
 }/*# sourceMappingURL=guiStyle.css.map */

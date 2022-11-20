@@ -21,7 +21,10 @@
               :drag-on-click="true"
             />
           </fieldset>
-          <fieldset :class="{'slider_holder': options.maxPlayersAmount != 2}">
+          <fieldset
+            class="slider_holder" 
+            :class="{'no_slider': options.maxPlayersAmount == 2}"
+          >
             <legend>Players amount</legend>
             <VueSlider 
               v-if="options.maxPlayersAmount != 2"
@@ -49,6 +52,20 @@
               :drag-on-click="true"
             />
           </fieldset>
+          <div class="summary">
+            <template v-if="options.humansAmount == 0">
+              {{ options.playersAmount }} bots fight
+            </template>
+            <template v-else-if="options.humansAmount == 2 && options.playersAmount == 2">
+              duel
+            </template>
+            <template v-else-if="options.humansAmount == options.playersAmount">
+              {{ options.humansAmount }} players
+            </template>
+            <template v-else>
+              {{ getWordNumber('player', options.humansAmount) }} and {{ getWordNumber('bot', options.playersAmount - options.humansAmount) }} 
+            </template>
+          </div>
         </section>
         <section>
           <h3>Game Options</h3>
@@ -153,8 +170,15 @@ export default {
       }
       if (!(this.options.maxPlayersAmount < this.options.playersAmount)) return;
       this.options.playersAmount = this.options.maxPlayersAmount;
+    },
+    getWordNumber(word, number) {
+      if (number == 1) {
+        return number + ' ' + word
+      }
+      else {
+        return number + ' ' + word + 's'
+      }
     }
-
   }
 };
 </script>

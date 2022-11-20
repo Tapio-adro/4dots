@@ -7,6 +7,7 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@formkit/auto-animate": "^1.0.0-beta.5",
     "@formkit/vue": "^1.0.0-beta.11",
     "click-outside-vue3": "^4.0.1",
     "fs-js": "^1.0.6",
