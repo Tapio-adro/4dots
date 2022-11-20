@@ -207,6 +207,12 @@
 #options .summary {
   margin-top: 15px;
   margin-bottom: 5px;
-  margin-left: 15px;
+  margin-left: 10px;
   color: #737373;
+}
+#options .summary .map_size {
+  border: 2px solid #999999;
+  padding: 2px 4px;
+  border-radius: 5px;
+  margin-left: 10px;
 }/*# sourceMappingURL=guiStyle.css.map */

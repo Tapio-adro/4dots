@@ -65,6 +65,9 @@
             <template v-else>
               {{ getWordNumber('player', options.humansAmount) }} and {{ getWordNumber('bot', options.playersAmount - options.humansAmount) }} 
             </template>
+            <span class="map_size">
+              {{ options.gridSize + ' x ' + options.gridSize }}
+            </span>
           </div>
         </section>
         <section>
