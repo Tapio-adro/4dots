@@ -72,13 +72,19 @@
         </section>
         <section>
           <h3>Game Options</h3>
-
-          game speed
+          <fieldset class="slider_holder">
+            <legend>Game speed</legend>
+            <VueSlider 
+              :data="gameSpeedSlider"
+              v-model="options.gameSpeed"
+              :tooltip="'none'"
+              :drag-on-click="true"
+            />
+          </fieldset>
           <div class="checkbox_wrapper"></div>
           <label class="checkbox">
             <input type="checkbox" v-model="options.betterBorders"/>
             <span>Enable better borders</span>
-            
           </label>
           <br>
           max optimization
@@ -120,7 +126,9 @@ export default {
         maxPlayersAmount: 8,
         humansAmount: 1,
         betterBorders: true,
-      }
+        gameSpeed: '0'
+      },
+      gameSpeedSlider: this.getSliderData()
     }
   },
   computed: {
@@ -185,6 +193,13 @@ export default {
       }
       else {
         return number + ' ' + word + 's'
+      }
+    },
+    getSliderData() {
+      return {
+        '0': 'Normal',
+        '1': 'Fast',
+        '2': 'Instant'
       }
     }
   }
