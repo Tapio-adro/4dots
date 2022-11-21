@@ -84,7 +84,7 @@
   flex-direction: column;
 }
 #options #container {
-  margin-top: 50px;
+  margin: 50px 0;
   width: 90%;
   border: 10px solid #ddd;
   border-radius: 20px;
@@ -218,7 +218,7 @@
 }
 
 #options .checkbox {
-  display: inline-flex;
+  display: flex;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -238,4 +238,9 @@
   margin-left: 5px;
   margin-right: 8px;
   accent-color: #04AA6D;
+}
+#options .checkbox.inactive {
+  pointer-events: none;
+  cursor: none;
+  opacity: 0.5;
 }/*# sourceMappingURL=guiStyle.css.map */

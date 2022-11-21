@@ -81,16 +81,18 @@
               :drag-on-click="true"
             />
           </fieldset>
-          <div class="checkbox_wrapper"></div>
           <label class="checkbox">
             <input type="checkbox" v-model="options.betterBorders"/>
             <span>Enable better borders</span>
           </label>
-          <br>
-          max optimization
-          <br>
-          boom circles
-
+          <label class="checkbox">
+            <input type="checkbox" v-model="options.maxOptimization"/>
+            <span>Enable maximal optimization</span>
+          </label>
+          <label class="checkbox" :class="{'inactive': options.maxOptimization}">
+            <input type="checkbox" v-model="options.boomCircles"/>
+            <span>Enable blast circles</span>
+          </label>
         </section>
         <section>
           <h3>Game Rules</h3>
@@ -126,7 +128,9 @@ export default {
         maxPlayersAmount: 8,
         humansAmount: 1,
         betterBorders: true,
-        gameSpeed: '0'
+        gameSpeed: '0',
+        maxOptimization: false,
+        boomCircles: true
       },
       gameSpeedSlider: this.getSliderData()
     }
@@ -134,6 +138,9 @@ export default {
   computed: {
     playersAmount() {
       return this.options.playersAmount;
+    },
+    maxOptimization() {
+      return this.options.maxOptimization;
     },
     gridSize() {
       return this.options.gridSize;
@@ -152,6 +159,11 @@ export default {
     },
     playersPosition() {
      this.updateMaxPlayersAmount()
+    },
+    maxOptimization() {
+      if (this.options.maxOptimization) {
+        this.options.boomCircles = false;
+      }
     }
   },
   mounted() {

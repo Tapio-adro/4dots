@@ -78,7 +78,7 @@ $textgrey: #666
   align-items: center
   flex-direction: column
   #container
-    margin-top: 50px
+    margin: 50px 0
     width: 90%
     border: 10px solid $grey
     border-radius: 20px
@@ -190,9 +190,8 @@ $textgrey: #666
     border-radius: 5px
     margin-left: 10px
 
-#options .checkbox_wrapper
 #options .checkbox
-  display: inline-flex
+  display: flex
   user-select: none
   cursor: pointer
   span
@@ -206,6 +205,10 @@ $textgrey: #666
     margin-left: 5px
     margin-right: 8px
     accent-color: $green
+  &.inactive
+    pointer-events: none
+    cursor: none
+    opacity: 0.5
 
 
 
