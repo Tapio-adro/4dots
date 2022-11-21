@@ -74,8 +74,12 @@
           <h3>Game Options</h3>
 
           game speed
-          <br>
-          border type
+          <div class="checkbox_wrapper"></div>
+          <label class="checkbox">
+            <input type="checkbox" v-model="options.betterBorders"/>
+            <span>Enable better borders</span>
+            
+          </label>
           <br>
           max optimization
           <br>
@@ -114,7 +118,8 @@ export default {
         gridSize: 9,
         playersAmount: 4,
         maxPlayersAmount: 8,
-        humansAmount: 1
+        humansAmount: 1,
+        betterBorders: true,
       }
     }
   },

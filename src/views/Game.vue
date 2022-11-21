@@ -29,14 +29,14 @@ export default {
       let settings = {
         gameOptions: {
           betterBorders: 1,
-          maxOptimization: 0,
+          maxOptimization: 1,
           boomCircles: 1,
-          gameSpeed: 0
+          gameSpeed: 2
         },
         gameRules: {
           homeDef: 1
         },
-        playersAmount: 9,
+        playersAmount: 4,
         gridSize: 9,
         humansAmount: 0,
         playersPosition: 'random'
@@ -44,7 +44,7 @@ export default {
       setTimeout(() => {
         setSettings(settings);
         startGame();
-      }, 0)
+      }, 10)
     }
   }
 };
