@@ -96,8 +96,10 @@
         </section>
         <section>
           <h3>Game Rules</h3>
-
-          homeland defense 
+          <label class="checkbox">
+            <input type="checkbox" v-model="options.homelandDefense"/>
+            <span>Homeland defense</span>
+          </label>
         </section>
       </div>
       <div id="options_description">
@@ -130,7 +132,8 @@ export default {
         betterBorders: true,
         gameSpeed: '0',
         maxOptimization: false,
-        boomCircles: true
+        boomCircles: true,
+        homelandDefense: false
       },
       gameSpeedSlider: this.getSliderData()
     }
