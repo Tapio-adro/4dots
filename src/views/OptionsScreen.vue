@@ -7,7 +7,7 @@
           <Dropdown
             label="Players position"
             v-model:value="options.playersPosition"
-            :options="['Default', 'Random']"
+            :options="{'default': 'Default', 'random':'Random'}"
           />
           <fieldset class="slider_holder">
             <legend>Grid size</legend>
@@ -124,7 +124,7 @@ export default {
   data() {
     return {
       options: {
-        playersPosition: 'Default',
+        playersPosition: 'default',
         gridSize: 9,
         playersAmount: 4,
         maxPlayersAmount: 8,
@@ -161,6 +161,7 @@ export default {
      this.updateMaxPlayersAmount()
     },
     playersPosition() {
+      console.log(this.options.playersPosition);
      this.updateMaxPlayersAmount()
     },
     maxOptimization() {

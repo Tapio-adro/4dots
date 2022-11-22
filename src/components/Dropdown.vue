@@ -8,7 +8,7 @@
     @click="showDropdownContent = !showDropdownContent"
     ref="dropdownButton"
   >
-    {{ value }}
+    {{ displayValue }}
     <i class="fa fa-chevron-down" aria-hidden="true"></i>
   </button>
   <div 
@@ -18,8 +18,8 @@
   >
     <div 
       class="dropdown_option"
-      v-for="(option, index) in options" :key="index"
-      @click="changeValueTo(option)"
+      v-for="[key, option] in Object.entries(options)" :key="key"
+      @click="changeValueTo(key, option)"
     >
       {{ option }}
     </div>
@@ -34,6 +34,7 @@ export default {
   data() {
     return {
       showDropdownContent: false,
+      displayValue: '',
       clickOutsideConfig: {
         handler: this.toggle,
         middleware: this.middleware,
@@ -44,12 +45,16 @@ export default {
   props: {
     label: String,
     value: String,
-    options: Array
+    options: Object
   },
   emits: ['update:value'],
+  mounted() {
+    this.displayValue = this.options[this.value];
+  },
   methods: {
-    changeValueTo(option) {
-      this.$emit('update:value', option)
+    changeValueTo(key, option) {
+      this.$emit('update:value', key);
+      this.displayValue = option;
       this.showDropdownContent = false;
     },
     middleware(event) {
