@@ -104,7 +104,12 @@
       </div>
       <div id="options_description">
         <section>
-
+          <h3>Presets</h3>
+          <Dropdown
+            label="Choose preset"
+            v-model:value="presetKey"
+            :options="getPresets(true)"
+          />
         </section>
       </div>
     </main>
@@ -135,6 +140,7 @@ export default {
         boomCircles: true,
         homelandDefense: false
       },
+      presetKey: 'none',
       gameSpeedSlider: this.getSliderData()
     }
   },
@@ -153,28 +159,31 @@ export default {
     }
   },
   watch: {
+    playersPosition() {
+      this.updateMaxPlayersAmount()
+    },
+    gridSize() {
+      this.updateMaxPlayersAmount()
+    },
     playersAmount() {
       if (!(this.options.playersAmount < this.options.humansAmount)) return;
       this.options.humansAmount = this.options.playersAmount;
-    },
-    gridSize() {
-     this.updateMaxPlayersAmount()
-    },
-    playersPosition() {
-      console.log(this.options.playersPosition);
-     this.updateMaxPlayersAmount()
     },
     maxOptimization() {
       if (this.options.maxOptimization) {
         this.options.boomCircles = false;
       }
+    },
+    presetKey() {
+      this.setPreset()
     }
   },
   mounted() {
+    this.getPresets(true);
   },
   methods: {
     updateMaxPlayersAmount() {
-      let playersPosition = this.options.playersPosition.toLowerCase();
+      let playersPosition = this.options.playersPosition;
       let gridSize = this.options.gridSize;
       if (playersPosition == 'default') {
         let playersToSize = [
@@ -217,6 +226,81 @@ export default {
         '1': 'Fast',
         '2': 'Instant'
       }
+    },
+    getPresets(getDropdownValues = false) {
+      let presets = {
+        classic: {
+          name: 'Classic',
+          betterBorders: false,
+          boomCircles: false
+        },
+        duel: {
+          name: 'Duel',
+          playersAmount: 2,
+          humansAmount: 2
+        },
+        bigBotFight: {
+          name: 'Big bot fight',
+          playersPosition: 'random',
+          gridSize: 11,
+          playersAmount: 8,
+          humansAmount: 0,
+          gameSpeed: '1'
+        },
+        hugeBotFight: {
+          name: 'Huge bot fight',
+          playersPosition: 'random',
+          gridSize: 15,
+          playersAmount: 16,
+          humansAmount: 0,
+          gameSpeed: '2',
+          maxOptimization: true
+        },
+        homelandDefense: {
+          name: 'Homeland defense',
+          playersPosition: 'random',
+          gridSize: 11,
+          playersAmount: 4,
+          humansAmount: 1,
+          gameSpeed: '0',
+          homelandDefense: true
+        }
+      }
+      if (getDropdownValues) {
+        let dropdownValues = {};
+        for (let [key, value] of Object.entries(presets)) {
+          dropdownValues[key] = value['name'];
+        }
+        return dropdownValues;
+      }
+      return presets;
+    },
+    setPreset() {
+      let defaultOptions = {
+        playersPosition: 'default',
+        gridSize: 9,
+        playersAmount: 4,
+        maxPlayersAmount: 8,
+        humansAmount: 1,
+        betterBorders: true,
+        gameSpeed: '0',
+        maxOptimization: false,
+        boomCircles: true,
+        homelandDefense: false
+      };
+      this.options = defaultOptions;
+      let preset = Object.entries(this.getPresets()[this.presetKey]);
+      let that = this;
+      let interval = setInterval(() => {
+        let optionArray = preset.shift();
+        if (optionArray[0] == 'name') {
+          return;
+        }
+        that.options[optionArray[0]] = optionArray[1];
+        if (preset.length == 0) {
+          clearInterval(interval);
+        }
+      }, 10)
     }
   }
 };

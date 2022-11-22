@@ -48,8 +48,17 @@ export default {
     options: Object
   },
   emits: ['update:value'],
+  watch: {
+    value() {
+      this.displayValue = this.options[this.value];
+    }
+  },
   mounted() {
-    this.displayValue = this.options[this.value];
+    if (this.value == 'none') {
+      this.displayValue = 'None'
+    } else {
+      this.displayValue = this.options[this.value];
+    }
   },
   methods: {
     changeValueTo(key, option) {
