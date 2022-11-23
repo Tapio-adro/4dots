@@ -78,7 +78,9 @@
         </section>
         <section>
           <h3>Game Options</h3>
-          <fieldset class="slider_holder">
+          <fieldset class="slider_holder"
+            @mouseover="description = 'options.gameSpeed'"
+          >
             <legend>Game speed</legend>
             <VueSlider 
               :data="gameSpeedSlider"
@@ -87,29 +89,38 @@
               :drag-on-click="true"
             />
           </fieldset>
-          <label class="checkbox">
+          <label class="checkbox"
+            @mouseover="description = 'options.betterBorders'"
+          >
             <input type="checkbox" v-model="options.betterBorders"/>
             <span>Enable better borders</span>
           </label>
-          <label class="checkbox">
+          <label class="checkbox"
+            @mouseover="description = 'options.optimization'"
+          >
             <input type="checkbox" v-model="options.maxOptimization"/>
             <span>Enable maximal optimization</span>
           </label>
-          <label class="checkbox" :class="{'inactive': options.maxOptimization}">
+          <label class="checkbox" 
+            :class="{'inactive': options.maxOptimization}"
+            @mouseover="description = 'options.circles'"
+          >
             <input type="checkbox" v-model="options.boomCircles"/>
             <span>Enable blast circles</span>
           </label>
         </section>
         <section>
           <h3>Game Rules</h3>
-          <label class="checkbox">
+          <label class="checkbox"
+            @mouseover="description = 'rules.homelandDefense'"
+          >
             <input type="checkbox" v-model="options.homelandDefense"/>
             <span>Homeland defense</span>
           </label>
         </section>
       </div>
       <div id="options_description">
-        <section>
+        <section @mouseover="description = 'presets'" >
           <h3>Presets</h3>
           <Dropdown
             label="Choose preset"
@@ -122,7 +133,7 @@
           <h4>{{ descriptionData.sectionName }}</h4>
           <div>{{ descriptionData.sectionDescription }}</div>
           <div id="part_descr">
-            <div class="arrow">
+            <div class="arrow" v-if="description != '' && description != 'presets'">
               <i class="fa fa-angle-right" aria-hidden="true"></i>
             </div>
             <div class="text">
@@ -184,6 +195,14 @@ export default {
     description() {
       let sectionsDescription = getDescriptionData();
       let descr = {};
+      if (this.description == 'presets') {
+        descr.sectionName = sectionsDescription['presets'].name;
+        descr.sectionDescription = sectionsDescription['presets'].description;   
+        descr.partName = '';
+        descr.partDescription = '';     
+        this.descriptionData = descr;
+        return;
+      }
       let [section, part] = this.description.split('.');
       descr.sectionName = sectionsDescription[section].name;
       descr.sectionDescription = sectionsDescription[section].description;
@@ -354,15 +373,34 @@ function getDescriptionData () {
       },
       humans: {
         name: 'Humans amount', 
-        description: 'Humans are real people, playing the game. Set it to 0 if you want to see bots fight, to 1 to fight vs bots, and 2 and more if you want to play with somebody on the same device'
+        description: 'Humans are real people, playing the game. Set it to 0 if you want to see bots fight, to 1 to fight vs bots, and 2 and more if you want to play with somebody on the same device.'
       },
     }},
-    options: {name: 'Game Options', description: '', parts: {
-
+    options: {name: 'Game Options', description: 'Game options doesn\'t change game mechanics. They change how game looks or how fast it runs.', parts: {
+      gameSpeed: {
+        name: 'Game speed', 
+        description: 'Sets how long is delay between players turns. Normal is for common games. Instant is good for massive bots fights.'
+      },
+      betterBorders: {
+        name: 'Better borders', 
+        description: 'Better borders are connected.'
+      },
+      optimization: {
+        name: 'Maximal optimization', 
+        description: 'Nice for massive bots fights.'
+      },
+      circles: {
+        name: 'Blast circles', 
+        description: 'Circle when "four" is activated.'
+      },
     }},
-    rules: {name: 'Game Rules', description: '', parts: {
-
-    }}
+    rules: {name: 'Game Rules', description: 'Game rules change game mechanics.', parts: {
+      homelandDefense: {
+        name: 'Homeland defense', 
+        description: 'By default player lose when loses all the cells. With this rule you should have at least one cell in your "Home area", otherwise you will lose. Home area is area of 9 cells, where you spawned.'
+      },
+    }},
+    presets: {name: 'Presets', description: 'Use these to set the options.'}
   };
 
 }

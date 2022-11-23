@@ -245,11 +245,14 @@
   opacity: 0.5;
 }
 
+#options #description {
+  height: 220px;
+}
 #options #description h4 {
   color: #404040;
+  margin: 5px 0;
 }
 #options #description #part_descr {
-  margin-top: 5px;
   display: flex;
 }
 #options #description #part_descr .arrow {
@@ -257,6 +260,5 @@
   padding-left: 3px;
   padding-top: 0px;
   font-size: 1.4rem;
-  transform: translateY(-4px);
   color: #04AA6D;
 }/*# sourceMappingURL=guiStyle.css.map */
