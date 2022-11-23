@@ -8,8 +8,11 @@
             label="Players position"
             v-model:value="options.playersPosition"
             :options="{'default': 'Default', 'random':'Random'}"
+            @mouseover="description = 'grid.position'"
           />
-          <fieldset class="slider_holder">
+          <fieldset class="slider_holder"
+            @mouseover="description = 'grid.size'"
+          >
             <legend>Grid size</legend>
             <VueSlider 
               :min="5"
@@ -24,6 +27,7 @@
           <fieldset
             class="slider_holder" 
             :class="{'no_slider': options.maxPlayersAmount == 2}"
+            @mouseover="description = 'grid.players'"
           >
             <legend>Players amount</legend>
             <VueSlider 
@@ -41,7 +45,9 @@
               <div class="half_line"></div>
             </div>
           </fieldset>
-          <fieldset class="slider_holder">
+          <fieldset class="slider_holder"
+            @mouseover="description = 'grid.humans'"
+          >
             <legend>Humans amount</legend>
             <VueSlider 
               :min="0"
@@ -111,6 +117,20 @@
             :options="getPresets(true)"
           />
         </section>
+        <section id="description">
+          <h3>Description</h3>
+          <h4>{{ descriptionData.sectionName }}</h4>
+          <div>{{ descriptionData.sectionDescription }}</div>
+          <div id="part_descr">
+            <div class="arrow">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>
+            </div>
+            <div class="text">
+              <h4>{{ descriptionData.partName }}</h4>
+              <div>{{ descriptionData.partDescription }}</div>
+            </div>
+          </div>
+        </section>
       </div>
     </main>
   </div>
@@ -141,7 +161,9 @@ export default {
         homelandDefense: false
       },
       presetKey: 'none',
-      gameSpeedSlider: this.getSliderData()
+      gameSpeedSlider: this.getSliderData(),
+      description: '',
+      descriptionData: {}
     }
   },
   computed: {
@@ -159,6 +181,16 @@ export default {
     }
   },
   watch: {
+    description() {
+      let sectionsDescription = getDescriptionData();
+      let descr = {};
+      let [section, part] = this.description.split('.');
+      descr.sectionName = sectionsDescription[section].name;
+      descr.sectionDescription = sectionsDescription[section].description;
+      descr.partName = sectionsDescription[section].parts[part].name;
+      descr.partDescription = sectionsDescription[section].parts[part].description;
+      this.descriptionData = descr;
+    },
     playersPosition() {
       this.updateMaxPlayersAmount()
     },
@@ -304,6 +336,36 @@ export default {
     }
   }
 };
+
+function getDescriptionData () {
+   return {
+    grid: {name: 'Grid & Players', description: 'Options for grid size, players amount and position. At the bottom of the section you can see the summary.', parts: {
+      position: {
+        name: 'Players position', 
+        description: 'Default players position is when players are positioned symmetrically. Random is for random positions.'
+      },
+      size: {
+        name: 'Grid size', 
+        description: 'Sets size of the game map.'
+      },
+      players: {
+        name: 'Players amount', 
+        description: 'Players amount is sum of bots and human players amount.'
+      },
+      humans: {
+        name: 'Humans amount', 
+        description: 'Humans are real people, playing the game. Set it to 0 if you want to see bots fight, to 1 to fight vs bots, and 2 and more if you want to play with somebody on the same device'
+      },
+    }},
+    options: {name: 'Game Options', description: '', parts: {
+
+    }},
+    rules: {name: 'Game Rules', description: '', parts: {
+
+    }}
+  };
+
+}
 </script>
 
 <style scoped></style>
