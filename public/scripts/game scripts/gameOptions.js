@@ -9,7 +9,7 @@ gameOptions.gameSpeed.setGameSpeed = function() {
     let speeds = {
         0: [500, 200],
         1: [100, 0],
-        2: [10, 0]
+        2: [10, 1]
     }
     gameOptions.gameSpeed.activateFoursSpeed = speeds[gameOptionsValues.gameSpeed][0];
     gameOptions.gameSpeed.teamChangeSpeed = speeds[gameOptionsValues.gameSpeed][1];

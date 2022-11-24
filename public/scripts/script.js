@@ -28,6 +28,7 @@ var gameRulesValues = {
 };
 let appData = {
   curWindow: "",
+  shouldSetDefaultSettings: true
 };
 
 let gridSize = 9;
@@ -113,21 +114,28 @@ function tryAddDot() {
   return false;
 }
 
+function getAppData (key) {
+  return appData[key];
+}
 function setAppData(key, value) {
   appData[key] = value;
 }
 function startGame() {
-  setupGridAndTeams();
-  checkOnStart();
-  nextTeam();
+  setTimeout(() => {
+    setupGridAndTeams();
+    setTimeout(() => {
+      checkOnStart();
+      setTimeout(() => {
+        nextTeam();
+      }, 10)
+    }, 10)
+  }, 10)
 }
 function setSettings(settings) {
   gridSize = settings.gridSize;
   playersAmount = settings.playersAmount;
   botsAmount = playersAmount - settings.humansAmount;
-  console.log(settings.playersPosition);
   playersPosition = settings.playersPosition == 'random' ? getPlayerCoords(gridSize, playersAmount) : false;
-  console.log(playersPosition);
   for (let [key, value] of Object.entries(settings.gameOptions)) {
     gameOptionsValues[key] = value;
   }
@@ -456,3 +464,4 @@ function countTeamsDots() {
   }
   return dotsArray;
 }
+

@@ -295,4 +295,23 @@
 }
 #options_description #description h3:hover .tooltip {
   visibility: visible;
+}
+
+#options_description #start_button_container {
+  margin-top: auto;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#options_description #start_button_container #start_button {
+  cursor: pointer;
+  font-size: 2rem;
+  background-color: #04AA6D;
+  color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+}
+#options_description #start_button_container #start_button:hover {
+  opacity: 0.8;
 }/*# sourceMappingURL=guiStyle.css.map */

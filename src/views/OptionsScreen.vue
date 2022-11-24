@@ -144,6 +144,14 @@
             </div>
           </div>
         </section>
+        <section id="start_button_container">
+          <div id="start_button"
+            @click="startGame"
+          >
+            Play
+            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+          </div>
+        </section>
       </div>
     </main>
   </div>
@@ -169,8 +177,8 @@ export default {
         playersAmount: 4,
         maxPlayersAmount: 8,
         humansAmount: 1,
-        betterBorders: true,
         gameSpeed: '0',
+        betterBorders: true,
         maxOptimization: false,
         boomCircles: true,
         homelandDefense: false
@@ -298,7 +306,8 @@ export default {
         duel: {
           name: 'Duel',
           playersAmount: 2,
-          humansAmount: 2
+          humansAmount: 2,
+          gridSize: 7
         },
         bigBotFight: {
           name: 'Big bot fight',
@@ -361,7 +370,7 @@ export default {
         if (preset.length == 0) {
           clearInterval(interval);
         }
-      }, 10)
+      }, 0)
     },
     toggleDescription() {
       if (this.updateDescription) {
@@ -373,6 +382,27 @@ export default {
     getToggleString(string, value) {
       let toggleString = value ? 'toggle off' : 'toggle on';
       return string.replace('toggle', toggleString)
+    },
+    startGame() {
+      let options = this.options;
+      let settings = {
+        gameOptions: {
+          betterBorders: options.betterBorders,
+          maxOptimization: options.maxOptimization,
+          boomCircles: options.boomCircles,
+          gameSpeed: options.gameSpeed
+        },
+        gameRules: {
+          homeDef: options.homelandDefense
+        },
+        playersAmount: options.playersAmount,
+        gridSize: options.gridSize,
+        humansAmount: options.humansAmount,
+        playersPosition: options.playersPosition
+      };
+      setSettings(settings);
+      setAppData('shouldSetDefaultSettings', false)
+      this.$router.push('/game')
     }
   }
 };

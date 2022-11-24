@@ -42,7 +42,10 @@ export default {
         playersPosition: 'random'
       };
       setTimeout(() => {
-        setSettings(settings);
+        if (getAppData('shouldSetDefaultSettings')) {
+          setSettings(settings);
+        }
+        console.log('start');
         startGame();
       }, 10)
     }
