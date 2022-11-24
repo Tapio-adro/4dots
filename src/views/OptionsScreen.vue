@@ -89,34 +89,31 @@
               :drag-on-click="true"
             />
           </fieldset>
-          <label class="checkbox"
+          
+          <Checkbox
             @mouseover="description = 'options.betterBorders'"
-          >
-            <input type="checkbox" v-model="options.betterBorders"/>
-            <span>Enable better borders</span>
-          </label>
-          <label class="checkbox"
+            label="Enable better borders"
+            v-model:checked="options.betterBorders"
+          />
+          <Checkbox
             @mouseover="description = 'options.optimization'"
-          >
-            <input type="checkbox" v-model="options.maxOptimization"/>
-            <span>Enable maximal optimization</span>
-          </label>
-          <label class="checkbox" 
-            :class="{'inactive': options.maxOptimization}"
+            label="Enable maximal optimization"
+            v-model:checked="options.maxOptimization"
+          />
+          <Checkbox
             @mouseover="description = 'options.circles'"
-          >
-            <input type="checkbox" v-model="options.boomCircles"/>
-            <span>Enable blast circles</span>
-          </label>
+            label="Enable blast circles"
+            v-model:checked="options.boomCircles"
+            :class="{'inactive': options.maxOptimization}"
+          />
         </section>
         <section>
           <h3>Game Rules</h3>
-          <label class="checkbox"
+          <Checkbox
             @mouseover="description = 'rules.homelandDefense'"
-          >
-            <input type="checkbox" v-model="options.homelandDefense"/>
-            <span>Homeland defense</span>
-          </label>
+            label="Homeland defense"
+            v-model:checked="options.homelandDefense"
+          />
         </section>
       </div>
       <div id="options_description">
@@ -150,12 +147,14 @@
 <script>
 import VueSlider from 'vue-slider-component'
 import Dropdown from '../components/Dropdown.vue'
+import Checkbox from '../components/Checkbox.vue'
 
 export default {
   name: "OptionsScreen",
   components: {
     VueSlider,
-    Dropdown
+    Dropdown,
+    Checkbox
   },
   data() {
     return {
