@@ -204,19 +204,6 @@
   background-color: #e6e6e6;
 }
 
-#options .summary {
-  margin-top: 15px;
-  margin-bottom: 5px;
-  margin-left: 10px;
-  color: #737373;
-}
-#options .summary .map_size {
-  border: 2px solid #999999;
-  padding: 2px 4px;
-  border-radius: 5px;
-  margin-left: 10px;
-}
-
 #options .checkbox_wrapper.inactive {
   pointer-events: none;
   cursor: none;
@@ -246,20 +233,66 @@
   accent-color: #04AA6D;
 }
 
-#options #description {
+#options_ui .summary {
+  margin-top: 15px;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  color: #737373;
+}
+#options_ui .summary .map_size {
+  border: 2px solid #999999;
+  padding: 2px 4px;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+
+#options_description #description {
   height: 220px;
 }
-#options #description h4 {
+#options_description #description h4 {
   color: #404040;
   margin: 5px 0;
 }
-#options #description #part_descr {
+#options_description #description #part_descr {
   display: flex;
 }
-#options #description #part_descr .arrow {
+#options_description #description #part_descr .arrow {
   padding: 6px;
   padding-left: 3px;
   padding-top: 0px;
   font-size: 1.4rem;
   color: #04AA6D;
+}
+
+#options_description #description h3 {
+  width: 120px;
+  margin: 0 auto;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  cursor: pointer;
+  position: relative;
+}
+#options_description #description h3:hover {
+  text-decoration: underline;
+}
+#options_description #description h3 .tooltip {
+  visibility: hidden;
+  width: 240px;
+  text-align: center;
+  padding: 5px;
+  font-size: 1rem;
+  background-color: rgba(243, 243, 243, 0.7);
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  color: #666;
+  position: absolute;
+  z-index: 1;
+  bottom: 120%;
+  left: 0;
+  margin-left: -60px;
+}
+#options_description #description h3:hover .tooltip {
+  visibility: visible;
 }/*# sourceMappingURL=guiStyle.css.map */

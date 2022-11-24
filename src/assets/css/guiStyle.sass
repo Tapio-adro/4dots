@@ -97,7 +97,6 @@ $textgrey: #666
     flex-direction: column
     row-gap: 10px
 
-
 #options section
   width: 100%
   border-radius: 10px
@@ -106,6 +105,7 @@ $textgrey: #666
   h3
     color: $green
     text-align: center
+
 
 #options fieldset
   margin-bottom: 10px
@@ -179,17 +179,6 @@ $textgrey: #666
       &:hover
         background-color: #e6e6e6
 
-#options .summary
-  margin-top: 15px
-  margin-bottom: 5px
-  margin-left: 10px
-  color: #737373
-  .map_size
-    border: 2px solid #999999
-    padding: 2px 4px
-    border-radius: 5px
-    margin-left: 10px
-
 #options .checkbox_wrapper.inactive
   pointer-events: none
   cursor: none
@@ -210,7 +199,20 @@ $textgrey: #666
     margin-right: 8px
     accent-color: $green
 
-#options #description
+
+#options_ui .summary
+  margin-top: 15px
+  margin-bottom: 5px
+  margin-left: 10px
+  color: #737373
+  .map_size
+    border: 2px solid #999999
+    padding: 2px 4px
+    border-radius: 5px
+    margin-left: 10px
+
+
+#options_description #description
   height: 220px
   h4
     color: #404040
@@ -224,5 +226,29 @@ $textgrey: #666
       font-size: 1.4rem
       color: $green
 
-
-
+#options_description #description h3
+  width: 120px
+  margin: 0 auto
+  user-select: none
+  cursor: pointer
+  position: relative
+  &:hover
+    text-decoration: underline
+  .tooltip
+    visibility: hidden
+    width: 240px
+    text-align: center
+    padding: 5px
+    font-size: 1rem
+    background-color: transparentize($lightgrey, 0.3)
+    border-radius: 5px
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px
+    color: $textgrey
+    
+    position: absolute
+    z-index: 1
+    bottom: 120%
+    left: 0
+    margin-left: -60px
+  &:hover .tooltip
+    visibility: visible

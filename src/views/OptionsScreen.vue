@@ -126,7 +126,12 @@
           />
         </section>
         <section id="description">
-          <h3>Description</h3>
+          <h3
+            @click="toggleDescription()"
+          >
+          Description
+          <span class="tooltip">{{ getToggleString('Click to toggle description', updateDescription) }}</span>
+          </h3>
           <h4>{{ descriptionData.sectionName }}</h4>
           <div>{{ descriptionData.sectionDescription }}</div>
           <div id="part_descr">
@@ -172,6 +177,7 @@ export default {
       },
       presetKey: 'none',
       gameSpeedSlider: this.getSliderData(),
+      updateDescription: false,
       description: '',
       descriptionData: {}
     }
@@ -192,6 +198,11 @@ export default {
   },
   watch: {
     description() {
+      if (!this.updateDescription) {
+        this.description = '';
+        return;
+      }
+
       let sectionsDescription = getDescriptionData();
       let descr = {};
       if (this.description == 'presets') {
@@ -351,6 +362,17 @@ export default {
           clearInterval(interval);
         }
       }, 10)
+    },
+    toggleDescription() {
+      if (this.updateDescription) {
+        this.description = '';
+        this.descriptionData = {};
+      }
+      this.updateDescription = !this.updateDescription;
+    },
+    getToggleString(string, value) {
+      let toggleString = value ? 'toggle off' : 'toggle on';
+      return string.replace('toggle', toggleString)
     }
   }
 };
