@@ -138,44 +138,6 @@ Cells.prototype.createField = function (field) {
 
     field.append(tr);
   }
-
-  // for (let i = 0; i < this.grid.length; i++) {
-  //     let row = this.grid[i];
-  //     let cell = row[0];
-  //     let elem = cell.elem;
-
-  //     let elemRect = elem.getBoundingClientRect(),
-  //         y = elemRect.y,
-  //         x = elemRect.x;
-
-  //     let numElem = document.createElement('div');
-  //     numElem.innerHTML = i;
-  //     numElem.classList.add('numbers');
-  //     numElem.id = ('rn' + i);
-
-  //     numElem.style.top = y + 'px';
-  //     numElem.style.left = x - 75 + 'px';
-
-  //     $('.nums_holder').append(numElem);
-  // }
-  // for (let i = 0; i < cells.grid[0].length; i++) {
-  //     let cell = this.grid[0][i];
-  //     let elem = cell.elem;
-
-  //     let elemRect = elem.getBoundingClientRect(),
-  //         y = elemRect.y,
-  //         x = elemRect.x;
-
-  //     let numElem = document.createElement('div');
-  //     numElem.innerHTML = i;
-  //     numElem.classList.add('numbers');
-  //     numElem.id = ('cn' + i);
-
-  //     numElem.style.top = y - 75 + 'px';
-  //     numElem.style.left = x + 'px';
-
-  //     $('.nums_holder').append(numElem);
-  // }
 };
 
 Cells.prototype.cell = function (x, y) {
@@ -220,9 +182,7 @@ Cells.prototype.activateFours = function (cells) {
     for (let cell of cells) {
       if (cell.dots == 4) {
         cell.addDotsAround();
-        setTimeout(() => {
-          cell.reset();
-        }, 10);
+        cell.reset();
       } else {
         cell.dots = cell.dots - 4;
         cell.setStyle();
