@@ -28,24 +28,25 @@ export default {
     setQuickGame() {
       let settings = {
         gameOptions: {
-          betterBorders: 1,
-          maxOptimization: 1,
+          betterBorders: 0,
+          maxOptimization: 0,
           boomCircles: 1,
-          gameSpeed: 2
+          gameSpeed: 1
         },
         gameRules: {
-          homeDef: 1
+          homeDef: 0
         },
         playersAmount: 4,
         gridSize: 9,
-        humansAmount: 0,
-        playersPosition: 'random'
+        humansAmount: 1,
+        playersPosition: 'default'
       };
       setTimeout(() => {
-        if (getAppData('shouldSetDefaultSettings')) {
-          setSettings(settings);
-        }
-        console.log('start');
+        setTimeout(() => {
+          if (getAppData('shouldSetDefaultSettings')) {
+            setSettings(settings);
+          }
+        }, 1)
         startGame();
       }, 10)
     }

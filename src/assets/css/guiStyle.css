@@ -278,6 +278,8 @@
   text-decoration: underline;
 }
 #options_description #description h3 .tooltip {
+  transition-delay: 0s;
+  transition-property: visibility;
   visibility: hidden;
   width: 240px;
   text-align: center;
@@ -294,6 +296,8 @@
   margin-left: -60px;
 }
 #options_description #description h3:hover .tooltip {
+  transition-delay: 0.5s;
+  transition-property: visibility;
   visibility: visible;
 }
 

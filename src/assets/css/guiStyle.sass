@@ -235,7 +235,10 @@ $textgrey: #666
   &:hover
     text-decoration: underline
   .tooltip
+    transition-delay: 0s
+    transition-property: visibility
     visibility: hidden
+
     width: 240px
     text-align: center
     padding: 5px
@@ -251,6 +254,8 @@ $textgrey: #666
     left: 0
     margin-left: -60px
   &:hover .tooltip
+    transition-delay: 0.5s
+    transition-property: visibility
     visibility: visible
 
 #options_description #start_button_container

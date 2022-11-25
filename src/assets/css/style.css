@@ -17,6 +17,7 @@
   align-items: center;
   justify-content: center;
   height: calc(100vh / var(--zoomLevel));
+  overflow: hidden;
 }
 .wrapper .container {
   border: 5px solid rgba(0, 0, 0, 0.479);
@@ -30,7 +31,6 @@
   margin: 0 auto;
   background-color: rgb(255, 255, 255);
   border-radius: 5px;
-  pointer-events: none;
 }
 
 .cell {
@@ -38,18 +38,12 @@
   height: 50px;
   border: 2px solid #000;
   border-radius: 5px;
-  text-align: center;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
   transition: var(--cell_transition);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-content: center;
   z-index: 2;
-  pointer-events: auto;
 }
 .cell .dot {
   width: 10px;
@@ -71,6 +65,7 @@
   transform-origin: center;
   opacity: 0.8;
   transition: 1s;
+  pointer-events: none;
 }
 .boom_circle.scale_circle {
   transform: scale(3);

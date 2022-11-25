@@ -19,6 +19,7 @@ $textgrey: #666
   align-items: center
   justify-content: center
   height: calc(100vh / var(--zoomLevel))
+  overflow: hidden
   .container
     border: 5px solid rgba(0, 0, 0, 0.479)
     border-radius: 10px
@@ -30,22 +31,18 @@ $textgrey: #666
   margin: 0 auto
   background-color: rgb(255, 255, 255)
   border-radius: 5px
-  pointer-events: none
 
 .cell
   width: 50px
   height: 50px
   border: 2px solid #000
   border-radius: 5px
-  text-align: center
-  user-select: none
   transition: var(--cell_transition)
   display: flex
   flex-wrap: wrap
   justify-content: center
   align-content: center
   z-index: 2
-  pointer-events: auto
 
   .dot
     width: 10px
@@ -66,6 +63,7 @@ $textgrey: #666
   transform-origin: center
   opacity: 0.8
   transition: 1s
+  pointer-events: none
 
   &.scale_circle
     transform: scale(3)
