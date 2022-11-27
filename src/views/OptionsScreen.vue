@@ -185,7 +185,7 @@ export default {
       },
       presetKey: 'none',
       gameSpeedSlider: this.getSliderData(),
-      showDescription: false,
+      showDescription: true,
       description: '',
       descriptionData: {}
     }

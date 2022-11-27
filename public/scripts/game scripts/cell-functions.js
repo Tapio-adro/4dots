@@ -83,7 +83,7 @@ function Cells(size) {
 Cells.prototype.setTeams = function (teams, start_dots, playersCoords) {
   this.teams = teams;
   playersCoords = (
-    playersCoords ? playersCoords.shuffleArray() : Cells.prototype.TEAM__START_COORDS
+    playersCoords ? playersCoords.shuffleArray() : JSON.parse(JSON.stringify(Cells.prototype.TEAM__START_COORDS))
   );
   teams.forEach((team) => {
     color = team.color;

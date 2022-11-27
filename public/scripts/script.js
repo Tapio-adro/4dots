@@ -121,7 +121,6 @@ function setAppData(key, value) {
   appData[key] = value;
 }
 function startGame() {
-  // console.log('start');
   runWithInterval([
     resetData,
     setupGridAndTeams,
