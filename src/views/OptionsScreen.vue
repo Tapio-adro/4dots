@@ -130,7 +130,7 @@
             @click="toggleDescription()"
           >
           Description
-          <span class="tooltip">{{ getToggleString('Click to toggle description', updateDescription) }}</span>
+          <span class="tooltip">{{ getToggleString('Click to toggle description', showDescription) }}</span>
           </h3>
           <h4>{{ descriptionData.sectionName }}</h4>
           <div>{{ descriptionData.sectionDescription }}</div>
@@ -185,7 +185,7 @@ export default {
       },
       presetKey: 'none',
       gameSpeedSlider: this.getSliderData(),
-      updateDescription: false,
+      showDescription: false,
       description: '',
       descriptionData: {}
     }
@@ -206,7 +206,7 @@ export default {
   },
   watch: {
     description() {
-      if (!this.updateDescription) {
+      if (!this.showDescription) {
         this.description = '';
         return;
       }
@@ -245,10 +245,36 @@ export default {
     },
     presetKey() {
       this.setPreset()
+    },
+    options: {
+      handler() {
+        window.localStorage.setItem('options', JSON.stringify(this.options))
+      },
+      deep: true
+    },
+    showDescription() {
+      window.localStorage.setItem('showDescription', JSON.stringify(this.showDescription))
     }
   },
   mounted() {
-    this.getPresets(true);
+
+    let options = JSON.parse(window.localStorage.getItem('options'))
+    if (options) {
+      let optionsArray = Object.entries(options);
+      let that = this;
+      let interval = setInterval(() => {
+        let optionArray = optionsArray.shift();
+  
+        that.options[optionArray[0]] = optionArray[1];
+  
+        if (optionsArray.length == 0) {
+          clearInterval(interval);
+        }
+      }, 0)
+    }
+    if (JSON.parse(window.localStorage.getItem('showDescription'))) {
+      this.showDescription = JSON.parse(window.localStorage.getItem('showDescription'))
+    }
   },
   methods: {
     updateMaxPlayersAmount() {
@@ -373,11 +399,11 @@ export default {
       }, 0)
     },
     toggleDescription() {
-      if (this.updateDescription) {
+      if (this.showDescription) {
         this.description = '';
         this.descriptionData = {};
       }
-      this.updateDescription = !this.updateDescription;
+      this.showDescription = !this.showDescription;
     },
     getToggleString(string, value) {
       let toggleString = value ? 'toggle off' : 'toggle on';

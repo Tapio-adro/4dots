@@ -21,7 +21,6 @@ gameOptions.boomCircles.spawnBoomCircle = function(cell) {
     let elemRect = cell.elem.getBoundingClientRect(),
     y = elemRect.y,
     x = elemRect.x;
-    console.log(cell);
     let color = 'rgb(' + cell.color + ')';
 
     let circle = document.createElement('div');

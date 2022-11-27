@@ -16,8 +16,6 @@ prototypeFunction(Array, 'randomIndex', function () {
     return Math.floor(Math.random() * this.length);
 })
 
-// AF stands for auxilary function
-
 
 function prototypeFunction (type, name, func) {
     Object.defineProperty(type['prototype'], name, {
