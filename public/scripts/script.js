@@ -121,15 +121,13 @@ function setAppData(key, value) {
   appData[key] = value;
 }
 function startGame() {
-  setTimeout(() => {
-    setupGridAndTeams();
-    setTimeout(() => {
-      checkOnStart();
-      setTimeout(() => {
-        nextTeam();
-      }, 10)
-    }, 10)
-  }, 10)
+  // console.log('start');
+  runWithInterval([
+    resetData,
+    setupGridAndTeams,
+    checkOnStart,
+    nextTeam
+  ], 10)
 }
 function setSettings(settings) {
   gridSize = settings.gridSize;
@@ -171,7 +169,7 @@ function checkOnStart() {
 
   gameRules.homeDef.createHomeAreaElements();
   setTimeout(() => {
-    gameFeatures.ScaleGameElements();
+    gameFeatures.scaleGameElements();
     gameRules.homeDef.resizeHomeAreaElements();
     gameRules.homeDef.resizeHomeAreaElements();
   }, 0);
@@ -315,10 +313,33 @@ function assignWidthAndHeight () {
   gameFieldHeight = container.offsetHeight;
   gameFieldWidth = container.offsetWidth;
 }
+function runWithInterval (functionsArray, time) {
+  let interval = setInterval(() => {
+    let function1 = functionsArray.shift();
+    function1();
+    if(functionsArray.length == 0) {
+      clearInterval(interval)
+    }
+  }, time)
+}
+function resetData () {
+  curSelection = { x: -1, y: -1 };
+
+  curTeam = {};
+  curTeamIndex = 0;
+  cycles = 0;
+  gamePaused = false;
+  gameIsRunnning = true;
+
+  teams = [];
+  cellsGrid = {};
+
+  document.querySelector('#window').innerHTML = '<div class="wrapper"><div class="outer_container"><div class="container"><table id="table"></table></div></div></div>';
+}
 
 window.onresize = function () {
   if (appData.curWindow != 'game') return;
-  gameFeatures.ScaleGameElements();
+  gameFeatures.scaleGameElements();
   gameRules.homeDef.resizeHomeAreaElements();
 };
 

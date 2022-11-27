@@ -28,13 +28,13 @@ export default {
     setQuickGame() {
       let settings = {
         gameOptions: {
-          betterBorders: 0,
+          betterBorders: 1,
           maxOptimization: 0,
           boomCircles: 1,
-          gameSpeed: 1
+          gameSpeed: 0
         },
         gameRules: {
-          homeDef: 0
+          homeDef: 1
         },
         playersAmount: 4,
         gridSize: 9,

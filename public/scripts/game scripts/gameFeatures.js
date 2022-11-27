@@ -1,9 +1,9 @@
 var gameFeatures = {
-  ScaleGameElements: function() {},
+  scaleGameElements: function() {},
   getTeamColors: function() {}
 }
 
-gameFeatures.ScaleGameElements = function () {
+gameFeatures.scaleGameElements = function () {
   let root = document.querySelector(':root');
 
   let windowHeight = window.innerHeight;

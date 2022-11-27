@@ -180,6 +180,7 @@ Cells.prototype.findFours = function () {
 Cells.prototype.activateFours = function (cells) {
   if (cells.length != 0) {
     for (let cell of cells) {
+      gameOptions.boomCircles.spawnBoomCircle(cell);
       if (cell.dots == 4) {
         cell.addDotsAround();
         cell.reset();
@@ -189,7 +190,6 @@ Cells.prototype.activateFours = function (cells) {
         cell.setInner(cell.dots);
         cell.addDotsAround(cell);
       }
-      gameOptions.boomCircles.spawnBoomCircle(cell);
       for (let cell2 of cell.cellsAround(Cells.prototype.UPDATE_BORDER_CELLS)) {
         cell2.shouldUpdateBorder = true;
       }
