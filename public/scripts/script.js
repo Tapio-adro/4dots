@@ -10,7 +10,7 @@ var curTeam;
 let curTeamIndex;
 let cycles = 0;
 let gamePaused = false;
-let gameIsRunnning = true;
+let gameIsRunning = true;
 
 let recording = [];
 let doRecording;
@@ -22,19 +22,21 @@ var gameOptionsValues = {
   maxOptimization: 0,
   boomCircles: 1,
   gameSpeed: 0,
+  pointerOnBotTurn: 1
 };
 var gameRulesValues = {
   homeDef: 1,
 };
 let appData = {
   curWindow: "",
-  shouldSetDefaultSettings: true
+  shouldSetDefaultSettings: true,
+  devMode: 0
 };
 
 let gridSize = 9;
 let playersAmount = 4;
 let playersPosition;
-let botsAmount = 3;
+let botsAmount = 4;
 
 
 let teams, cellsGrid;
@@ -45,7 +47,7 @@ function nextTeam() {
     return;
   }
   setTimeout(() => {
-    checkIsTeams();
+    checkTeams();
 
     let index = getTeamIndex();
 
@@ -63,7 +65,7 @@ function nextTeam() {
   }, gameOptions.gameSpeed.teamChangeSpeed);
 }
 function updateGameState() {
-  if (!gameIsRunnning) {
+  if (!gameIsRunning) {
     return;
   }
 
@@ -103,6 +105,7 @@ function tryAddDot() {
   [x, y] = [curSelection.x, curSelection.y];
   let cell = cellsGrid.cell(x, y);
   if (cell && cell.color == curTeam.color) {
+    gameOptions.showPointerOnBotTurn(cell, curTeam);
     unlightPreviousTeam();
     gameRules.homeDef.showHomeAreaAfterPlayerTurn(teams);
     curTeam.canDot = false;
@@ -208,7 +211,7 @@ function nextCycle() {
   updateRecording();
 }
 
-function checkIsTeams() {
+function checkTeams() {
   gameRules.homeDef.checkHomelands(teams);
 
   let lostTeams = teams.filter(
@@ -222,7 +225,7 @@ function checkIsTeams() {
 
   if (teams.length == 1) {
     console.log("game end");
-    gameIsRunnning = false;
+    gameIsRunning = false;
     updateStatistics();
     playRecording();
   }
@@ -325,10 +328,10 @@ function resetData () {
   curSelection = { x: -1, y: -1 };
 
   curTeam = {};
-  curTeamIndex = 0;
+  curTeamIndex = null;
   cycles = 0;
   gamePaused = false;
-  gameIsRunnning = true;
+  gameIsRunning = true;
 
   teams = [];
   cellsGrid = {};
@@ -346,7 +349,7 @@ window.onresize = function () {
 
 // player teams highlighting
 function highlightTeam() {
-  if (!(curTeam.isPlayer && gameIsRunnning)) return;
+  if (!(curTeam.isPlayer && gameIsRunning)) return;
 
   gameOptions.betterBorders.highlightTeamBorder(
     cellsGrid,

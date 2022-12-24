@@ -106,6 +106,12 @@
             v-model:checked="options.boomCircles"
             :class="{'inactive': options.maxOptimization}"
           />
+          <Checkbox
+            @mouseover="description = 'options.showPointer'"
+            label="Show pointer on bot turn"
+            v-model:checked="options.pointerOnBotTurn"
+            :class="{'inactive': options.maxOptimization}"
+          />  
         </section>
         <section>
           <h3>Game Rules</h3>
@@ -181,7 +187,8 @@ export default {
         betterBorders: true,
         maxOptimization: false,
         boomCircles: true,
-        homelandDefense: false
+        homelandDefense: false,
+        pointerOnBotTurn: false
       },
       presetKey: 'none',
       gameSpeedSlider: this.getSliderData(),
@@ -241,6 +248,7 @@ export default {
     maxOptimization() {
       if (this.options.maxOptimization) {
         this.options.boomCircles = false;
+        this.options.pointerOnBotTurn = false;
       }
     },
     presetKey() {
@@ -470,6 +478,10 @@ function getDescriptionData () {
         name: 'Blast circles', 
         description: 'Circle when "four" is activated.'
       },
+      showPointer: {
+        name: 'Show pointer', 
+        description: 'Shows pointer on cell bot made its turn on.'
+      }
     }},
     rules: {name: 'Game Rules', description: 'Game rules change game mechanics.', parts: {
       homelandDefense: {

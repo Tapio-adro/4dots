@@ -31,7 +31,8 @@ export default {
           betterBorders: 1,
           maxOptimization: 0,
           boomCircles: 1,
-          gameSpeed: 0
+          gameSpeed: 0,
+          pointerOnBotTurn: 0
         },
         gameRules: {
           homeDef: 1
@@ -43,7 +44,7 @@ export default {
       };
       setTimeout(() => {
         setTimeout(() => {
-          if (getAppData('shouldSetDefaultSettings')) {
+          if (getAppData('shouldSetDefaultSettings') && !getAppData('devMode')) {
             setSettings(settings);
           }
         }, 1)

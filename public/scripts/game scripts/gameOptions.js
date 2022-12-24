@@ -2,7 +2,8 @@ var gameOptions = {
     betterBorders: {},
     maxOptimization: {},
     boomCircles: {},
-    gameSpeed: {}
+    gameSpeed: {},
+    showPointer: function() {}
 }
 
 gameOptions.gameSpeed.setGameSpeed = function() {
@@ -91,4 +92,33 @@ gameOptions.betterBorders.updateBorders = function(grid) {
     }
 }
 
+gameOptions.showPointerOnBotTurn = function(cell, team) {
+    if (!gameOptionsValues.pointerOnBotTurn || team.isPlayer) return;
+
+    let elemRect = cell.elem.getBoundingClientRect(),
+    y = elemRect.y,
+    x = elemRect.x;
+
+    let pointer = document.createElement('div');
+    pointer.classList.add('bot_pointer');
+    pointer.classList.add('hiden');
+    pointer.innerHTML = '<i class="fa fa-hand-pointer-o" aria-hidden="true"></i>'; 
+
+    pointer.style.top = (y + 20) + 'px';
+    pointer.style.left = (x + 13) + 'px';
+    pointer.style.backgroundColor = color;
+
+    container.appendChild(pointer);
+
+    setTimeout(() => {
+        pointer.classList.remove('hiden');
+    }, 0)
+
+    setTimeout(() => {
+        pointer.classList.add('fade');
+        setTimeout(() => {
+            pointer.remove();
+        }, 500)
+    }, 700)
+}
 

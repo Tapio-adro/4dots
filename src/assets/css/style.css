@@ -72,6 +72,25 @@
   opacity: 0;
 }
 
+.bot_pointer {
+  display: block;
+  position: absolute;
+  font-size: 2rem;
+  transition: 0.5s;
+  pointer-events: none;
+  transform-origin: center;
+  transform: translate(0, 0);
+  opacity: 1;
+}
+.bot_pointer.hiden {
+  opacity: 0;
+  transform: translate(0, 20px);
+}
+.bot_pointer.fade {
+  opacity: 0;
+  transform: scale(0.5);
+}
+
 .better_borders {
   border-spacing: 0;
 }
