@@ -5,9 +5,6 @@ function Cells(size) {
   this.misc = {
     resetBorderWidth: gameOptionsValues.betterBorders ? "1px" : "2px",
   };
-  this.modules = {
-    betterBorders: {},
-  };
 
   for (let x = 0; x < size; x++) {
     this.grid[x] = [];

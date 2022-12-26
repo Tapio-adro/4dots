@@ -42,7 +42,9 @@ let botsAmount = 4;
 let teams, cellsGrid;
 document.addEventListener("keydown", checkKeyInput);
 
+// engine functions
 function nextTeam() {
+  console.log(cellsGrid);
   if (gamePaused) {
     return;
   }
@@ -61,7 +63,7 @@ function nextTeam() {
     highlightTeam();
     gameRules.homeDef.hideHomeAreaOnPlayerTurn(teams);
 
-    checkIfBot();
+    tryBotTurn();
   }, gameOptions.gameSpeed.teamChangeSpeed);
 }
 function updateGameState() {
@@ -101,89 +103,9 @@ function updateGameState() {
         })();
   }
 }
-function tryAddDot() {
-  [x, y] = [curSelection.x, curSelection.y];
-  let cell = cellsGrid.cell(x, y);
-  if (cell && cell.color == curTeam.color) {
-    gameOptions.showPointerOnBotTurn(cell, curTeam);
-    unlightPreviousTeam();
-    gameRules.homeDef.showHomeAreaAfterPlayerTurn(teams);
-    curTeam.canDot = false;
-    cell.addDot();
-    return true;
-  }
 
-  resetCurrentSelection();
-  return false;
-}
-
-function getAppData (key) {
-  return appData[key];
-}
-function setAppData(key, value) {
-  appData[key] = value;
-}
-function startGame() {
-  runWithInterval([
-    resetData,
-    setupGridAndTeams,
-    checkOnStart,
-    nextTeam
-  ], 10)
-}
-function setSettings(settings) {
-  gridSize = settings.gridSize;
-  playersAmount = settings.playersAmount;
-  botsAmount = playersAmount - settings.humansAmount;
-  playersPosition = settings.playersPosition == 'random' ? getPlayerCoords(gridSize, playersAmount) : false;
-  for (let [key, value] of Object.entries(settings.gameOptions)) {
-    gameOptionsValues[key] = value;
-  }
-  for (let [key, value] of Object.entries(settings.gameRules)) {
-    gameRulesValues[key] = value;
-  }
-}
-function setupGridAndTeams() {
-  table = document.querySelector("#table");
-  container = document.querySelector(".container");
-
-  let teamColors = gameFeatures.getTeamColors(playersAmount).shuffleArray();
-  teams = createTeams(playersAmount, teamColors);
-  createBots(botsAmount);
-  teams = teams.shuffleArray();
-
-  cellsGrid = new Cells(gridSize);
-  cellsGrid.setTeams(
-    teams,
-    start_dots,
-    playersPosition
-  );
-  cellsGrid.createField(table);
-}
-// on START
-function checkOnStart() {
-  gameOptions.gameSpeed.setGameSpeed();
-  gameOptions.maxOptimization.setMaxOptimization();
-  checkStatisticsElems();
-  updateStatistics();
-
-  assignWidthAndHeight();
-
-  gameRules.homeDef.createHomeAreaElements();
-  setTimeout(() => {
-    gameFeatures.scaleGameElements();
-    gameRules.homeDef.resizeHomeAreaElements();
-    gameRules.homeDef.resizeHomeAreaElements();
-  }, 0);
-
-  gameOptions.betterBorders.setStyles();
-
-  setTimeout(() => {
-    document.querySelector('#window').classList.remove('hiden');
-  }, 300)
-}
-
-function checkIfBot() {
+// other main functions
+function tryBotTurn() {
   if (!curTeam.isPlayer) {
     let botCells = cellsGrid.getByColor(curTeam.color);
 
@@ -205,42 +127,20 @@ function checkIfBot() {
   }
 }
 
-function nextCycle() {
-  cycles++;
-  updateStatistics();
-  updateRecording();
-}
-
-function checkTeams() {
-  gameRules.homeDef.checkHomelands(teams);
-
-  let lostTeams = teams.filter(
-    (team) => cellsGrid.getByColor(team.color).length == 0
-  );
-  if (lostTeams.length != 0) {
-    teams = teams.filter((team) => cellsGrid.getByColor(team.color).length > 0);
-
-    gameRules.homeDef.removeHomeAreaElement(lostTeams);
+function tryAddDot() {
+  [x, y] = [curSelection.x, curSelection.y];
+  let cell = cellsGrid.cell(x, y);
+  if (cell && cell.color == curTeam.color) {
+    gameOptions.showPointerOnBotTurn(cell, curTeam);
+    unlightPreviousTeam();
+    gameRules.homeDef.showHomeAreaAfterPlayerTurn(teams);
+    curTeam.canDot = false;
+    cell.addDot();
+    return true;
   }
 
-  if (teams.length == 1) {
-    console.log("game end");
-    gameIsRunning = false;
-    updateStatistics();
-    playRecording();
-  }
-}
-
-function checkKeyInput(e) {
-  if (e.code == "Space") {
-    if (gamePaused) {
-      gamePaused = false;
-      nextTeam();
-    } else {
-      gamePaused = true;
-    }
-    return;
-  }
+  resetCurrentSelection();
+  return false;
 }
 function checkCellClick() {
   if (!curTeam.isPlayer || !curTeam.canDot) {
@@ -264,18 +164,105 @@ function checkCellClick() {
     return id.split("_");
   }
 }
-
-// functions
-
-function getTeamIndex() {
-  let index;
-  for (let key in teams) {
-    if (teams[key] == curTeam) {
-      index = Number(key);
-      break;
+function checkKeyInput(e) {
+  if (e.code == "Space") {
+    if (gamePaused) {
+      gamePaused = false;
+      nextTeam();
+    } else {
+      gamePaused = true;
     }
+    return;
   }
-  return index;
+}
+
+function checkTeams() {
+  gameRules.homeDef.checkHomelands(teams);
+
+  let lostTeams = teams.filter(
+    (team) => cellsGrid.getByColor(team.color).length == 0
+  );
+  if (lostTeams.length != 0) {
+    teams = teams.filter((team) => cellsGrid.getByColor(team.color).length > 0);
+
+    gameRules.homeDef.removeHomeAreaElement(lostTeams);
+  }
+
+  if (teams.length == 1) {
+    console.log("game end");
+    gameIsRunning = false;
+    updateStatistics();
+    playRecording();
+  }
+}
+
+
+// global functions
+function getAppData (key) {
+  return appData[key];
+}
+function setAppData(key, value) {
+  appData[key] = value;
+}
+function setSettings(settings) {
+  gridSize = settings.gridSize;
+  playersAmount = settings.playersAmount;
+  botsAmount = playersAmount - settings.humansAmount;
+  playersPosition = settings.playersPosition == 'random' ? getPlayerCoords(gridSize, playersAmount) : false;
+  for (let [key, value] of Object.entries(settings.gameOptions)) {
+    gameOptionsValues[key] = value;
+  }
+  for (let [key, value] of Object.entries(settings.gameRules)) {
+    gameRulesValues[key] = value;
+  }
+}
+
+// init functions
+function startGame() {
+  runWithInterval([
+    resetData,
+    setupGridAndTeams,
+    checkOnStart,
+    nextTeam
+  ], 10)
+}
+function checkOnStart() {
+  gameOptions.gameSpeed.setGameSpeed();
+  gameOptions.maxOptimization.setMaxOptimization();
+  checkStatisticsElems();
+  updateStatistics();
+
+  assignWidthAndHeight();
+
+  gameRules.homeDef.createHomeAreaElements();
+  setTimeout(() => {
+    gameFeatures.scaleGameElements();
+    gameRules.homeDef.resizeHomeAreaElements();
+    gameRules.homeDef.resizeHomeAreaElements();
+  }, 0);
+
+  gameOptions.betterBorders.setStyles();
+
+  setTimeout(() => {
+    document.querySelector('#window').classList.remove('hiden');
+  }, 300)
+}
+function setupGridAndTeams() {
+  table = document.querySelector("#table");
+  container = document.querySelector(".container");
+
+  let teamColors = gameFeatures.getTeamColors(playersAmount).shuffleArray();
+  teams = createTeams(playersAmount, teamColors);
+  createBots(botsAmount);
+  teams = teams.shuffleArray();
+
+  cellsGrid = new Cells(gridSize);
+  cellsGrid.setTeams(
+    teams,
+    start_dots,
+    playersPosition
+  );
+  cellsGrid.createField(table);
 }
 function createTeams(amount, colors) {
   let teams = [];
@@ -300,6 +287,37 @@ function createBots(botsAmount) {
   return bots;
 }
 
+function resetData () {
+  curSelection = { x: -1, y: -1 };
+
+  curTeam = {};
+  curTeamIndex = null;
+  cycles = 0;
+  gamePaused = false;
+  gameIsRunning = true;
+
+  teams = [];
+  cellsGrid = {};
+
+  document.querySelector('#window').innerHTML = '<div class="wrapper"><div class="outer_container"><div class="container"><table id="table"></table></div></div></div>';
+}
+
+// utility functions
+function getTeamIndex() {
+  let index;
+  for (let key in teams) {
+    if (teams[key] == curTeam) {
+      index = Number(key);
+      break;
+    }
+  }
+  return index;
+}
+function nextCycle() {
+  cycles++;
+  updateStatistics();
+  updateRecording();
+}
 function resetCurrentSelection() {
   curSelection.x = -1;
   curSelection.y = -1;
@@ -324,30 +342,6 @@ function runWithInterval (functionsArray, time) {
     }
   }, time)
 }
-function resetData () {
-  curSelection = { x: -1, y: -1 };
-
-  curTeam = {};
-  curTeamIndex = null;
-  cycles = 0;
-  gamePaused = false;
-  gameIsRunning = true;
-
-  teams = [];
-  cellsGrid = {};
-
-  document.querySelector('#window').innerHTML = '<div class="wrapper"><div class="outer_container"><div class="container"><table id="table"></table></div></div></div>';
-}
-
-window.onresize = function () {
-  if (appData.curWindow != 'game') return;
-  gameFeatures.scaleGameElements();
-  gameRules.homeDef.resizeHomeAreaElements();
-};
-
-// OPTIONS -------------------------------------------
-
-// player teams highlighting
 function highlightTeam() {
   if (!(curTeam.isPlayer && gameIsRunning)) return;
 
@@ -383,6 +377,13 @@ function unlightPreviousTeam() {
     }
   }
 }
+
+// when window is resized
+window.onresize = function () {
+  if (appData.curWindow != 'game') return;
+  gameFeatures.scaleGameElements();
+  gameRules.homeDef.resizeHomeAreaElements();
+};
 
 // recording
 function updateRecording(forcedUpdate = false) {

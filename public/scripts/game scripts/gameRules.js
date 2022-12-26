@@ -1,7 +1,5 @@
 var gameRules = {
-    'homeDef': {
-
-    }
+    'homeDef': {}
 }
 
 gameRules.homeDef.createHomeAreaElements = function () {

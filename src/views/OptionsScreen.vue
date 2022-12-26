@@ -424,7 +424,8 @@ export default {
           betterBorders: options.betterBorders,
           maxOptimization: options.maxOptimization,
           boomCircles: options.boomCircles,
-          gameSpeed: options.gameSpeed
+          gameSpeed: options.gameSpeed,
+          pointerOnBotTurn: options.pointerOnBotTurn
         },
         gameRules: {
           homeDef: options.homelandDefense
