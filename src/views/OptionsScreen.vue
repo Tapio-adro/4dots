@@ -188,7 +188,7 @@ export default {
         maxOptimization: false,
         boomCircles: true,
         homelandDefense: false,
-        pointerOnBotTurn: false
+        pointerOnBotTurn: true
       },
       presetKey: 'none',
       gameSpeedSlider: this.getSliderData(),
@@ -332,6 +332,10 @@ export default {
     },
     getPresets(getDropdownValues = false) {
       let presets = {
+        default: {
+          name: 'Default',
+          pointerOnBotTurn: true
+        },
         classic: {
           name: 'Classic',
           betterBorders: false,
@@ -390,20 +394,21 @@ export default {
         gameSpeed: '0',
         maxOptimization: false,
         boomCircles: true,
-        homelandDefense: false
+        homelandDefense: false,
+        pointerOnBotTurn: false
       };
       this.options = defaultOptions;
       let preset = Object.entries(this.getPresets()[this.presetKey]);
       let that = this;
       let interval = setInterval(() => {
         let optionArray = preset.shift();
+        if (preset.length == 0) {
+          clearInterval(interval);
+        }
         if (optionArray[0] == 'name') {
           return;
         }
         that.options[optionArray[0]] = optionArray[1];
-        if (preset.length == 0) {
-          clearInterval(interval);
-        }
       }, 0)
     },
     toggleDescription() {

@@ -49,7 +49,7 @@ export default {
           }
         }, 1)
         startGame();
-      }, 10)
+      }, 100)
     }
   }
 };

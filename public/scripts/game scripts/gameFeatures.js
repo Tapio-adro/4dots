@@ -1,6 +1,7 @@
 var gameFeatures = {
   scaleGameElements: function() {},
-  getTeamColors: function() {}
+  getTeamColors: function() {},
+  getBotTurn: function() {}
 }
 
 gameFeatures.scaleGameElements = function () {
@@ -70,3 +71,96 @@ gameFeatures.getTeamColors = function (amount) {
       return [h, s, l];
   }
 }
+
+gameFeatures.getBotTurn = function (grid, botColor, behaviorTypes) {
+
+  for (let behavior of behaviorTypes) {
+    let cell = getBehaviorResult(behavior);
+    if (cell) {
+      return cell;
+    }
+  }
+
+  function getBehaviorResult (behavior) {
+    let botCells = grid.getByColor(botColor);
+    let rivalCells = getRivalCells();
+  
+    switch (behavior) {
+      case "3_by_3":
+        botCells = botCells.filterByDots(3);
+        rivalCells = rivalCells.filterByDots(3);
+  
+        for (let botCell of botCells) {
+          let cellsAround = botCell.cellsAround();
+          for (let cell of cellsAround) {
+            if (rivalCells.includes(cell)) {
+              return botCell;
+            }
+          }
+        }
+        break;
+      case "less_than_2":
+        botCells = botCells.filterByDots(2, '<=');
+        if (botCells.length) {
+          let botCellsWithOneDot = botCells.filterByDots(1);
+          if (botCellsWithOneDot.length) {
+            return botCellsWithOneDot.randomElement();
+          }
+        }
+        return botCells.randomElement();
+      case "any_by_free":
+        botCells = excludeAtEdge(botCells);
+        
+        if (!botCells.length) return false;
+  
+        let freeCellsAround = findFreeCellsAround(botCells);
+  
+        let chosenBotCells = [];
+
+        for (let key in freeCellsAround) {
+          let cur = freeCellsAround[key];
+          if (cur >= 2) {
+            chosenBotCells.push(botCells[key]);
+          }
+        }
+  
+        return chosenBotCells.randomElement();
+      case "any_byn_edge":
+        botCells = excludeAtEdge(botCells);
+        return botCells.randomElement();
+      case "any":
+        return botCells.randomElement();
+    }
+  }
+
+  function findFreeCellsAround(botCells) {
+    let freeCellsArray = [];
+    for (let key in botCells) {
+      let botCell = botCells[key];
+      let freeCells = 0;
+      let cellsAround = botCell.cellsAround();
+      for (let cell of cellsAround) {
+        if (cell.dots == 0) {
+          freeCells++;
+        }
+      }
+      freeCellsArray[key] = freeCells;
+    }
+    return freeCellsArray;
+  }
+  function getRivalCells () {
+    let result = [];
+    for (let cell of grid.array) {
+      if (cell.color != grid.BLACK && cell.color != botColor) {
+        result.push(cell);
+      }
+    }
+    return result;
+  }
+  function excludeAtEdge(cells) {
+    let edge = grid.size - 1;
+    return cells.filter(
+      (cell) => cell.x != 0 && cell.y != 0 && cell.x != edge && cell.y != edge
+    );
+  }
+};

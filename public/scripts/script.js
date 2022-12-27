@@ -21,8 +21,8 @@ var gameOptionsValues = {
   betterBorders: 1,
   maxOptimization: 0,
   boomCircles: 1,
-  gameSpeed: 0,
-  pointerOnBotTurn: 1
+  gameSpeed: 1,
+  pointerOnBotTurn: 0
 };
 var gameRulesValues = {
   homeDef: 1,
@@ -30,7 +30,7 @@ var gameRulesValues = {
 let appData = {
   curWindow: "",
   shouldSetDefaultSettings: true,
-  devMode: 0
+  devMode: 1
 };
 
 let gridSize = 9;
@@ -44,7 +44,6 @@ document.addEventListener("keydown", checkKeyInput);
 
 // engine functions
 function nextTeam() {
-  console.log(cellsGrid);
   if (gamePaused) {
     return;
   }
@@ -103,22 +102,20 @@ function updateGameState() {
         })();
   }
 }
-
+let botTypes = {
+  'random': ['any_byn_edge', 'any'],
+  'default': ['3_by_3', 'any_by_free', 'any_byn_edge', 'any'],
+  'powder_keg': ['3_by_3', 'less_than_2', 'any_byn_edge', 'any'],
+  'aggressive': [],
+  'smart': [],
+}
 // other main functions
 function tryBotTurn() {
   if (!curTeam.isPlayer) {
-    let botCells = cellsGrid.getByColor(curTeam.color);
 
-    let behaviorTypes = ["3_by_3", "any_by_free", "any_byn_edge", "any"];
+    let behaviorTypes = botTypes['powder_keg'];
 
-    let cell;
-    for (let behavior of behaviorTypes) {
-      cell = cellsGrid.findBotTurn(botCells, behavior);
-      if (cell) {
-        // console.log(behavior);
-        break;
-      }
-    }
+    let cell = gameFeatures.getBotTurn(cellsGrid, curTeam.color, behaviorTypes);
 
     curSelection.x = cell.x;
     curSelection.y = cell.y;

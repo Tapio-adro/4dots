@@ -20,7 +20,7 @@ export default {
     $route (to, from){
       setTimeout(() => {
         setAppData('curWindow', to.name);
-      }, 10)
+      }, 100)
     }
   },
   mounted() {
