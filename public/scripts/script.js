@@ -21,8 +21,8 @@ var gameOptionsValues = {
   betterBorders: 1,
   maxOptimization: 0,
   boomCircles: 1,
-  gameSpeed: 1,
-  pointerOnBotTurn: 0
+  gameSpeed: 0,
+  pointerOnBotTurn: 1
 };
 var gameRulesValues = {
   homeDef: 1,
@@ -106,14 +106,14 @@ let botTypes = {
   'random': ['any_byn_edge', 'any'],
   'default': ['3_by_3', 'any_by_free', 'any_byn_edge', 'any'],
   'powder_keg': ['3_by_3', 'less_than_2', 'any_byn_edge', 'any'],
-  'aggressive': [],
+  'aggressive': ['3_by_3', 'bigger_by_smaller', 'any_byn_edge', 'any'],
   'smart': [],
 }
 // other main functions
 function tryBotTurn() {
   if (!curTeam.isPlayer) {
 
-    let behaviorTypes = botTypes['powder_keg'];
+    let behaviorTypes = botTypes['aggressive'];
 
     let cell = gameFeatures.getBotTurn(cellsGrid, curTeam.color, behaviorTypes);
 

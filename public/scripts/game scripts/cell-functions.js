@@ -287,3 +287,16 @@ Cell.prototype.addDot = function (cellParent) {
     gameOptions.betterBorders.setCellBorder(this);
   }
 };
+
+
+Cell.prototype.hasNeighbourWithDots = function (dots) {
+  return this.cellsAround().filter(cell => this.isCellRival(cell))
+    .filter(cell => cell.dots == dots).length != 0;
+}
+Cell.prototype.hasNotNeighbourWithDots = function (dots) {
+  return this.cellsAround().filter(cell => this.isCellRival(cell))
+    .filter(cell => cell.dots == dots).length == 0;
+}
+Cell.prototype.isCellRival = function (cell) {
+  return cell.color != this.cells.BLACK && cell.color != this.color;
+}

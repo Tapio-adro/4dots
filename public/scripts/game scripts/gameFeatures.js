@@ -99,6 +99,46 @@ gameFeatures.getBotTurn = function (grid, botColor, behaviorTypes) {
           }
         }
         break;
+      case "bigger_by_smaller":
+        // for cells with 3 dots
+        let botCells_3 = botCells.filterByDots(3);
+        if (botCells_3.length) {
+          // first try if it has rival neighbour with 2 dots
+          for (let botCell of botCells) {
+            let hasNear_2 = botCell.hasNeighbourWithDots(2);
+            if (hasNear_2) {
+              return botCell;
+            }
+          }
+          // then try if it has rival neighbour with 1 dot
+          for (let botCell of botCells) {
+            let hasNear_1 = botCell.hasNeighbourWithDots(1);
+            if (hasNear_1) {
+              return botCell;
+            }
+          }
+        }
+        // for cells with 2 dots
+        let botCells_2 = botCells.filterByDots(2);
+        if (botCells_2.length) {
+          // first try 2_by_2_byn_3
+          for (let botCell of botCells) {
+            let hasNear_2 = botCell.hasNeighbourWithDots(2);
+            let hasNotNear_3 = botCell.hasNotNeighbourWithDots(3);
+            if (hasNear_2 && hasNotNear_3) {
+              return botCell;
+            }
+          }
+          // then try 2_by_1_byn_3
+          for (let botCell of botCells) {
+            let hasNear_1 = botCell.hasNeighbourWithDots(1);
+            let hasNotNear_3 = botCell.hasNeighbourWithDots(3);
+            if (hasNear_1 && hasNotNear_3) {
+              return botCell;
+            }
+          }
+        }
+        break;
       case "less_than_2":
         botCells = botCells.filterByDots(2, '<=');
         if (botCells.length) {
