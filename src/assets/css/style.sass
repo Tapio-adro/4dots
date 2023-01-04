@@ -7,18 +7,25 @@ $green: #04AA6D
 $lightgrey: #f3f3f3
 $grey: #ddd
 $textgrey: #666
-
+#app
+  height: 100vh
 #window
+  height: 100vh
   opacity: 1
   transition: 0.3s
   &.hiden
     opacity: 0
+.gui_wrapper
+  height: 100vh
+  display: flex
+  align-content: stretch
+  align-items: stretch
 .wrapper
   zoom: var(--zoomLevel)
   display: flex
   align-items: center
   justify-content: center
-  height: calc(100vh / var(--zoomLevel))
+  // height: calc(100vh / var(--zoomLevel))
   overflow: hidden
   .container
     border: 5px solid rgba(0, 0, 0, 0.479)
@@ -110,27 +117,37 @@ $textgrey: #666
     border-width: 6px
     transition: 0.2s
 
+.side_bar
+  flex: 1
+.side_bar .messages
+  
+// @media (max-width: 600px)
+@media (orientation: portrait) 
+  .gui_wrapper
+    flex-direction: column-reverse
 
 
-#statistics
-  margin-left: 50px
-  width: 600px
-  height: 300px
-  border: 3px solid #000
-  border-radius: 30px
-  padding: 20px
-.stats
-  width: 100%
-  height: 100%
 
-  display: flex
-  justify-content: space-evenly
-  align-items: flex-end
-  transition: 0.3s
 
-  &.hiden
-    opacity: 0
-.st_col
+// #statistics
+//   margin-left: 50px
+//   width: 600px
+//   height: 300px
+//   border: 3px solid #000
+//   border-radius: 30px
+//   padding: 20px
+// .stats
+//   width: 100%
+//   height: 100%
+
+//   display: flex
+//   justify-content: space-evenly
+//   align-items: flex-end
+//   transition: 0.3s
+
+//   &.hiden
+//     opacity: 0
+// .st_col
   height: 100%
   border: 1px solid #000
   width: 50px

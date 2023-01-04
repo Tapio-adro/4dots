@@ -30,13 +30,13 @@ var gameRulesValues = {
 let appData = {
   curWindow: "",
   shouldSetDefaultSettings: true,
-  devMode: 1
+  devMode: 0
 };
 
 let gridSize = 9;
 let playersAmount = 4;
 let playersPosition;
-let botsAmount = 4;
+let botsAmount = 3;
 
 
 let teams, cellsGrid;
@@ -113,7 +113,7 @@ let botTypes = {
 function tryBotTurn() {
   if (!curTeam.isPlayer) {
 
-    let behaviorTypes = botTypes['aggressive'];
+    let behaviorTypes = botTypes['default'];
 
     let cell = gameFeatures.getBotTurn(cellsGrid, curTeam.color, behaviorTypes);
 
@@ -296,7 +296,7 @@ function resetData () {
   teams = [];
   cellsGrid = {};
 
-  document.querySelector('#window').innerHTML = '<div class="wrapper"><div class="outer_container"><div class="container"><table id="table"></table></div></div></div>';
+  // document.querySelector('#window').innerHTML = '<div class="wrapper"><div class="outer_container"><div class="container"><table id="table"></table></div></div></div>';
 }
 
 // utility functions

@@ -1,11 +1,18 @@
 <template>
   <div id="window" class="hiden">
-    <div class="wrapper">
-      <div class="outer_container">
-        <div class="container">
-          <table id="table">
-          </table>
+    <div class="gui_wrapper">
+      <div class="side_bar">
+        <div class="messages">here</div>
+      </div>
+      <div class="wrapper">
+        <div class="outer_container">
+          <div class="container">
+            <table id="table">
+            </table>
+          </div>
         </div>
+      </div>
+      <div class="side_bar">
       </div>
     </div>
   </div>
