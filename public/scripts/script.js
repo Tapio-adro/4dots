@@ -21,7 +21,7 @@ var gameOptionsValues = {
   betterBorders: 1,
   maxOptimization: 0,
   boomCircles: 1,
-  gameSpeed: 2,
+  gameSpeed: 0,
   pointerOnBotTurn: 1
 };
 var gameRulesValues = {
@@ -36,7 +36,7 @@ let appData = {
 let gridSize = 7;
 let playersAmount = 4;
 let playersPosition;
-let botsAmount = 4;
+let botsAmount = 3;
 
 
 let teams, cellsGrid;
@@ -180,13 +180,13 @@ function checkTeams() {
     (team) => cellsGrid.getByColor(team.color).length == 0
   );
   if (lostTeams.length != 0) {
-    for (let team of lostTeams) {
-      let messagesDiv = document.querySelector('.messages');
-      let message = document.createElement('div');
-      message.innerHTML = team.isPlayer ? 'Player lost' : 'Enemy lost';
-      message.style.color = team.colorRGB;
-      messagesDiv.appendChild(message);
-    }
+    // for (let team of lostTeams) {
+    //   let messagesDiv = document.querySelector('.messages');
+    //   let message = document.createElement('div');
+    //   message.innerHTML = team.isPlayer ? 'Player lost' : 'Enemy lost';
+    //   message.style.color = team.colorRGB;
+    //   messagesDiv.appendChild(message);
+    // }
     teams = teams.filter((team) => cellsGrid.getByColor(team.color).length > 0);
 
     gameRules.homeDef.removeHomeAreaElement(lostTeams);
@@ -331,7 +331,13 @@ function setContainerColor(color) {
   container.style.backgroundColor = `rgba(${color}, 0.2)`;
 }
 function assignWidthAndHeight () {
-  let container = document.querySelector('.wrapper .outer_container');
+  let container = document.querySelector('.wrapper .container');
+
+  if (screen.orientation.type == 'portrait-primary') {
+    container = document.querySelector('.wrapper #table');
+    screen.orientation.lock('landscape');
+    document.querySelector('.wrapper .container').classList.add('no_border_radius');
+  }
 
   gameFieldHeight = container.offsetHeight;
   gameFieldWidth = container.offsetWidth;

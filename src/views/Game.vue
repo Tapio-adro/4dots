@@ -2,7 +2,7 @@
   <div id="window" class="hiden">
     <div class="gui_wrapper">
       <div class="side_bar">
-        <div class="messages"></div>
+        <!-- <div class="messages"></div> -->
       </div>
       <div class="wrapper">
         <div class="outer_container">

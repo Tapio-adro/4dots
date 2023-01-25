@@ -37,6 +37,9 @@
   margin: 5px;
   transition: 1s;
 }
+.wrapper .container.no_border_radius {
+  border-radius: 0;
+}
 
 #table {
   margin: 0 auto;
