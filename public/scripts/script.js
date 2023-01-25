@@ -30,13 +30,13 @@ var gameRulesValues = {
 let appData = {
   curWindow: "",
   shouldSetDefaultSettings: true,
-  devMode: 1
+  devMode: 0
 };
 
-let gridSize = 7;
+let gridSize = 5;
 let playersAmount = 4;
 let playersPosition;
-let botsAmount = 4;
+let botsAmount = 3;
 
 
 let teams, cellsGrid;
@@ -181,7 +181,7 @@ function checkTeams() {
   );
   if (lostTeams.length != 0) {
     // for (let team of lostTeams) {
-    //   let messagesDiv = document.querySelector('.messages');
+    //   let messagesDiv = document.querySelector('#messages');
     //   let message = document.createElement('div');
     //   message.innerHTML = team.isPlayer ? 'Player lost' : 'Enemy lost';
     //   message.style.color = team.colorRGB;
@@ -196,6 +196,7 @@ function checkTeams() {
     console.log("game end");
     gameIsRunning = false;
     gameFeatures.showWinner(curTeam)
+    document.querySelector('#go_back_button').classList.add('highlight');
     updateStatistics();
     playRecording();
   }
