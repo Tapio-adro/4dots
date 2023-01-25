@@ -15,6 +15,7 @@
       <div class="side_bar">
       </div>
     </div>
+    <div id="win_overlay" class="hidden"></div>
   </div>
 </template>
 

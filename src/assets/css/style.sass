@@ -7,6 +7,12 @@ $green: #04AA6D
 $lightgrey: #f3f3f3
 $grey: #ddd
 $textgrey: #666
+
+html, body 
+  margin: 0 
+  height: 100% 
+  overflow: hidden
+
 #app
   height: 100vh
 #window
@@ -40,6 +46,13 @@ $textgrey: #666
   margin: 0 auto
   background-color: rgb(255, 255, 255)
   border-radius: 5px
+#table.better_borders
+  border-spacing: 0
+  td
+    padding: 0
+  .cell
+    border: 1px solid #000
+    border-radius: 0
 
 .cell
   width: 50px
@@ -93,14 +106,6 @@ $textgrey: #666
     opacity: 0
     transform: scale(0.5)
 
-.better_borders
-  border-spacing: 0
-  td
-    padding: 0
-  .cell
-    border: 1px solid #000
-    border-radius: 0
-
 .homeland_area
   border: 6px dashed #000
   border-radius: 4px
@@ -109,6 +114,7 @@ $textgrey: #666
   height: 160px
   pointer-events: none
   zoom: var(--zoomLevel)
+  z-index: 1
   &.hiden
     opacity: 0
     transition: 1s
@@ -118,6 +124,9 @@ $textgrey: #666
   &.after_player_turn
     border-width: 6px
     transition: 0.2s
+
+  
+// some ingame gui
 
 .side_bar
   font-family: system-ui
@@ -132,17 +141,37 @@ $textgrey: #666
   border-radius: 5px
   border: 5px solid $green
   max-width: 200px
+
+#win_overlay
+  position: absolute
+  min-width: 400px
+  height: 200px
+  top: 20%
+  left: 50%
+  transform: translate(-50%, -20%)
+  border: 10px solid $green
+  border-radius: 15px
+  backdrop-filter: blur(8px)
+  background-color: transparentize(black, 0.2)
+  z-index: 2
+  font-size: 3rem
+  display: flex
+  justify-content: center
+  align-items: center
+  font-family: sans-serif
+  padding: 40px
+  white-space: nowrap
+  transition: 1s
+  &.hidden
+    pointer-events: none
+    opacity: 0
+    transform: translate(-50%, -150%)
     
-@media (max-width: 600px)
-  .wrapper .container
-    margin: 0
-    
-@media (orientation: portrait) 
-  .gui_wrapper
-    flex-direction: column-reverse
-
-
-
+@media (pointer: none), (max-height: 600px)
+  #win_overlay
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
 
 // #statistics
 //   margin-left: 50px

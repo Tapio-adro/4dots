@@ -1,7 +1,8 @@
 var gameFeatures = {
   scaleGameElements: function() {},
   getTeamColors: function() {},
-  getBotTurn: function() {}
+  getBotTurn: function() {},
+  showWinner: function() {}
 }
 
 gameFeatures.scaleGameElements = function () {
@@ -204,3 +205,15 @@ gameFeatures.getBotTurn = function (grid, botColor, behaviorTypes) {
     );
   }
 };
+gameFeatures.showWinner = function (team) {
+  let string = (team.isPlayer ? 'Player' : 'Bot') + ' won!';
+  var elem = document.querySelector('#win_overlay')
+  elem.style.color = team.colorRGB
+  elem.innerHTML = string
+  elem.classList.remove('hidden');
+}
+
+// template
+// gameFeatures. = function () {
+  
+// }

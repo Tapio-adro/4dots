@@ -21,7 +21,7 @@ var gameOptionsValues = {
   betterBorders: 1,
   maxOptimization: 0,
   boomCircles: 1,
-  gameSpeed: 0,
+  gameSpeed: 2,
   pointerOnBotTurn: 1
 };
 var gameRulesValues = {
@@ -36,7 +36,7 @@ let appData = {
 let gridSize = 7;
 let playersAmount = 4;
 let playersPosition;
-let botsAmount = 3;
+let botsAmount = 4;
 
 
 let teams, cellsGrid;
@@ -195,6 +195,7 @@ function checkTeams() {
   if (teams.length == 1) {
     console.log("game end");
     gameIsRunning = false;
+    gameFeatures.showWinner(curTeam)
     updateStatistics();
     playRecording();
   }
