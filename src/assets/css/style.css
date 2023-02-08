@@ -150,9 +150,6 @@ html, body {
   align-items: start;
   padding: 20px;
 }
-.side_bar:hover #go_back_button {
-  opacity: 1;
-}
 
 .side_bar #messages {
   background-color: #333333;
@@ -163,7 +160,10 @@ html, body {
   max-width: 200px;
 }
 
-.side_bar #go_back_button {
+#go_back_button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
   font-size: 3rem;
   line-height: 14px;
   height: 25px;
@@ -172,11 +172,12 @@ html, body {
   transition: 0.5s;
   border-radius: 5px;
 }
-.side_bar #go_back_button:hover {
+#go_back_button:hover {
   transform: scale(1.2);
   color: #04AA6D;
+  opacity: 1;
 }
-.side_bar #go_back_button.highlight {
+#go_back_button.highlight {
   opacity: 1;
   color: #04AA6D;
 }

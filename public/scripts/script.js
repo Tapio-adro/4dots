@@ -7,7 +7,7 @@ let start_dots = 3;
 let curSelection = { x: -1, y: -1 };
 
 var curTeam;
-let curTeamIndex;
+let curTeamIndex = null;
 let cycles = 0;
 let gamePaused = false;
 let gameIsRunning = true;
@@ -28,9 +28,10 @@ var gameRulesValues = {
   homeDef: 1,
 };
 let appData = {
-  curWindow: "",
+  curWindow: '',
   shouldSetDefaultSettings: true,
-  devMode: 0
+  devMode: 0,
+  lastWindow: 'home'
 };
 
 let gridSize = 5;
@@ -304,7 +305,7 @@ function resetData () {
   teams = [];
   cellsGrid = {};
 
-  // document.querySelector('#window').innerHTML = '<div class="wrapper"><div class="outer_container"><div class="container"><table id="table"></table></div></div></div>';
+  document.querySelector('#table').innerHTML = '';
 }
 
 // utility functions

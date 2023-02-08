@@ -3,7 +3,8 @@
     <router-link to="/">Home</router-link> |
     <router-link to="/multiply-trainer">multiply-trainer</router-link>
   </nav> -->
-  <router-view />
+  <div id="go_back_button" @click="handleGoBackClick" v-if="$route.name != 'home'" ref="goBackButton">&#8656;</div>
+  <router-view/>
 </template>
 
 
@@ -20,6 +21,9 @@ export default {
     $route (to, from){
       setTimeout(() => {
         setAppData('curWindow', to.name);
+        if (from.name == 'options' || from.name == 'home') {
+          setAppData('lastWindow', from.name)
+        }
       }, 100)
     }
   },
@@ -46,6 +50,12 @@ export default {
         startGame();
       }, 10)
     } 
-  }
+  },
+  methods: {
+    handleGoBackClick() {
+      this.$router.go(-1);
+      this.$refs.goBackButton.classList.remove('highlight');
+    }
+  },
 }
 </script>

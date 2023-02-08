@@ -2,7 +2,6 @@
   <div id="window" class="hiden">
     <div class="gui_wrapper">
       <div class="side_bar">
-        <div id="go_back_button" @click="$router.push('/options')">&#8656;</div>
         <!-- <div id="messages"></div> -->
       </div>
       <div class="wrapper">
