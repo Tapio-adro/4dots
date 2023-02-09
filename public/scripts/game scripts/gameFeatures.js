@@ -205,8 +205,12 @@ gameFeatures.getBotTurn = function (grid, botColor, behaviorTypes) {
     );
   }
 };
-gameFeatures.showWinner = function (team) {
-  let string = (team.isPlayer ? 'Player' : 'Bot') + ' won!';
+gameFeatures.showWinner = function (team, lang) {
+  let subject = lang == 'uk' ? 
+    (team.isPlayer ? 'Гравець' : 'Бот')
+    : (team.isPlayer ? 'Player' : 'Bot')
+  let winWord = lang == 'uk' ? 'виграв' : 'won'
+  let string =  subject + ' ' + winWord + '!';
   var elem = document.querySelector('#win_overlay')
   elem.style.color = team.colorRGB
   elem.innerHTML = string

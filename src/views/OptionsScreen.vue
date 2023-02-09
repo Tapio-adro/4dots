@@ -59,18 +59,7 @@
             />
           </fieldset>
           <div class="summary">
-            <template v-if="options.humansAmount == 0">
-              {{ options.playersAmount }} bots fight
-            </template>
-            <template v-else-if="options.humansAmount == 2 && options.playersAmount == 2">
-              duel
-            </template>
-            <template v-else-if="options.humansAmount == options.playersAmount">
-              {{ options.humansAmount }} players
-            </template>
-            <template v-else>
-              {{ getPlayersSummary() }} 
-            </template>
+            {{ getPlayersSummary }} 
             <span class="map_size">
               {{ options.gridSize + ' x ' + options.gridSize }}
             </span>
@@ -213,7 +202,44 @@ export default {
       return this.options.playersPosition;
     },
     getPlayersSummary() {
-      
+      let humansAmount = this.options.humansAmount
+      let botsAmount = this.options.playersAmount - this.options.humansAmount
+      // return humansAmount + ' ' + botsAmount
+      let humansWord, botsWord
+      let lang = this.$root.curLang 
+      if (lang == 'uk') {
+        humansWord = getNounByNumber(humansAmount)
+        botsWord = getNounByNumber(botsAmount, true)
+      } else {
+        humansWord = humansAmount == 1 ? 'human player' : 'human players'
+        botsWord = botsAmount == 1 ? 'bot' : 'bots'
+      }
+      if (humansAmount == 2 && botsAmount == 0) {
+        return lang == 'uk' ? 'дуель' : 'duel'
+      }
+      if (botsAmount == 0) {
+        return humansAmount + ' ' + humansWord
+      }  
+      if (humansAmount == 0) {
+        return botsAmount + ' ' + botsWord
+      }
+      let conjunctionWord = lang == 'uk' ? ' і ' : ' and '
+      return humansAmount + ' ' + humansWord + conjunctionWord + botsAmount + ' ' + botsWord
+      // if (number == 1) {
+      //   return number + ' ' + word
+      // }
+      // else {
+      //   return number + ' ' + word + 's'
+      // }
+      function getNounByNumber (num, bot = false) {
+        if (num == 1) {
+          return bot ? 'бот' : 'людина-гравець'
+        } else if (num <= 4) {
+          return bot ? 'боти' : 'людини-гравця'
+        } else {
+          return bot ? 'ботів' : 'людей-гравців'
+        }
+      }
     }
   },
   watch: {
@@ -322,14 +348,6 @@ export default {
       }
       if (!(this.options.maxPlayersAmount < this.options.playersAmount)) return;
       this.options.playersAmount = this.options.maxPlayersAmount;
-    },
-    getWordNumber(word, number) {
-      if (number == 1) {
-        return number + ' ' + word
-      }
-      else {
-        return number + ' ' + word + 's'
-      }
     },
     getSliderData() {
       return {

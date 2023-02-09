@@ -17,7 +17,7 @@ export default {
     return {
       devMode: 0,
       lang: lang,
-      curLang: 'uk'
+      curLang: 'en'
     }
   },
   watch: {
@@ -30,7 +30,7 @@ export default {
       }, 100)
     },
     curLang() {
-      setAppData('lang', curLang)
+      setAppData('lang', this.curLang)
     }
   },
   mounted() {
@@ -57,7 +57,7 @@ export default {
       }, 10)
     }
     setTimeout(() => {
-      setAppData('lang', curLang)
+      setAppData('lang', this.curLang)
     }, 100) 
   },
   methods: {

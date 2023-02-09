@@ -197,7 +197,7 @@ function checkTeams() {
   if (teams.length == 1) {
     console.log("game end");
     gameIsRunning = false;
-    gameFeatures.showWinner(curTeam)
+    gameFeatures.showWinner(curTeam, appData.lang)
     document.querySelector('#go_back_button').classList.add('highlight');
     updateStatistics();
     playRecording();
