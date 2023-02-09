@@ -45,7 +45,8 @@ export default {
   props: {
     label: String,
     value: String,
-    options: Object
+    options: Object,
+    initialString: String
   },
   emits: ['update:value'],
   watch: {
@@ -54,8 +55,8 @@ export default {
     }
   },
   mounted() {
-    if (this.value == 'none') {
-      this.displayValue = 'None'
+    if (this.initialString) {
+      this.displayValue = this.initialString
     } else {
       this.displayValue = this.options[this.value];
     }

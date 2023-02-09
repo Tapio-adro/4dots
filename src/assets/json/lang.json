@@ -11,10 +11,6 @@
     "options.gridSize": "Grid size",
     "options.playersAmount": "Players amount",
     "options.humansAmount": "Humans amount",
-    "options.playersAmount_1": "player",
-    "options.playersAmount_2": "players",
-    "options.botsAmount_1": "bot",
-    "options.botsAmount_2": "bots",
 
     "options.gameOptions.header": "Game Options",
     "options.gameSpeed": "Game speed",
@@ -31,10 +27,11 @@
 
     "options.presets.header": "Presets",
     "options.choosePreset": "Choose preset",
+    "options.preset.none": "none",
     "options.preset.default": "Default",
     "options.preset.classic": "Classic",
     "options.preset.duel": "Duel",
-    "options.preset.bigBotFight": "Big bot figh",
+    "options.preset.bigBotFight": "Big bot fight",
     "options.preset.hugeBotFight": "Huge bot fight",
     "options.preset.homelandDefense": "Homeland defense",
 
@@ -60,5 +57,63 @@
     "options.presets.desc": "Use these to set the options.",
 
     "options.play": "Play"
+  },
+  "uk": {
+    "home.quickGame": "Швидка гра",
+    "home.customGame": "Користувацька гра",
+
+
+    "options.gridAndPlayers.header": "Сітка та гравці",
+    "options.playersPosition": "Розташування гравців",
+    "options.playersPosition.default": "За замовчуванням",
+    "options.playersPosition.random": "Випадкове",
+    "options.gridSize": "Розмір сітки",
+    "options.playersAmount": "Кількість гравців",
+    "options.humansAmount": "Кількість людей",
+
+    "options.gameOptions.header": "Ігрові параметри",
+    "options.gameSpeed": "Швидкість гри",
+    "options.gameSpeed.normal": "Звичайна",
+    "options.gameSpeed.fast": "Швидка",
+    "options.gameSpeed.instant": "Миттєва",
+    "options.betterBorders": "Увімкнути кращі межі",
+    "options.maximalOptimization": "Увімкнути максимальну оптимізацію",
+    "options.blastCircles": "Увімкнути кола вибухів",
+    "options.pointerOnBotTurn": "Показувати вказівник, коли бот робить свій хід",
+
+    "options.gameRules.header": "Ігрові правила",
+    "options.homelandDefense": "Захист вітчизни",
+
+    "options.presets.header": "Передстановлення",
+    "options.choosePreset": "Виберіть передстановлення",
+    "options.preset.none": "немає",
+    "options.preset.default": "За замовчуванням",
+    "options.preset.classic": "Класичне",
+    "options.preset.duel": "Дуель",
+    "options.preset.bigBotFight": "Велика битва ботів",
+    "options.preset.hugeBotFight": "Величезна битва ботів",
+    "options.preset.homelandDefense": "Захист вітчизни",
+
+    "options.description.header": "Опис",
+
+    "options.gridAndPlayers.desc": "Options for grid size, players amount and position. At the bottom of the section you can see the summary.",
+    "options.playersPosition.desc": "Default players position is when players are positioned symmetrically. Random is for random positions.",
+    "options.gridSize.desc": "Sets size of the game map.",
+    "options.playersAmount.desc": "Players amount is sum of bots and human players amount.",
+    "options.humansAmount.desc": "Humans are real people, playing the game. Set it to 0 if you want to see bots fight, to 1 to fight vs bots, and 2 and more if you want to play with somebody on the same device.",
+
+    "options.gameOptions.desc": "Game options doesn't change game mechanics. They change how game looks or how fast it runs.",
+    "options.gameSpeed.desc": "Sets how long is delay between players turns. Normal is for common games. Instant is good for massive bots fights.",
+    "options.betterBorders.desc": "Better borders are connected.",
+    "options.maximalOptimization.desc": "Nice for massive bots fights.",
+    "options.blastCircles.desc": "Circle which appears when \"four\" is activated.",
+    "options.pointerOnBotTurn.desc": "Shows pointer on cell bot made its turn on.",
+
+    "options.gameRules.desc": "Game rules change game mechanics.",
+    "options.homelandDefense.desc": "By default player lose when loses all the cells. With this rule you should have at least one cell in your \"Home area\", otherwise you will lose. Home area is area of 9 cells, where you spawned.",
+
+    "options.presets.desc": "Use these to set the options.",
+
+    "options.play": "Грати"
   }
 }

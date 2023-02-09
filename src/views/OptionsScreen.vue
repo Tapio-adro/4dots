@@ -81,7 +81,7 @@
           <fieldset class="slider_holder"
             @mouseover="description = 'options.gameSpeed'"
           >
-            <legend>Game speed</legend>
+            <legend>{{ l('gameSpeed') }}</legend>
             <VueSlider 
               :data="gameSpeedSlider"
               v-model="options.gameSpeed"
@@ -128,6 +128,7 @@
           <Dropdown
             :label="l('choosePreset')"
             v-model:value="presetKey"
+            :initial-string="l('preset.none')"
             :options="getPresets(true)"
           />
         </section>
@@ -190,7 +191,8 @@ export default {
         homelandDefense: false,
         pointerOnBotTurn: true
       },
-      presetKey: 'none',
+      presets: {},
+      presetKey: 'hs',
       gameSpeedSlider: this.getSliderData(),
       showDescription: true,
       description: '',
@@ -245,14 +247,14 @@ export default {
       if (!(this.options.playersAmount < this.options.humansAmount)) return;
       this.options.humansAmount = this.options.playersAmount;
     },
+    presetKey() {
+      this.setPreset()
+    },
     maxOptimization() {
       if (this.options.maxOptimization) {
         this.options.boomCircles = false;
         this.options.pointerOnBotTurn = false;
       }
-    },
-    presetKey() {
-      this.setPreset()
     },
     options: {
       handler() {
@@ -265,7 +267,10 @@ export default {
     }
   },
   mounted() {
-
+    this.presets = getPresetsData()
+    for (let [key, value] of Object.entries(this.presets)) {
+      this.presets[key].name = this.l('preset.' + key)
+    }
     let options = JSON.parse(window.localStorage.getItem('options'))
     if (options) {
       let optionsArray = Object.entries(options);
@@ -325,63 +330,20 @@ export default {
     },
     getSliderData() {
       return {
-        '0': 'Normal',
-        '1': 'Fast',
-        '2': 'Instant'
+        '0': this.l('gameSpeed.normal'),
+        '1': this.l('gameSpeed.fast'),
+        '2': this.l('gameSpeed.instant')
       }
     },
     getPresets(getDropdownValues = false) {
-      let presets = {
-        default: {
-          name: 'Default',
-          pointerOnBotTurn: true
-        },
-        classic: {
-          name: 'Classic',
-          betterBorders: false,
-          boomCircles: false
-        },
-        duel: {
-          name: 'Duel',
-          playersAmount: 2,
-          humansAmount: 2,
-          gridSize: 7
-        },
-        bigBotFight: {
-          name: 'Big bot fight',
-          playersPosition: 'random',
-          gridSize: 11,
-          playersAmount: 8,
-          humansAmount: 0,
-          gameSpeed: '1'
-        },
-        hugeBotFight: {
-          name: 'Huge bot fight',
-          playersPosition: 'random',
-          gridSize: 15,
-          playersAmount: 16,
-          humansAmount: 0,
-          gameSpeed: '2',
-          maxOptimization: true
-        },
-        homelandDefense: {
-          name: 'Homeland defense',
-          playersPosition: 'random',
-          gridSize: 11,
-          playersAmount: 4,
-          humansAmount: 1,
-          gameSpeed: '0',
-          homelandDefense: true
-        }
-      }
       if (getDropdownValues) {
         let dropdownValues = {};
-        for (let [key, value] of Object.entries(presets)) {
+        for (let [key, value] of Object.entries(this.presets)) {
           dropdownValues[key] = value['name'];
         }
         return dropdownValues;
       }
-      return presets;
+      return this.presets;
     },
     setPreset() {
       let defaultOptions = {
@@ -507,6 +469,45 @@ function getDescriptionData () {
     presets: {name: 'Presets', description: 'Use these to set the options.'}
   };
 
+}
+function getPresetsData () {
+  return {
+    default: {
+      pointerOnBotTurn: true
+    },
+    classic: {
+      betterBorders: false,
+      boomCircles: false
+    },
+    duel: {
+      playersAmount: 2,
+      humansAmount: 2,
+      gridSize: 7
+    },
+    bigBotFight: {
+      playersPosition: 'random',
+      gridSize: 11,
+      playersAmount: 8,
+      humansAmount: 0,
+      gameSpeed: '1'
+    },
+    hugeBotFight: {
+      playersPosition: 'random',
+      gridSize: 15,
+      playersAmount: 16,
+      humansAmount: 0,
+      gameSpeed: '2',
+      maxOptimization: true
+    },
+    homelandDefense: {
+      playersPosition: 'random',
+      gridSize: 11,
+      playersAmount: 4,
+      humansAmount: 1,
+      gameSpeed: '0',
+      homelandDefense: true
+    }
+  }
 }
 </script>
 

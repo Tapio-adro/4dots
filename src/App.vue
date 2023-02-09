@@ -17,7 +17,7 @@ export default {
     return {
       devMode: 0,
       lang: lang,
-      curLang: 'en'
+      curLang: 'uk'
     }
   },
   watch: {
@@ -31,7 +31,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.lang);
     if (this.devMode) {
       let settings = {
         gameOptions: {
