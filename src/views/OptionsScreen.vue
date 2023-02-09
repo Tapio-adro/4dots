@@ -3,17 +3,17 @@
     <main id="container">
       <div id="options_ui">
         <section>
-          <h3>Grid & Players</h3>
+          <h3>{{ lh('gridAndPlayers') }}</h3>
           <Dropdown
-            label="Players position"
+            :label="l('playersPosition')"
             v-model:value="options.playersPosition"
-            :options="{'default': 'Default', 'random':'Random'}"
+            :options="{'default': l('playersPosition.default'), 'random': l('playersPosition.random')}"
             @mouseover="description = 'grid.position'"
           />
           <fieldset class="slider_holder"
             @mouseover="description = 'grid.size'"
           >
-            <legend>Grid size</legend>
+            <legend>{{ l('gridSize') }}</legend>
             <VueSlider 
               :min="5"
               :max="21"
@@ -29,7 +29,7 @@
             :class="{'no_slider': options.maxPlayersAmount == 2}"
             @mouseover="description = 'grid.players'"
           >
-            <legend>Players amount</legend>
+            <legend>{{ l('playersAmount') }}</legend>
             <VueSlider 
               v-if="options.maxPlayersAmount != 2"
               :min="2"
@@ -48,7 +48,7 @@
           <fieldset class="slider_holder"
             @mouseover="description = 'grid.humans'"
           >
-            <legend>Humans amount</legend>
+            <legend>{{ l('humansAmount') }}</legend>
             <VueSlider 
               :min="0"
               :max="options.playersAmount"
@@ -77,7 +77,7 @@
           </div>
         </section>
         <section>
-          <h3>Game Options</h3>
+          <h3>{{ lh('gameOptions') }}</h3>
           <fieldset class="slider_holder"
             @mouseover="description = 'options.gameSpeed'"
           >
@@ -92,41 +92,41 @@
           
           <Checkbox
             @mouseover="description = 'options.betterBorders'"
-            label="Enable better borders"
+            :label="l('betterBorders')"
             v-model:checked="options.betterBorders"
           />
           <Checkbox
             @mouseover="description = 'options.optimization'"
-            label="Enable maximal optimization"
+            :label="l('maximalOptimization')"
             v-model:checked="options.maxOptimization"
           />
           <Checkbox
             @mouseover="description = 'options.circles'"
-            label="Enable blast circles"
+            :label="l('blastCircles')"
             v-model:checked="options.boomCircles"
             :class="{'inactive': options.maxOptimization}"
           />
           <Checkbox
             @mouseover="description = 'options.showPointer'"
-            label="Show pointer on bot turn"
+            :label="l('pointerOnBotTurn')"
             v-model:checked="options.pointerOnBotTurn"
             :class="{'inactive': options.maxOptimization}"
           />  
         </section>
         <section>
-          <h3>Game Rules</h3>
+          <h3>{{ lh('gameRules') }}</h3>
           <Checkbox
             @mouseover="description = 'rules.homelandDefense'"
-            label="Homeland defense"
+            :label="l('homelandDefense')"
             v-model:checked="options.homelandDefense"
           />
         </section>
       </div>
       <div id="options_description">
         <section @mouseover="description = 'presets'" >
-          <h3>Presets</h3>
+          <h3>{{ lh('presets') }}</h3>
           <Dropdown
-            label="Choose preset"
+            :label="l('choosePreset')"
             v-model:value="presetKey"
             :options="getPresets(true)"
           />
@@ -135,7 +135,7 @@
           <h3
             @click="toggleDescription()"
           >
-          Description
+          {{ lh('description') }}
           <span class="tooltip">{{ getToggleString('Click to toggle description', showDescription) }}</span>
           </h3>
           <h4>{{ descriptionData.sectionName }}</h4>
@@ -154,7 +154,7 @@
           <div id="start_button"
             @click="startGame"
           >
-            Play
+            {{ l('play') }}
             <i class="fa fa-arrow-right" aria-hidden="true"></i>
           </div>
         </section>
@@ -443,6 +443,15 @@ export default {
       setSettings(settings);
       setAppData('shouldSetDefaultSettings', false)
       this.$router.push('/game')
+    },
+    l(key) {
+      return this.$root.getLangString('options.' + key)
+    },
+    lh(key) {
+      return this.$root.getLangString('options.' + key + '.header')
+    },
+    ld(key) {
+      return this.$root.getLangString('options.' + key + '.desc')
     }
   }
 };

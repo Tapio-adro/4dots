@@ -9,12 +9,15 @@
 
 
 <script>
+import lang from './assets/json/lang.json'
 
 export default {
   name: 'App',
   data() {
     return {
-      devMode: 0
+      devMode: 0,
+      lang: lang,
+      curLang: 'en'
     }
   },
   watch: {
@@ -28,6 +31,7 @@ export default {
     }
   },
   mounted() {
+    console.log(this.lang);
     if (this.devMode) {
       let settings = {
         gameOptions: {
@@ -55,6 +59,9 @@ export default {
     handleGoBackClick() {
       this.$router.go(-1);
       this.$refs.goBackButton.classList.remove('highlight');
+    },
+    getLangString(key) {
+      return this.lang[this.curLang][key]
     }
   },
 }

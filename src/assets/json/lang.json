@@ -1,0 +1,64 @@
+{
+  "en": {
+    "home.quickGame": "Quick game",
+    "home.customGame": "Custom game",
+
+
+    "options.gridAndPlayers.header": "Grid & Players",
+    "options.playersPosition": "Players position",
+    "options.playersPosition.default": "Default",
+    "options.playersPosition.random": "Random",
+    "options.gridSize": "Grid size",
+    "options.playersAmount": "Players amount",
+    "options.humansAmount": "Humans amount",
+    "options.playersAmount_1": "player",
+    "options.playersAmount_2": "players",
+    "options.botsAmount_1": "bot",
+    "options.botsAmount_2": "bots",
+
+    "options.gameOptions.header": "Game Options",
+    "options.gameSpeed": "Game speed",
+    "options.gameSpeed.normal": "Normal",
+    "options.gameSpeed.fast": "Fast",
+    "options.gameSpeed.instant": "Instant",
+    "options.betterBorders": "Enable better borders",
+    "options.maximalOptimization": "Enable maximal optimization",
+    "options.blastCircles": "Enable blast circles",
+    "options.pointerOnBotTurn": "Show pointer on bot turn",
+
+    "options.gameRules.header": "Game rules",
+    "options.homelandDefense": "Homeland defense",
+
+    "options.presets.header": "Presets",
+    "options.choosePreset": "Choose preset",
+    "options.preset.default": "Default",
+    "options.preset.classic": "Classic",
+    "options.preset.duel": "Duel",
+    "options.preset.bigBotFight": "Big bot figh",
+    "options.preset.hugeBotFight": "Huge bot fight",
+    "options.preset.homelandDefense": "Homeland defense",
+
+    "options.description.header": "Description",
+
+    "options.gridAndPlayers.desc": "Options for grid size, players amount and position. At the bottom of the section you can see the summary.",
+    "options.playersPosition.desc": "Default players position is when players are positioned symmetrically. Random is for random positions.",
+    "options.gridSize.desc": "Sets size of the game map.",
+    "options.playersAmount.desc": "Players amount is sum of bots and human players amount.",
+    "options.humansAmount.desc": "Humans are real people, playing the game. Set it to 0 if you want to see bots fight, to 1 to fight vs bots, and 2 and more if you want to play with somebody on the same device.",
+
+    "options.gameOptions.desc": "Game options doesn't change game mechanics. They change how game looks or how fast it runs.",
+    "options.gameSpeed.desc": "Sets how long is delay between players turns. Normal is for common games. Instant is good for massive bots fights.",
+    "options.betterBorders.desc": "Better borders are connected.",
+    "options.maximalOptimization.desc": "Nice for massive bots fights.",
+    "options.blastCircles.desc": "Circle which appears when \"four\" is activated.",
+    "options.pointerOnBotTurn.desc": "Shows pointer on cell bot made its turn on.",
+
+    "options.gameRules.desc": "Game rules change game mechanics.",
+    "options.homelandDefense": "Homeland defence",
+    "options.homelandDefense.desc": "By default player lose when loses all the cells. With this rule you should have at least one cell in your \"Home area\", otherwise you will lose. Home area is area of 9 cells, where you spawned.",
+
+    "options.presets.desc": "Use these to set the options.",
+
+    "options.play": "Play"
+  }
+}
