@@ -28,6 +28,9 @@ export default {
           setAppData('lastWindow', from.name)
         }
       }, 100)
+    },
+    curLang() {
+      setAppData('lang', curLang)
     }
   },
   mounted() {
@@ -52,7 +55,10 @@ export default {
         setSettings(settings);
         startGame();
       }, 10)
-    } 
+    }
+    setTimeout(() => {
+      setAppData('lang', curLang)
+    }, 100) 
   },
   methods: {
     handleGoBackClick() {

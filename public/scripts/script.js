@@ -31,7 +31,8 @@ let appData = {
   curWindow: '',
   shouldSetDefaultSettings: true,
   devMode: 0,
-  lastWindow: 'home'
+  lastWindow: 'home',
+  lang: ''
 };
 
 let gridSize = 5;

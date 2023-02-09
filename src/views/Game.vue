@@ -37,6 +37,8 @@ export default {
   beforeUnmount() {
     document.documentElement.style.overflow = 'auto'
     document.body.style.overflow = 'auto'
+    var winnerPanel = document.querySelector('#win_overlay')
+    winnerPanel.classList.add('hidden');
   },  
   methods: {
     setQuickGame() {

@@ -69,7 +69,7 @@
               {{ options.humansAmount }} players
             </template>
             <template v-else>
-              {{ getWordNumber('player', options.humansAmount) }} and {{ getWordNumber('bot', options.playersAmount - options.humansAmount) }} 
+              {{ getPlayersSummary() }} 
             </template>
             <span class="map_size">
               {{ options.gridSize + ' x ' + options.gridSize }}
@@ -211,6 +211,9 @@ export default {
     },
     playersPosition() {
       return this.options.playersPosition;
+    },
+    getPlayersSummary() {
+      
     }
   },
   watch: {
