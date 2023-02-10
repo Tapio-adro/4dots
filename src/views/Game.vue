@@ -39,6 +39,17 @@ export default {
     document.body.style.overflow = 'auto'
     var winnerPanel = document.querySelector('#win_overlay')
     winnerPanel.classList.add('hidden');
+
+    removeElementsByClass('boom circle')
+    removeElementsByClass('bot_pointer')
+    removeElementsByClass('homeland_area')
+
+    function removeElementsByClass(className){
+      let elements = document.getElementsByClassName(className);
+      while(elements.length > 0){
+        elements[0].parentNode.removeChild(elements[0]);
+      }
+    }
   },  
   methods: {
     setQuickGame() {
