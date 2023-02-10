@@ -169,6 +169,9 @@
   transform: rotate(-45deg);
 }
 
+#options .dropdown {
+  position: relative;
+}
 #options .dropdown .dropdown_button {
   cursor: pointer;
   font-size: 16px;
