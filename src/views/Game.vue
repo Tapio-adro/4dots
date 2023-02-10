@@ -33,10 +33,14 @@ export default {
     this.setQuickGame();
     document.documentElement.style.overflow = 'hidden'
     document.body.style.overflow = 'hidden'
+    var root = document.getElementsByTagName('html')[0];
+    root.setAttribute('class', '');
   },
   beforeUnmount() {
     document.documentElement.style.overflow = 'auto'
     document.body.style.overflow = 'auto'
+    var root = document.getElementsByTagName('html')[0];
+    root.setAttribute('class', 'rotated');
     var winnerPanel = document.querySelector('#win_overlay')
     winnerPanel.classList.add('hidden');
   },  

@@ -335,13 +335,13 @@ function setContainerColor(color) {
   container.style.backgroundColor = `rgba(${color}, 0.2)`;
 }
 function assignWidthAndHeight () {
-  let container = document.querySelector('.wrapper .container');
+  let container = document.querySelector('.wrapper .outer_container');
 
-  if (screen.orientation.type == 'portrait-primary') {
-    container = document.querySelector('.wrapper #table');
-    screen.orientation.lock('landscape');
-    document.querySelector('.wrapper .container').classList.add('no_border_radius');
-  }
+  // if (screen.orientation.type == 'portrait-primary') {
+  //   container = document.querySelector('.wrapper #table');
+  //   screen.orientation.lock('landscape');
+  //   document.querySelector('.wrapper .container').classList.add('no_border_radius');
+  // }
 
   gameFieldHeight = container.offsetHeight;
   gameFieldWidth = container.offsetWidth;

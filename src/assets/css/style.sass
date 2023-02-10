@@ -12,9 +12,9 @@ html, body
   height: 100% 
 
 #app
-  height: 100vh
+  // height: 100vh
 #window
-  height: 100vh
+  // height: 100vh
   opacity: 1
   transition: 0.3s
   &.hiden
@@ -24,6 +24,7 @@ html, body
   display: flex
   align-content: stretch
   align-items: stretch
+  padding: 20px 0
 .wrapper
   zoom: var(--zoomLevel)
   display: flex
@@ -31,12 +32,11 @@ html, body
   justify-content: center
   // height: calc(100vh / var(--zoomLevel))
   overflow: hidden
-  padding: 20px
+  // padding: 20px
   .container
     border: 5px solid rgba(0, 0, 0, 0.479)
     border-radius: 10px
     padding: 15px
-    margin: 5px
     transition: 1s
     &.no_border_radius
       border-radius: 0
@@ -132,7 +132,7 @@ html, body
   flex: 1
   display: flex
   align-items: start
-  padding: 20px
+  // padding: 20px
 .side_bar #messages
   background-color: #333333
   padding: 5px
@@ -189,6 +189,21 @@ html, body
     top: 50%
     left: 50%
     transform: translate(-50%, -50%)
+
+@media screen and (orientation: portrait) 
+  html.rotated
+    transform: rotate(-90deg)
+    transform-origin: left top
+    width: 100vh
+    height: 100vw
+    overflow-x: hidden
+    position: absolute
+    top: 100%
+    left: 0
+  .gui_wrapper
+    padding: 0
+  
+  
 
 
 // some unused code for now
