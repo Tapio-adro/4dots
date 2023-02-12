@@ -34,8 +34,6 @@ export default {
     }
   },
   mounted() {
-    var root = document.getElementsByTagName('html')[0];
-    root.setAttribute('class', 'rotated');
     if (this.devMode) {
       let settings = {
         gameOptions: {

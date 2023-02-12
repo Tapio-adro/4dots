@@ -18,8 +18,10 @@ gameFeatures.scaleGameElements = function () {
   width = gameFieldWidth;
   height = gameFieldHeight;
 
+  var padding = window.innerHeight > 600 ? 40 : 0
+
   if (windowWidth > windowHeight) {
-    zoomLevel = (windowHeight - 40) / height;
+    zoomLevel = (windowHeight - padding) / height;
     // wrapper.style.height = 'calc(100vh / var(--zoomLevel))';
   } else {
     zoomLevel = windowWidth / width;

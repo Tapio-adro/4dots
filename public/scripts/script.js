@@ -239,6 +239,8 @@ function checkOnStart() {
   checkStatisticsElems();
   updateStatistics();
 
+  gameOptions.betterBorders.setStyles();
+
   assignWidthAndHeight();
 
   gameRules.homeDef.createHomeAreaElements();
@@ -247,8 +249,6 @@ function checkOnStart() {
     gameRules.homeDef.resizeHomeAreaElements();
     gameRules.homeDef.resizeHomeAreaElements();
   }, 0);
-
-  gameOptions.betterBorders.setStyles();
 
   setTimeout(() => {
     document.querySelector('#window').classList.remove('hiden');
@@ -335,7 +335,7 @@ function setContainerColor(color) {
   container.style.backgroundColor = `rgba(${color}, 0.2)`;
 }
 function assignWidthAndHeight () {
-  let container = document.querySelector('.wrapper .outer_container');
+  let container = document.querySelector('.wrapper .container');
 
   // if (screen.orientation.type == 'portrait-primary') {
   //   container = document.querySelector('.wrapper #table');

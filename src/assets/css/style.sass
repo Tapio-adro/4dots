@@ -24,7 +24,7 @@ html, body
   display: flex
   align-content: stretch
   align-items: stretch
-  padding: 20px 0
+  // padding: 20px 0
 .wrapper
   zoom: var(--zoomLevel)
   display: flex
@@ -189,22 +189,6 @@ html, body
     top: 50%
     left: 50%
     transform: translate(-50%, -50%)
-
-@media screen and (orientation: portrait) 
-  html.rotated
-    transform: rotate(-90deg)
-    transform-origin: left top
-    width: 100vh
-    height: 100vw
-    overflow-x: hidden
-    position: absolute
-    top: 100%
-    left: 0
-  .gui_wrapper
-    padding: 0
-  
-  
-
 
 // some unused code for now
 
