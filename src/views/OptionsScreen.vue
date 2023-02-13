@@ -126,7 +126,7 @@
             @click="toggleDescription()"
           >
           {{ lh('description') }}
-          <span class="tooltip">{{ getToggleString('Click to toggle description', showDescription) }}</span>
+          <span class="tooltip">{{ getDescriptionToggleString() }}</span>
           </h3>
           <h4>{{ descriptionData.sectionName }}</h4>
           <div>{{ descriptionData.sectionDescription }}</div>
@@ -401,10 +401,6 @@ export default {
       }
       this.showDescription = !this.showDescription;
     },
-    getToggleString(string, value) {
-      let toggleString = value ? 'toggle off' : 'toggle on';
-      return string.replace('toggle', toggleString)
-    },
     startGame() {
       let options = this.options;
       let settings = {
@@ -426,6 +422,14 @@ export default {
       setSettings(settings);
       setAppData('shouldSetDefaultSettings', false)
       this.$router.push('/game')
+    },
+    getDescriptionToggleString() {
+      let strStart = this.l('disableDescription.start')
+      let strOn = this.l('disableDescription.on')
+      let strOff = this.l('disableDescription.off')
+      let strEnd = this.l('disableDescription.end')
+      let toggleString = !this.showDescription ? strOn : strOff
+      return strStart + toggleString + strEnd
     },
     l(key) {
       return this.$root.getLangString('options.' + key)

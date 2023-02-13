@@ -2,6 +2,10 @@
   <div 
     id="home"
   >
+    <div id="lang">
+      <img src="../assets/img/ua.png" alt="flag_ua" @click="$root.curLang = 'uk'">
+      <img src="../assets/img/us_uk.png" alt="flag_en" @click="$root.curLang = 'en'">
+    </div>
     <div class="title_wrapper">
       <div class="title_container">
         <div class="title">4Dots</div>

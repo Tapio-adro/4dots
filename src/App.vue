@@ -17,7 +17,7 @@ export default {
     return {
       devMode: 0,
       lang: lang,
-      curLang: 'en'
+      curLang: 'uk'
     }
   },
   watch: {

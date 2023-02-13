@@ -36,6 +36,10 @@
     "options.preset.homelandDefense": "Homeland defense",
 
     "options.description.header": "Description",
+    "options.disableDescription.start": "Click to toggle ",
+    "options.disableDescription.on": "on",
+    "options.disableDescription.off": "off",
+    "options.disableDescription.end": " description",
 
     "options.gridAndPlayers.desc": "Options for grid size, players amount and position. At the bottom of the section you can see the summary.",
     "options.playersPosition.desc": "Default players position is when players are positioned symmetrically. Random is for random positions.",
@@ -95,6 +99,10 @@
     "options.preset.homelandDefense": "Захист вітчизни",
 
     "options.description.header": "Опис",
+    "options.disableDescription.start": "Натисніть, щоб ",
+    "options.disableDescription.on": "увімкнути",
+    "options.disableDescription.off": "вимкнути",
+    "options.disableDescription.end": " опис",
 
     "options.gridAndPlayers.desc": "Налаштування розміру сітки, кількості гравців та їх розташування. Знизу відділу можна побачити зведення.",
     "options.playersPosition.desc": "Розташування гравців за замовчуванням — симетричне. Випадкове — для випадкового розташування.",
