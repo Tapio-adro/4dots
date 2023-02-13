@@ -30,7 +30,10 @@ export default {
       }, 100)
     },
     curLang() {
-      setAppData('lang', this.curLang)
+      setTimeout(() => {
+        setAppData('lang', this.curLang)
+      }, 100)
+      window.localStorage.setItem('lang', JSON.stringify(this.curLang))
     }
   },
   mounted() {
@@ -59,6 +62,9 @@ export default {
     setTimeout(() => {
       setAppData('lang', this.curLang)
     }, 100) 
+    if (JSON.parse(window.localStorage.getItem('lang'))) {
+      this.curLang = JSON.parse(window.localStorage.getItem('lang'))
+    }
   },
   methods: {
     handleGoBackClick() {

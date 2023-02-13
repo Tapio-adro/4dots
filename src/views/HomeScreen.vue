@@ -33,11 +33,6 @@
 
 export default {
   name: "HomeScreen",
-  data() {
-    return {
-
-    }
-  },
   methods: {
     runQuickGame() {
       setAppData('shouldSetDefaultSettings', true)
