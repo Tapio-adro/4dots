@@ -259,7 +259,6 @@ export default {
         return;
       }
       let [section, part] = this.description.split('.');
-      console.log(section);
       descr.sectionName = this.lh(section);
       descr.sectionDescription = this.ld(section);
       descr.partName = this.l(part);
@@ -442,6 +441,7 @@ export default {
     }
   }
 };
+
 
 function getPresetsData () {
   return {

@@ -31,12 +31,6 @@ export default {
     this.setQuickGame();
     document.documentElement.style.overflow = 'hidden'
     document.body.style.overflow = 'hidden'
-  },
-  beforeUnmount() {
-    document.documentElement.style.overflow = 'auto'
-    document.body.style.overflow = 'auto'
-    var winnerPanel = document.querySelector('#win_overlay')
-    winnerPanel.classList.add('hidden');
 
     removeElementsByClass('boom circle')
     removeElementsByClass('bot_pointer')
@@ -46,8 +40,15 @@ export default {
       let elements = document.getElementsByClassName(className);
       while(elements.length > 0){
         elements[0].parentNode.removeChild(elements[0]);
+        console.log("removed: " + className);
       }
     }
+  },
+  beforeUnmount() {
+    document.documentElement.style.overflow = 'auto'
+    document.body.style.overflow = 'auto'
+    var winnerPanel = document.querySelector('#win_overlay')
+    winnerPanel.classList.add('hidden');
   },  
   methods: {
     setQuickGame() {
