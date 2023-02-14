@@ -239,6 +239,8 @@ function checkOnStart() {
   checkStatisticsElems();
   updateStatistics();
 
+  gameOptions.betterBorders.setStyles();
+
   assignWidthAndHeight();
 
   gameRules.homeDef.createHomeAreaElements();
@@ -247,8 +249,6 @@ function checkOnStart() {
     gameRules.homeDef.resizeHomeAreaElements();
     gameRules.homeDef.resizeHomeAreaElements();
   }, 0);
-
-  gameOptions.betterBorders.setStyles();
 
   setTimeout(() => {
     document.querySelector('#window').classList.remove('hiden');
@@ -337,11 +337,11 @@ function setContainerColor(color) {
 function assignWidthAndHeight () {
   let container = document.querySelector('.wrapper .container');
 
-  if (screen.orientation.type == 'portrait-primary') {
-    container = document.querySelector('.wrapper #table');
-    screen.orientation.lock('landscape');
-    document.querySelector('.wrapper .container').classList.add('no_border_radius');
-  }
+  // if (screen.orientation.type == 'portrait-primary') {
+  //   container = document.querySelector('.wrapper #table');
+  //   screen.orientation.lock('landscape');
+  //   document.querySelector('.wrapper .container').classList.add('no_border_radius');
+  // }
 
   gameFieldHeight = container.offsetHeight;
   gameFieldWidth = container.offsetWidth;

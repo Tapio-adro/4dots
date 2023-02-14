@@ -8,10 +8,10 @@
             :label="l('playersPosition')"
             v-model:value="options.playersPosition"
             :options="{'default': l('playersPosition.default'), 'random': l('playersPosition.random')}"
-            @mouseover="description = 'grid.position'"
+            @mouseover="description = 'gridAndPlayers.playersPosition'"
           />
           <fieldset class="slider_holder"
-            @mouseover="description = 'grid.size'"
+            @mouseover="description = 'gridAndPlayers.gridSize'"
           >
             <legend>{{ l('gridSize') }}</legend>
             <VueSlider 
@@ -27,7 +27,7 @@
           <fieldset
             class="slider_holder" 
             :class="{'no_slider': options.maxPlayersAmount == 2}"
-            @mouseover="description = 'grid.players'"
+            @mouseover="description = 'gridAndPlayers.playersAmount'"
           >
             <legend>{{ l('playersAmount') }}</legend>
             <VueSlider 
@@ -46,7 +46,7 @@
             </div>
           </fieldset>
           <fieldset class="slider_holder"
-            @mouseover="description = 'grid.humans'"
+            @mouseover="description = 'gridAndPlayers.humansAmount'"
           >
             <legend>{{ l('humansAmount') }}</legend>
             <VueSlider 
@@ -68,7 +68,7 @@
         <section>
           <h3>{{ lh('gameOptions') }}</h3>
           <fieldset class="slider_holder"
-            @mouseover="description = 'options.gameSpeed'"
+            @mouseover="description = 'gameOptions.gameSpeed'"
           >
             <legend>{{ l('gameSpeed') }}</legend>
             <VueSlider 
@@ -80,23 +80,23 @@
           </fieldset>
           
           <Checkbox
-            @mouseover="description = 'options.betterBorders'"
+            @mouseover="description = 'gameOptions.betterBorders'"
             :label="l('betterBorders')"
             v-model:checked="options.betterBorders"
           />
           <Checkbox
-            @mouseover="description = 'options.optimization'"
+            @mouseover="description = 'gameOptions.maximalOptimization'"
             :label="l('maximalOptimization')"
             v-model:checked="options.maxOptimization"
           />
           <Checkbox
-            @mouseover="description = 'options.circles'"
+            @mouseover="description = 'gameOptions.blastCircles'"
             :label="l('blastCircles')"
             v-model:checked="options.boomCircles"
             :class="{'inactive': options.maxOptimization}"
           />
           <Checkbox
-            @mouseover="description = 'options.showPointer'"
+            @mouseover="description = 'gameOptions.pointerOnBotTurn'"
             :label="l('pointerOnBotTurn')"
             v-model:checked="options.pointerOnBotTurn"
             :class="{'inactive': options.maxOptimization}"
@@ -105,7 +105,7 @@
         <section>
           <h3>{{ lh('gameRules') }}</h3>
           <Checkbox
-            @mouseover="description = 'rules.homelandDefense'"
+            @mouseover="description = 'gameRules.homelandDefense'"
             :label="l('homelandDefense')"
             v-model:checked="options.homelandDefense"
           />
@@ -126,7 +126,7 @@
             @click="toggleDescription()"
           >
           {{ lh('description') }}
-          <span class="tooltip">{{ getToggleString('Click to toggle description', showDescription) }}</span>
+          <span class="tooltip">{{ getDescriptionToggleString() }}</span>
           </h3>
           <h4>{{ descriptionData.sectionName }}</h4>
           <div>{{ descriptionData.sectionDescription }}</div>
@@ -249,21 +249,21 @@ export default {
         return;
       }
 
-      let sectionsDescription = getDescriptionData();
       let descr = {};
       if (this.description == 'presets') {
-        descr.sectionName = sectionsDescription['presets'].name;
-        descr.sectionDescription = sectionsDescription['presets'].description;   
+        descr.sectionName = this.lh('presets');
+        descr.sectionDescription = this.ld('presets');
         descr.partName = '';
         descr.partDescription = '';     
         this.descriptionData = descr;
         return;
       }
       let [section, part] = this.description.split('.');
-      descr.sectionName = sectionsDescription[section].name;
-      descr.sectionDescription = sectionsDescription[section].description;
-      descr.partName = sectionsDescription[section].parts[part].name;
-      descr.partDescription = sectionsDescription[section].parts[part].description;
+      console.log(section);
+      descr.sectionName = this.lh(section);
+      descr.sectionDescription = this.ld(section);
+      descr.partName = this.l(part);
+      descr.partDescription = this.ld(part);
       this.descriptionData = descr;
     },
     playersPosition() {
@@ -401,10 +401,6 @@ export default {
       }
       this.showDescription = !this.showDescription;
     },
-    getToggleString(string, value) {
-      let toggleString = value ? 'toggle off' : 'toggle on';
-      return string.replace('toggle', toggleString)
-    },
     startGame() {
       let options = this.options;
       let settings = {
@@ -427,6 +423,14 @@ export default {
       setAppData('shouldSetDefaultSettings', false)
       this.$router.push('/game')
     },
+    getDescriptionToggleString() {
+      let strStart = this.l('disableDescription.start')
+      let strOn = this.l('disableDescription.on')
+      let strOff = this.l('disableDescription.off')
+      let strEnd = this.l('disableDescription.end')
+      let toggleString = !this.showDescription ? strOn : strOff
+      return strStart + toggleString + strEnd
+    },
     l(key) {
       return this.$root.getLangString('options.' + key)
     },
@@ -439,58 +443,6 @@ export default {
   }
 };
 
-function getDescriptionData () {
-   return {
-    grid: {name: 'Grid & Players', description: 'Options for grid size, players amount and position. At the bottom of the section you can see the summary.', parts: {
-      position: {
-        name: 'Players position', 
-        description: 'Default players position is when players are positioned symmetrically. Random is for random positions.'
-      },
-      size: {
-        name: 'Grid size', 
-        description: 'Sets size of the game map.'
-      },
-      players: {
-        name: 'Players amount', 
-        description: 'Players amount is sum of bots and human players amount.'
-      },
-      humans: {
-        name: 'Humans amount', 
-        description: 'Humans are real people, playing the game. Set it to 0 if you want to see bots fight, to 1 to fight vs bots, and 2 and more if you want to play with somebody on the same device.'
-      },
-    }},
-    options: {name: 'Game Options', description: 'Game options doesn\'t change game mechanics. They change how game looks or how fast it runs.', parts: {
-      gameSpeed: {
-        name: 'Game speed', 
-        description: 'Sets how long is delay between players turns. Normal is for common games. Instant is good for massive bots fights.'
-      },
-      betterBorders: {
-        name: 'Better borders', 
-        description: 'Better borders are connected.'
-      },
-      optimization: {
-        name: 'Maximal optimization', 
-        description: 'Nice for massive bots fights.'
-      },
-      circles: {
-        name: 'Blast circles', 
-        description: 'Circle when "four" is activated.'
-      },
-      showPointer: {
-        name: 'Show pointer', 
-        description: 'Shows pointer on cell bot made its turn on.'
-      }
-    }},
-    rules: {name: 'Game Rules', description: 'Game rules change game mechanics.', parts: {
-      homelandDefense: {
-        name: 'Homeland defense', 
-        description: 'By default player lose when loses all the cells. With this rule you should have at least one cell in your "Home area", otherwise you will lose. Home area is area of 9 cells, where you spawned.'
-      },
-    }},
-    presets: {name: 'Presets', description: 'Use these to set the options.'}
-  };
-
-}
 function getPresetsData () {
   return {
     default: {

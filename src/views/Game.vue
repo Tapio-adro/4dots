@@ -5,11 +5,9 @@
         <!-- <div id="messages"></div> -->
       </div>
       <div class="wrapper">
-        <div class="outer_container">
-          <div class="container">
-            <table id="table">
-            </table>
-          </div>
+        <div class="container">
+          <table id="table">
+          </table>
         </div>
       </div>
       <div class="side_bar">

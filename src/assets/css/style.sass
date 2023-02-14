@@ -12,9 +12,9 @@ html, body
   height: 100% 
 
 #app
-  height: 100vh
+  position: relative
 #window
-  height: 100vh
+  // height: 100vh
   opacity: 1
   transition: 0.3s
   &.hiden
@@ -24,6 +24,7 @@ html, body
   display: flex
   align-content: stretch
   align-items: stretch
+  // padding: 20px 0
 .wrapper
   zoom: var(--zoomLevel)
   display: flex
@@ -31,12 +32,11 @@ html, body
   justify-content: center
   // height: calc(100vh / var(--zoomLevel))
   overflow: hidden
-  padding: 20px
+  // padding: 20px
   .container
     border: 5px solid rgba(0, 0, 0, 0.479)
     border-radius: 10px
     padding: 15px
-    margin: 5px
     transition: 1s
     &.no_border_radius
       border-radius: 0
@@ -132,7 +132,7 @@ html, body
   flex: 1
   display: flex
   align-items: start
-  padding: 20px
+  // padding: 20px
 .side_bar #messages
   background-color: #333333
   padding: 5px
@@ -140,24 +140,6 @@ html, body
   border-radius: 5px
   border: 5px solid $green
   max-width: 200px
-#go_back_button
-  position: absolute
-  top: 20px
-  left: 20px
-  font-size: 3rem
-  line-height: 14px
-  height: 25px
-  cursor: pointer
-  opacity: 0.2
-  transition: 0.5s
-  border-radius: 5px
-  &:hover
-    transform: scale(1.2)
-    color: $green
-    opacity: 1
-  &.highlight
-    opacity: 1
-    color: $green
 
 #win_overlay
   position: absolute
@@ -189,7 +171,6 @@ html, body
     top: 50%
     left: 50%
     transform: translate(-50%, -50%)
-
 
 // some unused code for now
 
