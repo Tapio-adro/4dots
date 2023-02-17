@@ -32,7 +32,7 @@ export default {
     document.documentElement.style.overflow = 'hidden'
     document.body.style.overflow = 'hidden'
 
-    removeElementsByClass('boom circle')
+    removeElementsByClass('boom_circle')
     removeElementsByClass('bot_pointer')
     removeElementsByClass('homeland_area')
 
@@ -40,7 +40,6 @@ export default {
       let elements = document.getElementsByClassName(className);
       while(elements.length > 0){
         elements[0].parentNode.removeChild(elements[0]);
-        console.log("removed: " + className);
       }
     }
   },
