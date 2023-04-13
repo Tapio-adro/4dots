@@ -58,7 +58,6 @@ export default {
     setQuickGame() {
       let settings = {
         gameOptions: {
-          betterBorders: 1,
           maxOptimization: 0,
           boomCircles: 1,
           gameSpeed: 0,

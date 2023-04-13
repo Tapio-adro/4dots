@@ -17,7 +17,6 @@
     "options.gameSpeed.normal": "Normal",
     "options.gameSpeed.fast": "Fast",
     "options.gameSpeed.instant": "Instant",
-    "options.betterBorders": "Enable better borders",
     "options.maximalOptimization": "Enable maximal optimization",
     "options.blastCircles": "Enable blast circles",
     "options.pointerOnBotTurn": "Show pointer on bot turn",
@@ -49,7 +48,6 @@
 
     "options.gameOptions.desc": "Game options doesn't change game mechanics. They change how game looks or how fast it runs.",
     "options.gameSpeed.desc": "Sets how long is delay between players turns. Normal is for common games. Instant is good for massive bots fights.",
-    "options.betterBorders.desc": "Better borders are connected.",
     "options.maximalOptimization.desc": "Nice for massive bots fights.",
     "options.blastCircles.desc": "Circle which appears when \"four\" is activated.",
     "options.pointerOnBotTurn.desc": "Shows pointer on cell bot made its turn on.",
@@ -80,7 +78,6 @@
     "options.gameSpeed.normal": "Звичайна",
     "options.gameSpeed.fast": "Швидка",
     "options.gameSpeed.instant": "Миттєва",
-    "options.betterBorders": "Увімкнути кращі межі",
     "options.maximalOptimization": "Увімкнути максимальну оптимізацію",
     "options.blastCircles": "Увімкнути кола вибухів",
     "options.pointerOnBotTurn": "Показувати вказівник, коли бот робить свій хід",
@@ -112,7 +109,6 @@
 
     "options.gameOptions.desc": "Ігрові параметри не змінюють механіки гри. Вони змінюють зовнішній вигляд або швидкість гри.",
     "options.gameSpeed.desc": "Встановлює тривалість затримки між ходами гравців. Нормальна для звичайних ігор. Миттєва підходить для великих битв ботів.",
-    "options.betterBorders.desc": "Кращі межі з'єднані.",
     "options.maximalOptimization.desc": "Підходить для великих битв ботів.",
     "options.blastCircles.desc": "Коло, яке з'являється при активації \"четвірки\".",
     "options.pointerOnBotTurn.desc": "Показує вказівник на клітинці бота, який зробив хід.",

@@ -80,11 +80,6 @@
           </fieldset>
           
           <Checkbox
-            @mouseover="description = 'gameOptions.betterBorders'"
-            :label="l('betterBorders')"
-            v-model:checked="options.betterBorders"
-          />
-          <Checkbox
             @mouseover="description = 'gameOptions.maximalOptimization'"
             :label="l('maximalOptimization')"
             v-model:checked="options.maxOptimization"
@@ -165,29 +160,26 @@ export default {
     Dropdown,
     Checkbox
   },
-  data() {
-    return {
-      options: {
-        playersPosition: 'default',
-        gridSize: 9,
-        playersAmount: 4,
-        maxPlayersAmount: 8,
-        humansAmount: 1,
-        gameSpeed: '0',
-        betterBorders: true,
-        maxOptimization: false,
-        boomCircles: true,
-        homelandDefense: false,
-        pointerOnBotTurn: true
-      },
-      presets: {},
-      presetKey: 'hs',
-      gameSpeedSlider: this.getSliderData(),
-      showDescription: true,
-      description: '',
-      descriptionData: {}
-    }
-  },
+  data() { return {
+    options: {
+      playersPosition: 'default',
+      gridSize: 9,
+      playersAmount: 4,
+      maxPlayersAmount: 8,
+      humansAmount: 1,
+      gameSpeed: '0',
+      maxOptimization: false,
+      boomCircles: true,
+      homelandDefense: false,
+      pointerOnBotTurn: true
+    },
+    presets: {},
+    presetKey: 'hs',
+    gameSpeedSlider: this.getSliderData(),
+    showDescription: true,
+    description: '',
+    descriptionData: {}
+  }},
   computed: {
     playersAmount() {
       return this.options.playersAmount;
@@ -372,7 +364,6 @@ export default {
         playersAmount: 4,
         maxPlayersAmount: 8,
         humansAmount: 1,
-        betterBorders: true,
         gameSpeed: '0',
         maxOptimization: false,
         boomCircles: true,
@@ -404,7 +395,6 @@ export default {
       let options = this.options;
       let settings = {
         gameOptions: {
-          betterBorders: options.betterBorders,
           maxOptimization: options.maxOptimization,
           boomCircles: options.boomCircles,
           gameSpeed: options.gameSpeed,
@@ -447,10 +437,6 @@ function getPresetsData () {
   return {
     default: {
       pointerOnBotTurn: true
-    },
-    classic: {
-      betterBorders: false,
-      boomCircles: false
     },
     duel: {
       playersAmount: 2,

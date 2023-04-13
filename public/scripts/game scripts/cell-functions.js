@@ -2,9 +2,6 @@ function Cells(size) {
   this.size = size;
   this.grid = [];
   this.array = [];
-  this.misc = {
-    resetBorderWidth: gameOptionsValues.betterBorders ? "1px" : "2px",
-  };
 
   for (let x = 0; x < size; x++) {
     this.grid[x] = [];
@@ -91,7 +88,7 @@ Cells.prototype.setTeams = function (teams, start_dots, playersCoords) {
     cell.borderColor = `rgb(${color})`;
     cell.color = color;
     cell.dots = start_dots;
-    cell.borderWidth = gameOptionsValues.betterBorders ? "5px" : "3px";
+    cell.borderWidth = "5px"
 
     team.coreCell = cell;
     team.dotsAmount = start_dots;
@@ -249,7 +246,7 @@ Cell.prototype.reset = function (toNeutral = false) {
     this.setInner(this.dots);
     this.color = this.cells.BLACK;
   }
-  this.borderWidth = this.cells.misc.resetBorderWidth;
+  this.borderWidth = "1px";
   this.borderColor = "rgb(" + this.cells.BLACK + ")";
   this.setStyle();
 };
@@ -284,7 +281,7 @@ Cell.prototype.addDot = function (cellParent) {
   this.setInner(this.dots);
   this.setStyle();
   if (this.dots <= 3) {
-    gameOptions.betterBorders.setCellBorder(this);
+    gameFeatures.betterBorders.setCellBorder(this);
   }
 };
 

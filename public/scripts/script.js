@@ -8,6 +8,7 @@ let curSelection = { x: -1, y: -1 };
 
 var curTeam;
 let curTeamIndex = 0;
+let curTeamColor = '';
 let cycles = 0;
 let gamePaused = false;
 let gameIsRunning = true;
@@ -18,7 +19,6 @@ let doStatistics;
 // doRecording = true;
 // doStatistics = true;
 var gameOptionsValues = {
-  betterBorders: 1,
   maxOptimization: 0,
   boomCircles: 1,
   gameSpeed: 2,
@@ -30,15 +30,15 @@ var gameRulesValues = {
 let appData = {
   curWindow: '',
   shouldSetDefaultSettings: true,
-  devMode: 0,
+  devMode: 1,
   lastWindow: 'home',
   lang: ''
 };
 
-let gridSize = 5;
+let gridSize = 7;
 let playersAmount = 4;
 let playersPosition;
-let botsAmount = 3;
+let botsAmount = 4;
 
 
 let teams, cellsGrid;
@@ -50,11 +50,13 @@ function nextTeam() {
     return;
   }
   setTimeout(() => {
-    checkTeams();
+    let gameEnded = checkTeams();
+    if (gameEnded) return;
 
     curTeam = teams[curTeamIndex];
 
     curTeamIndex = curTeamIndex + 1 < teams.length ? curTeamIndex + 1 : 0
+    curTeamColor = teams[curTeamIndex].color
 
     setContainerColor(curTeam.color);
     curTeam.canDot = true;
@@ -93,7 +95,7 @@ function updateGameState() {
         checkCellsState();
       }, gameOptions.gameSpeed.activateFoursSpeed)
     } else {
-      gameOptions.betterBorders.updateBorders(cellsGrid);
+      gameFeatures.betterBorders.updateBorders(cellsGrid);
       if (curTeamIndex == teams.length) {
         nextCycle();
       }
@@ -185,6 +187,13 @@ function checkTeams() {
     //   message.style.color = team.colorRGB;
     //   messagesDiv.appendChild(message);
     // }
+    for (let key in teams) {
+      if (teams[key].color == curTeamColor) {
+        curTeamIndex = Number(key);
+        break;
+      }
+    }
+
     teams = teams.filter((team) => cellsGrid.getByColor(team.color).length > 0);
 
     gameRules.homeDef.removeHomeAreaElement(lostTeams);
@@ -198,6 +207,8 @@ function checkTeams() {
     updateStatistics();
     playRecording();
   }
+
+  return teams.length == 1
 }
 
 // global functions
@@ -230,12 +241,13 @@ function startGame() {
   ], 10)
 }
 function checkOnStart() {
+  curTeamColor = teams[0].color
   gameOptions.gameSpeed.setGameSpeed();
   gameOptions.maxOptimization.setMaxOptimization();
   checkStatisticsElems();
   updateStatistics();
 
-  gameOptions.betterBorders.setStyles();
+  gameFeatures.betterBorders.setStyles();
 
   assignWidthAndHeight();
 
@@ -344,36 +356,19 @@ function runWithInterval (functionsArray, time) {
 function highlightTeam() {
   if (!(curTeam.isPlayer && gameIsRunning)) return;
 
-  gameOptions.betterBorders.highlightTeamBorder(
+  gameFeatures.betterBorders.highlightTeamBorder(
     cellsGrid,
     curTeam,
     curTeam.highlightColor
   );
-
-  if (gameOptionsValues.betterBorders) return;
-
-  let cells = cellsGrid.getByTeam(curTeam);
-  for (let cell of cells) {
-    if (!gameOptionsValues.betterBorders) {
-      cell.style.borderWidth = "4px";
-      cell.style.borderColor = curTeam.highlightColor;
-    }
-  }
 }
 function unlightPreviousTeam() {
   if (curTeam && curTeam.isPlayer) {
-    if (gameOptionsValues.betterBorders) {
-      gameOptions.betterBorders.highlightTeamBorder(
-        cellsGrid,
-        curTeam,
-        curTeam.colorRGB
-      );
-    } else {
-      let cells = cellsGrid.getByTeam(curTeam);
-      for (let cell of cells) {
-        cell.setStyle();
-      }
-    }
+    gameFeatures.betterBorders.highlightTeamBorder(
+      cellsGrid,
+      curTeam,
+      curTeam.colorRGB
+    );
   }
 }
 
@@ -415,7 +410,7 @@ function playRecording() {
     for (let cell of array) {
       cell.setStyle();
       cell.setInner(cell.dots);
-      gameOptions.betterBorders.setCellBorder(cell);
+      gameFeatures.betterBorders.setCellBorder(cell);
     }
     if (index == recording.length) {
       clearInterval(interval);

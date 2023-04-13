@@ -40,7 +40,6 @@ export default {
     if (this.devMode) {
       let settings = {
         gameOptions: {
-          betterBorders: 0,
           maxOptimization: 0,
           boomCircles: 0,
           gameSpeed: 0
