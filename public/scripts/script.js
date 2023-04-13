@@ -7,7 +7,7 @@ let start_dots = 3;
 let curSelection = { x: -1, y: -1 };
 
 var curTeam;
-let curTeamIndex = null;
+let curTeamIndex = 0;
 let cycles = 0;
 let gamePaused = false;
 let gameIsRunning = true;
@@ -52,11 +52,9 @@ function nextTeam() {
   setTimeout(() => {
     checkTeams();
 
-    let index = getTeamIndex();
+    curTeam = teams[curTeamIndex];
 
-    curTeam = index + 1 < teams.length ? teams[index + 1] : teams[0];
-
-    curTeamIndex = index + 1;
+    curTeamIndex = curTeamIndex + 1 < teams.length ? curTeamIndex + 1 : 0
 
     setContainerColor(curTeam.color);
     curTeam.canDot = true;
@@ -91,17 +89,17 @@ function updateGameState() {
 
     let doCheck = cellsGrid.activateFours(fullCells);
 
-    doCheck
-      ? setTimeout(() => {
-          checkCellsState();
-        }, gameOptions.gameSpeed.activateFoursSpeed)
-      : (function () {
-          gameOptions.betterBorders.updateBorders(cellsGrid);
-          if (curTeamIndex == teams.length) {
-            nextCycle();
-          }
-          nextTeam();
-        })();
+    if (doCheck) {
+      setTimeout(() => {
+        checkCellsState();
+      }, gameOptions.gameSpeed.activateFoursSpeed)
+    } else {
+      gameOptions.betterBorders.updateBorders(cellsGrid);
+      if (curTeamIndex == teams.length) {
+        nextCycle();
+      }
+      nextTeam();
+    }
   }
 }
 let botTypes = {
@@ -298,7 +296,7 @@ function resetData () {
   curSelection = { x: -1, y: -1 };
 
   curTeam = {};
-  curTeamIndex = null;
+  curTeamIndex = 0;
   cycles = 0;
   gamePaused = false;
   gameIsRunning = true;
@@ -310,16 +308,6 @@ function resetData () {
 }
 
 // utility functions
-function getTeamIndex() {
-  let index;
-  for (let key in teams) {
-    if (teams[key] == curTeam) {
-      index = Number(key);
-      break;
-    }
-  }
-  return index;
-}
 function nextCycle() {
   cycles++;
   updateStatistics();

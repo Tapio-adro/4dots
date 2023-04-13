@@ -44,6 +44,11 @@ export default {
     }
   },
   beforeUnmount() {
+    let id = window.setTimeout(function() {}, 0);
+    while (id--) {
+      window.clearTimeout(id);
+    }
+
     document.documentElement.style.overflow = 'auto'
     document.body.style.overflow = 'auto'
     var winnerPanel = document.querySelector('#win_overlay')
