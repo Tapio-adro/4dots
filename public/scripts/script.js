@@ -60,7 +60,6 @@ function nextTeam() {
     curTeam.canDot = true;
 
     highlightTeam();
-    gameRules.homeDef.hideHomeAreaOnPlayerTurn(teams);
 
     tryBotTurn();
   }, gameOptions.gameSpeed.teamChangeSpeed);
@@ -130,7 +129,6 @@ function tryAddDot() {
   if (cell && cell.color == curTeam.color) {
     gameOptions.showPointerOnBotTurn(cell, curTeam);
     unlightPreviousTeam();
-    gameRules.homeDef.showHomeAreaAfterPlayerTurn(teams);
     curTeam.canDot = false;
     cell.addDot();
     return true;
