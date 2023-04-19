@@ -60,7 +60,7 @@ export default {
         gameOptions: {
           maxOptimization: 0,
           boomCircles: 1,
-          gameSpeed: 0,
+          gameSpeed: 1,
           pointerOnBotTurn: 0
         },
         gameRules: {

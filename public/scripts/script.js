@@ -21,7 +21,7 @@ let doStatistics;
 var gameOptionsValues = {
   maxOptimization: 0,
   boomCircles: 1,
-  gameSpeed: 0,
+  gameSpeed: 1,
   pointerOnBotTurn: 1
 };
 var gameRulesValues = {

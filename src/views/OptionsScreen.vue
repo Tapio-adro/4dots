@@ -167,7 +167,7 @@ export default {
       playersAmount: 4,
       maxPlayersAmount: 8,
       humansAmount: 1,
-      gameSpeed: '0',
+      gameSpeed: '1',
       maxOptimization: false,
       boomCircles: true,
       homelandDefense: true,
@@ -342,9 +342,10 @@ export default {
     },
     getSliderData() {
       return {
-        '0': this.l('gameSpeed.normal'),
-        '1': this.l('gameSpeed.fast'),
-        '2': this.l('gameSpeed.instant')
+        '0': this.l('gameSpeed.slow'),
+        '1': this.l('gameSpeed.normal'),
+        '2': this.l('gameSpeed.fast'),
+        '3': this.l('gameSpeed.instant')
       }
     },
     getPresets(getDropdownValues = false) {
@@ -364,7 +365,7 @@ export default {
         playersAmount: 4,
         maxPlayersAmount: 8,
         humansAmount: 1,
-        gameSpeed: '0',
+        gameSpeed: '1',
         maxOptimization: false,
         boomCircles: true,
         homelandDefense: true,
@@ -446,23 +447,15 @@ function getPresetsData () {
       gridSize: 11,
       playersAmount: 8,
       humansAmount: 0,
-      gameSpeed: '1'
+      gameSpeed: '2'
     },
     hugeBotFight: {
       playersPosition: 'random',
       gridSize: 15,
       playersAmount: 16,
       humansAmount: 0,
-      gameSpeed: '2',
+      gameSpeed: '3',
       maxOptimization: true
-    },
-    homelandDefense: {
-      playersPosition: 'random',
-      gridSize: 11,
-      playersAmount: 4,
-      humansAmount: 1,
-      gameSpeed: '0',
-      homelandDefense: true
     }
   }
 }

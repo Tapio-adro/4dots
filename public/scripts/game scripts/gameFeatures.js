@@ -141,6 +141,7 @@ gameFeatures.getBotTurn = function (grid, botColor, behaviorTypes) {
   for (let behavior of behaviorTypes) {
     let cell = getBehaviorResult(behavior);
     if (cell) {
+      console.log(behavior);
       return cell;
     }
   }
@@ -191,8 +192,20 @@ gameFeatures.getBotTurn = function (grid, botColor, behaviorTypes) {
           // then try 2_by_1_byn_3
           for (let botCell of botCells_2) {
             let hasNear_1 = botCell.hasRivalNeighbourWithDots(1);
-            let hasNotNear_3 = botCell.hasRivalNeighbourWithDots(3);
+            let hasNotNear_3 = botCell.hasNotRivalNeighbourWithDots(3);
             if (hasNear_1 && hasNotNear_3) {
+              return botCell;
+            }
+          }
+        }
+        let botCells_1 = botCells.filterByDots(1);
+        if (botCells_1.length) {
+          // try 1_by_1_byn_2_byn_3
+          for (let botCell of botCells_1) {
+            let hasNear_1 = botCell.hasRivalNeighbourWithDots(1);
+            let hasNotNear_2 = botCell.hasNotRivalNeighbourWithDots(2);
+            let hasNotNear_3 = botCell.hasNotRivalNeighbourWithDots(3);
+            if (hasNear_1 && hasNotNear_2 && hasNotNear_3) {
               return botCell;
             }
           }
@@ -209,7 +222,7 @@ gameFeatures.getBotTurn = function (grid, botColor, behaviorTypes) {
         return findClosestCell(botCells, rivalCells);
       case "dot_inside":
         botCells = botCells.filter(
-          (cell) => cell.dots != 2 || this.hasNotRivalNeighbourWithDots(3)
+          (cell) => cell.dots != 2 || cell.hasNotRivalNeighbourWithDots(3)
         );
 
         if (!botCells.length) return;
@@ -219,6 +232,7 @@ gameFeatures.getBotTurn = function (grid, botColor, behaviorTypes) {
           if (botCell.dots <= 2) {
             safeCellsInside.push(botCell);
           } else if (botCell.cellsAround().filter((cell) => cell.hasRivalNeighbour()) == 0) {
+            console.log('here');
             safeCellsInside.push(botCell);
           }
         }

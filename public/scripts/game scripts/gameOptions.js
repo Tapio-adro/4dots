@@ -7,9 +7,10 @@ var gameOptions = {
 
 gameOptions.gameSpeed.setGameSpeed = function () {
   let speeds = {
-    0: [500, 200],
-    1: [100, 0],
-    2: [10, 0],
+    0: [750, 750],
+    1: [500, 200],
+    2: [100, 0],
+    3: [10, 0],
   };
   gameOptions.gameSpeed.activateFoursSpeed =
     speeds[gameOptionsValues.gameSpeed][0];

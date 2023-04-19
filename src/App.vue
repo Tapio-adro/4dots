@@ -42,10 +42,10 @@ export default {
         gameOptions: {
           maxOptimization: 0,
           boomCircles: 0,
-          gameSpeed: 0
+          gameSpeed: 1
         },
         gameRules: {
-          homeDef: 0
+          homeDef: 1
         },
         playersAmount: 4,
         humansAmount: 1

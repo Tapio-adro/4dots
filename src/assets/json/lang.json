@@ -14,6 +14,7 @@
 
     "options.gameOptions.header": "Game Options",
     "options.gameSpeed": "Game speed",
+    "options.gameSpeed.slow": "Slow",
     "options.gameSpeed.normal": "Normal",
     "options.gameSpeed.fast": "Fast",
     "options.gameSpeed.instant": "Instant",
