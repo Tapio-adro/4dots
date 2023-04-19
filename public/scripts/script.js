@@ -21,11 +21,11 @@ let doStatistics;
 var gameOptionsValues = {
   maxOptimization: 0,
   boomCircles: 1,
-  gameSpeed: 2,
+  gameSpeed: 0,
   pointerOnBotTurn: 1
 };
 var gameRulesValues = {
-  homeDef: 1,
+  homeDef: 0,
 };
 let appData = {
   curWindow: '',
@@ -35,10 +35,10 @@ let appData = {
   lang: ''
 };
 
-let gridSize = 7;
-let playersAmount = 4;
+let gridSize = 5;
+let playersAmount = 2;
 let playersPosition;
-let botsAmount = 4;
+let botsAmount = 1;
 
 
 let teams, cellsGrid;
@@ -114,9 +114,9 @@ let botTypes = {
 function tryBotTurn() {
   if (!curTeam.isPlayer) {
 
-    let behaviorTypes = botTypes['default'];
+    let behaviorType = botTypes['aggressive'];
 
-    let cell = gameFeatures.getBotTurn(cellsGrid, curTeam.color, behaviorTypes);
+    let cell = gameFeatures.getBotTurn(cellsGrid, curTeam.color, behaviorType);
 
     curSelection.x = cell.x;
     curSelection.y = cell.y;
@@ -187,14 +187,15 @@ function checkTeams() {
     //   message.style.color = team.colorRGB;
     //   messagesDiv.appendChild(message);
     // }
+
+    teams = teams.filter((team) => cellsGrid.getByColor(team.color).length > 0);
+
     for (let key in teams) {
       if (teams[key].color == curTeamColor) {
         curTeamIndex = Number(key);
         break;
       }
     }
-
-    teams = teams.filter((team) => cellsGrid.getByColor(team.color).length > 0);
 
     gameRules.homeDef.removeHomeAreaElement(lostTeams);
   }

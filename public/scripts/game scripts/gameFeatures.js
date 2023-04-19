@@ -147,19 +147,14 @@ gameFeatures.getBotTurn = function (grid, botColor, behaviorTypes) {
 
   function getBehaviorResult (behavior) {
     let botCells = grid.getByColor(botColor);
-    let rivalCells = getRivalCells();
   
     switch (behavior) {
       case "3_by_3":
         botCells = botCells.filterByDots(3);
-        rivalCells = rivalCells.filterByDots(3);
   
         for (let botCell of botCells) {
-          let cellsAround = botCell.cellsAround();
-          for (let cell of cellsAround) {
-            if (rivalCells.includes(cell)) {
-              return botCell;
-            }
+          if (botCell.hasRivalNeighbourWithDots(3)) {
+            return botCell;
           }
         }
         break;
@@ -168,15 +163,15 @@ gameFeatures.getBotTurn = function (grid, botColor, behaviorTypes) {
         let botCells_3 = botCells.filterByDots(3);
         if (botCells_3.length) {
           // first try if it has rival neighbour with 2 dots
-          for (let botCell of botCells) {
-            let hasNear_2 = botCell.hasNeighbourWithDots(2);
+          for (let botCell of botCells_3) {
+            let hasNear_2 = botCell.hasRivalNeighbourWithDots(2);
             if (hasNear_2) {
               return botCell;
             }
           }
           // then try if it has rival neighbour with 1 dot
-          for (let botCell of botCells) {
-            let hasNear_1 = botCell.hasNeighbourWithDots(1);
+          for (let botCell of botCells_3) {
+            let hasNear_1 = botCell.hasRivalNeighbourWithDots(1);
             if (hasNear_1) {
               return botCell;
             }
@@ -186,17 +181,17 @@ gameFeatures.getBotTurn = function (grid, botColor, behaviorTypes) {
         let botCells_2 = botCells.filterByDots(2);
         if (botCells_2.length) {
           // first try 2_by_2_byn_3
-          for (let botCell of botCells) {
-            let hasNear_2 = botCell.hasNeighbourWithDots(2);
-            let hasNotNear_3 = botCell.hasNotNeighbourWithDots(3);
+          for (let botCell of botCells_2) {
+            let hasNear_2 = botCell.hasRivalNeighbourWithDots(2);
+            let hasNotNear_3 = botCell.hasNotRivalNeighbourWithDots(3);
             if (hasNear_2 && hasNotNear_3) {
               return botCell;
             }
           }
           // then try 2_by_1_byn_3
-          for (let botCell of botCells) {
-            let hasNear_1 = botCell.hasNeighbourWithDots(1);
-            let hasNotNear_3 = botCell.hasNeighbourWithDots(3);
+          for (let botCell of botCells_2) {
+            let hasNear_1 = botCell.hasRivalNeighbourWithDots(1);
+            let hasNotNear_3 = botCell.hasRivalNeighbourWithDots(3);
             if (hasNear_1 && hasNotNear_3) {
               return botCell;
             }
@@ -205,36 +200,51 @@ gameFeatures.getBotTurn = function (grid, botColor, behaviorTypes) {
         break;
       case "less_than_2":
         botCells = botCells.filterByDots(2, '<=');
-        if (botCells.length) {
-          let botCellsWithOneDot = botCells.filterByDots(1);
-          if (botCellsWithOneDot.length) {
-            return botCellsWithOneDot.randomElement();
-          }
+
+        if (!botCells.length) return;
+
+        let botCellsWithOneDot = botCells.filterByDots(1);
+        if (botCellsWithOneDot.length) {
+          return botCellsWithOneDot.randomElement();
         }
+
         return botCells.randomElement();
       case "any_by_free":
         botCells = excludeAtEdge(botCells);
         
-        if (!botCells.length) return false;
+        if (!botCells.length) return;
   
         let freeCellsAround = findFreeCellsAround(botCells);
   
-        let chosenBotCells = [];
+        let botCellsWith_2_FreeNeighbours = [];
+        let botCellsWith_3_or_4_FreeNeighbours = [];
 
         for (let key in freeCellsAround) {
           let cur = freeCellsAround[key];
-          if (cur >= 2) {
-            chosenBotCells.push(botCells[key]);
+          if (cur == 2) {
+            botCellsWith_2_FreeNeighbours.push(botCells[key]);
+          }
+          if (cur >= 3) {
+            botCellsWith_3_or_4_FreeNeighbours.push(botCells[key]);
           }
         }
-  
-        return chosenBotCells.randomElement();
+
+        if (botCellsWith_3_or_4_FreeNeighbours) {
+          return botCellsWith_3_or_4_FreeNeighbours.randomElement();
+        }
+        if (botCellsWith_2_FreeNeighbours) {
+          return botCellsWith_2_FreeNeighbours.randomElement();
+        }
       case "any_byn_edge":
         botCells = excludeAtEdge(botCells);
+
+        if (!botCells.length) return;
+
         return botCells.randomElement();
       case "any":
         return botCells.randomElement();
     }
+    return false;
   }
 
   function findFreeCellsAround(botCells) {

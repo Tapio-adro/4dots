@@ -286,11 +286,11 @@ Cell.prototype.addDot = function (cellParent) {
 };
 
 
-Cell.prototype.hasNeighbourWithDots = function (dots) {
+Cell.prototype.hasRivalNeighbourWithDots = function (dots) {
   return this.cellsAround().filter(cell => this.isCellRival(cell))
     .filter(cell => cell.dots == dots).length != 0;
 }
-Cell.prototype.hasNotNeighbourWithDots = function (dots) {
+Cell.prototype.hasNotRivalNeighbourWithDots = function (dots) {
   return this.cellsAround().filter(cell => this.isCellRival(cell))
     .filter(cell => cell.dots == dots).length == 0;
 }
