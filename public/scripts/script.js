@@ -53,10 +53,10 @@ function nextTeam() {
     let gameEnded = checkTeams();
     if (gameEnded) return;
 
-    curTeam = teams[curTeamIndex];
-
-    curTeamIndex = curTeamIndex + 1 < teams.length ? curTeamIndex + 1 : 0
+    curTeamIndex = curTeamIndex + 1 < teams.length && curTeamIndex != -1 ? curTeamIndex + 1 : 0
     curTeamColor = teams[curTeamIndex].color
+    
+    curTeam = teams[curTeamIndex];
 
     setContainerColor(curTeam.color);
     curTeam.canDot = true;
@@ -107,7 +107,7 @@ let botTypes = {
   'random': ['any_byn_edge', 'any'],
   'default': ['3_by_3', 'any_by_free', 'any_byn_edge', 'any'],
   'powder_keg': ['3_by_3', 'less_than_2', 'any_byn_edge', 'any'],
-  'aggressive': ['3_by_3', 'bigger_by_smaller', 'any_byn_edge', 'any'],
+  'aggressive': ['3_by_3', 'bigger_by_smaller', 'get_closer_to_enemy', 'any_byn_edge', 'any'],
   'smart': [],
 }
 // other main functions
@@ -140,13 +140,15 @@ function tryAddDot() {
   return false;
 }
 function checkCellClick() {
-  if (!curTeam.isPlayer || !curTeam.canDot) {
-    return;
-  }
-
   resetCurrentSelection();
 
   let [x, y] = idToCoords(this);
+
+  console.log(cellsGrid.cell(x, y));
+
+  if (!curTeam.isPlayer || !curTeam.canDot) {
+    return;
+  }
 
   curSelection.x = x;
   curSelection.y = y;

@@ -198,14 +198,23 @@ gameFeatures.getBotTurn = function (grid, botColor, behaviorTypes) {
           }
         }
         break;
+      case "get_closer_to_enemy":
+        for (let botCell of botCells) {
+          if (botCell.hasRivalNeighbour()) {
+            return;
+          }
+        }
+
+        let rivalCells = getRivalCells();
+        return findClosestCell(botCells, rivalCells)
       case "less_than_2":
         botCells = botCells.filterByDots(2, '<=');
 
         if (!botCells.length) return;
 
-        let botCellsWithOneDot = botCells.filterByDots(1);
-        if (botCellsWithOneDot.length) {
-          return botCellsWithOneDot.randomElement();
+        let botCellsWithTwoDots = botCells.filterByDots(2);
+        if (botCellsWithTwoDots.length) {
+          return botCellsWithTwoDots.randomElement();
         }
 
         return botCells.randomElement();
@@ -235,6 +244,7 @@ gameFeatures.getBotTurn = function (grid, botColor, behaviorTypes) {
         if (botCellsWith_2_FreeNeighbours) {
           return botCellsWith_2_FreeNeighbours.randomElement();
         }
+        break;
       case "any_byn_edge":
         botCells = excludeAtEdge(botCells);
 
@@ -247,6 +257,24 @@ gameFeatures.getBotTurn = function (grid, botColor, behaviorTypes) {
     return false;
   }
 
+  function findClosestCell(firstCellsArray, secondCellsArray) {
+    let closestDistance = Infinity;
+    let closestPoint = null;
+  
+    for (let i = 0; i < firstCellsArray.length; i++) {
+      for (let j = 0; j < secondCellsArray.length; j++) {
+        let dx = firstCellsArray[i].x - secondCellsArray[j].x;
+        let dy = firstCellsArray[i].y - secondCellsArray[j].y;
+        let distanceSquared = dx ** 2 + dy ** 2;
+        if (distanceSquared < closestDistance) {
+          closestDistance = distanceSquared;
+          closestPoint = firstCellsArray[i];
+        }
+      }
+    }
+
+    return closestPoint;
+  }
   function findFreeCellsAround(botCells) {
     let freeCellsArray = [];
     for (let key in botCells) {

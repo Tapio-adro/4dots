@@ -285,7 +285,10 @@ Cell.prototype.addDot = function (cellParent) {
   }
 };
 
-
+Cell.prototype.hasRivalNeighbour = function () {
+  return this.cellsAround()
+    .filter(cell => this.isCellRival(cell)).length != 0;
+}
 Cell.prototype.hasRivalNeighbourWithDots = function (dots) {
   return this.cellsAround().filter(cell => this.isCellRival(cell))
     .filter(cell => cell.dots == dots).length != 0;
@@ -295,5 +298,5 @@ Cell.prototype.hasNotRivalNeighbourWithDots = function (dots) {
     .filter(cell => cell.dots == dots).length == 0;
 }
 Cell.prototype.isCellRival = function (cell) {
-  return cell.color != this.cells.BLACK && cell.color != this.color;
+  return cell.color != this.cells.BLACK && cell.color != this.color && !cell.isNeutral;
 }
