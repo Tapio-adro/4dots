@@ -30,7 +30,7 @@ var gameRulesValues = {
 let appData = {
   curWindow: '',
   shouldSetDefaultSettings: true,
-  devMode: 1,
+  devMode: 0,
   lastWindow: 'home',
   lang: ''
 };

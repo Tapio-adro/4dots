@@ -170,7 +170,7 @@ export default {
       gameSpeed: '0',
       maxOptimization: false,
       boomCircles: true,
-      homelandDefense: false,
+      homelandDefense: true,
       pointerOnBotTurn: true
     },
     presets: {},
@@ -367,8 +367,8 @@ export default {
         gameSpeed: '0',
         maxOptimization: false,
         boomCircles: true,
-        homelandDefense: false,
-        pointerOnBotTurn: false
+        homelandDefense: true,
+        pointerOnBotTurn: true
       };
       this.options = defaultOptions;
       let preset = Object.entries(this.getPresets()[this.presetKey]);
@@ -435,9 +435,7 @@ export default {
 
 function getPresetsData () {
   return {
-    default: {
-      pointerOnBotTurn: true
-    },
+    default: {},
     duel: {
       playersAmount: 2,
       humansAmount: 2,
