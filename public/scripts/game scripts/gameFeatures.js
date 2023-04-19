@@ -206,7 +206,29 @@ gameFeatures.getBotTurn = function (grid, botColor, behaviorTypes) {
         }
 
         let rivalCells = getRivalCells();
-        return findClosestCell(botCells, rivalCells)
+        return findClosestCell(botCells, rivalCells);
+      case "dot_inside":
+        botCells = botCells.filter(
+          (cell) => cell.dots != 2 || this.hasNotRivalNeighbourWithDots(3)
+        );
+
+        if (!botCells.length) return;
+
+        let safeCellsInside = []
+        for (let botCell of botCells) {
+          if (botCell.dots <= 2) {
+            safeCellsInside.push(botCell);
+          } else if (botCell.cellsAround().filter((cell) => cell.hasRivalNeighbour()) == 0) {
+            safeCellsInside.push(botCell);
+          }
+        }
+
+        if (safeCellsInside.length) {
+          return safeCellsInside.randomElement();
+        } else {
+          return botCells.randomElement();
+        }
+        break;
       case "less_than_2":
         botCells = botCells.filterByDots(2, '<=');
 
