@@ -21,7 +21,7 @@
       <div class="menu_container">
         <div class="menu">
           <router-link id="quick_game" class="router_link" to="/game" @click="runQuickGame">{{ l('quickGame') }}</router-link>
-          <router-link id="set_own_game" class="router_link" to="/options">{{ l('customGame') }}</router-link>
+          <router-link id="set_own_game" class="router_link" to="/settings">{{ l('customGame') }}</router-link>
         </div>
       </div>
     </div>

@@ -136,7 +136,6 @@ gameFeatures.getBotTurn = function (grid, botColor, behaviorTypes) {
   for (let behavior of behaviorTypes) {
     let cell = getBehaviorResult(behavior);
     if (cell) {
-      console.log(behavior);
       return cell;
     }
   }

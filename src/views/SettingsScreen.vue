@@ -1,12 +1,12 @@
 <template>
-  <div id="options">
+  <div id="settings">
     <main id="container">
-      <div id="options_ui">
+      <div id="settings_ui">
         <section>
           <h3>{{ lh('gridAndPlayers') }}</h3>
           <Dropdown
             :label="l('playersPosition')"
-            v-model:value="options.playersPosition"
+            v-model:value="settings.playersPosition"
             :options="{'default': l('playersPosition.default'), 'random': l('playersPosition.random')}"
             @mouseover="description = 'gridAndPlayers.playersPosition'"
           />
@@ -19,23 +19,23 @@
               :max="21"
               :interval="2"
               :marks="true"
-              v-model="options.gridSize"
+              v-model="settings.gridSize"
               :tooltip="'none'"
               :drag-on-click="true"
             />
           </fieldset>
           <fieldset
             class="slider_holder" 
-            :class="{'no_slider': options.maxPlayersAmount == 2}"
+            :class="{'no_slider': settings.maxPlayersAmount == 2}"
             @mouseover="description = 'gridAndPlayers.playersAmount'"
           >
             <legend>{{ l('playersAmount') }}</legend>
             <VueSlider 
-              v-if="options.maxPlayersAmount != 2"
+              v-if="settings.maxPlayersAmount != 2"
               :min="2"
-              :max="options.maxPlayersAmount"
+              :max="settings.maxPlayersAmount"
               :marks="true"
-              v-model="options.playersAmount"
+              v-model="settings.playersAmount"
               :tooltip="'none'"
               :drag-on-click="true"
             />
@@ -51,9 +51,9 @@
             <legend>{{ l('humansAmount') }}</legend>
             <VueSlider 
               :min="0"
-              :max="options.playersAmount"
+              :max="settings.playersAmount"
               :marks="true"
-              v-model="options.humansAmount"
+              v-model="settings.humansAmount"
               :tooltip="'none'"
               :drag-on-click="true"
             />
@@ -61,7 +61,7 @@
           <div class="summary">
             {{ getPlayersSummary }} 
             <span class="map_size">
-              {{ options.gridSize + ' x ' + options.gridSize }}
+              {{ settings.gridSize + ' x ' + settings.gridSize }}
             </span>
           </div>
         </section>
@@ -73,7 +73,7 @@
             <legend>{{ l('gameSpeed') }}</legend>
             <VueSlider 
               :data="gameSpeedSlider"
-              v-model="options.gameSpeed"
+              v-model="settings.gameSpeed"
               :tooltip="'none'"
               :drag-on-click="true"
             />
@@ -82,19 +82,19 @@
           <Checkbox
             @mouseover="description = 'gameOptions.maximalOptimization'"
             :label="l('maximalOptimization')"
-            v-model:checked="options.maxOptimization"
+            v-model:checked="settings.maxOptimization"
           />
           <Checkbox
             @mouseover="description = 'gameOptions.blastCircles'"
             :label="l('blastCircles')"
-            v-model:checked="options.boomCircles"
-            :class="{'inactive': options.maxOptimization}"
+            v-model:checked="settings.boomCircles"
+            :class="{'inactive': settings.maxOptimization}"
           />
           <Checkbox
             @mouseover="description = 'gameOptions.pointerOnBotTurn'"
             :label="l('pointerOnBotTurn')"
-            v-model:checked="options.pointerOnBotTurn"
-            :class="{'inactive': options.maxOptimization}"
+            v-model:checked="settings.pointerOnBotTurn"
+            :class="{'inactive': settings.maxOptimization}"
           />  
         </section>
         <section>
@@ -102,11 +102,11 @@
           <Checkbox
             @mouseover="description = 'gameRules.homelandDefense'"
             :label="l('homelandDefense')"
-            v-model:checked="options.homelandDefense"
+            v-model:checked="settings.homelandDefense"
           />
         </section>
       </div>
-      <div id="options_description">
+      <div id="settings_description">
         <section @mouseover="description = 'presets'" >
           <h3>{{ lh('presets') }}</h3>
           <Dropdown
@@ -154,14 +154,14 @@ import Dropdown from '../components/Dropdown.vue'
 import Checkbox from '../components/Checkbox.vue'
 
 export default {
-  name: "OptionsScreen",
+  name: "SettingsScreen",
   components: {
     VueSlider,
     Dropdown,
     Checkbox
   },
   data() { return {
-    options: {
+    settings: {
       playersPosition: 'default',
       gridSize: 9,
       playersAmount: 4,
@@ -182,20 +182,20 @@ export default {
   }},
   computed: {
     playersAmount() {
-      return this.options.playersAmount;
+      return this.settings.playersAmount;
     },
     maxOptimization() {
-      return this.options.maxOptimization;
+      return this.settings.maxOptimization;
     },
     gridSize() {
-      return this.options.gridSize;
+      return this.settings.gridSize;
     },
     playersPosition() {
-      return this.options.playersPosition;
+      return this.settings.playersPosition;
     },
     getPlayersSummary() {
-      let humansAmount = this.options.humansAmount
-      let botsAmount = this.options.playersAmount - this.options.humansAmount
+      let humansAmount = this.settings.humansAmount
+      let botsAmount = this.settings.playersAmount - this.settings.humansAmount
       // return humansAmount + ' ' + botsAmount
       let humansWord, botsWord
       let lang = this.$root.curLang 
@@ -264,21 +264,21 @@ export default {
       this.updateMaxPlayersAmount()
     },
     playersAmount() {
-      if (!(this.options.playersAmount < this.options.humansAmount)) return;
-      this.options.humansAmount = this.options.playersAmount;
+      if (!(this.settings.playersAmount < this.settings.humansAmount)) return;
+      this.settings.humansAmount = this.settings.playersAmount;
     },
     presetKey() {
       this.setPreset()
     },
     maxOptimization() {
-      if (this.options.maxOptimization) {
-        this.options.boomCircles = false;
-        this.options.pointerOnBotTurn = false;
+      if (this.settings.maxOptimization) {
+        this.settings.boomCircles = false;
+        this.settings.pointerOnBotTurn = false;
       }
     },
-    options: {
+    settings: {
       handler() {
-        window.localStorage.setItem('options', JSON.stringify(this.options))
+        window.localStorage.setItem('settings', JSON.stringify(this.settings))
       },
       deep: true
     },
@@ -291,28 +291,28 @@ export default {
     for (let [key, value] of Object.entries(this.presets)) {
       this.presets[key].name = this.l('preset.' + key)
     }
-    let options = JSON.parse(window.localStorage.getItem('options'))
-    if (options) {
-      let optionsArray = Object.entries(options);
+    let settings = JSON.parse(window.localStorage.getItem('settings'))
+    if (settings) {
+      let settingsArray = Object.entries(settings);
       let that = this;
       let interval = setInterval(() => {
-        let optionArray = optionsArray.shift();
+        let settingArray = settingsArray.shift();
   
-        that.options[optionArray[0]] = optionArray[1];
+        that.settings[settingArray[0]] = settingArray[1];
   
-        if (optionsArray.length == 0) {
+        if (settingsArray.length == 0) {
           clearInterval(interval);
         }
       }, 0)
     }
-    if (JSON.parse(window.localStorage.getItem('showDescription'))) {
+    if (JSON.parse(window.localStorage.getItem('showDescription')) !== undefined) {
       this.showDescription = JSON.parse(window.localStorage.getItem('showDescription'))
     }
   },
   methods: {
     updateMaxPlayersAmount() {
-      let playersPosition = this.options.playersPosition;
-      let gridSize = this.options.gridSize;
+      let playersPosition = this.settings.playersPosition;
+      let gridSize = this.settings.gridSize;
       if (playersPosition == 'default') {
         let playersToSize = [
           [5, 2],
@@ -320,9 +320,9 @@ export default {
           [9, 8]
         ]
         if (gridSize > 9) {
-          this.options.maxPlayersAmount = 8
+          this.settings.maxPlayersAmount = 8
         } else {
-          this.options.maxPlayersAmount = playersToSize.find(elem => elem[0] >= this.options.gridSize)[1]
+          this.settings.maxPlayersAmount = playersToSize.find(elem => elem[0] >= this.settings.gridSize)[1]
         }
       } else {
         let playersToSize = [
@@ -332,13 +332,13 @@ export default {
         [ 11, 14 ]
         ]
         if (gridSize > 11) {
-          this.options.maxPlayersAmount = 20
+          this.settings.maxPlayersAmount = 20
         } else {
-          this.options.maxPlayersAmount = playersToSize.find(elem => elem[0] >= this.options.gridSize)[1]
+          this.settings.maxPlayersAmount = playersToSize.find(elem => elem[0] >= this.settings.gridSize)[1]
         }
       }
-      if (!(this.options.maxPlayersAmount < this.options.playersAmount)) return;
-      this.options.playersAmount = this.options.maxPlayersAmount;
+      if (!(this.settings.maxPlayersAmount < this.settings.playersAmount)) return;
+      this.settings.playersAmount = this.settings.maxPlayersAmount;
     },
     getSliderData() {
       return {
@@ -359,7 +359,7 @@ export default {
       return this.presets;
     },
     setPreset() {
-      let defaultOptions = {
+      let defaultSettings = {
         playersPosition: 'default',
         gridSize: 9,
         playersAmount: 4,
@@ -371,18 +371,18 @@ export default {
         homelandDefense: true,
         pointerOnBotTurn: true
       };
-      this.options = defaultOptions;
+      this.settings = defaultSettings;
       let preset = Object.entries(this.getPresets()[this.presetKey]);
       let that = this;
       let interval = setInterval(() => {
-        let optionArray = preset.shift();
+        let settingArray = preset.shift();
         if (preset.length == 0) {
           clearInterval(interval);
         }
-        if (optionArray[0] == 'name') {
+        if (settingArray[0] == 'name') {
           return;
         }
-        that.options[optionArray[0]] = optionArray[1];
+        that.settings[settingArray[0]] = settingArray[1];
       }, 0)
     },
     toggleDescription() {
@@ -393,23 +393,23 @@ export default {
       this.showDescription = !this.showDescription;
     },
     startGame() {
-      let options = this.options;
-      let settings = {
+      let settings = this.settings;
+      let settingsToSet = {
         gameOptions: {
-          maxOptimization: options.maxOptimization,
-          boomCircles: options.boomCircles,
-          gameSpeed: options.gameSpeed,
-          pointerOnBotTurn: options.pointerOnBotTurn
+          maxOptimization: settings.maxOptimization,
+          boomCircles: settings.boomCircles,
+          gameSpeed: settings.gameSpeed,
+          pointerOnBotTurn: settings.pointerOnBotTurn
         },
         gameRules: {
-          homeDef: options.homelandDefense
+          homeDef: settings.homelandDefense
         },
-        playersAmount: options.playersAmount,
-        gridSize: options.gridSize,
-        humansAmount: options.humansAmount,
-        playersPosition: options.playersPosition
+        playersAmount: settings.playersAmount,
+        gridSize: settings.gridSize,
+        humansAmount: settings.humansAmount,
+        playersPosition: settings.playersPosition
       };
-      setSettings(settings);
+      setSettings(settingsToSet);
       setAppData('shouldSetDefaultSettings', false)
       this.$router.push('/game')
     },
@@ -422,13 +422,13 @@ export default {
       return strStart + toggleString + strEnd
     },
     l(key) {
-      return this.$root.getLangString('options.' + key)
+      return this.$root.getLangString('settings.' + key)
     },
     lh(key) {
-      return this.$root.getLangString('options.' + key + '.header')
+      return this.$root.getLangString('settings.' + key + '.header')
     },
     ld(key) {
-      return this.$root.getLangString('options.' + key + '.desc')
+      return this.$root.getLangString('settings.' + key + '.desc')
     }
   }
 };

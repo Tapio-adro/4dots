@@ -95,13 +95,13 @@
   background-color: #f3f3f3;
 }
 
-#options {
+#settings {
   font-family: sans-serif;
   display: flex;
   align-items: center;
   flex-direction: column;
 }
-#options #container {
+#settings #container {
   margin: 50px 0;
   width: 90%;
   border: 10px solid #ddd;
@@ -110,66 +110,66 @@
   grid-template-columns: 1fr 1fr;
   background-color: #f3f3f3;
 }
-#options #options_ui {
+#settings #settings_ui {
   border-right: 5px solid #ddd;
 }
-#options #options_description {
+#settings #settings_description {
   border-left: 5px solid #ddd;
 }
-#options .sections_holder, #options #options_ui, #options #options_description {
+#settings .sections_holder, #settings #settings_ui, #settings #settings_description {
   padding: 10px;
   display: flex;
   flex-direction: column;
   row-gap: 10px;
 }
 
-#options section {
+#settings section {
   width: 100%;
   border-radius: 10px;
   background-color: #fff;
   padding: 10px;
 }
-#options section h3 {
+#settings section h3 {
   color: #04AA6D;
   text-align: center;
 }
 
-#options fieldset {
+#settings fieldset {
   margin-bottom: 10px;
   border-radius: 10px;
   border-color: rgba(102, 102, 102, 0.2);
 }
-#options fieldset.slider_holder {
+#settings fieldset.slider_holder {
   padding-bottom: 25px;
 }
-#options fieldset.no_slider {
+#settings fieldset.no_slider {
   padding-bottom: 15px;
 }
 
-#options .vue-slider {
+#settings .vue-slider {
   margin: 0 20px;
 }
-#options .vue-slider .vue-slider-process {
+#settings .vue-slider .vue-slider-process {
   background-color: #04AA6D;
 }
-#options .vue-slider .vue-slider-mark-label {
+#settings .vue-slider .vue-slider-mark-label {
   font-size: 12px;
 }
-#options .vue-slider .vue-slider-dot-handle-focus {
+#settings .vue-slider .vue-slider-dot-handle-focus {
   background-color: #fff;
   box-shadow: 0.5px 0.5px 2px 1px #04AA6D;
 }
 
-#options .slider_replacement {
+#settings .slider_replacement {
   display: grid;
   grid-template-columns: auto 30px auto;
 }
-#options .slider_replacement .half_line {
+#settings .slider_replacement .half_line {
   border-bottom: 2px solid #04AA6D;
   margin: 0 10px;
   align-self: center;
 }
-#options .slider_replacement .number {
+#settings .slider_replacement .number {
   color: rgba(0, 0, 0, 0.8);
   border: 3px solid rgba(4, 170, 109, 0.8);
   background: rgba(4, 170, 109, 0.15);
@@ -182,15 +182,15 @@
   transform-origin: center;
   transform: rotate(45deg);
 }
-#options .slider_replacement .number div {
+#settings .slider_replacement .number div {
   transform-origin: center;
   transform: rotate(-45deg);
 }
 
-#options .dropdown {
+#settings .dropdown {
   position: relative;
 }
-#options .dropdown .dropdown_button {
+#settings .dropdown .dropdown_button {
   cursor: pointer;
   font-size: 16px;
   background: none;
@@ -200,13 +200,13 @@
   transition: 0.5s;
   padding: 0 5px;
 }
-#options .dropdown .dropdown_button:hover, #options .dropdown .dropdown_button.active {
+#settings .dropdown .dropdown_button:hover, #settings .dropdown .dropdown_button.active {
   border-color: #04AA6D;
 }
-#options .dropdown .dropdown_button i {
+#settings .dropdown .dropdown_button i {
   color: #04AA6D;
 }
-#options .dropdown .content {
+#settings .dropdown .content {
   position: absolute;
   background-color: #f3f3f3;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
@@ -214,38 +214,38 @@
   z-index: 6;
   min-width: 160px;
 }
-#options .dropdown .content .dropdown_option {
+#settings .dropdown .content .dropdown_option {
   cursor: pointer;
   padding: 4px;
   padding-left: 10px;
   margin: 3px;
   border-radius: 5px;
 }
-#options .dropdown .content .dropdown_option:hover {
+#settings .dropdown .content .dropdown_option:hover {
   background-color: #e6e6e6;
 }
 
-#options .checkbox_wrapper.inactive {
+#settings .checkbox_wrapper.inactive {
   pointer-events: none;
   cursor: none;
   opacity: 0.5;
 }
 
-#options .checkbox {
+#settings .checkbox {
   display: inline-flex;
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
   cursor: pointer;
 }
-#options .checkbox span {
+#settings .checkbox span {
   padding: 3px;
   border-radius: 5px;
 }
-#options .checkbox:hover span {
+#settings .checkbox:hover span {
   background-color: #f3f3f3;
 }
-#options .checkbox input {
+#settings .checkbox input {
   cursor: pointer;
   transform: scale(1.3);
   margin-left: 5px;
@@ -253,30 +253,30 @@
   accent-color: #04AA6D;
 }
 
-#options_ui .summary {
+#settings_ui .summary {
   margin-top: 15px;
   margin-bottom: 5px;
   margin-left: 10px;
   color: #737373;
 }
-#options_ui .summary .map_size {
+#settings_ui .summary .map_size {
   border: 2px solid #999999;
   padding: 2px 4px;
   border-radius: 5px;
   margin-left: 10px;
 }
 
-#options_description #description {
+#settings_description #description {
   min-height: 220px;
 }
-#options_description #description h4 {
+#settings_description #description h4 {
   color: #404040;
   margin: 5px 0;
 }
-#options_description #description #part_descr {
+#settings_description #description #part_descr {
   display: flex;
 }
-#options_description #description #part_descr .arrow {
+#settings_description #description #part_descr .arrow {
   padding: 6px;
   padding-left: 3px;
   padding-top: 0px;
@@ -284,7 +284,7 @@
   color: #04AA6D;
 }
 
-#options_description #description h3 {
+#settings_description #description h3 {
   width: 120px;
   margin: 0 auto;
   -webkit-user-select: none;
@@ -293,10 +293,10 @@
   cursor: pointer;
   position: relative;
 }
-#options_description #description h3:hover {
+#settings_description #description h3:hover {
   text-decoration: underline;
 }
-#options_description #description h3 .tooltip {
+#settings_description #description h3 .tooltip {
   transition-delay: 0s;
   transition-property: visibility;
   visibility: hidden;
@@ -314,20 +314,20 @@
   left: 0;
   margin-left: -60px;
 }
-#options_description #description h3:hover .tooltip {
+#settings_description #description h3:hover .tooltip {
   transition-delay: 0.5s;
   transition-property: visibility;
   visibility: visible;
 }
 
-#options_description #start_button_container {
+#settings_description #start_button_container {
   margin-top: auto;
   height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-#options_description #start_button_container #start_button {
+#settings_description #start_button_container #start_button {
   cursor: pointer;
   font-size: 2rem;
   background-color: #04AA6D;
@@ -335,7 +335,7 @@
   padding: 15px;
   border-radius: 10px;
 }
-#options_description #start_button_container #start_button:hover {
+#settings_description #start_button_container #start_button:hover {
   opacity: 0.8;
 }
 

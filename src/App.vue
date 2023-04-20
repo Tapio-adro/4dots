@@ -24,7 +24,7 @@ export default {
     $route (to, from){
       setTimeout(() => {
         setAppData('curWindow', to.name);
-        if (from.name == 'options' || from.name == 'home') {
+        if (from.name == 'settings' || from.name == 'home') {
           setAppData('lastWindow', from.name)
         }
       }, 100)

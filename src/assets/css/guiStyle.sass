@@ -87,7 +87,7 @@ $textgrey: #666
 
       
 
-#options
+#settings
   font-family: sans-serif
   display: flex
   align-items: center
@@ -100,10 +100,10 @@ $textgrey: #666
     display: grid
     grid-template-columns: 1fr 1fr
     background-color: $lightgrey
-  #options_ui
+  #settings_ui
     border-right: 5px solid $grey
     @extend .sections_holder
-  #options_description
+  #settings_description
     border-left: 5px solid $grey
     @extend .sections_holder
   .sections_holder
@@ -112,7 +112,7 @@ $textgrey: #666
     flex-direction: column
     row-gap: 10px
 
-#options section
+#settings section
   width: 100%
   border-radius: 10px
   background-color: #fff
@@ -122,7 +122,7 @@ $textgrey: #666
     text-align: center
 
 
-#options fieldset
+#settings fieldset
   margin-bottom: 10px
   border-radius: 10px
   border-color: transparentize($textgrey, 0.8)
@@ -131,7 +131,7 @@ $textgrey: #666
   &.no_slider
     padding-bottom: 15px
 
-#options .vue-slider
+#settings .vue-slider
   margin: 0 20px
   .vue-slider-process
     background-color: $green
@@ -140,7 +140,7 @@ $textgrey: #666
   .vue-slider-dot-handle-focus
     background-color: #fff
     box-shadow: 0.5px 0.5px 2px 1px $green
-#options .slider_replacement
+#settings .slider_replacement
   display: grid
   grid-template-columns: auto 30px auto
   .half_line
@@ -164,7 +164,7 @@ $textgrey: #666
       transform-origin: center
       transform: rotate(-45deg)
 
-#options .dropdown
+#settings .dropdown
   position: relative
   .dropdown_button
     cursor: pointer
@@ -195,11 +195,11 @@ $textgrey: #666
       &:hover
         background-color: #e6e6e6
 
-#options .checkbox_wrapper.inactive
+#settings .checkbox_wrapper.inactive
   pointer-events: none
   cursor: none
   opacity: 0.5
-#options .checkbox
+#settings .checkbox
   display: inline-flex
   user-select: none
   cursor: pointer
@@ -216,7 +216,7 @@ $textgrey: #666
     accent-color: $green
 
 
-#options_ui .summary
+#settings_ui .summary
   margin-top: 15px
   margin-bottom: 5px
   margin-left: 10px
@@ -228,7 +228,7 @@ $textgrey: #666
     margin-left: 10px
 
 
-#options_description #description
+#settings_description #description
   min-height: 220px
   h4
     color: #404040
@@ -242,7 +242,7 @@ $textgrey: #666
       font-size: 1.4rem
       color: $green
 
-#options_description #description h3
+#settings_description #description h3
   width: 120px
   margin: 0 auto
   user-select: none
@@ -274,7 +274,7 @@ $textgrey: #666
     transition-property: visibility
     visibility: visible
 
-#options_description #start_button_container
+#settings_description #start_button_container
   margin-top: auto
   height: 100px
   display: flex

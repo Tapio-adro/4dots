@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeScreen.vue";
-import OptionsView from "../views/OptionsScreen.vue";
+import SettingsView from "../views/SettingsScreen.vue";
 import GameView from "../views/Game.vue";
 
 const routes = [
@@ -15,9 +15,9 @@ const routes = [
     component: GameView
   },
   {
-    path: "/options",
-    name: "options",
-    component: OptionsView
+    path: "/settings",
+    name: "settings",
+    component: SettingsView
   },
 ];
 
