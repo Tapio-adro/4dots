@@ -58,6 +58,12 @@
               :drag-on-click="true"
             />
           </fieldset>
+          <Dropdown
+            :label="l('botType')"
+            v-model:value="settings.botType"
+            :options="botTypes"
+            :initialString="this.l('botType.' + settings.botType)"
+          />
           <div class="summary">
             {{ getPlayersSummary }} 
             <span class="map_size">
@@ -171,14 +177,17 @@ export default {
       maxOptimization: false,
       boomCircles: true,
       homelandDefense: true,
-      pointerOnBotTurn: true
+      pointerOnBotTurn: true,
+      botType: 'default'
     },
     presets: {},
     presetKey: 'hs',
     gameSpeedSlider: this.getSliderData(),
     showDescription: true,
     description: '',
-    descriptionData: {}
+    descriptionData: {},
+    botTypesKeys: ['random', 'default', 'powder_keg', 'aggressive'],
+    botTypes: {}
   }},
   computed: {
     playersAmount() {
@@ -308,6 +317,9 @@ export default {
     if (JSON.parse(window.localStorage.getItem('showDescription')) !== undefined) {
       this.showDescription = JSON.parse(window.localStorage.getItem('showDescription'))
     }
+    for (let key of this.botTypesKeys) {
+      this.botTypes[key] = this.l('botType.' + key);
+    }
   },
   methods: {
     updateMaxPlayersAmount() {
@@ -371,7 +383,9 @@ export default {
         homelandDefense: true,
         pointerOnBotTurn: true
       };
-      this.settings = defaultSettings;
+      for (let [key, value] of Object.entries(defaultSettings)) {
+        this.settings[key] = value
+      }
       let preset = Object.entries(this.getPresets()[this.presetKey]);
       let that = this;
       let interval = setInterval(() => {
@@ -407,7 +421,8 @@ export default {
         playersAmount: settings.playersAmount,
         gridSize: settings.gridSize,
         humansAmount: settings.humansAmount,
-        playersPosition: settings.playersPosition
+        playersPosition: settings.playersPosition,
+        botType: settings.botType
       };
       setSettings(settingsToSet);
       setAppData('shouldSetDefaultSettings', false)

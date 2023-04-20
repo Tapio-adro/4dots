@@ -11,6 +11,11 @@
     "settings.gridSize": "Grid size",
     "settings.playersAmount": "Players amount",
     "settings.humansAmount": "Human players amount",
+    "settings.botType": "Bot type",
+    "settings.botType.random": "Random",
+    "settings.botType.default": "Default",
+    "settings.botType.powder_keg": "Powder keg",
+    "settings.botType.aggressive": "Aggressive",
 
     "settings.gameOptions.header": "Game Options",
     "settings.gameSpeed": "Game speed",

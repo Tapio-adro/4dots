@@ -40,6 +40,9 @@ let playersAmount = 2;
 let playersPosition;
 let botsAmount = 1;
 
+let botType = 'default'
+let botBehavior = []
+
 
 let teams, cellsGrid;
 document.addEventListener("keydown", checkKeyInput);
@@ -114,9 +117,7 @@ let botTypes = {
 function tryBotTurn() {
   if (!curTeam.isPlayer) {
 
-    let behaviorType = botTypes['aggressive'];
-
-    let cell = gameFeatures.getBotTurn(cellsGrid, curTeam.color, behaviorType);
+    let cell = gameFeatures.getBotTurn(cellsGrid, curTeam.color, botBehavior);
 
     curSelection.x = cell.x;
     curSelection.y = cell.y;
@@ -219,6 +220,8 @@ function setAppData(key, value) {
   appData[key] = value;
 }
 function setSettings(settings) {
+  botType = settings.botType
+  botBehavior = botTypes[botType];
   gridSize = settings.gridSize;
   playersAmount = settings.playersAmount;
   botsAmount = playersAmount - settings.humansAmount;

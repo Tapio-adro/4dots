@@ -61,7 +61,7 @@ export default {
           maxOptimization: 0,
           boomCircles: 1,
           gameSpeed: 1,
-          pointerOnBotTurn: 0
+          pointerOnBotTurn: 0,
         },
         gameRules: {
           homeDef: 1
@@ -69,7 +69,8 @@ export default {
         playersAmount: 4,
         gridSize: 9,
         humansAmount: 1,
-        playersPosition: 'default'
+        playersPosition: 'default',
+        botType: 'default'
       };
       setTimeout(() => {
         setTimeout(() => {
