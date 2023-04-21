@@ -59,10 +59,11 @@
             />
           </fieldset>
           <Dropdown
-            :label="l('botType')"
+            :label="l('botsType')"
             v-model:value="settings.botType"
             :options="botTypes"
-            :initialString="this.l('botType.' + settings.botType)"
+            :initialString="this.l('botsType.' + settings.botType)"
+            @mouseover="description = 'gridAndPlayers.botsTypes'"
           />
           <div class="summary">
             {{ getPlayersSummary }} 
@@ -318,7 +319,7 @@ export default {
       this.showDescription = JSON.parse(window.localStorage.getItem('showDescription'))
     }
     for (let key of this.botTypesKeys) {
-      this.botTypes[key] = this.l('botType.' + key);
+      this.botTypes[key] = this.l('botsType.' + key);
     }
   },
   methods: {

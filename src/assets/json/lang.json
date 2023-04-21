@@ -6,16 +6,16 @@
 
     "settings.gridAndPlayers.header": "Grid & Players",
     "settings.playersPosition": "Players position",
-    "settings.playersPosition.default": "Default",
+    "settings.playersPosition.default": "Symmetrical",
     "settings.playersPosition.random": "Random",
     "settings.gridSize": "Grid size",
     "settings.playersAmount": "Players amount",
     "settings.humansAmount": "Human players amount",
-    "settings.botType": "Bot type",
-    "settings.botType.random": "Random",
-    "settings.botType.default": "Default",
-    "settings.botType.powder_keg": "Powder keg",
-    "settings.botType.aggressive": "Aggressive",
+    "settings.botsType": "Bots type",
+    "settings.botsType.random": "Random",
+    "settings.botsType.default": "Default",
+    "settings.botsType.powder_keg": "Powder keg",
+    "settings.botsType.aggressive": "Aggressive",
 
     "settings.gameOptions.header": "Game Options",
     "settings.gameSpeed": "Game speed",
@@ -34,11 +34,9 @@
     "settings.choosePreset": "Choose preset",
     "settings.preset.none": "none",
     "settings.preset.default": "Default",
-    "settings.preset.classic": "Classic",
     "settings.preset.duel": "Duel",
     "settings.preset.bigBotFight": "Big bot fight",
     "settings.preset.hugeBotFight": "Huge bot fight",
-    "settings.preset.homelandDefense": "Homeland defense",
 
     "settings.description.header": "Description",
     "settings.disableDescription.start": "Click to toggle ",
@@ -51,6 +49,7 @@
     "settings.gridSize.desc": "Sets size of the game map.",
     "settings.playersAmount.desc": "Players amount is sum of bots and human players amount.",
     "settings.humansAmount.desc": "Human players are real people, playing the game. Set it to 0 if you want to see bots fight, to 1 to fight vs bots, and 2 and more if you want to play with somebody on the same device.",
+    "settings.botsTypes.desc": "There are several options to choose the bots type. Random places dots on random cells. Default is a bot which isn't that smart but can do at least something. Powder keg will try to accumulate as much as possible cells with 3 dots. Aggressive one is the smartest and can challenge your skills in this game.",
 
     "settings.gameOptions.desc": "Game options doesn't change game mechanics. They change how game looks or how fast it runs.",
     "settings.gameSpeed.desc": "Sets how long is delay between players turns. Normal is for common games. Instant is good for massive bots fights.",
@@ -60,7 +59,7 @@
 
     "settings.gameRules.desc": "Game rules change game mechanics.",
     "settings.homelandDefense": "Homeland defence",
-    "settings.homelandDefense.desc": "By default player lose when loses all the cells. With this rule you should have at least one cell in your \"Home area\", otherwise you will lose. Home area is area of 9 cells, where you spawned.",
+    "settings.homelandDefense.desc": "By default player is defeated when loses all the cells. With this rule you should have at least one cell in your \"Home area\", otherwise you will lose. Home area is area of 9 cells, where you spawned.",
 
     "settings.presets.desc": "Use these to set the settings.",
 
@@ -73,14 +72,20 @@
 
     "settings.gridAndPlayers.header": "Сітка та гравці",
     "settings.playersPosition": "Розташування гравців",
-    "settings.playersPosition.default": "За замовчуванням",
+    "settings.playersPosition.default": "Симетричне",
     "settings.playersPosition.random": "Випадкове",
     "settings.gridSize": "Розмір сітки",
     "settings.playersAmount": "Кількість гравців",
     "settings.humansAmount": "Кількість людей-гравців",
-
+    "settings.botsType": "Вид ботів",
+    "settings.botsType.random": "Випадковий",
+    "settings.botsType.default": "Стандартний",
+    "settings.botsType.powder_keg": "Порохова бочка",
+    "settings.botsType.aggressive": "Загарбницький",
+    
     "settings.gameOptions.header": "Ігрові параметри",
     "settings.gameSpeed": "Швидкість гри",
+    "settings.gameSpeed.slow": "Повільна",
     "settings.gameSpeed.normal": "Звичайна",
     "settings.gameSpeed.fast": "Швидка",
     "settings.gameSpeed.instant": "Миттєва",
@@ -95,11 +100,9 @@
     "settings.choosePreset": "Виберіть передстановлення",
     "settings.preset.none": "немає",
     "settings.preset.default": "За замовчуванням",
-    "settings.preset.classic": "Класичне",
     "settings.preset.duel": "Дуель",
     "settings.preset.bigBotFight": "Велика битва ботів",
     "settings.preset.hugeBotFight": "Величезна битва ботів",
-    "settings.preset.homelandDefense": "Захист вітчизни",
 
     "settings.description.header": "Опис",
     "settings.disableDescription.start": "Натисніть, щоб ",
@@ -108,11 +111,12 @@
     "settings.disableDescription.end": " опис",
 
     "settings.gridAndPlayers.desc": "Налаштування розміру сітки, кількості гравців та їх розташування. Знизу відділу можна побачити зведення.",
-    "settings.playersPosition.desc": "Розташування гравців за замовчуванням — симетричне. Випадкове — для випадкового розташування.",
+    "settings.playersPosition.desc": "Стандартне розташування гравців — симетричне. Випадкове — для випадкового розташування.",
     "settings.gridSize.desc": "Установлює розмір ігрової карти.",
     "settings.playersAmount.desc": "Кількість гравців - це сума ботів і кількості людей-гравців.",
     "settings.humansAmount.desc": "Люди-гравці — це реальні люди, які грають у гру. Встановіть значення на 0, якщо ви хочете влаштувати бій ботів, установіть значення на 1, щоб битися з ботами, а значення 2 і більше, якщо ви хочете грати з кимось на тому самому пристрої.",
-
+    "settings.botsTypes.desc": "Існує кілька типів ботів. Випадковий розставляє крапки на випадкових клітинках. Стандартний — це бот, який не такий розумний, але щось то він може зробити. Порохова бочка намагатиметься накопичувати якомога більше клітинок із 3-ма крапками. Агресивний — найрозумніший бот, який може випробувати ваші навички в цій грі.",
+    
     "settings.gameOptions.desc": "Ігрові параметри не змінюють механіки гри. Вони змінюють зовнішній вигляд або швидкість гри.",
     "settings.gameSpeed.desc": "Встановлює тривалість затримки між ходами гравців. Нормальна для звичайних ігор. Миттєва підходить для великих битв ботів.",
     "settings.maximalOptimization.desc": "Підходить для великих битв ботів.",
