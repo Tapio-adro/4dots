@@ -1,8 +1,10 @@
 <template>
   <div id="window" class="hiden">
     <div class="gui_wrapper">
-      <div class="side_bar">
-        <!-- <div id="messages"></div> -->
+      <div class="sidebar_wrapper">
+        <sidebar>
+          hi
+        </sidebar>
       </div>
       <div class="wrapper">
         <div class="container">
@@ -10,7 +12,7 @@
           </table>
         </div>
       </div>
-      <div class="side_bar">
+      <div class="sidebar_wrapper">
       </div>
     </div>
     <div id="win_overlay" class="hidden"></div>
@@ -19,9 +21,13 @@
 
 
 <script>
+import Sidebar from '../components/Sidebar.vue';
 
 export default {
   name: "Game",
+  components: {
+    Sidebar
+  },
   data() {
     return {
 
