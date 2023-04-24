@@ -2,6 +2,7 @@ $green: #04AA6D
 $lightgrey: #f3f3f3
 $grey: #ddd
 $textgrey: #666
+$midgrey: #ccc
 
 .box_shadow
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19)
@@ -298,16 +299,14 @@ $textgrey: #666
   line-height: 14px
   height: 25px
   cursor: pointer
-  opacity: 0.2
+  color: $midgrey
   transition: 0.5s
   border-radius: 5px
   z-index: 1
   &:hover
     transform: scale(1.2)
     color: $green
-    opacity: 1
   &.highlight
-    opacity: 1
     color: $green
 
 // ingame gui
@@ -358,20 +357,45 @@ $textgrey: #666
   justify-content: center
   align-items: center
   font-size: 25px
-  background-color: $green
+  background-color: $midgrey
   border-end-end-radius: 8px
   border-start-end-radius: 8px
   color: white
   cursor: pointer
+  transition: 0.5s
+  &.open
+    background-color: $green
   &:hover
     opacity: 0.8
+    background-color: $green
   i
     transform: scaleX(1)
     transition: 0.5s
   i.open
     transform: scaleX(-1) translateX(1px)
 
-
+.collapsible_section
+  width: 100%
+  background-color: $lightgrey
+  border-radius: 10px
+  padding: 5px
+  .container
+    border-radius: 5px
+    background-color: #fff
+  .header
+    background-color: $green
+    color: #fff
+    border-radius: 5px
+    font-size: 20px
+    line-height: 20px
+    text-align: center
+    padding: 7px
+  .content
+    // padding: 5px
+    padding-bottom: 5px
+    margin: 7px
+    margin-bottom: 0
+    border-top: 2px solid $lightgrey
 
 
 #win_overlay

@@ -3,7 +3,7 @@
     <div id="sidebar_left" :class="{open: isSidebarOpen}">
       <slot></slot>
     </div>
-    <div id="sidebar_left_button" @click="toggleSidebar">
+    <div id="sidebar_left_button" @click="toggleSidebar" :class="{open: isSidebarOpen}">
       <i class="fa fa-arrow-right" :class="{open: isSidebarOpen}" aria-hidden="true"></i>
     </div>
   </div>

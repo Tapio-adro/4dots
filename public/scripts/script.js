@@ -1,5 +1,5 @@
 let table = document.querySelector("#table");
-let container = document.querySelector(".container");
+let container = document.querySelector(".wrapper .container");
 
 var gameFieldWidth, gameFieldHeight;
 
@@ -267,7 +267,7 @@ function checkOnStart() {
 }
 function setupGridAndTeams() {
   table = document.querySelector("#table");
-  container = document.querySelector(".container");
+  container = document.querySelector(".wrapper .container");
 
   let teamColors = gameFeatures.getTeamColors(playersAmount).shuffleArray();
   teams = createTeams(playersAmount, teamColors);

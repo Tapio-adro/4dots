@@ -6,6 +6,16 @@
           v-model:is-sidebar-open="isSidebarOpen"
         >
           hi
+          <font-awesome-icon icon="fa-robot"/>
+          <collapsible-section>
+            hi
+            <br>
+            hi
+            <br>
+            hi
+            <br>
+            hi
+          </collapsible-section>
         </sidebar>
       </div>
       <div class="wrapper">
@@ -24,12 +34,20 @@
 
 <script>
 import Sidebar from '../components/Sidebar.vue';
+import CollapsibleSection from '../components/CollapsibleSection.vue';
 import Memorization from '../mixins/Memorization'
+
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faRobot } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+library.add(faRobot)
 
 export default {
   name: "Game",
   components: {
-    Sidebar
+    Sidebar,
+    CollapsibleSection,
+    FontAwesomeIcon
   },
   mixins: [
     Memorization
@@ -74,7 +92,7 @@ export default {
           maxOptimization: 0,
           boomCircles: 1,
           gameSpeed: 1,
-          pointerOnBotTurn: 0,
+          pointerOnBotTurn: 1,
         },
         gameRules: {
           homeDef: 1

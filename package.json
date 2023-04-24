@@ -9,6 +9,11 @@
   "dependencies": {
     "@formkit/auto-animate": "^1.0.0-beta.5",
     "@formkit/vue": "^1.0.0-beta.11",
+    "@fortawesome/fontawesome-svg-core": "^6.4.0",
+    "@fortawesome/free-brands-svg-icons": "^6.4.0",
+    "@fortawesome/free-regular-svg-icons": "^6.4.0",
+    "@fortawesome/free-solid-svg-icons": "^6.4.0",
+    "@fortawesome/vue-fontawesome": "^3.0.3",
     "click-outside-vue3": "^4.0.1",
     "fs-js": "^1.0.6",
     "vue": "^3.2.13",

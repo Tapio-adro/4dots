@@ -254,7 +254,7 @@ gameFeatures.getBotTurn = function (grid, botColor, behaviorTypes) {
         if (!botCells.length) return;
   
         let freeCellsAround = findFreeCellsAround(botCells);
-  
+        
         let botCellsWith_2_FreeNeighbours = [];
         let botCellsWith_3_or_4_FreeNeighbours = [];
 

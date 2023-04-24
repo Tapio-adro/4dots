@@ -347,7 +347,7 @@
   line-height: 14px;
   height: 25px;
   cursor: pointer;
-  opacity: 0.2;
+  color: #ccc;
   transition: 0.5s;
   border-radius: 5px;
   z-index: 1;
@@ -355,10 +355,8 @@
 #go_back_button:hover {
   transform: scale(1.2);
   color: #04AA6D;
-  opacity: 1;
 }
 #go_back_button.highlight {
-  opacity: 1;
   color: #04AA6D;
 }
 
@@ -416,14 +414,19 @@
   justify-content: center;
   align-items: center;
   font-size: 25px;
-  background-color: #04AA6D;
+  background-color: #ccc;
   border-end-end-radius: 8px;
   border-start-end-radius: 8px;
   color: white;
   cursor: pointer;
+  transition: 0.5s;
+}
+#sidebar_left_container #sidebar_left_button.open {
+  background-color: #04AA6D;
 }
 #sidebar_left_container #sidebar_left_button:hover {
   opacity: 0.8;
+  background-color: #04AA6D;
 }
 #sidebar_left_container #sidebar_left_button i {
   transform: scaleX(1);
@@ -431,6 +434,32 @@
 }
 #sidebar_left_container #sidebar_left_button i.open {
   transform: scaleX(-1) translateX(1px);
+}
+
+.collapsible_section {
+  width: 100%;
+  background-color: #f3f3f3;
+  border-radius: 10px;
+  padding: 5px;
+}
+.collapsible_section .container {
+  border-radius: 5px;
+  background-color: #fff;
+}
+.collapsible_section .header {
+  background-color: #04AA6D;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 20px;
+  line-height: 20px;
+  text-align: center;
+  padding: 7px;
+}
+.collapsible_section .content {
+  padding-bottom: 5px;
+  margin: 7px;
+  margin-bottom: 0;
+  border-top: 2px solid #f3f3f3;
 }
 
 #win_overlay {
