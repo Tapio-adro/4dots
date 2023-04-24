@@ -159,6 +159,7 @@
 import VueSlider from 'vue-slider-component'
 import Dropdown from '../components/Dropdown.vue'
 import Checkbox from '../components/Checkbox.vue'
+import Memorization from '../mixins/Memorization'
 
 export default {
   name: "SettingsScreen",
@@ -167,6 +168,9 @@ export default {
     Dropdown,
     Checkbox
   },
+  mixins: [
+    Memorization
+  ],
   data() { return {
     settings: {
       playersPosition: 'default',
@@ -188,7 +192,8 @@ export default {
     description: '',
     descriptionData: {},
     botTypesKeys: ['random', 'default', 'powder_keg', 'aggressive'],
-    botTypes: {}
+    botTypes: {},
+    dataToMemorize: ['showDescription']
   }},
   computed: {
     playersAmount() {
@@ -291,9 +296,6 @@ export default {
         window.localStorage.setItem('settings', JSON.stringify(this.settings))
       },
       deep: true
-    },
-    showDescription() {
-      window.localStorage.setItem('showDescription', JSON.stringify(this.showDescription))
     }
   },
   mounted() {
@@ -314,9 +316,6 @@ export default {
           clearInterval(interval);
         }
       }, 0)
-    }
-    if (JSON.parse(window.localStorage.getItem('showDescription')) !== undefined) {
-      this.showDescription = JSON.parse(window.localStorage.getItem('showDescription'))
     }
     for (let key of this.botTypesKeys) {
       this.botTypes[key] = this.l('botsType.' + key);
