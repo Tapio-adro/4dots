@@ -1,26 +1,24 @@
 <template>
-  <div id="sidebar_left_container" :class="{open: sidebarOpen}">
-    <div id="sidebar_left" :class="{open: sidebarOpen}">
+  <div id="sidebar_left_container" :class="{open: isSidebarOpen}">
+    <div id="sidebar_left" :class="{open: isSidebarOpen}">
       <slot></slot>
     </div>
     <div id="sidebar_left_button" @click="toggleSidebar">
-      <i class="fa fa-arrow-right" :class="{open: sidebarOpen}" aria-hidden="true"></i>
+      <i class="fa fa-arrow-right" :class="{open: isSidebarOpen}" aria-hidden="true"></i>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      sidebarOpen: true
-    };
+  props: {
+    isSidebarOpen: false
   },
+  emits: ['update:isSidebarOpen'],
   methods: {
     toggleSidebar() {
-      console.log('click');
-      this.sidebarOpen = !this.sidebarOpen;
-    },
+      this.$emit('update:isSidebarOpen', !this.isSidebarOpen);
+    }
   }
 };
 </script>

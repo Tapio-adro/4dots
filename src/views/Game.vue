@@ -2,7 +2,9 @@
   <div id="window" class="hiden">
     <div class="gui_wrapper">
       <div class="sidebar_wrapper">
-        <sidebar>
+        <sidebar
+          v-model:is-sidebar-open="isSidebarOpen"
+        >
           hi
         </sidebar>
       </div>
@@ -22,15 +24,20 @@
 
 <script>
 import Sidebar from '../components/Sidebar.vue';
+import Memorization from '../mixins/Memorization'
 
 export default {
   name: "Game",
   components: {
     Sidebar
   },
+  mixins: [
+    Memorization
+  ],
   data() {
     return {
-
+      isSidebarOpen: false,
+      dataToMemorize: ['isSidebarOpen']
     }
   },
   mounted() {
