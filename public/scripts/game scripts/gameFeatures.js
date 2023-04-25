@@ -3,7 +3,8 @@ var gameFeatures = {
   scaleGameElements: function() {},
   getTeamColors: function() {},
   getBotTurn: function() {},
-  showWinner: function() {}
+  showWinner: function() {},
+  getPlayersData: function() {}
 }
 
 gameFeatures.betterBorders.updateBorders = function (grid) {
@@ -347,6 +348,27 @@ gameFeatures.showWinner = function (team, lang) {
   elem.style.color = team.colorRGB
   elem.innerHTML = string
   elem.classList.remove('hidden');
+}
+
+gameFeatures.getPlayersData = function (grid, players) {
+  let playersData = [];
+  console.log(players.length);
+  for (let team of players) {
+    let cells = cellsGrid.getByTeam(team);
+
+    let dotsAmount = 0;
+
+    for (let cell of cells) {
+      dotsAmount += cell.dots;
+    }
+    
+    playersData.push({
+      color: team.colorRGB,
+      cellsAmount: cells.length,
+      dotsAmount
+    });
+  }
+  return playersData;
 }
 
 // template

@@ -35,6 +35,12 @@ let appData = {
   lang: ''
 };
 
+// function passPlayersData(data) {
+//   const event = new CustomEvent("passPlayersData", { detail: {info: data} });
+//   dispatchEvent(event);
+// };
+
+
 let gridSize = 5;
 let playersAmount = 2;
 let playersPosition;
@@ -99,7 +105,7 @@ function updateGameState() {
       }, gameOptions.gameSpeed.activateFoursSpeed)
     } else {
       gameFeatures.betterBorders.updateBorders(cellsGrid);
-      if (curTeamIndex == teams.length) {
+      if (curTeamIndex + 1 == teams.length) {
         nextCycle();
       }
       nextTeam();
@@ -244,6 +250,7 @@ function startGame() {
   ], 10)
 }
 function checkOnStart() {
+  console.log(cellsGrid);
   curTeamColor = teams[0].color
   gameOptions.gameSpeed.setGameSpeed();
   gameOptions.maxOptimization.setMaxOptimization();
@@ -323,6 +330,7 @@ function resetData () {
 // utility functions
 function nextCycle() {
   cycles++;
+  console.log(gameFeatures.getPlayersData(cellsGrid, teams));
   updateStatistics();
   updateRecording();
 }

@@ -7,7 +7,9 @@
         >
           hi
           <font-awesome-icon icon="fa-robot"/>
-          <collapsible-section>
+          <collapsible-section
+            header="Players"
+          >
             hi
             <br>
             hi
@@ -73,6 +75,8 @@ export default {
         elements[0].parentNode.removeChild(elements[0]);
       }
     }
+
+    // window.addEventListener('passPlayersData', this.displayData) 
   },
   beforeUnmount() {
     let id = window.setTimeout(function() {}, 0);
@@ -86,6 +90,9 @@ export default {
     winnerPanel.classList.add('hidden');
   },  
   methods: {
+    // displayData(e) {
+    //   console.log(e.detail.message+" "+e.detail.info)
+    // },
     setQuickGame() {
       let settings = {
         gameOptions: {

@@ -1,7 +1,7 @@
 <template>
   <div class="collapsible_section">
     <div class="container">
-      <div class="header">Players</div>
+      <div class="header">{{ header }}</div>
       <div class="content">
         <slot>
 
@@ -13,6 +13,9 @@
 
 <script>
 export default {
+  props: {
+    header: String
+  },
   methods: {
 
   }
