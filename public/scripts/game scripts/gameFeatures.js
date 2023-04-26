@@ -1,7 +1,7 @@
 var gameFeatures = {
   betterBorders: {},
   scaleGameElements: function() {},
-  getTeamColors: function() {},
+  getPlayerColors: function() {},
   getBotTurn: function() {},
   showWinner: function() {},
   getPlayersData: function() {}
@@ -38,8 +38,8 @@ gameFeatures.betterBorders.setCellBorder = function (cell) {
       ? "rgba(0, 0, 0, 0)"
       : cell.borderColor;
 };
-gameFeatures.betterBorders.highlightTeamBorder = function (grid, team, color) {
-  for (let cell of grid.getByTeam(team)) {
+gameFeatures.betterBorders.highlightPlayerBorder = function (grid, player, color) {
+  for (let cell of grid.getByPlayer(player)) {
     let x = cell.x;
     let y = cell.y;
     let style = cell.elem.style;
@@ -92,7 +92,7 @@ gameFeatures.scaleGameElements = function () {
   root.style.setProperty('--zoomLevel', zoomLevel);
 }
 
-gameFeatures.getTeamColors = function (amount) {
+gameFeatures.getPlayerColors = function (amount) {
   let colorFraction = 345 / amount;
   let huesArray = [];
   for (let i = 0; i < amount; i++) {
@@ -338,14 +338,14 @@ gameFeatures.getBotTurn = function (grid, botColor, behaviorTypes) {
   }
 };
 
-gameFeatures.showWinner = function (team, lang) {
+gameFeatures.showWinner = function (player, lang) {
   let subject = lang == 'uk' ? 
-    (team.isPlayer ? 'Гравець' : 'Бот')
-    : (team.isPlayer ? 'Player' : 'Bot')
+    (player.isPlayer ? 'Гравець' : 'Бот')
+    : (player.isPlayer ? 'Player' : 'Bot')
   let winWord = lang == 'uk' ? 'виграв' : 'won'
   let string =  subject + ' ' + winWord + '!';
   var elem = document.querySelector('#win_overlay')
-  elem.style.color = team.colorRGB
+  elem.style.color = player.colorRGB
   elem.innerHTML = string
   elem.classList.remove('hidden');
 }
@@ -353,8 +353,8 @@ gameFeatures.showWinner = function (team, lang) {
 gameFeatures.getPlayersData = function (grid, players) {
   let playersData = [];
   console.log(players.length);
-  for (let team of players) {
-    let cells = cellsGrid.getByTeam(team);
+  for (let player of players) {
+    let cells = grid.getByPlayer(player);
 
     let dotsAmount = 0;
 
@@ -363,7 +363,7 @@ gameFeatures.getPlayersData = function (grid, players) {
     }
     
     playersData.push({
-      color: team.colorRGB,
+      color: player.colorRGB,
       cellsAmount: cells.length,
       dotsAmount
     });

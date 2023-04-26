@@ -14,7 +14,7 @@ gameOptions.gameSpeed.setGameSpeed = function () {
   };
   gameOptions.gameSpeed.activateFoursSpeed =
     speeds[gameOptionsValues.gameSpeed][0];
-  gameOptions.gameSpeed.teamChangeSpeed =
+  gameOptions.gameSpeed.playerChangeSpeed =
     speeds[gameOptionsValues.gameSpeed][1];
 };
 
@@ -53,8 +53,8 @@ gameOptions.maxOptimization.setMaxOptimization = function () {
   root.style.setProperty("--cellTransition", "none");
 };
 
-gameOptions.showPointerOnBotTurn = function (cell, team) {
-  if (!gameOptionsValues.pointerOnBotTurn || team.isPlayer) return;
+gameOptions.showPointerOnBotTurn = function (cell, player) {
+  if (!gameOptionsValues.pointerOnBotTurn || player.isPlayer) return;
 
   let elemRect = cell.elem.getBoundingClientRect(),
     y = elemRect.y,

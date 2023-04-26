@@ -6,9 +6,9 @@ var gameFieldWidth, gameFieldHeight;
 let start_dots = 3;
 let curSelection = { x: -1, y: -1 };
 
-var curTeam;
-let curTeamIndex = 0;
-let curTeamColor = '';
+var curPlayer;
+let curPlayerIndex = 0;
+let curPlayerColor = '';
 let cycles = 0;
 let gamePaused = false;
 let gameIsRunning = true;
@@ -35,11 +35,10 @@ let appData = {
   lang: ''
 };
 
-// function passPlayersData(data) {
-//   const event = new CustomEvent("passPlayersData", { detail: {info: data} });
-//   dispatchEvent(event);
-// };
-
+function passPlayersData(data) {
+  const event = new CustomEvent("passPlayersData", { detail: data });
+  dispatchEvent(event);
+};
 
 let gridSize = 5;
 let playersAmount = 2;
@@ -50,30 +49,30 @@ let botType = 'default'
 let botBehavior = []
 
 
-let teams, cellsGrid;
+let players, cellsGrid;
 document.addEventListener("keydown", checkKeyInput);
 
 // engine functions
-function nextTeam() {
+function nextPlayer() {
   if (gamePaused) {
     return;
   }
   setTimeout(() => {
-    let gameEnded = checkTeams();
+    let gameEnded = checkPlayers();
     if (gameEnded) return;
 
-    curTeamIndex = curTeamIndex + 1 < teams.length && curTeamIndex != -1 ? curTeamIndex + 1 : 0
-    curTeamColor = teams[curTeamIndex].color
+    curPlayerIndex = curPlayerIndex + 1 < players.length && curPlayerIndex != -1 ? curPlayerIndex + 1 : 0
+    curPlayerColor = players[curPlayerIndex].color
     
-    curTeam = teams[curTeamIndex];
+    curPlayer = players[curPlayerIndex];
 
-    setContainerColor(curTeam.color);
-    curTeam.canDot = true;
+    setContainerColor(curPlayer.color);
+    curPlayer.canDot = true;
 
-    highlightTeam();
+    highlightPlayer();
 
     tryBotTurn();
-  }, gameOptions.gameSpeed.teamChangeSpeed);
+  }, gameOptions.gameSpeed.playerChangeSpeed);
 }
 function updateGameState() {
   if (!gameIsRunning) {
@@ -105,10 +104,10 @@ function updateGameState() {
       }, gameOptions.gameSpeed.activateFoursSpeed)
     } else {
       gameFeatures.betterBorders.updateBorders(cellsGrid);
-      if (curTeamIndex + 1 == teams.length) {
+      if (curPlayerIndex + 1 == players.length) {
         nextCycle();
       }
-      nextTeam();
+      nextPlayer();
     }
   }
 }
@@ -121,9 +120,9 @@ let botTypes = {
 }
 // other main functions
 function tryBotTurn() {
-  if (!curTeam.isPlayer) {
+  if (!curPlayer.isPlayer) {
 
-    let cell = gameFeatures.getBotTurn(cellsGrid, curTeam.color, botBehavior);
+    let cell = gameFeatures.getBotTurn(cellsGrid, curPlayer.color, botBehavior);
 
     curSelection.x = cell.x;
     curSelection.y = cell.y;
@@ -135,10 +134,10 @@ function tryBotTurn() {
 function tryAddDot() {
   [x, y] = [curSelection.x, curSelection.y];
   let cell = cellsGrid.cell(x, y);
-  if (cell && cell.color == curTeam.color) {
-    gameOptions.showPointerOnBotTurn(cell, curTeam);
-    unlightPreviousTeam();
-    curTeam.canDot = false;
+  if (cell && cell.color == curPlayer.color) {
+    gameOptions.showPointerOnBotTurn(cell, curPlayer);
+    unlightPreviousPlayer();
+    curPlayer.canDot = false;
     cell.addDot();
     return true;
   }
@@ -147,7 +146,7 @@ function tryAddDot() {
   return false;
 }
 function checkCellClick() {
-  if (!curTeam.isPlayer || !curTeam.canDot) {
+  if (!curPlayer.isPlayer || !curPlayer.canDot) {
     return;
   }
 
@@ -160,7 +159,7 @@ function checkCellClick() {
 
   updateGameState();
   // cellsGrid.cell(x, y).reset();
-  // checkIsTeams();
+  // checkIsPlayers();
 
   function idToCoords(elem) {
     let id = elem.id;
@@ -172,7 +171,7 @@ function checkKeyInput(e) {
   if (e.code == "Space") {
     if (gamePaused) {
       gamePaused = false;
-      nextTeam();
+      nextPlayer();
     } else {
       gamePaused = true;
     }
@@ -180,42 +179,42 @@ function checkKeyInput(e) {
   }
 }
 
-function checkTeams() {
-  gameRules.homeDef.checkHomelands(teams);
+function checkPlayers() {
+  gameRules.homeDef.checkHomelands(players);
 
-  let lostTeams = teams.filter(
-    (team) => cellsGrid.getByColor(team.color).length == 0
+  let lostPlayers = players.filter(
+    (player) => cellsGrid.getByColor(player.color).length == 0
   );
-  if (lostTeams.length != 0) {
-    // for (let team of lostTeams) {
+  if (lostPlayers.length != 0) {
+    // for (let player of lostPlayers) {
     //   let messagesDiv = document.querySelector('#messages');
     //   let message = document.createElement('div');
-    //   message.innerHTML = team.isPlayer ? 'Player lost' : 'Enemy lost';
-    //   message.style.color = team.colorRGB;
+    //   message.innerHTML = player.isPlayer ? 'Player lost' : 'Enemy lost';
+    //   message.style.color = player.colorRGB;
     //   messagesDiv.appendChild(message);
     // }
 
-    teams = teams.filter((team) => cellsGrid.getByColor(team.color).length > 0);
+    players = players.filter((player) => cellsGrid.getByColor(player.color).length > 0);
 
-    for (let key in teams) {
-      if (teams[key].color == curTeamColor) {
-        curTeamIndex = Number(key);
+    for (let key in players) {
+      if (players[key].color == curPlayerColor) {
+        curPlayerIndex = Number(key);
         break;
       }
     }
 
-    gameRules.homeDef.removeHomeAreaElement(lostTeams);
+    gameRules.homeDef.removeHomeAreaElement(lostPlayers);
   }
 
-  if (teams.length == 1) {
+  if (players.length == 1) {
     gameIsRunning = false;
-    gameFeatures.showWinner(curTeam, appData.lang)
+    gameFeatures.showWinner(curPlayer, appData.lang)
     document.querySelector('#go_back_button').classList.add('highlight');
     updateStatistics();
     playRecording();
   }
 
-  return teams.length == 1
+  return players.length == 1
 }
 
 // global functions
@@ -244,14 +243,13 @@ function setSettings(settings) {
 function startGame() {
   runWithInterval([
     resetData,
-    setupGridAndTeams,
+    setupGridAndPlayers,
     checkOnStart,
-    nextTeam
+    nextPlayer
   ], 10)
 }
 function checkOnStart() {
-  console.log(cellsGrid);
-  curTeamColor = teams[0].color
+  curPlayerColor = players[0].color
   gameOptions.gameSpeed.setGameSpeed();
   gameOptions.maxOptimization.setMaxOptimization();
   checkStatisticsElems();
@@ -272,42 +270,42 @@ function checkOnStart() {
     document.querySelector('#window').classList.remove('hiden');
   }, 300)
 }
-function setupGridAndTeams() {
+function setupGridAndPlayers() {
   table = document.querySelector("#table");
   container = document.querySelector(".wrapper .container");
 
-  let teamColors = gameFeatures.getTeamColors(playersAmount).shuffleArray();
-  teams = createTeams(playersAmount, teamColors);
+  let playerColors = gameFeatures.getPlayerColors(playersAmount).shuffleArray();
+  players = createPlayers(playersAmount, playerColors);
   createBots(botsAmount);
-  teams = teams.shuffleArray();
+  players = players.shuffleArray();
 
   cellsGrid = new Cells(gridSize);
-  cellsGrid.setTeams(
-    teams,
+  cellsGrid.setPlayers(
+    players,
     start_dots,
     playersPosition
   );
   cellsGrid.createField(table);
 }
-function createTeams(amount, colors) {
-  let teams = [];
+function createPlayers(amount, colors) {
+  let players = [];
   for (let i = 0; i < amount; i++) {
     let [color, invertedColor] = colors.shift();
-    teams.push({
+    players.push({
       color: color,
       isPlayer: true,
       canDot: true,
       highlightColor: `rgb(${invertedColor})`,
     });
-    teams[i].colorRGB = `rgb(${teams[i].color})`;
+    players[i].colorRGB = `rgb(${players[i].color})`;
   }
-  return teams;
+  return players;
 }
 function createBots(botsAmount) {
   let bots = [];
   for (let i = 0; i < botsAmount; i++) {
-    bots[i] = teams[i].color;
-    teams[i].isPlayer = false;
+    bots[i] = players[i].color;
+    players[i].isPlayer = false;
   }
   return bots;
 }
@@ -315,13 +313,13 @@ function createBots(botsAmount) {
 function resetData () {
   curSelection = { x: -1, y: -1 };
 
-  curTeam = {};
-  curTeamIndex = 0;
+  curPlayer = {};
+  curPlayerIndex = 0;
   cycles = 0;
   gamePaused = false;
   gameIsRunning = true;
 
-  teams = [];
+  players = [];
   cellsGrid = {};
 
   document.querySelector('#table').innerHTML = '';
@@ -330,7 +328,7 @@ function resetData () {
 // utility functions
 function nextCycle() {
   cycles++;
-  console.log(gameFeatures.getPlayersData(cellsGrid, teams));
+  passPlayersData(gameFeatures.getPlayersData(cellsGrid, players));
   updateStatistics();
   updateRecording();
 }
@@ -364,21 +362,21 @@ function runWithInterval (functionsArray, time) {
     }
   }, time)
 }
-function highlightTeam() {
-  if (!(curTeam.isPlayer && gameIsRunning)) return;
+function highlightPlayer() {
+  if (!(curPlayer.isPlayer && gameIsRunning)) return;
 
-  gameFeatures.betterBorders.highlightTeamBorder(
+  gameFeatures.betterBorders.highlightPlayerBorder(
     cellsGrid,
-    curTeam,
-    curTeam.highlightColor
+    curPlayer,
+    curPlayer.highlightColor
   );
 }
-function unlightPreviousTeam() {
-  if (curTeam && curTeam.isPlayer) {
-    gameFeatures.betterBorders.highlightTeamBorder(
+function unlightPreviousPlayer() {
+  if (curPlayer && curPlayer.isPlayer) {
+    gameFeatures.betterBorders.highlightPlayerBorder(
       cellsGrid,
-      curTeam,
-      curTeam.colorRGB
+      curPlayer,
+      curPlayer.colorRGB
     );
   }
 }
@@ -442,7 +440,7 @@ function checkStatisticsElems() {
 function updateStatistics() {
   if (!doStatistics) return;
 
-  let dotsArray = countTeamsDots();
+  let dotsArray = countPlayersDots();
   let dots_stats = document.querySelector("#dots_stats");
   let stDots_cols = document.querySelectorAll("#dots_stats .st_col");
   let stDots_cols_amount = stDots_cols.length;
@@ -478,17 +476,17 @@ function updateStatistics() {
     }
   }, waitTime);
 }
-function countTeamsDots() {
+function countPlayersDots() {
   let dotsArray = [];
-  for (let team of teams) {
-    team.dotsAmount = 0;
-    let cells = cellsGrid.getByTeam(team);
+  for (let player of players) {
+    player.dotsAmount = 0;
+    let cells = cellsGrid.getByPlayer(player);
     for (let cell of cells) {
-      team.dotsAmount += cell.dots;
+      player.dotsAmount += cell.dots;
     }
     dotsArray.push({
-      color: team.color,
-      amount: team.dotsAmount,
+      color: player.color,
+      amount: player.dotsAmount,
     });
   }
   return dotsArray;

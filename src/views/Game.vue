@@ -57,7 +57,8 @@ export default {
   data() {
     return {
       isSidebarOpen: false,
-      dataToMemorize: ['isSidebarOpen']
+      dataToMemorize: ['isSidebarOpen'],
+      playersData: []
     }
   },
   mounted() {
@@ -76,7 +77,7 @@ export default {
       }
     }
 
-    // window.addEventListener('passPlayersData', this.displayData) 
+    window.addEventListener('passPlayersData', this.updatePlayersData) 
   },
   beforeUnmount() {
     let id = window.setTimeout(function() {}, 0);
@@ -90,9 +91,10 @@ export default {
     winnerPanel.classList.add('hidden');
   },  
   methods: {
-    // displayData(e) {
-    //   console.log(e.detail.message+" "+e.detail.info)
-    // },
+    updatePlayersData(event) {
+      this.playersData = event.detail;
+      console.log(this.playersData);
+    },
     setQuickGame() {
       let settings = {
         gameOptions: {

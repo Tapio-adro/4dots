@@ -26,7 +26,7 @@ function Cells(size) {
 
   let middle = (this.size - 1) / 2;
   let edge = this.size - 2;
-  Cells.prototype.TEAM__START_COORDS = [
+  Cells.prototype.PLAYER__START_COORDS = [
     { x: 1, y: 1 },
     { x: edge, y: edge },
     { x: edge, y: 1 },
@@ -74,13 +74,13 @@ function Cells(size) {
   Cells.prototype.DOTS_ELEM = '<div class="dot"></div>';
 }
 
-Cells.prototype.setTeams = function (teams, start_dots, playersCoords) {
-  this.teams = teams;
+Cells.prototype.setPlayers = function (players, start_dots, playersCoords) {
+  this.players = players;
   playersCoords = (
-    playersCoords ? playersCoords.shuffleArray() : JSON.parse(JSON.stringify(Cells.prototype.TEAM__START_COORDS))
+    playersCoords ? playersCoords.shuffleArray() : JSON.parse(JSON.stringify(Cells.prototype.PLAYER__START_COORDS))
   );
-  teams.forEach((team) => {
-    color = team.color;
+  players.forEach((player) => {
+    color = player.color;
     let coords = playersCoords.shift();
     let [x, y] = [coords.x, coords.y];
     let cell = this.cell(x, y);
@@ -90,9 +90,9 @@ Cells.prototype.setTeams = function (teams, start_dots, playersCoords) {
     cell.dots = start_dots;
     cell.borderWidth = "5px"
 
-    team.coreCell = cell;
-    team.dotsAmount = start_dots;
-    team.cellsAmount = 1;
+    player.coreCell = cell;
+    player.dotsAmount = start_dots;
+    player.cellsAmount = 1;
   });
 };
 Cells.prototype.createField = function (field) {
@@ -155,9 +155,9 @@ Cells.prototype.getByColor = function (color, cellsToCheck = false) {
   });
   return cells;
 };
-Cells.prototype.getByTeam = function (team) {
+Cells.prototype.getByPlayer = function (player) {
   let cells = this.array.filter((cell) => {
-    return cell.color == team.color;
+    return cell.color == player.color;
   });
   return cells;
 };
