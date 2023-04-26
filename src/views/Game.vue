@@ -1,5 +1,5 @@
 <template>
-  <div id="window" class="hiden">
+  <div id="window" class="hidden">
     <div class="gui_wrapper">
       <div class="sidebar_wrapper">
         <sidebar
@@ -16,7 +16,7 @@
                     <font-awesome-icon icon="fa-solid fa-palette" />
                   </th>
                   <th>
-                    <font-awesome-icon icon="fa-solid fa-brain" />
+                    <font-awesome-icon icon="fa-solid fa-brain" v-tooltip="'Bot or human'"/>
                   </th>
                   <th>
                     <font-awesome-icon icon="fa-regular fa-square" />
@@ -51,6 +51,7 @@
               </table>
             </div>
           </collapsible-section>
+          
         </sidebar>
       </div>
       <div class="wrapper">
@@ -70,6 +71,7 @@
 <script>
 import Sidebar from '../components/Sidebar.vue';
 import CollapsibleSection from '../components/CollapsibleSection.vue';
+
 import Memorization from '../mixins/Memorization'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -80,9 +82,8 @@ import { faSquare } from '@fortawesome/free-regular-svg-icons'
 import { faBrain } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 library.add(faRobot, faUser, faPalette, faSquare, faBrain)
-library.add()
-library.add()
-library.add()
+
+import 'floating-vue/dist/style.css'
 
 export default {
   name: "Game",
@@ -98,11 +99,7 @@ export default {
     return {
       isSidebarOpen: false,
       dataToMemorize: ['isSidebarOpen'],
-      playersData: [
-        {color: 'red', cellsAmount: 2, dotsAmount: 5, isHuman: false},
-        {color: 'blue', cellsAmount: 5, dotsAmount: 11, isHuman: true},
-        {color: 'yellow', cellsAmount: 10, dotsAmount: 32, isHuman: false}
-      ]
+      playersData: []
     }
   },
   mounted() {
@@ -136,7 +133,7 @@ export default {
   },  
   methods: {
     updatePlayersData(event) {
-      // this.playersData = event.detail;
+      this.playersData = event.detail;
     },
     setQuickGame() {
       let settings = {

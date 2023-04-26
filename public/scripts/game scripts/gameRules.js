@@ -28,7 +28,7 @@ gameRules.homeDef.removeHomeAreaElement = function (lostPlayers) {
 
     for (let player of lostPlayers) {
         let homeElem = player.homelandArea;
-        homeElem.classList.add('hiden');
+        homeElem.classList.add('hidden');
         setTimeout(() => {
             homeElem.remove();
         }, 1000)

@@ -104,6 +104,9 @@ function updateGameState() {
       }, gameOptions.gameSpeed.activateFoursSpeed)
     } else {
       gameFeatures.betterBorders.updateBorders(cellsGrid);
+      if (curPlayerIndex == 0) {
+        passPlayersData(gameFeatures.getPlayersData(cellsGrid, players));
+      }
       if (curPlayerIndex + 1 == players.length) {
         nextCycle();
       }
@@ -207,6 +210,7 @@ function checkPlayers() {
   }
 
   if (players.length == 1) {
+    passPlayersData(gameFeatures.getPlayersData(cellsGrid, players));
     gameIsRunning = false;
     gameFeatures.showWinner(curPlayer, appData.lang)
     document.querySelector('#go_back_button').classList.add('highlight');
@@ -267,8 +271,10 @@ function checkOnStart() {
   }, 0);
 
   setTimeout(() => {
-    document.querySelector('#window').classList.remove('hiden');
+    document.querySelector('#window').classList.remove('hidden');
   }, 300)
+
+  passPlayersData(gameFeatures.getPlayersData(cellsGrid, players));
 }
 function setupGridAndPlayers() {
   table = document.querySelector("#table");
@@ -328,7 +334,6 @@ function resetData () {
 // utility functions
 function nextCycle() {
   cycles++;
-  passPlayersData(gameFeatures.getPlayersData(cellsGrid, players));
   updateStatistics();
   updateRecording();
 }
@@ -448,7 +453,7 @@ function updateStatistics() {
 
   if (stDots_cols_amount != dotsArray.length) {
     waitTime = 301;
-    dots_stats.classList.add("hiden");
+    dots_stats.classList.add("hidden");
     setTimeout(() => {
       dots_stats.innerHTML = "";
       for (let dotsData of dotsArray) {
@@ -458,7 +463,7 @@ function updateStatistics() {
         dots_stats.appendChild(col);
       }
       stDots_cols = document.querySelectorAll("#dots_stats .st_col");
-      dots_stats.classList.remove("hiden");
+      dots_stats.classList.remove("hidden");
     }, waitTime - 1);
   }
 

@@ -15,7 +15,7 @@ html, body {
   opacity: 1;
   transition: 0.3s;
 }
-#window.hiden {
+#window.hidden {
   opacity: 0;
 }
 
@@ -109,7 +109,7 @@ html, body {
   transform: translate(0, 0);
   opacity: 1;
 }
-.bot_pointer.hiden {
+.bot_pointer.hidden {
   opacity: 0;
   transform: translate(0, 20px);
 }
@@ -128,7 +128,7 @@ html, body {
   zoom: var(--zoomLevel);
   z-index: 1;
 }
-.homeland_area.hiden {
+.homeland_area.hidden {
   opacity: 0;
   transition: 1s;
 }

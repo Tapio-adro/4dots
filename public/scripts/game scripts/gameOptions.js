@@ -62,7 +62,7 @@ gameOptions.showPointerOnBotTurn = function (cell, player) {
 
   let pointer = document.createElement("div");
   pointer.classList.add("bot_pointer");
-  pointer.classList.add("hiden");
+  pointer.classList.add("hidden");
   pointer.innerHTML = '<i class="fa fa-hand-pointer-o" aria-hidden="true"></i>';
 
   pointer.style.top = y + 20 + "px";
@@ -72,7 +72,7 @@ gameOptions.showPointerOnBotTurn = function (cell, player) {
   container.appendChild(pointer);
 
   setTimeout(() => {
-    pointer.classList.remove("hiden");
+    pointer.classList.remove("hidden");
   }, 50);
 
   setTimeout(() => {
