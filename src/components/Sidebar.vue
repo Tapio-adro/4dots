@@ -11,6 +11,7 @@
 
 <script>
 export default {
+  name: "Sidebar",
   props: {
     isSidebarOpen: false
   },

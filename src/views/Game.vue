@@ -8,50 +8,11 @@
           <collapsible-section
             header="Players"
           >
-            <div id="players_data_container">
-              <table id="players_data">
-                <tr>
-                  <th>№</th>
-                  <th>
-                    <font-awesome-icon icon="fa-solid fa-palette" />
-                  </th>
-                  <th>
-                    <font-awesome-icon icon="fa-solid fa-brain" v-tooltip="'Bot or human'"/>
-                  </th>
-                  <th>
-                    <font-awesome-icon icon="fa-regular fa-square" />
-                  </th>
-                  <th class="small_squares">
-                    <div class="small_squares_container">
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                    </div>
-                  </th>
-                </tr>
-                <tr
-                  v-for="(player, index) in playersData" :key="index"
-                  :class="{
-                    player_tr: true, 
-                    no_border: index + 1 == playersData.length, 
-                    background: index % 2 != 0}"
-                >
-                  <td> {{ index + 1 }} </td>
-                  <td class="color_square_container"> 
-                    <div class="color_square" :style="{backgroundColor: player.color}"></div> 
-                  </td>
-                  <td class="icon_td"> 
-                    <font-awesome-icon icon="fa-user"  size="xs" v-if="player.isHuman"/>
-                    <font-awesome-icon icon="fa-robot" size="xs" v-else/>
-                  </td>
-                  <td> {{ player.cellsAmount }} </td>
-                  <td> {{ player.dotsAmount }} </td>
-                </tr>
-              </table>
-            </div>
+            <PlayersList
+              :playersData="playersData"
+            />
           </collapsible-section>
-          
+
         </sidebar>
       </div>
       <div class="wrapper">
@@ -71,26 +32,17 @@
 <script>
 import Sidebar from '../components/Sidebar.vue';
 import CollapsibleSection from '../components/CollapsibleSection.vue';
+import PlayersList from '../components/PlayersList.vue';
 
 import Memorization from '../mixins/Memorization'
 
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faRobot } from '@fortawesome/free-solid-svg-icons'
-import { faUser } from '@fortawesome/free-solid-svg-icons'
-import { faPalette } from '@fortawesome/free-solid-svg-icons'
-import { faSquare } from '@fortawesome/free-regular-svg-icons'
-import { faBrain } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-library.add(faRobot, faUser, faPalette, faSquare, faBrain)
-
-import 'floating-vue/dist/style.css'
 
 export default {
   name: "Game",
   components: {
     Sidebar,
     CollapsibleSection,
-    FontAwesomeIcon
+    PlayersList
   },
   mixins: [
     Memorization

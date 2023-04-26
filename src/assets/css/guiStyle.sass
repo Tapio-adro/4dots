@@ -5,6 +5,8 @@ $grey: #ddd
 $textgrey: #666
 $midgrey: #ccc
 
+*
+  outline: 0
 .box_shadow
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19)
 
@@ -383,21 +385,39 @@ $midgrey: #ccc
   .container
     border-radius: 5px
     background-color: #fff
+  .content.hidden
   .header
+    user-select: none
     background-color: $green
     color: #fff
     border-radius: 5px
     font-size: 20px
-    line-height: 20px
-    text-align: center
     padding: 7px
     padding-bottom: 10px
+    display: flex
+    justify-content: center
+    align-items: center
+    height: 43px
+    cursor: pointer
+    transition: 0.5s
+    &:hover
+      opacity: 0.8
+  .header_arrow_container
+    padding-left: 5px
+    padding-bottom: 2px
+  .header_arrow
+    font-size: 12px
+    transition: 0.5s
+  .header_arrow.rotate
+    transform: scaleY(-1)
+
 
 #players_data_container
   display: flex
   justify-content: center
   padding-bottom: 5px
 #players_data
+  user-select: none
   font-size: 15px
   text-align: center
   width: 100%
@@ -406,6 +426,7 @@ $midgrey: #ccc
   padding-top: 1px
   tr
     border-bottom: 1px solid $grey
+    height: 30px
   tr.player_tr:hover
     background-color: $lightgreen
     cursor: default
@@ -418,7 +439,10 @@ $midgrey: #ccc
     padding: 5px
   td
     padding: 5px
-  .icon_td
+    text-align: center
+  td.number_td
+    min-width: 35px
+  td.icon_td
     color: $textgrey
   .color_square_container
     height: 30px
@@ -450,9 +474,11 @@ $midgrey: #ccc
 
 
 .v-popper--theme-tooltip .v-popper__inner
-  background: rgba(0, 0, 0, .6)
+  background-color: transparentize($textgrey, 0.2)
   backdrop-filter: blur(2px)
   font-family: sans-serif
+.v-popper--theme-tooltip .v-popper__arrow-outer
+  border-color: transparentize($textgrey, 0.2)
 
 
 #win_overlay
