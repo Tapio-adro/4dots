@@ -1,4 +1,5 @@
 $green: #04AA6D
+$lightgreen: #06e090
 $lightgrey: #f3f3f3
 $grey: #ddd
 $textgrey: #666
@@ -391,12 +392,60 @@ $midgrey: #ccc
     text-align: center
     padding: 7px
   .content
-    // padding: 5px
-    padding-bottom: 5px
-    margin: 7px
-    margin-bottom: 0
-    border-top: 2px solid $lightgrey
 
+#players_data_container
+  display: flex
+  justify-content: center
+#players_data
+  font-size: 15px
+  text-align: center
+  width: 100%
+  max-width: 200px
+  border-collapse: collapse
+  padding-top: 1px
+  tr
+    border-bottom: 1px solid $grey
+  tr.player_tr:hover
+    background-color: $lightgreen
+    cursor: default
+  tr.no_border
+    border: none
+  tr.background
+    background-color: transparentize($lightgrey, 0.5)
+  th
+    color: $green
+    padding: 5px
+  td
+    padding: 5px
+  .icon_td
+    color: $textgrey
+  .color_square_container
+    height: 30px
+    display: flex
+    justify-content: center
+    align-items: center
+  .color_square
+    width: 18px
+    height: 18px
+    border-radius: 5px
+  .small_squares
+    height: 30px
+    display: flex
+    justify-content: center
+    align-items: center
+  .small_squares_container
+    width: 14px
+    height: 14px
+    margin-top: 1px
+    display: grid
+    grid-template-columns: 1fr 1fr
+    justify-items: center
+    align-items: center
+    div
+      width: 4px
+      height: 4px
+      background-color: $green
+      border-radius: 50%
 
 #win_overlay
   position: absolute

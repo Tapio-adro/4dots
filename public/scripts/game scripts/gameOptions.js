@@ -54,7 +54,7 @@ gameOptions.maxOptimization.setMaxOptimization = function () {
 };
 
 gameOptions.showPointerOnBotTurn = function (cell, player) {
-  if (!gameOptionsValues.pointerOnBotTurn || player.isPlayer) return;
+  if (!gameOptionsValues.pointerOnBotTurn || player.isHuman) return;
 
   let elemRect = cell.elem.getBoundingClientRect(),
     y = elemRect.y,

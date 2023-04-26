@@ -50,7 +50,7 @@ gameRules.homeDef.checkHomelands = function (players) {
     }
 }
 gameRules.homeDef.hideHomeAreaOnPlayerTurn = function (players) {
-    if (!gameRulesValues.homeDef || !curPlayer.isPlayer) return;
+    if (!gameRulesValues.homeDef || !curPlayer.isHuman) return;
 
     for (let player of players) {
         let areaElem = player.homelandArea;
@@ -58,7 +58,7 @@ gameRules.homeDef.hideHomeAreaOnPlayerTurn = function (players) {
     }
 }
 gameRules.homeDef.showHomeAreaAfterPlayerTurn = function (players) {
-    if (!gameRulesValues.homeDef || !curPlayer.isPlayer) return;
+    if (!gameRulesValues.homeDef || !curPlayer.isHuman) return;
 
     for (let player of players) {
         let areaElem = player.homelandArea;

@@ -455,11 +455,73 @@
   text-align: center;
   padding: 7px;
 }
-.collapsible_section .content {
-  padding-bottom: 5px;
-  margin: 7px;
-  margin-bottom: 0;
-  border-top: 2px solid #f3f3f3;
+#players_data_container {
+  display: flex;
+  justify-content: center;
+}
+
+#players_data {
+  font-size: 15px;
+  text-align: center;
+  width: 100%;
+  max-width: 200px;
+  border-collapse: collapse;
+  padding-top: 1px;
+}
+#players_data tr {
+  border-bottom: 1px solid #ddd;
+}
+#players_data tr.player_tr:hover {
+  background-color: #06e090;
+  cursor: default;
+}
+#players_data tr.no_border {
+  border: none;
+}
+#players_data tr.background {
+  background-color: rgba(243, 243, 243, 0.5);
+}
+#players_data th {
+  color: #04AA6D;
+  padding: 5px;
+}
+#players_data td {
+  padding: 5px;
+}
+#players_data .icon_td {
+  color: #666;
+}
+#players_data .color_square_container {
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#players_data .color_square {
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+}
+#players_data .small_squares {
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#players_data .small_squares_container {
+  width: 14px;
+  height: 14px;
+  margin-top: 1px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+}
+#players_data .small_squares_container div {
+  width: 4px;
+  height: 4px;
+  background-color: #04AA6D;
+  border-radius: 50%;
 }
 
 #win_overlay {

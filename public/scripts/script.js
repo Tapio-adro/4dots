@@ -120,7 +120,7 @@ let botTypes = {
 }
 // other main functions
 function tryBotTurn() {
-  if (!curPlayer.isPlayer) {
+  if (!curPlayer.isHuman) {
 
     let cell = gameFeatures.getBotTurn(cellsGrid, curPlayer.color, botBehavior);
 
@@ -146,7 +146,7 @@ function tryAddDot() {
   return false;
 }
 function checkCellClick() {
-  if (!curPlayer.isPlayer || !curPlayer.canDot) {
+  if (!curPlayer.isHuman || !curPlayer.canDot) {
     return;
   }
 
@@ -159,7 +159,7 @@ function checkCellClick() {
 
   updateGameState();
   // cellsGrid.cell(x, y).reset();
-  // checkIsPlayers();
+  // checkIsHumans();
 
   function idToCoords(elem) {
     let id = elem.id;
@@ -189,7 +189,7 @@ function checkPlayers() {
     // for (let player of lostPlayers) {
     //   let messagesDiv = document.querySelector('#messages');
     //   let message = document.createElement('div');
-    //   message.innerHTML = player.isPlayer ? 'Player lost' : 'Enemy lost';
+    //   message.innerHTML = player.isHuman ? 'Player lost' : 'Enemy lost';
     //   message.style.color = player.colorRGB;
     //   messagesDiv.appendChild(message);
     // }
@@ -293,7 +293,7 @@ function createPlayers(amount, colors) {
     let [color, invertedColor] = colors.shift();
     players.push({
       color: color,
-      isPlayer: true,
+      isHuman: true,
       canDot: true,
       highlightColor: `rgb(${invertedColor})`,
     });
@@ -305,7 +305,7 @@ function createBots(botsAmount) {
   let bots = [];
   for (let i = 0; i < botsAmount; i++) {
     bots[i] = players[i].color;
-    players[i].isPlayer = false;
+    players[i].isHuman = false;
   }
   return bots;
 }
@@ -363,7 +363,7 @@ function runWithInterval (functionsArray, time) {
   }, time)
 }
 function highlightPlayer() {
-  if (!(curPlayer.isPlayer && gameIsRunning)) return;
+  if (!(curPlayer.isHuman && gameIsRunning)) return;
 
   gameFeatures.betterBorders.highlightPlayerBorder(
     cellsGrid,
@@ -372,7 +372,7 @@ function highlightPlayer() {
   );
 }
 function unlightPreviousPlayer() {
-  if (curPlayer && curPlayer.isPlayer) {
+  if (curPlayer && curPlayer.isHuman) {
     gameFeatures.betterBorders.highlightPlayerBorder(
       cellsGrid,
       curPlayer,

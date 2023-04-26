@@ -227,7 +227,6 @@ gameFeatures.getBotTurn = function (grid, botColor, behaviorTypes) {
           if (botCell.dots <= 2) {
             safeCellsInside.push(botCell);
           } else if (botCell.cellsAround().filter((cell) => cell.hasRivalNeighbour()) == 0) {
-            console.log('here');
             safeCellsInside.push(botCell);
           }
         }
@@ -340,8 +339,8 @@ gameFeatures.getBotTurn = function (grid, botColor, behaviorTypes) {
 
 gameFeatures.showWinner = function (player, lang) {
   let subject = lang == 'uk' ? 
-    (player.isPlayer ? 'Гравець' : 'Бот')
-    : (player.isPlayer ? 'Player' : 'Bot')
+    (player.isHuman ? 'Гравець' : 'Бот')
+    : (player.isHuman ? 'Player' : 'Bot')
   let winWord = lang == 'uk' ? 'виграв' : 'won'
   let string =  subject + ' ' + winWord + '!';
   var elem = document.querySelector('#win_overlay')
@@ -352,7 +351,6 @@ gameFeatures.showWinner = function (player, lang) {
 
 gameFeatures.getPlayersData = function (grid, players) {
   let playersData = [];
-  console.log(players.length);
   for (let player of players) {
     let cells = grid.getByPlayer(player);
 
