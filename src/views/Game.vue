@@ -1,31 +1,31 @@
 <template>
-  <div id="window" class="hidden">
-    <div class="gui_wrapper">
-      <div class="sidebar_wrapper">
-        <sidebar
-          v-model:is-sidebar-open="isSidebarOpen"
+<div id="window" class="hidden">
+  <div class="gui_wrapper">
+    <div class="sidebar_wrapper">
+      <sidebar
+        v-model:is-sidebar-open="isSidebarOpen"
+      >
+        <collapsible-section
+          header="Players"
         >
-          <collapsible-section
-            header="Players"
-          >
-            <PlayersList
-              :playersData="playersData"
-            />
-          </collapsible-section>
+          <PlayersList
+            :playersData="playersData"
+          />
+        </collapsible-section>
 
-        </sidebar>
-      </div>
-      <div class="wrapper">
-        <div class="container">
-          <table id="table">
-          </table>
-        </div>
-      </div>
-      <div class="sidebar_wrapper">
+      </sidebar>
+    </div>
+    <div class="wrapper">
+      <div class="container">
+        <table id="table">
+        </table>
       </div>
     </div>
-    <div id="win_overlay" class="hidden"></div>
+    <div class="sidebar_wrapper">
+    </div>
   </div>
+  <div id="win_overlay" class="hidden"></div>
+</div>
 </template>
 
 
@@ -79,26 +79,8 @@ export default {
       this.playersData = event.detail;
     },
     setQuickGame() {
-      let settings = {
-        gameOptions: {
-          maxOptimization: 0,
-          boomCircles: 1,
-          gameSpeed: 1,
-          pointerOnBotTurn: 1,
-        },
-        gameRules: {
-          homeDef: 1
-        },
-        gridAndPlayers: {
-          playersAmount: 4,
-          gridSize: 9,
-          humansAmount: 1,
-          playersPosition: 'default',
-          botType: 'default'
-        }
-      };
+      let settings = getDefaultSettings()
       setTimeout(() => {
-        console.log(localStorage);
         if (JSON.parse(window.localStorage.getItem('lastWindow')) == 'settings') {
           setSettings(JSON.parse(window.localStorage.getItem('settingsToSet')))
         } else {
@@ -121,6 +103,27 @@ export default {
     }
   }
 };
+
+function getDefaultSettings() {
+  return {
+    gameOptions: {
+      maxOptimization: 0,
+      boomCircles: 1,
+      gameSpeed: 1,
+      pointerOnBotTurn: 1,
+    },
+    gameRules: {
+      homeDef: 1
+    },
+    gridAndPlayers: {
+      playersAmount: 4,
+      gridSize: 9,
+      humansAmount: 1,
+      playersPosition: 'default',
+      botType: 'default'
+    }
+  };
+}
 </script>
 
 <style scoped>

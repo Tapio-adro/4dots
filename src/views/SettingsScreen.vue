@@ -63,7 +63,7 @@
             v-model:value="settings.botType"
             :options="botTypes"
             :initialString="this.l('botsType.' + settings.botType)"
-            @mouseover="description = 'gridAndPlayers.botsTypes'"
+            @mouseover="description = 'gridAndPlayers.botsType'"
           />
           <div class="summary">
             {{ getPlayersSummary }} 

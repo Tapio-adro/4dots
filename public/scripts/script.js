@@ -35,6 +35,11 @@ var gridAndPlayersValues = {
   botsAmount: 2,
   botType: 'default'
 }
+var statisticsValues = {
+  gatherPlayersData: true,
+  gatherLinechartsData: true,
+  gatherHeatmapData: true
+}
 let appData = {
   lang: ''
 };
@@ -95,7 +100,7 @@ function updateGameState() {
     } else {
       gameFeatures.betterBorders.updateBorders(cellsGrid);
       if (curPlayerIndex == 0) {
-        passPlayersData(gameFeatures.getPlayersData(cellsGrid, players));
+        passPlayersData(statistics.getPlayersData(cellsGrid, players));
       }
       if (curPlayerIndex + 1 == players.length) {
         nextCycle();
@@ -193,7 +198,7 @@ function checkPlayers() {
   }
 
   if (players.length == 1) {
-    passPlayersData(gameFeatures.getPlayersData(cellsGrid, players));
+    passPlayersData(statistics.getPlayersData(cellsGrid, players));
     gameIsRunning = false;
     gameFeatures.showWinner(curPlayer, appData.lang)
     document.querySelector('#go_back_button').classList.add('highlight');
@@ -257,7 +262,7 @@ function checkOnStart() {
     document.querySelector('#window').classList.remove('hidden');
   }, 300)
 
-  passPlayersData(gameFeatures.getPlayersData(cellsGrid, players));
+  passPlayersData(statistics.getPlayersData(cellsGrid, players));
 }
 function setupGridAndPlayers() {
   table = document.querySelector("#table");

@@ -3,8 +3,7 @@ var gameFeatures = {
   scaleGameElements: function() {},
   getPlayerColors: function() {},
   getBotTurn: function() {},
-  showWinner: function() {},
-  getPlayersData: function() {}
+  showWinner: function() {}
 }
 
 gameFeatures.betterBorders.updateBorders = function (grid) {
@@ -347,26 +346,6 @@ gameFeatures.showWinner = function (player, lang) {
   elem.style.color = player.colorRGB
   elem.innerHTML = string
   elem.classList.remove('hidden');
-}
-
-gameFeatures.getPlayersData = function (grid, players) {
-  let playersData = [];
-  for (let player of players) {
-    let cells = grid.getByPlayer(player);
-
-    let dotsAmount = 0;
-
-    for (let cell of cells) {
-      dotsAmount += cell.dots;
-    }
-    
-    playersData.push({
-      color: player.colorRGB,
-      cellsAmount: cells.length,
-      dotsAmount
-    });
-  }
-  return playersData;
 }
 
 // template

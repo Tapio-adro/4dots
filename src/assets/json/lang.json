@@ -49,7 +49,7 @@
     "settings.gridSize.desc": "Sets size of the game map.",
     "settings.playersAmount.desc": "Players amount is sum of bots and human players amount.",
     "settings.humansAmount.desc": "Human players are real people, playing the game. Set it to 0 if you want to see bots fight, to 1 to fight vs bots, and 2 and more if you want to play with somebody on the same device.",
-    "settings.botsTypes.desc": "There are several options to choose the bots type. Random places dots on random cells. Default is a bot which isn't that smart but can do at least something. Powder keg will try to accumulate as much as possible cells with 3 dots. Aggressive one is the smartest and can challenge your skills in this game.",
+    "settings.botsType.desc": "There are several options to choose the bots type. Random places dots on random cells. Default is a bot which isn't that smart but can do at least something. Powder keg will try to accumulate as much as possible cells with 3 dots. Aggressive one is the smartest and can challenge your skills in this game.",
 
     "settings.gameOptions.desc": "Game options doesn't change game mechanics. They change how game looks or how fast it runs.",
     "settings.gameSpeed.desc": "Sets how long is delay between players turns. Normal is for common games. Instant is good for massive bots fights.",
