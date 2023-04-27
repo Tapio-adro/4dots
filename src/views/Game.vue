@@ -98,11 +98,13 @@ export default {
         gameRules: {
           homeDef: 1
         },
-        playersAmount: 4,
-        gridSize: 9,
-        humansAmount: 1,
-        playersPosition: 'default',
-        botType: 'default'
+        gridAndPlayers: {
+          playersAmount: 4,
+          gridSize: 9,
+          humansAmount: 1,
+          playersPosition: 'default',
+          botType: 'default'
+        }
       };
       setTimeout(() => {
         setTimeout(() => {

@@ -47,9 +47,11 @@ export default {
         gameRules: {
           homeDef: 1
         },
-        playersAmount: 4,
-        humansAmount: 1,
-        botType: 'default'
+        gridAndPlayers: {
+          playersAmount: 4,
+          humansAmount: 1,
+          botType: 'default'
+        }
       };
       setTimeout(() => {
         this.curWindow = 'game';

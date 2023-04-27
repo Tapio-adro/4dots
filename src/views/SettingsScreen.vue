@@ -418,11 +418,13 @@ export default {
         gameRules: {
           homeDef: settings.homelandDefense
         },
-        playersAmount: settings.playersAmount,
-        gridSize: settings.gridSize,
-        humansAmount: settings.humansAmount,
-        playersPosition: settings.playersPosition,
-        botType: settings.botType
+        gridAndPlayers: {
+          playersAmount: settings.playersAmount,
+          gridSize: settings.gridSize,
+          humansAmount: settings.humansAmount,
+          playersPosition: settings.playersPosition,
+          botType: settings.botType
+        }
       };
       setSettings(settingsToSet);
       setAppData('shouldSetDefaultSettings', false)

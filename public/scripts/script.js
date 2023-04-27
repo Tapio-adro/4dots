@@ -3,7 +3,7 @@ let container = document.querySelector(".wrapper .container");
 
 var gameFieldWidth, gameFieldHeight;
 
-let start_dots = 3;
+let startDots = 3;
 let curSelection = { x: -1, y: -1 };
 
 var curPlayer;
@@ -12,6 +12,7 @@ let curPlayerColor = '';
 let cycles = 0;
 let gamePaused = false;
 let gameIsRunning = true;
+let botBehavior = []
 
 let recording = [];
 let doRecording;
@@ -27,6 +28,13 @@ var gameOptionsValues = {
 var gameRulesValues = {
   homeDef: 0,
 };
+var gridAndPlayersValues = {
+  gridSize: 5,
+  playersAmount: 2,
+  playersPosition: 'default',
+  botsAmount: 1,
+  botType: 'default'
+}
 let appData = {
   curWindow: '',
   shouldSetDefaultSettings: true,
@@ -34,20 +42,6 @@ let appData = {
   lastWindow: 'home',
   lang: ''
 };
-
-function passPlayersData(data) {
-  const event = new CustomEvent("passPlayersData", { detail: data });
-  dispatchEvent(event);
-};
-
-let gridSize = 5;
-let playersAmount = 2;
-let playersPosition;
-let botsAmount = 1;
-
-let botType = 'default'
-let botBehavior = []
-
 
 let players, cellsGrid;
 document.addEventListener("keydown", checkKeyInput);
@@ -113,13 +107,6 @@ function updateGameState() {
       nextPlayer();
     }
   }
-}
-let botTypes = {
-  'random': ['any'],
-  'default': ['3_by_3', 'any_by_free', 'any_byn_edge', 'any'],
-  'powder_keg': ['3_by_3', 'less_than_2', 'any_byn_edge', 'any'],
-  'aggressive': ['3_by_3', 'bigger_by_smaller', 'get_closer_to_enemy', 'dot_inside', 'any_byn_edge', 'any'],
-  'smart': [],
 }
 // other main functions
 function tryBotTurn() {
@@ -229,18 +216,16 @@ function setAppData(key, value) {
   appData[key] = value;
 }
 function setSettings(settings) {
-  botType = settings.botType
-  botBehavior = botTypes[botType];
-  gridSize = settings.gridSize;
-  playersAmount = settings.playersAmount;
-  botsAmount = playersAmount - settings.humansAmount;
-  playersPosition = settings.playersPosition == 'random' ? getPlayerCoords(gridSize, playersAmount) : false;
+  for (let [key, value] of Object.entries(settings.gridAndPlayers)) {
+    gridAndPlayersValues[key] = value;
+  }
   for (let [key, value] of Object.entries(settings.gameOptions)) {
     gameOptionsValues[key] = value;
   }
   for (let [key, value] of Object.entries(settings.gameRules)) {
     gameRulesValues[key] = value;
   }
+  gridAndPlayersValues.botsAmount = gridAndPlayersValues.playersAmount - gridAndPlayersValues.humansAmount
 }
 
 // init functions
@@ -253,6 +238,8 @@ function startGame() {
   ], 10)
 }
 function checkOnStart() {
+  botBehavior = getBotBehavior(gridAndPlayersValues.botType);
+
   curPlayerColor = players[0].color
   gameOptions.gameSpeed.setGameSpeed();
   gameOptions.maxOptimization.setMaxOptimization();
@@ -280,16 +267,16 @@ function setupGridAndPlayers() {
   table = document.querySelector("#table");
   container = document.querySelector(".wrapper .container");
 
-  let playerColors = gameFeatures.getPlayerColors(playersAmount).shuffleArray();
-  players = createPlayers(playersAmount, playerColors);
-  createBots(botsAmount);
+  let playerColors = gameFeatures.getPlayerColors(gridAndPlayersValues.playersAmount).shuffleArray();
+  players = createPlayers(gridAndPlayersValues.playersAmount, playerColors);
+  createBots(gridAndPlayersValues.botsAmount);
   players = players.shuffleArray();
 
-  cellsGrid = new Cells(gridSize);
+  cellsGrid = new Cells(gridAndPlayersValues.gridSize);
   cellsGrid.setPlayers(
     players,
-    start_dots,
-    playersPosition
+    startDots,
+    gridAndPlayersValues.playersPosition
   );
   cellsGrid.createField(table);
 }
@@ -384,6 +371,19 @@ function unlightPreviousPlayer() {
       curPlayer.colorRGB
     );
   }
+}
+function passPlayersData(data) {
+  const event = new CustomEvent("passPlayersData", { detail: data });
+  dispatchEvent(event);
+};
+function getBotBehavior (botType) {
+  return {
+    'random': ['any'],
+    'default': ['3_by_3', 'any_by_free', 'any_byn_edge', 'any'],
+    'powder_keg': ['3_by_3', 'less_than_2', 'any_byn_edge', 'any'],
+    'aggressive': ['3_by_3', 'bigger_by_smaller', 'get_closer_to_enemy', 'dot_inside', 'any_byn_edge', 'any'],
+    'smart': []
+  }[botType]
 }
 
 // when window is resized

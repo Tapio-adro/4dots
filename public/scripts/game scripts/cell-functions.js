@@ -74,11 +74,14 @@ function Cells(size) {
   Cells.prototype.DOTS_ELEM = '<div class="dot"></div>';
 }
 
-Cells.prototype.setPlayers = function (players, start_dots, playersCoords) {
+Cells.prototype.setPlayers = function (players, startDots, playersPosition) {
   this.players = players;
-  playersCoords = (
-    playersCoords ? playersCoords.shuffleArray() : JSON.parse(JSON.stringify(Cells.prototype.PLAYER__START_COORDS))
-  );
+  let playersCoords = []
+  if (playersPosition == 'default') {
+    playersCoords = JSON.parse(JSON.stringify(Cells.prototype.PLAYER__START_COORDS))
+  } else {
+    playersCoords = getPlayerCoords(this.size, players.length).shuffleArray()
+  }
   players.forEach((player) => {
     color = player.color;
     let coords = playersCoords.shift();
@@ -87,11 +90,11 @@ Cells.prototype.setPlayers = function (players, start_dots, playersCoords) {
 
     cell.borderColor = `rgb(${color})`;
     cell.color = color;
-    cell.dots = start_dots;
+    cell.dots = startDots;
     cell.borderWidth = "5px"
 
     player.coreCell = cell;
-    player.dotsAmount = start_dots;
+    player.dotsAmount = startDots;
     player.cellsAmount = 1;
   });
 };
