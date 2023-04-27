@@ -41,7 +41,8 @@ var statisticsValues = {
   gatherHeatmapData: true
 }
 let appData = {
-  lang: ''
+  lang: '',
+  curWindow: 'home'
 };
 
 let players, cellsGrid;

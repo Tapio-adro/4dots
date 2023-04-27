@@ -38,6 +38,11 @@
     "settings.preset.bigBotFight": "Big bot fight",
     "settings.preset.hugeBotFight": "Huge bot fight",
 
+    "settings.statistics.header": "Statistics",
+    "settings.gatherPlayersData": "Gather basic information about players ",
+    "settings.gatherLinechartsData": "Gather statistics for linecharts",
+    "settings.gatherHeatmapData": "Gather statistics for a heatmap",
+
     "settings.description.header": "Description",
     "settings.disableDescription.start": "Click to toggle ",
     "settings.disableDescription.on": "on",

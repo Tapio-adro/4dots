@@ -1,7 +1,7 @@
 <template>
   <div id="settings">
     <main id="container">
-      <div id="settings_ui">
+      <div id="first_settings_column">
         <section>
           <h3>{{ lh('gridAndPlayers') }}</h3>
           <Dropdown
@@ -113,7 +113,7 @@
           />
         </section>
       </div>
-      <div id="settings_description">
+      <div id="second_settings_column">
         <section @mouseover="description = 'presets'" >
           <h3>{{ lh('presets') }}</h3>
           <Dropdown
@@ -121,6 +121,25 @@
             v-model:value="presetKey"
             :initial-string="l('preset.none')"
             :options="getPresets(true)"
+          />
+        </section>
+        <section>
+          <h3>{{ lh('statistics') }}</h3>
+          <Checkbox
+            @mouseover="description = 'gameOptions.gatherPlayersData'"
+            :label="l('gatherPlayersData')"
+            v-model:checked="settings.gatherPlayersData"
+          />
+          <Checkbox
+            @mouseover="description = 'gameOptions.gatherLinechartsData'"
+            :label="l('gatherLinechartsData')"
+            v-model:checked="settings.gatherLinechartsData"
+            :class="{'inactive': !settings.gatherPlayersData}"
+          />
+          <Checkbox
+            @mouseover="description = 'gameOptions.gatherHeatmapData'"
+            :label="l('gatherHeatmapData')"
+            v-model:checked="settings.gatherHeatmapData"
           />
         </section>
         <section id="description">
@@ -183,7 +202,10 @@ export default {
       boomCircles: true,
       homelandDefense: true,
       pointerOnBotTurn: true,
-      botType: 'default'
+      botType: 'default',
+      gatherPlayersData: true,
+      gatherLinechartsData: true,
+      gatherHeatmapData: true
     },
     presets: {},
     presetKey: 'hs',
@@ -247,6 +269,9 @@ export default {
           return bot ? 'ботів' : 'людей-гравців'
         }
       }
+    },
+    gatherPlayersData() {
+      return this.settings.gatherPlayersData;
     }
   },
   watch: {
@@ -290,6 +315,11 @@ export default {
         this.settings.boomCircles = false;
         this.settings.pointerOnBotTurn = false;
       }
+    },
+    gatherPlayersData() {
+      if (!this.settings.gatherPlayersData) {
+        this.settings.gatherLinechartsData = false;
+      }    
     },
     settings: {
       handler() {

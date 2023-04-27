@@ -104,10 +104,10 @@ $midgrey: #ccc
     display: grid
     grid-template-columns: 1fr 1fr
     background-color: $lightgrey
-  #settings_ui
+  #first_settings_column
     border-right: 5px solid $grey
     @extend .sections_holder
-  #settings_description
+  #second_settings_column
     border-left: 5px solid $grey
     @extend .sections_holder
   .sections_holder
@@ -220,7 +220,7 @@ $midgrey: #ccc
     accent-color: $green
 
 
-#settings_ui .summary
+#first_settings_column .summary
   margin-top: 15px
   margin-bottom: 5px
   margin-left: 10px
@@ -232,7 +232,7 @@ $midgrey: #ccc
     margin-left: 10px
 
 
-#settings_description #description
+#second_settings_column #description
   min-height: 220px
   h4
     color: #404040
@@ -246,7 +246,7 @@ $midgrey: #ccc
       font-size: 1.4rem
       color: $green
 
-#settings_description #description h3
+#second_settings_column #description h3
   width: 120px
   margin: 0 auto
   user-select: none
@@ -278,7 +278,7 @@ $midgrey: #ccc
     transition-property: visibility
     visibility: visible
 
-#settings_description #start_button_container
+#second_settings_column #start_button_container
   margin-top: auto
   height: 100px
   display: flex
@@ -335,20 +335,18 @@ $midgrey: #ccc
   display: flex
   padding-right: 10px
   align-items: center
-  transition: transform 0.5s ease-in-out, z-index 0.5s step-end
+  transition: transform 0.5s ease-in-out
   transform: translateX(calc(-100% + 40px + 10px - 1px))
-  z-index: 0
   &.open
-    transition: transform 0.5s ease-in-out, z-index 0.5s step-start
+    transition: transform 0.5s ease-in-out
     transform: translateX(0)
-    z-index: 1
 #sidebar_left_container #sidebar_left
   flex: 1
   height: 100%
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0)
-  z-index: 2
   background-color: #fff
   padding: 15px
+  padding-top: 59px
   transition-delay: 0.5s
   &.open
     transition-delay: 0s

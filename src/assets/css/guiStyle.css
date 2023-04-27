@@ -114,13 +114,13 @@
   grid-template-columns: 1fr 1fr;
   background-color: #f3f3f3;
 }
-#settings #settings_ui {
+#settings #first_settings_column {
   border-right: 5px solid #ddd;
 }
-#settings #settings_description {
+#settings #second_settings_column {
   border-left: 5px solid #ddd;
 }
-#settings .sections_holder, #settings #settings_ui, #settings #settings_description {
+#settings .sections_holder, #settings #first_settings_column, #settings #second_settings_column {
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -257,30 +257,30 @@
   accent-color: #04AA6D;
 }
 
-#settings_ui .summary {
+#first_settings_column .summary {
   margin-top: 15px;
   margin-bottom: 5px;
   margin-left: 10px;
   color: #737373;
 }
-#settings_ui .summary .map_size {
+#first_settings_column .summary .map_size {
   border: 2px solid #999999;
   padding: 2px 4px;
   border-radius: 5px;
   margin-left: 10px;
 }
 
-#settings_description #description {
+#second_settings_column #description {
   min-height: 220px;
 }
-#settings_description #description h4 {
+#second_settings_column #description h4 {
   color: #404040;
   margin: 5px 0;
 }
-#settings_description #description #part_descr {
+#second_settings_column #description #part_descr {
   display: flex;
 }
-#settings_description #description #part_descr .arrow {
+#second_settings_column #description #part_descr .arrow {
   padding: 6px;
   padding-left: 3px;
   padding-top: 0px;
@@ -288,7 +288,7 @@
   color: #04AA6D;
 }
 
-#settings_description #description h3 {
+#second_settings_column #description h3 {
   width: 120px;
   margin: 0 auto;
   -webkit-user-select: none;
@@ -297,10 +297,10 @@
   cursor: pointer;
   position: relative;
 }
-#settings_description #description h3:hover {
+#second_settings_column #description h3:hover {
   text-decoration: underline;
 }
-#settings_description #description h3 .tooltip {
+#second_settings_column #description h3 .tooltip {
   transition-delay: 0s;
   transition-property: visibility;
   visibility: hidden;
@@ -318,20 +318,20 @@
   left: 0;
   margin-left: -60px;
 }
-#settings_description #description h3:hover .tooltip {
+#second_settings_column #description h3:hover .tooltip {
   transition-delay: 0.5s;
   transition-property: visibility;
   visibility: visible;
 }
 
-#settings_description #start_button_container {
+#second_settings_column #start_button_container {
   margin-top: auto;
   height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-#settings_description #start_button_container #start_button {
+#second_settings_column #start_button_container #start_button {
   cursor: pointer;
   font-size: 2rem;
   background-color: #04AA6D;
@@ -339,7 +339,7 @@
   padding: 15px;
   border-radius: 10px;
 }
-#settings_description #start_button_container #start_button:hover {
+#second_settings_column #start_button_container #start_button:hover {
   opacity: 0.8;
 }
 
@@ -387,23 +387,21 @@
   display: flex;
   padding-right: 10px;
   align-items: center;
-  transition: transform 0.5s ease-in-out, z-index 0.5s step-end;
+  transition: transform 0.5s ease-in-out;
   transform: translateX(calc(-100% + 40px + 10px - 1px));
-  z-index: 0;
 }
 #sidebar_left_container.open {
-  transition: transform 0.5s ease-in-out, z-index 0.5s step-start;
+  transition: transform 0.5s ease-in-out;
   transform: translateX(0);
-  z-index: 1;
 }
 
 #sidebar_left_container #sidebar_left {
   flex: 1;
   height: 100%;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0);
-  z-index: 2;
   background-color: #fff;
   padding: 15px;
+  padding-top: 59px;
   transition-delay: 0.5s;
 }
 #sidebar_left_container #sidebar_left.open {

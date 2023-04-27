@@ -22,6 +22,9 @@ export default {
   watch: {
     $route (to, from) {
       window.localStorage.setItem('curWindow', JSON.stringify(to.name))
+      setTimeout(() => {
+        setAppData('curWindow', to.name)
+      }, 100)
       if (from.name !== undefined) {
         window.localStorage.setItem('lastWindow', JSON.stringify(from.name))
       }
