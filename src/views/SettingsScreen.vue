@@ -426,8 +426,8 @@ export default {
           botType: settings.botType
         }
       };
+      window.localStorage.setItem('settingsToSet', JSON.stringify(settingsToSet))
       setSettings(settingsToSet);
-      setAppData('shouldSetDefaultSettings', false)
       this.$router.push('/game')
     },
     getDescriptionToggleString() {

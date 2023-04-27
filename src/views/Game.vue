@@ -59,16 +59,7 @@ export default {
     document.documentElement.style.overflow = 'hidden'
     document.body.style.overflow = 'hidden'
 
-    removeElementsByClass('boom_circle')
-    removeElementsByClass('bot_pointer')
-    removeElementsByClass('homeland_area')
-
-    function removeElementsByClass(className){
-      let elements = document.getElementsByClassName(className);
-      while(elements.length > 0){
-        elements[0].parentNode.removeChild(elements[0]);
-      }
-    }
+    this.removeLeftoverElements()
 
     window.addEventListener('passPlayersData', this.updatePlayersData) 
   },
@@ -107,13 +98,26 @@ export default {
         }
       };
       setTimeout(() => {
-        setTimeout(() => {
-          if (getAppData('shouldSetDefaultSettings') && !getAppData('devMode')) {
-            setSettings(settings);
-          }
-        }, 1)
+        console.log(localStorage);
+        if (JSON.parse(window.localStorage.getItem('lastWindow')) == 'settings') {
+          setSettings(JSON.parse(window.localStorage.getItem('settingsToSet')))
+        } else {
+          setSettings(settings);
+        }
         startGame();
       }, 100)
+    },
+    removeLeftoverElements() {
+      removeElementsByClass('boom_circle')
+      removeElementsByClass('bot_pointer')
+      removeElementsByClass('homeland_area')
+
+      function removeElementsByClass(className){
+        let elements = document.getElementsByClassName(className);
+        while(elements.length > 0){
+          elements[0].parentNode.removeChild(elements[0]);
+        }
+      }
     }
   }
 };

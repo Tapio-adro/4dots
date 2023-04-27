@@ -15,19 +15,16 @@ export default {
   name: 'App',
   data() {
     return {
-      devMode: 0,
       lang: lang,
       curLang: 'en'
     }
   },
   watch: {
-    $route (to, from){
-      setTimeout(() => {
-        setAppData('curWindow', to.name);
-        if (from.name == 'settings' || from.name == 'home') {
-          setAppData('lastWindow', from.name)
-        }
-      }, 100)
+    $route (to, from) {
+      window.localStorage.setItem('curWindow', JSON.stringify(to.name))
+      if (from.name !== undefined) {
+        window.localStorage.setItem('lastWindow', JSON.stringify(from.name))
+      }
     },
     curLang() {
       setTimeout(() => {
@@ -37,30 +34,7 @@ export default {
     }
   },
   mounted() {
-    if (this.devMode) {
-      let settings = {
-        gameOptions: {
-          maxOptimization: 0,
-          boomCircles: 0,
-          gameSpeed: 1
-        },
-        gameRules: {
-          homeDef: 1
-        },
-        gridAndPlayers: {
-          playersAmount: 4,
-          humansAmount: 1,
-          botType: 'default'
-        }
-      };
-      setTimeout(() => {
-        this.curWindow = 'game';
-      }, 5)
-      setTimeout(() => {
-        setSettings(settings);
-        startGame();
-      }, 10)
-    }
+    this.checkWindowData()
     setTimeout(() => {
       setAppData('lang', this.curLang)
     }, 100) 
@@ -75,6 +49,14 @@ export default {
     },
     getLangString(key) {
       return this.lang[this.curLang][key]
+    },
+    checkWindowData() {
+      if (!window.localStorage.getItem('curWindow')) {
+        window.localStorage.setItem('curWindow', JSON.stringify('home'))
+      }
+      if (!window.localStorage.getItem('lastWindow')) {
+        window.localStorage.setItem('lastWindow', JSON.stringify('home'))
+      }
     }
   },
 }

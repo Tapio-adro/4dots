@@ -32,14 +32,10 @@ var gridAndPlayersValues = {
   gridSize: 5,
   playersAmount: 2,
   playersPosition: 'default',
-  botsAmount: 1,
+  botsAmount: 2,
   botType: 'default'
 }
 let appData = {
-  curWindow: '',
-  shouldSetDefaultSettings: true,
-  devMode: 0,
-  lastWindow: 'home',
   lang: ''
 };
 

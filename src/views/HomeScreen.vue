@@ -20,7 +20,7 @@
     <div class="menu_wrapper">
       <div class="menu_container">
         <div class="menu">
-          <router-link id="quick_game" class="router_link" to="/game" @click="runQuickGame">{{ l('quickGame') }}</router-link>
+          <router-link id="quick_game" class="router_link" to="/game">{{ l('quickGame') }}</router-link>
           <router-link id="set_own_game" class="router_link" to="/settings">{{ l('customGame') }}</router-link>
         </div>
       </div>
@@ -34,9 +34,6 @@
 export default {
   name: "HomeScreen",
   methods: {
-    runQuickGame() {
-      setAppData('shouldSetDefaultSettings', true)
-    },
     l(key) {
       return this.$root.getLangString('home.' + key)
     }
