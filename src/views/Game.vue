@@ -58,7 +58,9 @@ export default {
       dataToMemorize: ['isSidebarOpen'],
       playersData: [],
       undefeatedPlayersData: [],
-      defeatedPlayersData: []
+      defeatedPlayersData: [],
+      playersStatistics: {},
+      firstPlayersData: true
     }
   },
   mounted() {
@@ -113,19 +115,37 @@ export default {
     winnerPanel.classList.add('hidden');
   },  
   methods: {
+    initPlayersStatistics(playersData) {
+      if (!this.firstPlayersData) return;
+
+      this.firstPlayersData = false
+
+      for (let playerData of playersData) {
+        this.playersStatistics[playerData.color] = {cellsAmount: [], dotsAmount: []}
+      }
+    },
+    updatePlayersStatistics() {
+      let playersData = this.undefeatedPlayersData.slice();
+      playersData.push(...this.defeatedPlayersData);
+      for (let playerData of playersData) {
+        this.playersStatistics[playerData.color].cellsAmount.push(playerData.cellsAmount);
+        this.playersStatistics[playerData.color].dotsAmount.push(playerData.dotsAmount);
+      }
+    },
     updatePlayersData(event) {
       let newPlayersData = event.detail;
+
+      this.initPlayersStatistics(newPlayersData)
+
       if (newPlayersData.length != this.undefeatedPlayersData.length
         && this.undefeatedPlayersData.length != 0) {
 
         mainLoop: for (let playerData of this.undefeatedPlayersData) {
           for (let newPlayerData of newPlayersData) {
             if (playerData.color == newPlayerData.color) {
-              console.log('continue mainloop');
               continue mainLoop
             }
           }
-          console.log('found defeated');
           this.defeatedPlayersData.push({
             color: playerData.color,
             cellsAmount: 0,
@@ -137,6 +157,8 @@ export default {
       this.undefeatedPlayersData = newPlayersData;
       this.playersData = this.undefeatedPlayersData.slice();
       this.playersData.push(...this.defeatedPlayersData)
+
+      this.updatePlayersStatistics();
     },
     setQuickGame() {
       let settings = getDefaultSettings()
