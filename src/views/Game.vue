@@ -1,7 +1,7 @@
 <template>
 <div id="window" class="hidden">
   <div class="gui_wrapper">
-    <div class="sidebar_wrapper">
+    <div class="sidebar_wrapper left">
       <sidebar
         v-model:is-sidebar-open="isSidebarOpen"
       >
@@ -12,6 +12,9 @@
             :playersData="playersData"
           />
         </collapsible-section>
+        <div class="chart_container">
+          <canvas id="myChart"></canvas>
+        </div>
 
       </sidebar>
     </div>
@@ -36,6 +39,8 @@ import PlayersList from '../components/PlayersList.vue';
 
 import Memorization from '../mixins/Memorization'
 
+import Chart from 'chart.js/auto';
+
 
 export default {
   name: "Game",
@@ -55,6 +60,37 @@ export default {
     }
   },
   mounted() {
+    const ctx = document.getElementById('myChart').getContext('2d');
+
+    let chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['', '', '', '', '', '', '', '', '', '', ''],
+        datasets: [{
+          data: [1, 0, 0, 0, 1, 4, 5, 8, 10, 7, 2],
+          borderWidth: 1,
+          cubicInterpolationMode: 'monotone',
+          pointStyle: false,
+          borderWidth: 3,
+          fill: true,
+          borderColor: 'rgb(51, 204, 255)',
+          backgroundColor: 'rgba(51, 204, 255, 0.5)'
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            suggestedMax: 15
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          }
+        }
+      }
+    });
+
     this.setQuickGame();
     document.documentElement.style.overflow = 'hidden'
     document.body.style.overflow = 'hidden'

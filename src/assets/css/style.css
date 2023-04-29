@@ -19,13 +19,6 @@ html, body {
   opacity: 0;
 }
 
-.gui_wrapper {
-  height: 100vh;
-  display: flex;
-  align-content: stretch;
-  align-items: stretch;
-}
-
 .wrapper {
   zoom: var(--zoomLevel);
   display: flex;

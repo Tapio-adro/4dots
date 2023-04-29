@@ -313,13 +313,22 @@ $midgrey: #ccc
     color: $green
 
 // ingame gui
-
+  
+.gui_wrapper
+  height: 100vh
+  display: flex
+  justify-content: stretch
+  align-items: stretch
+  // padding: 20px 0
 .sidebar_wrapper
   font-family: system-ui
-  flex: 1
   display: flex
   align-items: start
   // padding: 20px
+  width: 50px
+.sidebar_wrapper.left
+  max-width: calc( (100vw - 680px - 50px))
+  flex: 1
 .sidebar_wrapper #messages
   background-color: #333333
   padding: 5px
@@ -469,6 +478,15 @@ $midgrey: #ccc
       height: 4px
       background-color: $green
       border-radius: 50%
+
+.chart_container
+  position: relative
+  width: 99%
+  // padding: 40%
+  // height: auto
+canvas
+  position: absolute
+  // width: 100%
 
 
 .v-popper--theme-tooltip .v-popper__inner

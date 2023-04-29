@@ -364,11 +364,23 @@
   color: #04AA6D;
 }
 
+.gui_wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: stretch;
+  align-items: stretch;
+}
+
 .sidebar_wrapper {
   font-family: system-ui;
-  flex: 1;
   display: flex;
   align-items: start;
+  width: 50px;
+}
+
+.sidebar_wrapper.left {
+  max-width: calc(100vw - 680px - 50px);
+  flex: 1;
 }
 
 .sidebar_wrapper #messages {
@@ -556,6 +568,15 @@
   height: 4px;
   background-color: #04AA6D;
   border-radius: 50%;
+}
+
+.chart_container {
+  position: relative;
+  width: 99%;
+}
+
+canvas {
+  position: absolute;
 }
 
 .v-popper--theme-tooltip .v-popper__inner {
