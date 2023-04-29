@@ -11,8 +11,8 @@
           />
         </div>
       </div>
-      <div class="content" v-auto-animate>
-        <slot v-if="isOpen">
+      <div class="content" :class="{hidden: !isOpen}">
+        <slot>
 
         </slot>
       </div>

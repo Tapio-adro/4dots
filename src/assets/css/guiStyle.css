@@ -459,6 +459,15 @@
 .collapsible_section .container {
   border-radius: 5px;
   background-color: #fff;
+  overflow: hidden;
+}
+.collapsible_section .content {
+  transition: 1s;
+  max-height: 1000px;
+}
+.collapsible_section .content.hidden {
+  transition: 0.5s;
+  max-height: 0;
 }
 .collapsible_section .header {
   -webkit-user-select: none;

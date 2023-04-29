@@ -392,7 +392,13 @@ $midgrey: #ccc
   .container
     border-radius: 5px
     background-color: #fff
+    overflow: hidden
+  .content
+    transition: 1s
+    max-height: 1000px
   .content.hidden
+    transition: 0.5s
+    max-height: 0
   .header
     user-select: none
     background-color: $green
@@ -417,7 +423,6 @@ $midgrey: #ccc
     transition: 0.5s
   .header_arrow.rotate
     transform: scaleY(-1)
-
 
 #players_data_container
   display: flex

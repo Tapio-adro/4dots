@@ -56,7 +56,9 @@ export default {
     return {
       isSidebarOpen: false,
       dataToMemorize: ['isSidebarOpen'],
-      playersData: []
+      playersData: [],
+      undefeatedPlayersData: [],
+      defeatedPlayersData: []
     }
   },
   mounted() {
@@ -112,7 +114,29 @@ export default {
   },  
   methods: {
     updatePlayersData(event) {
-      this.playersData = event.detail;
+      let newPlayersData = event.detail;
+      if (newPlayersData.length != this.undefeatedPlayersData.length
+        && this.undefeatedPlayersData.length != 0) {
+
+        mainLoop: for (let playerData of this.undefeatedPlayersData) {
+          for (let newPlayerData of newPlayersData) {
+            if (playerData.color == newPlayerData.color) {
+              console.log('continue mainloop');
+              continue mainLoop
+            }
+          }
+          console.log('found defeated');
+          this.defeatedPlayersData.push({
+            color: playerData.color,
+            cellsAmount: 0,
+            dotsAmount: 0,
+            isHuman: playerData.isHuman
+          });
+        }
+      }
+      this.undefeatedPlayersData = newPlayersData;
+      this.playersData = this.undefeatedPlayersData.slice();
+      this.playersData.push(...this.defeatedPlayersData)
     },
     setQuickGame() {
       let settings = getDefaultSettings()

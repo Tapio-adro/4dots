@@ -16,8 +16,10 @@ statistics.getPlayersData = function (grid, players) {
     playersData.push({
       color: player.colorRGB,
       cellsAmount: cells.length,
-      dotsAmount
+      dotsAmount,
+      isHuman: player.isHuman
     });
   }
+
   return playersData;
 }
