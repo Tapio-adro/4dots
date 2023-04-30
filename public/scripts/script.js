@@ -263,7 +263,7 @@ function checkOnStart() {
     document.querySelector('#window').classList.remove('hidden');
   }, 300)
 
-  passPlayersData(statistics.getPlayersData(cellsGrid, players));
+  // passPlayersData(statistics.getPlayersData(cellsGrid, players));
 }
 function setupGridAndPlayers() {
   table = document.querySelector("#table");

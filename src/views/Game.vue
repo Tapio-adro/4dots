@@ -98,6 +98,7 @@ export default {
           if (canvas) {
             let ctx = canvas.getContext('2d');
             let chart = getDefaultChart(ctx)
+            Object.seal(chart)
             this.playersStatistics[playerData.color].chart = chart
           }
         }, 0)
@@ -109,6 +110,19 @@ export default {
       for (let playerData of playersData) {
         this.playersStatistics[playerData.color].cellsAmount.push(playerData.cellsAmount);
         this.playersStatistics[playerData.color].dotsAmount.push(playerData.dotsAmount);
+        if (!Object.hasOwn(this.playersStatistics[playerData.color], 'chart')) return;
+        let chart = this.playersStatistics[playerData.color].chart;
+        let chartDataset = chart.data.datasets[0];
+        if (chartDataset.data[1] == 0) {
+          chart.data.datasets[0].data.shift();
+          chart.data.datasets[0].data.push(playerData.cellsAmount);
+        } else {
+          chart.data.labels.push('');
+          chart.data.datasets[0].data.push(playerData.cellsAmount);
+        }
+        chart.update();
+        setTimeout(() => {
+        }, 1)
       }
     },
     updatePlayersData(event) {
@@ -125,7 +139,7 @@ export default {
               continue mainLoop
             }
           }
-          this.defeatedPlayersData.push({
+          this.defeatedPlayersData.unshift({
             color: playerData.color,
             cellsAmount: 0,
             dotsAmount: 0,
