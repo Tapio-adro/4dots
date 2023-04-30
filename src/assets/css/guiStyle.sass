@@ -428,69 +428,90 @@ $midgrey: #ccc
   display: flex
   justify-content: center
   padding-bottom: 5px
+  width: 100%
 #players_data
   user-select: none
   font-size: 15px
   text-align: center
   width: 100%
   max-width: 200px
-  border-collapse: collapse
   padding-top: 1px
-  tr
+  display: flex
+  flex-direction: column
+  justify-content: center
+  .row
+    display: flex
+    justify-content: space-between
     border-bottom: 1px solid $grey
     height: 30px
-  tr.player_tr:hover
+  .header_row>div
+    color: $green
+  .player_row:hover
     background-color: $lightgreen
     cursor: default
-  tr.no_border
-    border: none
-  tr.background
-    background-color: transparentize($lightgrey, 0.5)
-  th
-    color: $green
-    padding: 5px
-  td
-    padding: 5px
-    text-align: center
-  td.number_td
-    min-width: 35px
-  td.icon_td
-    color: $textgrey
-  .color_square_container
-    height: 30px
+  .row>div
     display: flex
     justify-content: center
     align-items: center
-  .color_square
-    width: 18px
-    height: 18px
-    border-radius: 5px
-  .small_squares
-    height: 30px
-    display: flex
-    justify-content: center
-    align-items: center
-  .small_squares_container
-    width: 14px
-    height: 14px
-    margin-top: 1px
-    display: grid
-    grid-template-columns: 1fr 1fr
-    justify-items: center
-    align-items: center
-    div
-      width: 4px
-      height: 4px
-      background-color: $green
-      border-radius: 50%
+    padding: 5px
+  .row
+    .player_index
+      width: 30px
+    .player_color
+      width: 30px
+    .player_type
+      width: 25px
+    .player_cells, .player_dots
+      width: 35px
+
+    .no_border
+      border: none
+    .background
+      background-color: transparentize($lightgrey, 0.5)
+
+    .icon_div
+      color: $textgrey
+    .color_square_container
+      height: 30px
+      display: flex
+      justify-content: center
+      align-items: center
+    .color_square
+      width: 18px
+      height: 18px
+      border-radius: 5px
+    .small_squares
+      height: 30px
+      display: flex
+      justify-content: center
+      align-items: center
+    .small_squares_container
+      width: 14px
+      height: 14px
+      display: grid
+      grid-template-columns: 1fr 1fr
+      justify-items: center
+      align-items: center
+      div
+        width: 4px
+        height: 4px
+        background-color: $green
+        border-radius: 50%
+
+  .chart_row
+    // width: 100%
+    height: auto
+    // position: relative
+    // height: auto
+    // left: calc(-50%)
 
 .chart_container
-  position: relative
+  // position: relative
   width: 99%
   // padding: 40%
   // height: auto
 canvas
-  position: absolute
+  // position: absolute
   // width: 100%
 
 

@@ -1,55 +1,64 @@
 <template>
 <div id="players_data_container">
-  <table id="players_data">
-    <tr>
-      <th>№</th>
-      <th>
+  <div id="players_data">
+    <div class="row header_row">
+      <div class="player_index">№</div>
+      <div class="player_color">
         <font-awesome-icon icon="fa-solid fa-palette" v-tooltip="'Player color'"/>
-      </th>
-      <th>
+      </div>
+      <div class="player_type">
         <font-awesome-icon icon="fa-solid fa-brain" v-tooltip="'Bot or human'"/>
-      </th>
-      <th>
+      </div>
+      <div class="player_cells">
         <font-awesome-icon icon="fa-regular fa-square" v-tooltip="'Amount of cells'"/>
-      </th>
-      <th class="small_squares">
+      </div>
+      <div class="player_dots small_squares">
         <div class="small_squares_container" v-tooltip="'Amount of dots'">
           <div></div>
           <div></div>
           <div></div>
           <div></div>
         </div>
-      </th>
-    </tr>
-    <tr
+      </div>
+    </div>
+    <template
       v-for="(player, index) in playersData" :key="player.color"
-      :class="{
-        player_tr: true, 
-        no_border: index + 1 == playersData.length, 
-        background: index % 2 != 0}"
     >
-      <td> {{ index + 1 }} </td>
-      <td class="color_square_container"> 
-        <div class="color_square" :style="{backgroundColor: player.color}"></div> 
-      </td>
-      <td class="icon_td"> 
-        <font-awesome-icon 
-          v-if="player.isHuman"
-          icon="fa-user"  
-          size="xs" 
-          v-tooltip="'Human'"
-        />
-        <font-awesome-icon
-          v-else
-          icon="fa-robot"
-          size="xs"
-          v-tooltip="'Bot'"
-        />
-      </td>
-      <td class="number_td"> {{ player.cellsAmount }} </td>
-      <td class="number_td"> {{ player.dotsAmount }} </td>
-    </tr>
-  </table>
+      <div
+        class="row player_row"
+        :class="{
+          no_border: index + 1 == playersData.length, 
+          background: index % 2 != 0}"
+      >
+  
+        <div class="player_index"> {{ index + 1 }} </div>
+        <div class="player_color color_square_container"> 
+          <div class="color_square" :style="{backgroundColor: player.color}"></div> 
+        </div>
+        <div class="player_type icon_div"> 
+          <font-awesome-icon 
+            v-if="player.isHuman"
+            icon="fa-user"  
+            size="xs" 
+            v-tooltip="'Human'"
+          />
+          <font-awesome-icon
+            v-else
+            icon="fa-robot"
+            size="xs"
+            v-tooltip="'Bot'"
+          />
+        </div>
+        <div class="player_cells number_td"> {{ player.cellsAmount }} </div>
+        <div class="player_dots number_td"> {{ player.dotsAmount }} </div>
+      </div>
+      <div class="chart_row">
+        <div class="chart_container">
+          <canvas :id="playersStatistics[player.color].chartId"></canvas>
+        </div>
+      </div>
+    </template>
+  </div>
 </div>
 </template>
 
@@ -73,7 +82,8 @@ export default {
     FontAwesomeIcon
   },
   props: {
-    playersData: Array
+    playersData: Array,
+    playersStatistics: Object
   }
 };
 </script>

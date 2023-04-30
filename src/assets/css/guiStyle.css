@@ -505,6 +505,7 @@
   display: flex;
   justify-content: center;
   padding-bottom: 5px;
+  width: 100%;
 }
 
 #players_data {
@@ -515,77 +516,88 @@
   text-align: center;
   width: 100%;
   max-width: 200px;
-  border-collapse: collapse;
   padding-top: 1px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-#players_data tr {
+#players_data .row {
+  display: flex;
+  justify-content: space-between;
   border-bottom: 1px solid #ddd;
   height: 30px;
 }
-#players_data tr.player_tr:hover {
+#players_data .header_row > div {
+  color: #04AA6D;
+}
+#players_data .player_row:hover {
   background-color: #06e090;
   cursor: default;
 }
-#players_data tr.no_border {
+#players_data .row > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}
+#players_data .row .player_index {
+  width: 30px;
+}
+#players_data .row .player_color {
+  width: 30px;
+}
+#players_data .row .player_type {
+  width: 25px;
+}
+#players_data .row .player_cells, #players_data .row .player_dots {
+  width: 35px;
+}
+#players_data .row .no_border {
   border: none;
 }
-#players_data tr.background {
+#players_data .row .background {
   background-color: rgba(243, 243, 243, 0.5);
 }
-#players_data th {
-  color: #04AA6D;
-  padding: 5px;
-}
-#players_data td {
-  padding: 5px;
-  text-align: center;
-}
-#players_data td.number_td {
-  min-width: 35px;
-}
-#players_data td.icon_td {
+#players_data .row .icon_div {
   color: #666;
 }
-#players_data .color_square_container {
+#players_data .row .color_square_container {
   height: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-#players_data .color_square {
+#players_data .row .color_square {
   width: 18px;
   height: 18px;
   border-radius: 5px;
 }
-#players_data .small_squares {
+#players_data .row .small_squares {
   height: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-#players_data .small_squares_container {
+#players_data .row .small_squares_container {
   width: 14px;
   height: 14px;
-  margin-top: 1px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   justify-items: center;
   align-items: center;
 }
-#players_data .small_squares_container div {
+#players_data .row .small_squares_container div {
   width: 4px;
   height: 4px;
   background-color: #04AA6D;
   border-radius: 50%;
 }
-
-.chart_container {
-  position: relative;
-  width: 99%;
+#players_data .chart_row {
+  height: auto;
 }
 
-canvas {
-  position: absolute;
+.chart_container {
+  width: 99%;
 }
 
 .v-popper--theme-tooltip .v-popper__inner {

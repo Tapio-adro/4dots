@@ -10,11 +10,9 @@
         >
           <PlayersList
             :playersData="playersData"
+            :playersStatistics="playersStatistics"
           />
         </collapsible-section>
-        <div class="chart_container">
-          <canvas id="myChart"></canvas>
-        </div>
 
       </sidebar>
     </div>
@@ -64,37 +62,6 @@ export default {
     }
   },
   mounted() {
-    const ctx = document.getElementById('myChart').getContext('2d');
-
-    let chart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: ['', '', '', '', '', '', '', '', '', '', ''],
-        datasets: [{
-          data: [1, 0, 0, 0, 1, 4, 5, 8, 10, 7, 2],
-          borderWidth: 1,
-          cubicInterpolationMode: 'monotone',
-          pointStyle: false,
-          borderWidth: 3,
-          fill: true,
-          borderColor: 'rgb(51, 204, 255)',
-          backgroundColor: 'rgba(51, 204, 255, 0.5)'
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            suggestedMax: 15
-          }
-        },
-        plugins: {
-          legend: {
-            display: false
-          }
-        }
-      }
-    });
-
     this.setQuickGame();
     document.documentElement.style.overflow = 'hidden'
     document.body.style.overflow = 'hidden'
@@ -119,9 +86,21 @@ export default {
       if (!this.firstPlayersData) return;
 
       this.firstPlayersData = false
-
+      
       for (let playerData of playersData) {
-        this.playersStatistics[playerData.color] = {cellsAmount: [], dotsAmount: []}
+        this.playersStatistics[playerData.color] = {
+          cellsAmount: [], 
+          dotsAmount: [],
+          chartId: rgbToId(playerData.color)
+        }
+        setTimeout(() => {
+          const canvas = document.getElementById(rgbToId(playerData.color))
+          if (canvas) {
+            let ctx = canvas.getContext('2d');
+            let chart = getDefaultChart(ctx)
+            this.playersStatistics[playerData.color].chart = chart
+          }
+        }, 0)
       }
     },
     updatePlayersStatistics() {
@@ -185,6 +164,47 @@ export default {
     }
   }
 };
+
+function rgbaHalfOpacity(rgbColorString) {
+  var rgbValues = rgbColorString.match(/\d+/g).map(Number);
+  
+  var rgbaValues = rgbValues.concat(0.5);
+  
+  return "rgba(" + rgbaValues.join(",") + ")";
+}
+function rgbToId (rgbString) {
+  return rgbString.replaceAll(',', '').replaceAll(' ', '').replace('(', '').replace(')', '')
+}
+
+function getDefaultChart (ctx) {
+  return new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['', '', '', '', '', '', '', '', '', ''],
+      datasets: [{
+        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        borderWidth: 3,
+        cubicInterpolationMode: 'monotone',
+        pointStyle: false,
+        fill: true,
+        borderColor: 'rgb(51, 204, 255)',
+        backgroundColor: 'rgba(51, 204, 255, 0.5)'
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          suggestedMax: 15
+        }
+      },
+      plugins: {
+        legend: {
+          display: false
+        }
+      }
+    }
+  });
+}
 
 function getDefaultSettings() {
   return {
