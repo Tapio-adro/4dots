@@ -71,6 +71,7 @@ export default {
     window.addEventListener('passPlayersData', this.updatePlayersData) 
   },
   beforeUnmount() {
+    window.removeEventListener('passPlayersData', this.updatePlayersData)
     let id = window.setTimeout(function() {}, 0);
     while (id--) {
       window.clearTimeout(id);
