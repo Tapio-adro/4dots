@@ -1,6 +1,6 @@
 <template>
   <div id="sidebar_left_container" :class="{open: isSidebarOpen}">
-    <div id="sidebar_left" :class="{open: isSidebarOpen}">
+    <div id="sidebar_left" :class="{open: isSidebarOpen}" ref="sidebar">
       <slot></slot>
     </div>
     <div id="sidebar_left_button" @click="toggleSidebar" :class="{open: isSidebarOpen}">

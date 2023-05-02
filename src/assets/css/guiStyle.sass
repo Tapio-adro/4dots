@@ -68,6 +68,7 @@ $midgrey: #ccc
     border-radius: 20px
     background-color: $green
     color: #fff
+    user-select: none
     &:hover
      opacity: 0.8
 
@@ -311,24 +312,24 @@ $midgrey: #ccc
     color: $green
   &.highlight
     color: $green
+  &.hidden
+    opacity: 0
 
 // ingame gui
   
 .gui_wrapper
   height: 100vh
   display: flex
-  justify-content: stretch
-  align-items: stretch
-  // padding: 20px 0
 .sidebar_wrapper
   font-family: system-ui
   display: flex
   align-items: start
-  // padding: 20px
-  width: 50px
-.sidebar_wrapper.left
-  max-width: calc( (100vw - 680px - 50px))
+  min-width: 50px
+  max-width: calc( (100vw - 520px) / 2)
   flex: 1
+.sidebar_wrapper.left
+  width: calc( (100vw - 520px) / 2)
+  min-width: 380px
 .sidebar_wrapper #messages
   background-color: #333333
   padding: 5px
@@ -358,9 +359,19 @@ $midgrey: #ccc
   padding-top: 59px
   transition-delay: 0.5s
   overflow-y: scroll
+  z-index: 1
   &.open
     transition-delay: 0s
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2)
+  &::-webkit-scrollbar 
+    width: 10px
+  &::-webkit-scrollbar-track 
+    background: #f1f1f1 
+  &::-webkit-scrollbar-thumb 
+    background: $green
+    border-radius: 5px
+  &::-webkit-scrollbar-thumb:hover 
+    background: transparentize($green, 0.2)
 #sidebar_left_container #sidebar_left_button
   width: 40px
   height: 40px
@@ -374,6 +385,7 @@ $midgrey: #ccc
   color: white
   cursor: pointer
   transition: 0.5s
+  z-index: 0
   &.open
     background-color: $green
   &:hover
@@ -396,7 +408,7 @@ $midgrey: #ccc
     overflow: hidden
   .content
     transition: 1s
-    max-height: 1000px
+    max-height: 10000px
   .content.hidden
     transition: 0.5s
     max-height: 0
@@ -425,6 +437,8 @@ $midgrey: #ccc
   .header_arrow.rotate
     transform: scaleY(-1)
 
+  
+
 #players_data_container
   display: flex
   justify-content: center
@@ -435,7 +449,7 @@ $midgrey: #ccc
   font-size: 15px
   text-align: center
   width: 100%
-  max-width: 200px
+  max-width: 300px
   padding-top: 1px
   display: flex
   flex-direction: column
@@ -445,6 +459,9 @@ $midgrey: #ccc
     justify-content: space-between
     border-bottom: 1px solid $grey
     height: 30px
+    max-width: 200px
+    width: 100%
+    margin: 0 auto
   .header_row>div
     color: $green
   .player_row:hover
@@ -500,20 +517,13 @@ $midgrey: #ccc
         border-radius: 50%
 
   .chart_row
-    // width: 100%
-    height: auto
-    // position: relative
-    // height: auto
-    // left: calc(-50%)
+    .chart_container
+      position: relative
+      max-width: 300px
+      min-width: 200px
+    canvas
+      width: 100%
 
-.chart_container
-  // position: relative
-  width: 99%
-  // padding: 40%
-  // height: auto
-canvas
-  // position: absolute
-  // width: 100%
 
 
 .v-popper--theme-tooltip .v-popper__inner

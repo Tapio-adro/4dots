@@ -76,6 +76,9 @@
   border-radius: 20px;
   background-color: #04AA6D;
   color: #fff;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 #home .menu .router_link:hover {
   opacity: 0.8;
@@ -363,24 +366,27 @@
 #go_back_button.highlight {
   color: #04AA6D;
 }
+#go_back_button.hidden {
+  opacity: 0;
+}
 
 .gui_wrapper {
   height: 100vh;
   display: flex;
-  justify-content: stretch;
-  align-items: stretch;
 }
 
 .sidebar_wrapper {
   font-family: system-ui;
   display: flex;
   align-items: start;
-  width: 50px;
+  min-width: 50px;
+  max-width: calc((100vw - 520px) / 2);
+  flex: 1;
 }
 
 .sidebar_wrapper.left {
-  max-width: calc(100vw - 680px - 50px);
-  flex: 1;
+  width: calc((100vw - 520px) / 2);
+  min-width: 380px;
 }
 
 .sidebar_wrapper #messages {
@@ -416,10 +422,24 @@
   padding-top: 59px;
   transition-delay: 0.5s;
   overflow-y: scroll;
+  z-index: 1;
 }
 #sidebar_left_container #sidebar_left.open {
   transition-delay: 0s;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+}
+#sidebar_left_container #sidebar_left::-webkit-scrollbar {
+  width: 10px;
+}
+#sidebar_left_container #sidebar_left::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+#sidebar_left_container #sidebar_left::-webkit-scrollbar-thumb {
+  background: #04AA6D;
+  border-radius: 5px;
+}
+#sidebar_left_container #sidebar_left::-webkit-scrollbar-thumb:hover {
+  background: rgba(4, 170, 109, 0.8);
 }
 
 #sidebar_left_container #sidebar_left_button {
@@ -435,6 +455,7 @@
   color: white;
   cursor: pointer;
   transition: 0.5s;
+  z-index: 0;
 }
 #sidebar_left_container #sidebar_left_button.open {
   background-color: #04AA6D;
@@ -464,7 +485,7 @@
 }
 .collapsible_section .content {
   transition: 1s;
-  max-height: 1000px;
+  max-height: 10000px;
 }
 .collapsible_section .content.hidden {
   transition: 0.5s;
@@ -516,7 +537,7 @@
   font-size: 15px;
   text-align: center;
   width: 100%;
-  max-width: 200px;
+  max-width: 300px;
   padding-top: 1px;
   display: flex;
   flex-direction: column;
@@ -527,6 +548,9 @@
   justify-content: space-between;
   border-bottom: 1px solid #ddd;
   height: 30px;
+  max-width: 200px;
+  width: 100%;
+  margin: 0 auto;
 }
 #players_data .header_row > div {
   color: #04AA6D;
@@ -593,12 +617,13 @@
   background-color: #04AA6D;
   border-radius: 50%;
 }
-#players_data .chart_row {
-  height: auto;
+#players_data .chart_row .chart_container {
+  position: relative;
+  max-width: 300px;
+  min-width: 200px;
 }
-
-.chart_container {
-  width: 99%;
+#players_data .chart_row canvas {
+  width: 100%;
 }
 
 .v-popper--theme-tooltip .v-popper__inner {

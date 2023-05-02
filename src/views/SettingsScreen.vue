@@ -438,6 +438,7 @@ export default {
     },
     startGame() {
       let settings = this.settings;
+      window.localStorage.setItem('globalSettings', JSON.stringify(settings))
       let settingsToSet = {
         gameOptions: {
           maxOptimization: settings.maxOptimization,

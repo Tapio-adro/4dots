@@ -3,6 +3,7 @@
   <div class="gui_wrapper">
     <div class="sidebar_wrapper left">
       <sidebar
+        ref="sidebar"
         v-model:is-sidebar-open="isSidebarOpen"
       >
         <collapsible-section
@@ -68,7 +69,18 @@ export default {
     this.removeLeftoverElements()
 
     window.addEventListener('passPlayersData', this.updatePlayersData) 
-    window.addEventListener('passInitialPlayersData', this.initPlayersStatistics) 
+    window.addEventListener('passInitialPlayersData', this.initPlayersStatistics)
+    
+    let that = this
+    this.$refs.sidebar.$refs.sidebar.onscroll = function (e) { 
+      let scrollValue = that.$refs.sidebar.$refs.sidebar.scrollTop
+      if (scrollValue >= 15) {
+        document.getElementById('go_back_button').classList.add('hidden');
+      } 
+      if (scrollValue == 0) {
+        document.getElementById('go_back_button').classList.remove('hidden');
+      }
+    } 
   },
   beforeUnmount() {
     window.removeEventListener('passPlayersData', this.updatePlayersData)
@@ -101,7 +113,7 @@ export default {
             if (Object.hasOwn(this.playersStatistics[playerData.color], 'chart')) continue;
 
             let ctx = canvas.getContext('2d');
-            let chart = getDefaultChart(ctx)
+            let chart = getDefaultChart(ctx, playerData.color, rgbaHalfOpacity(playerData.color))
             Object.seal(chart)
             this.playersStatistics[playerData.color].chart = chart
 
@@ -194,7 +206,7 @@ function rgbToId (rgbString) {
   return rgbString.replaceAll(',', '').replaceAll(' ', '').replace('(', '').replace(')', '')
 }
 
-function getDefaultChart (ctx) {
+function getDefaultChart (ctx, borderColor, backgroundColor) {
   return new Chart(ctx, {
     type: 'line',
     data: {
@@ -205,8 +217,8 @@ function getDefaultChart (ctx) {
         cubicInterpolationMode: 'monotone',
         pointStyle: false,
         fill: true,
-        borderColor: 'rgb(51, 204, 255)',
-        backgroundColor: 'rgba(51, 204, 255, 0.5)'
+        borderColor,
+        backgroundColor
       }]
     },
     options: {
