@@ -52,13 +52,12 @@ export default {
   ],
   data() {
     return {
-      isSidebarOpen: false,
+      isSidebarOpen: true,
       dataToMemorize: ['isSidebarOpen'],
       playersData: [],
       undefeatedPlayersData: [],
       defeatedPlayersData: [],
-      playersStatistics: {},
-      firstPlayersData: true
+      playersStatistics: {}
     }
   },
   mounted() {
@@ -69,9 +68,11 @@ export default {
     this.removeLeftoverElements()
 
     window.addEventListener('passPlayersData', this.updatePlayersData) 
+    window.addEventListener('passInitialPlayersData', this.initPlayersStatistics) 
   },
   beforeUnmount() {
     window.removeEventListener('passPlayersData', this.updatePlayersData)
+    window.removeEventListener('passInitialPlayersData', this.initPlayersStatistics)
     let id = window.setTimeout(function() {}, 0);
     while (id--) {
       window.clearTimeout(id);
@@ -83,27 +84,34 @@ export default {
     winnerPanel.classList.add('hidden');
   },  
   methods: {
-    initPlayersStatistics(playersData) {
-      if (!this.firstPlayersData) return;
-
-      this.firstPlayersData = false
-      
+    initPlayersStatistics(event) {
+      let playersData = event.detail;
+      this.playersData = playersData;
       for (let playerData of playersData) {
         this.playersStatistics[playerData.color] = {
           cellsAmount: [], 
           dotsAmount: [],
           chartId: rgbToId(playerData.color)
         }
-        setTimeout(() => {
+      }
+      let interval = setInterval(() => {
+        for (let playerData of playersData) {
           const canvas = document.getElementById(rgbToId(playerData.color))
           if (canvas) {
+            if (Object.hasOwn(this.playersStatistics[playerData.color], 'chart')) continue;
+
             let ctx = canvas.getContext('2d');
             let chart = getDefaultChart(ctx)
             Object.seal(chart)
             this.playersStatistics[playerData.color].chart = chart
+
+          } else {
+            return;
           }
-        }, 0)
-      }
+        }
+        clearInterval(interval);
+        confirmGameStart();
+      }, 100)
     },
     updatePlayersStatistics() {
       let playersData = this.undefeatedPlayersData.slice();
@@ -111,7 +119,6 @@ export default {
       for (let playerData of playersData) {
         this.playersStatistics[playerData.color].cellsAmount.push(playerData.cellsAmount);
         this.playersStatistics[playerData.color].dotsAmount.push(playerData.dotsAmount);
-        if (!Object.hasOwn(this.playersStatistics[playerData.color], 'chart')) return;
         let chart = this.playersStatistics[playerData.color].chart;
         let chartDataset = chart.data.datasets[0];
         if (chartDataset.data[1] == 0) {
@@ -122,14 +129,10 @@ export default {
           chart.data.datasets[0].data.push(playerData.cellsAmount);
         }
         chart.update();
-        setTimeout(() => {
-        }, 1)
       }
     },
     updatePlayersData(event) {
       let newPlayersData = event.detail;
-
-      this.initPlayersStatistics(newPlayersData)
 
       if (newPlayersData.length != this.undefeatedPlayersData.length
         && this.undefeatedPlayersData.length != 0) {

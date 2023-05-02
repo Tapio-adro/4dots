@@ -101,7 +101,7 @@ function updateGameState() {
     } else {
       gameFeatures.betterBorders.updateBorders(cellsGrid);
       if (curPlayerIndex == 0) {
-        passPlayersData(statistics.getPlayersData(cellsGrid, players));
+        statistics.passPlayersData(statistics.getPlayersData(cellsGrid, players));
       }
       if (curPlayerIndex + 1 == players.length) {
         nextCycle();
@@ -199,7 +199,7 @@ function checkPlayers() {
   }
 
   if (players.length == 1) {
-    passPlayersData(statistics.getPlayersData(cellsGrid, players));
+    statistics.passPlayersData(statistics.getPlayersData(cellsGrid, players));
     gameIsRunning = false;
     gameFeatures.showWinner(curPlayer, appData.lang)
     document.querySelector('#go_back_button').classList.add('highlight');
@@ -236,7 +236,6 @@ function startGame() {
     resetData,
     setupGridAndPlayers,
     checkOnStart,
-    nextPlayer
   ], 10)
 }
 function checkOnStart() {
@@ -259,11 +258,8 @@ function checkOnStart() {
     gameRules.homeDef.resizeHomeAreaElements();
   }, 0);
 
-  setTimeout(() => {
-    document.querySelector('#window').classList.remove('hidden');
-  }, 300)
+  statistics.passInitialPlayersData(statistics.getPlayersData(cellsGrid, players));
 
-  // passPlayersData(statistics.getPlayersData(cellsGrid, players));
 }
 function setupGridAndPlayers() {
   table = document.querySelector("#table");
@@ -303,6 +299,13 @@ function createBots(botsAmount) {
     players[i].isHuman = false;
   }
   return bots;
+}
+function confirmGameStart () {
+  setTimeout(() => {
+    document.querySelector('#window').classList.remove('hidden');
+    statistics.passPlayersData(statistics.getPlayersData(cellsGrid, players));
+    nextPlayer();
+  }, 100)
 }
 
 function resetData () {
@@ -374,10 +377,6 @@ function unlightPreviousPlayer() {
     );
   }
 }
-function passPlayersData(data) {
-  const event = new CustomEvent("passPlayersData", { detail: data });
-  dispatchEvent(event);
-};
 function getBotBehavior (botType) {
   return {
     'random': ['any'],
