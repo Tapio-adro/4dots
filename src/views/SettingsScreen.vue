@@ -126,18 +126,18 @@
         <section>
           <h3>{{ lh('statistics') }}</h3>
           <Checkbox
-            @mouseover="description = 'gameOptions.gatherPlayersData'"
+            @mouseover="description = 'statistics.gatherPlayersData'"
             :label="l('gatherPlayersData')"
             v-model:checked="settings.gatherPlayersData"
           />
           <Checkbox
-            @mouseover="description = 'gameOptions.gatherLinechartsData'"
+            @mouseover="description = 'statistics.gatherLinechartsData'"
             :label="l('gatherLinechartsData')"
             v-model:checked="settings.gatherLinechartsData"
             :class="{'inactive': !settings.gatherPlayersData}"
           />
           <!-- <Checkbox
-            @mouseover="description = 'gameOptions.gatherHeatmapData'"
+            @mouseover="description = 'statistics.gatherHeatmapData'"
             :label="l('gatherHeatmapData')"
             v-model:checked="settings.gatherHeatmapData"
           /> -->

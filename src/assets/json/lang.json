@@ -66,6 +66,11 @@
     "settings.homelandDefense": "Homeland defence",
     "settings.homelandDefense.desc": "By default player is defeated when loses all the cells. With this rule you should have at least one cell in your \"Home area\", otherwise you will lose. Home area is area of 9 cells, where you spawned.",
 
+    "settings.statistics.desc": "Here you can choose which types of statistics you want to be gathered. Statistics data is updated every cycle. Note that any type of statistcs will affect game perfomance.",
+    "settings.gatherPlayersData.desc": "This type of statistics is about type of player, color, amount of cells and dots. It has rather small impact on perfomance.",
+    "settings.gatherLinechartsData.desc": "The data will be gathered to display linecharts which show how many cells player had during the game at any given point. Probably has great impact on perfomance of the game.",
+    "settings.gatherHeatmapData.desc": "",
+
     "settings.presets.desc": "Use these to set the settings.",
 
     "settings.play": "Play"
