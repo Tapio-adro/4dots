@@ -6,7 +6,7 @@ const Memorization = {
   },
   mounted() {
     for (let key of this.dataToMemorize) {
-      if (JSON.parse(localStorage.getItem(key)) !== undefined) {
+      if (JSON.parse(localStorage.getItem(key)) !== null) {
         this[key] = JSON.parse(localStorage.getItem(key))
       }
       this.$watch(key, (newValue) => {

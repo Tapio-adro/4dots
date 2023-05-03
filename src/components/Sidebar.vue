@@ -13,7 +13,7 @@
 export default {
   name: "Sidebar",
   props: {
-    isSidebarOpen: false
+    isSidebarOpen: Boolean
   },
   emits: ['update:isSidebarOpen'],
   methods: {

@@ -44,6 +44,9 @@ export default {
     if (JSON.parse(window.localStorage.getItem('lang'))) {
       this.curLang = JSON.parse(window.localStorage.getItem('lang'))
     }
+    if (localStorage.getItem("globalSettings") === null) {
+      window.localStorage.setItem('globalSettings', JSON.stringify(getDefaultGlobalSettings()))
+    }
   },
   methods: {
     handleGoBackClick() {
@@ -62,5 +65,24 @@ export default {
       }
     }
   },
+}
+
+function getDefaultGlobalSettings () {
+  return {
+    playersPosition: 'default',
+    gridSize: 9,
+    playersAmount: 4,
+    maxPlayersAmount: 8,
+    humansAmount: 1,
+    gameSpeed: '1',
+    maxOptimization: false,
+    boomCircles: true,
+    homelandDefense: true,
+    pointerOnBotTurn: true,
+    botType: 'default',
+    gatherPlayersData: true,
+    gatherLinechartsData: true,
+    gatherHeatmapData: true
+  }
 }
 </script>
