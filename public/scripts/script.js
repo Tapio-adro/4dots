@@ -40,10 +40,12 @@ var statisticsValues = {
   gatherLinechartsData: true,
   gatherHeatmapData: true
 }
-let appData = {
+var appData = {
   lang: '',
-  curWindow: 'home'
+  curWindow: 'home',
+  globalSettings: {}
 };
+
 
 let players, cellsGrid;
 document.addEventListener("keydown", checkKeyInput);

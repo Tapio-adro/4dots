@@ -136,11 +136,11 @@
             v-model:checked="settings.gatherLinechartsData"
             :class="{'inactive': !settings.gatherPlayersData}"
           />
-          <Checkbox
+          <!-- <Checkbox
             @mouseover="description = 'gameOptions.gatherHeatmapData'"
             :label="l('gatherHeatmapData')"
             v-model:checked="settings.gatherHeatmapData"
-          />
+          /> -->
         </section>
         <section id="description">
           <h3

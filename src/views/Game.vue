@@ -3,6 +3,7 @@
   <div class="gui_wrapper">
     <div class="sidebar_wrapper left">
       <sidebar
+        v-if="globalSettings.gatherPlayersData"
         ref="sidebar"
         v-model:is-sidebar-open="isSidebarOpen"
       >
@@ -10,8 +11,10 @@
           header="Players"
         >
           <PlayersList
+            v-if="globalSettings.gatherPlayersData"
             :playersData="playersData"
             :playersStatistics="playersStatistics"
+            :globalSettings="globalSettings"
           />
         </collapsible-section>
 
@@ -58,11 +61,12 @@ export default {
       playersData: [],
       undefeatedPlayersData: [],
       defeatedPlayersData: [],
-      playersStatistics: {}
+      playersStatistics: {},
+      globalSettings: JSON.parse(localStorage.getItem('globalSettings'))
     }
   },
   mounted() {
-    this.setQuickGame();
+    this.setGame();
     document.documentElement.style.overflow = 'hidden'
     document.body.style.overflow = 'hidden'
 
@@ -71,16 +75,18 @@ export default {
     window.addEventListener('passPlayersData', this.updatePlayersData) 
     window.addEventListener('passInitialPlayersData', this.initPlayersStatistics)
     
-    let that = this
-    this.$refs.sidebar.$refs.sidebar.onscroll = function (e) { 
-      let scrollValue = that.$refs.sidebar.$refs.sidebar.scrollTop
-      if (scrollValue >= 15) {
-        document.getElementById('go_back_button').classList.add('hidden');
+    if (this.globalSettings.gatherPlayersData) {
+      let that = this
+      this.$refs.sidebar.$refs.sidebar.onscroll = function (e) { 
+        let scrollValue = that.$refs.sidebar.$refs.sidebar.scrollTop
+        if (scrollValue >= 15) {
+          document.getElementById('go_back_button').classList.add('hidden');
+        } 
+        if (scrollValue == 0) {
+          document.getElementById('go_back_button').classList.remove('hidden');
+        }
       } 
-      if (scrollValue == 0) {
-        document.getElementById('go_back_button').classList.remove('hidden');
-      }
-    } 
+    }
   },
   beforeUnmount() {
     window.removeEventListener('passPlayersData', this.updatePlayersData)
@@ -99,6 +105,9 @@ export default {
     initPlayersStatistics(event) {
       let playersData = event.detail;
       this.playersData = playersData;
+
+      if (!this.globalSettings.gatherLinechartsData) return;
+
       for (let playerData of playersData) {
         this.playersStatistics[playerData.color] = {
           cellsAmount: [], 
@@ -126,6 +135,8 @@ export default {
       }, 100)
     },
     updatePlayersStatistics() {
+      if (!this.globalSettings.gatherLinechartsData) return;
+
       let playersData = this.undefeatedPlayersData.slice();
       playersData.push(...this.defeatedPlayersData);
       for (let playerData of playersData) {
@@ -169,15 +180,20 @@ export default {
 
       this.updatePlayersStatistics();
     },
-    setQuickGame() {
+    setGame() {
       let settings = getDefaultSettings()
       setTimeout(() => {
         if (JSON.parse(window.localStorage.getItem('lastWindow')) == 'settings') {
           setSettings(JSON.parse(window.localStorage.getItem('settingsToSet')))
         } else {
+          this.globalSettings = getDefaultGlobalSettings()
           setSettings(settings);
         }
         startGame();
+        if (!this.globalSettings.gatherLinechartsData) {
+          confirmGameStart();
+        }
+        setAppData('globalSettings', this.globalSettings)
       }, 100)
     },
     removeLeftoverElements() {
@@ -255,6 +271,24 @@ function getDefaultSettings() {
       botType: 'default'
     }
   };
+}
+function getDefaultGlobalSettings () {
+  return {
+    playersPosition: 'default',
+    gridSize: 9,
+    playersAmount: 4,
+    maxPlayersAmount: 8,
+    humansAmount: 1,
+    gameSpeed: '1',
+    maxOptimization: false,
+    boomCircles: true,
+    homelandDefense: true,
+    pointerOnBotTurn: true,
+    botType: 'default',
+    gatherPlayersData: true,
+    gatherLinechartsData: true,
+    gatherHeatmapData: true
+  }
 }
 </script>
 

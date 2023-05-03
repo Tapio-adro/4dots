@@ -52,7 +52,7 @@
         <div class="player_cells number_td"> {{ player.cellsAmount }} </div>
         <div class="player_dots number_td"> {{ player.dotsAmount }} </div>
       </div>
-      <div class="chart_row">
+      <div v-if="globalSettings.gatherLinechartsData" class="chart_row">
         <div class="chart_container">
           <canvas :id="playersStatistics[player.color].chartId"></canvas>
         </div>
@@ -83,7 +83,8 @@ export default {
   },
   props: {
     playersData: Array,
-    playersStatistics: Object
+    playersStatistics: Object,
+    globalSettings: Object
   }
 };
 </script>
