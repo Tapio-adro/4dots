@@ -1,7 +1,7 @@
 <template>
   <div class="collapsible_section">
     <div class="container">
-      <div class="header" @click="isOpen = !isOpen">
+      <div class="header" @click="toggleCollapsibleSection">
         {{ header }}
         <div class="header_arrow_container">
           <font-awesome-icon
@@ -34,11 +34,13 @@ export default {
     FontAwesomeIcon
   },
   props: {
-    header: String
+    header: String,
+    isOpen: Boolean
   },
-  data() {
-    return {
-      isOpen: true
+  emits: ['update:isOpen'],
+  methods: {
+    toggleCollapsibleSection() {
+      this.$emit('update:isOpen', !this.isOpen);
     }
   },
 };

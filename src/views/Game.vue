@@ -8,7 +8,19 @@
         v-model:is-sidebar-open="isSidebarOpen"
       >
         <collapsible-section
+          v-if="globalSettings.gatherLinechartsData"
+          header="Shared chart"
+          v-model:is-open="isPlayersSectionOpened"
+        >
+          <div class="chart_wrapper">
+            <div class="chart_container">
+              <canvas id="shared_linechart"></canvas>
+            </div>
+          </div>
+        </collapsible-section>
+        <collapsible-section
           header="Players"
+          v-model:is-open="isSharedChartSectionOpened"
         >
           <PlayersList
             v-if="globalSettings.gatherPlayersData"
@@ -17,7 +29,6 @@
             :globalSettings="globalSettings"
           />
         </collapsible-section>
-
       </sidebar>
     </div>
     <div class="wrapper">
@@ -57,12 +68,15 @@ export default {
   data() {
     return {
       isSidebarOpen: true,
-      dataToMemorize: ['isSidebarOpen'],
+      dataToMemorize: ['isSidebarOpen', 'isPlayersSectionOpened', 'isSharedChartSectionOpened'],
       playersData: [],
       undefeatedPlayersData: [],
       defeatedPlayersData: [],
       playersStatistics: {},
-      globalSettings: JSON.parse(localStorage.getItem('globalSettings'))
+      sharedPlayersStatistics: {},
+      globalSettings: JSON.parse(localStorage.getItem('globalSettings')),
+      isPlayersSectionOpened: true,
+      isSharedChartSectionOpened: true
     }
   },
   mounted() {
@@ -115,9 +129,10 @@ export default {
           chartId: rgbToId(playerData.color)
         }
       }
+
       let interval = setInterval(() => {
         for (let playerData of playersData) {
-          const canvas = document.getElementById(rgbToId(playerData.color))
+          let canvas = document.getElementById(rgbToId(playerData.color))
           if (canvas) {
             if (Object.hasOwn(this.playersStatistics[playerData.color], 'chart')) continue;
 
@@ -129,6 +144,18 @@ export default {
           } else {
             return;
           }
+        }
+        let sharedLinechartCanvas = document.getElementById('shared_linechart')
+        if (sharedLinechartCanvas) {
+          if (!Object.hasOwn(this.sharedPlayersStatistics, 'chart')) {
+            let ctx = sharedLinechartCanvas.getContext('2d');
+            let colors = playersData.map(data => data.color)
+            let chart = getSharedChart(ctx, colors)
+            Object.seal(chart)
+            this.sharedPlayersStatistics.chart = chart
+          }
+        } else {
+          return;
         }
         clearInterval(interval);
         confirmGameStart();
@@ -153,6 +180,21 @@ export default {
         }
         chart.update();
       }
+
+      let chart = this.sharedPlayersStatistics.chart
+      if (chart.data.datasets[0].data[1] != 0) {
+        chart.data.labels.push('');
+      }
+      for (let dataset of chart.data.datasets) {
+        let color = dataset.borderColor;
+        let foundPlayerData = this.undefeatedPlayersData.find(data => data.color == color)
+        let valueToPush = foundPlayerData ? foundPlayerData.cellsAmount : 0
+        if (dataset.data[1] == 0) {
+          dataset.data.shift();
+        }
+        dataset.data.push(valueToPush);
+      }
+      chart.update();
     },
     updatePlayersData(event) {
       let newPlayersData = event.detail;
@@ -250,6 +292,40 @@ function getDefaultChart (ctx, borderColor, backgroundColor) {
       }
     }
   });
+}
+function getSharedChart (ctx, borderColors) {
+  let chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['', '', '', '', '', '', '', '', '', ''],
+      datasets: []
+    },
+    options: {
+      scales: {
+        y: {
+          suggestedMax: 15
+        }
+      },
+      plugins: {
+        legend: {
+          display: false
+        }
+      }
+    }
+  });
+  let datasetTemplate = {
+    data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    borderWidth: 3,
+    cubicInterpolationMode: 'monotone',
+    pointStyle: false
+  }
+  for (let [index, value] of borderColors.entries()) {
+    let dataset = JSON.parse(JSON.stringify(datasetTemplate))
+    dataset.borderColor = value
+
+    chart.data.datasets.push(dataset)
+  }
+  return chart;
 }
 
 function getDefaultSettings() {

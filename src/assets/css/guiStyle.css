@@ -422,6 +422,7 @@
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0);
   background-color: #fff;
   padding: 15px;
+  padding-bottom: 0;
   padding-top: 59px;
   transition-delay: 0.5s;
   overflow-y: scroll;
@@ -480,6 +481,7 @@
   background-color: #f3f3f3;
   border-radius: 10px;
   padding: 5px;
+  margin-bottom: 15px;
 }
 .collapsible_section .container {
   border-radius: 5px;
@@ -487,11 +489,9 @@
   overflow: hidden;
 }
 .collapsible_section .content {
-  transition: 1s;
   max-height: 10000px;
 }
 .collapsible_section .content.hidden {
-  transition: 0.5s;
   max-height: 0;
 }
 .collapsible_section .header {
@@ -627,6 +627,20 @@
   min-width: 200px;
 }
 #players_data .chart_row canvas {
+  width: 100%;
+}
+
+.chart_wrapper {
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+}
+.chart_wrapper .chart_container {
+  position: relative;
+  max-width: 300px;
+  min-width: 200px;
+}
+.chart_wrapper canvas {
   width: 100%;
 }
 

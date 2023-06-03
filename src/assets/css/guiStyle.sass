@@ -357,6 +357,7 @@ $midgrey: #ccc
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0)
   background-color: #fff
   padding: 15px
+  padding-bottom: 0
   padding-top: 59px
   transition-delay: 0.5s
   overflow-y: scroll
@@ -403,15 +404,16 @@ $midgrey: #ccc
   background-color: $lightgrey
   border-radius: 10px
   padding: 5px
+  margin-bottom: 15px
   .container
     border-radius: 5px
     background-color: #fff
     overflow: hidden
   .content
-    transition: 1s
+    // transition: 1s
     max-height: 10000px
   .content.hidden
-    transition: 0.5s
+    // transition: 0.5s
     max-height: 0
   .header
     user-select: none
@@ -517,7 +519,6 @@ $midgrey: #ccc
         height: 4px
         background-color: $green
         border-radius: 50%
-
   .chart_row
     .chart_container
       position: relative
@@ -525,7 +526,16 @@ $midgrey: #ccc
       min-width: 200px
     canvas
       width: 100%
-
+.chart_wrapper
+  display: flex
+  justify-content: center
+  padding-top: 10px
+  .chart_container
+    position: relative
+    max-width: 300px
+    min-width: 200px
+  canvas
+    width: 100%
 
 
 .v-popper--theme-tooltip .v-popper__inner
