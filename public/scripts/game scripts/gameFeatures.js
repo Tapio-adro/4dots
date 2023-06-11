@@ -235,9 +235,11 @@ gameFeatures.getBotTurn = function (grid, botColor, behaviorTypes) {
         } else {
           return botCells.randomElement();
         }
-        break;
-      case "less_than_2":
+      case "dot_byn_enemy":
         botCells = botCells.filterByDots(2, '<=');
+        botCells = botCells.filter(
+          (cell) => !cell.hasRivalNeighbour()
+        );
 
         if (!botCells.length) return;
 

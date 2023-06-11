@@ -383,7 +383,7 @@ function getBotBehavior (botType) {
   return {
     'random': ['any'],
     'default': ['3_by_3', 'any_by_free', 'any_byn_edge', 'any'],
-    'powder_keg': ['3_by_3', 'less_than_2', 'any_byn_edge', 'any'],
+    'powder_keg': ['3_by_3', 'dot_byn_enemy', 'any_byn_edge', 'any'],
     'aggressive': ['3_by_3', 'bigger_by_smaller', 'get_closer_to_enemy', 'dot_inside', 'any_byn_edge', 'any'],
     'smart': []
   }[botType]
