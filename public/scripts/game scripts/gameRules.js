@@ -39,8 +39,23 @@ gameRules.homeDef.checkHomelands = function (players) {
 
     for (let player of players) {
         let coreCell = player.coreCell;
-        let homeCells = cellsGrid.getByColor(player.color, 
-            coreCell.cellsAround(cellsGrid.AROUND_SQUARE_NINE));
+        let homeCells = cellsGrid.getByColor(player.color,
+            coreCell.cellsAround(cellsGrid.AROUND_SQUARE_RADIUS_1));
+        if (homeCells.length == 0) {
+            let playerCells = cellsGrid.getByColor(player.color);
+            for (let cell of playerCells) {
+                cell.reset(true);
+            }
+        } 
+    }
+}
+gameRules.homeDef.checkHomelands = function (players) {
+    if (!gameRulesValues.homeDef) return;
+
+    for (let player of players) {
+        let coreCell = player.coreCell;
+        let homeCells = cellsGrid.getByColor(player.color,
+            coreCell.cellsAround(cellsGrid.AROUND_SQUARE_RADIUS_1));
         if (homeCells.length == 0) {
             let playerCells = cellsGrid.getByColor(player.color);
             for (let cell of playerCells) {

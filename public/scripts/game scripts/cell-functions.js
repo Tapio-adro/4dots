@@ -44,7 +44,7 @@ function Cells(size) {
     { x: 1, y: 0 },
   ];
 
-  Cells.prototype.AROUND_SQUARE_NINE = [
+  Cells.prototype.AROUND_SQUARE_RADIUS_1 = [
     { x: 0, y: -1 },
     { x: 0, y: 1 },
     { x: -1, y: 0 },
@@ -54,6 +54,33 @@ function Cells(size) {
     { x: -1, y: -1 },
     { x: -1, y: 1 },
     { x: 1, y: -1 },
+  ];
+  Cells.prototype.AROUND_SQUARE_RADIUS_2 = [
+    { x: -2, y: -2 },
+    { x: -2, y: -1 },
+    { x: -2, y: 0 },
+    { x: -2, y: 1 },
+    { x: -2, y: 2 },
+    { x: -1, y: -2 },
+    { x: -1, y: -1 },
+    { x: -1, y: 0 },
+    { x: -1, y: 1 },
+    { x: -1, y: 2 },
+    { x: 0, y: -2 },
+    { x: 0, y: -1 },
+    { x: 0, y: 0 },
+    { x: 0, y: 1 },
+    { x: 0, y: 2 },
+    { x: 1, y: -2 },
+    { x: 1, y: -1 },
+    { x: 1, y: 0 },
+    { x: 1, y: 1 },
+    { x: 1, y: 2 },
+    { x: 2, y: -2 },
+    { x: 2, y: -1 },
+    { x: 2, y: 0 },
+    { x: 2, y: 1 },
+    { x: 2, y: 2 },
   ];
   Cells.prototype.UPDATE_BORDER_CELLS = [
     { x: 0, y: -1 },
@@ -93,9 +120,11 @@ Cells.prototype.setPlayers = function (players, startDots, playersPosition) {
     cell.dots = startDots;
     cell.borderWidth = "5px"
 
-    player.coreCell = cell;
-    player.dotsAmount = startDots;
-    player.cellsAmount = 1;
+    if (gameRulesValues.homeDef) {
+      player.coreCell = cell;
+      player.coreCells = cell.cellsAround(Cells.prototype.AROUND_SQUARE_RADIUS_1);
+      player.coreCellsWithNeighbours = cell.cellsAround(Cells.prototype.AROUND_SQUARE_RADIUS_2);
+    }
   });
 };
 Cells.prototype.createField = function (field) {

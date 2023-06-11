@@ -131,17 +131,53 @@ gameFeatures.getPlayerColors = function (amount) {
   }
 }
 
-gameFeatures.getBotTurn = function (grid, botColor, behaviorTypes) {
+gameFeatures.getBotTurn = function (grid, botColor, behaviorTypes, isHomeDefOn) {
 
-  for (let behavior of behaviorTypes) {
-    let cell = getBehaviorResult(behavior);
-    if (cell) {
-      return cell;
+  if (isHomeDefOn) {
+    let botCell = grid.getByColor(botColor)[0];
+    let player = grid.players.find(curPlayer => curPlayer.color == botColor)
+
+    let coreCells = player.coreCells
+    let hasEnemyInHomeland = coreCells.some((cell) => {
+      cell.isCellRival(botCell)
+    })
+    let ownCoreCells = grid.getByColor(botColor, player.coreCells)
+    for (let behavior of behaviorTypes.prioritised) {
+      let cell = getBehaviorResult(behavior, [...ownCoreCells]);
+      if (cell) {
+        return cell;
+      }
+    }
+
+    let coreCellsWithNeighbours = player.coreCellsWithNeighbours
+    let hasEnemyNearHomeland = coreCellsWithNeighbours.some((cell) => {
+      cell.isCellRival(botCell)
+    })
+    let ownCoreCellsWithNeighbours = grid.getByColor(botColor, player.coreCells)
+    for (let behavior of behaviorTypes.prioritised) {
+      let cell = getBehaviorResult(behavior, [...ownCoreCellsWithNeighbours]);
+      if (cell) {
+        return cell;
+      }
+    }
+
+    for (let behavior of behaviorTypes.default) {
+      let cell = getBehaviorResult(behavior);
+      if (cell) {
+        return cell;
+      }
+    }
+  } else {
+    for (let behavior of behaviorTypes) {
+      let cell = getBehaviorResult(behavior);
+      if (cell) {
+        return cell;
+      }
     }
   }
 
-  function getBehaviorResult (behavior) {
-    let botCells = grid.getByColor(botColor);
+  function getBehaviorResult (behavior, otherBotCells = false) {
+    let botCells = otherBotCells ? otherBotCells : grid.getByColor(botColor);
   
     switch (behavior) {
       case "3_by_3":
