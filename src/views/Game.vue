@@ -185,10 +185,11 @@ export default {
       if (chart.data.datasets[0].data[1] != 0) {
         chart.data.labels.push('');
       }
+      let totalCellsAmount = this.undefeatedPlayersData.reduce((sum, playerData) => sum + playerData.cellsAmount, 0);
       for (let dataset of chart.data.datasets) {
         let color = dataset.borderColor;
-        let foundPlayerData = this.undefeatedPlayersData.find(data => data.color == color)
-        let valueToPush = foundPlayerData ? foundPlayerData.cellsAmount : 0
+        let foundPlayerData = this.undefeatedPlayersData.find(data => data.color == color);
+        let valueToPush = foundPlayerData ? foundPlayerData.cellsAmount / totalCellsAmount : 0;
         if (dataset.data[1] == 0) {
           dataset.data.shift();
         }
@@ -289,6 +290,11 @@ function getDefaultChart (ctx, borderColor, backgroundColor) {
         legend: {
           display: false
         }
+      },
+      animation: {     
+        y: {
+          duration: 0 
+        }
       }
     }
   });
@@ -303,12 +309,24 @@ function getSharedChart (ctx, borderColors) {
     options: {
       scales: {
         y: {
-          suggestedMax: 15
+          max: 1,
+          stacked: true,
+          ticks: {
+            display: false
+          }
         }
       },
       plugins: {
         legend: {
           display: false
+        },
+        tooltip: {
+          enabled: false
+        }
+      },
+      animation: {     
+        y: {
+          duration: 0 
         }
       }
     }
@@ -317,11 +335,13 @@ function getSharedChart (ctx, borderColors) {
     data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     borderWidth: 3,
     cubicInterpolationMode: 'monotone',
-    pointStyle: false
+    pointStyle: false,
+    fill: true
   }
   for (let [index, value] of borderColors.entries()) {
     let dataset = JSON.parse(JSON.stringify(datasetTemplate))
     dataset.borderColor = value
+    dataset.backgroundColor = rgbaHalfOpacity(value)
 
     chart.data.datasets.push(dataset)
   }
