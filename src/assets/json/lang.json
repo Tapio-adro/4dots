@@ -28,7 +28,7 @@
     "settings.pointerOnBotTurn": "Show pointer on bot turn",
 
     "settings.gameRules.header": "Game rules",
-    "settings.homelandDefense": "Homeland defense",
+    "settings.homelandDefense": "Capital defense",
 
     "settings.presets.header": "Presets",
     "settings.choosePreset": "Choose preset",
@@ -63,8 +63,7 @@
     "settings.pointerOnBotTurn.desc": "Shows pointer on cell bot made its turn on.",
 
     "settings.gameRules.desc": "Game rules change game mechanics.",
-    "settings.homelandDefense": "Homeland defence",
-    "settings.homelandDefense.desc": "By default player is defeated when loses all the cells. With this rule you should have at least one cell in your \"Home area\", otherwise you will lose. Home area is area of 9 cells, where you spawned.",
+    "settings.homelandDefense.desc": "By default player is defeated when loses all the cells. With this rule you should have at least one cell in your \"Capital\", otherwise you will lose. Capital is area of 9 cells, where you spawned.",
 
     "settings.statistics.desc": "Here you can choose which types of statistics you want to be gathered. Statistics data is updated every cycle. Note that any type of statistcs will affect game perfomance.",
     "settings.gatherPlayersData.desc": "This type of statistics is about type of player, color, amount of cells and dots. It has rather small impact on perfomance.",
@@ -73,7 +72,17 @@
 
     "settings.presets.desc": "Use these to set the settings.",
 
-    "settings.play": "Play"
+    "settings.play": "Play",
+
+
+    "game.sharedChart": "Shared chart",
+    "game.players": "Players",
+    "game.playerColor": "Player color",
+    "game.amountOfCells": "Amount of cells",
+    "game.amountOfDots": "Amount of dots",
+    "game.botOrHuman": "Bot or human",
+    "game.bot": "Bot",
+    "game.human": "Human"
   },
   "uk": {
     "home.quickGame": "Швидка гра",
@@ -81,7 +90,7 @@
 
 
     "settings.gridAndPlayers.header": "Сітка та гравці",
-    "settings.playersPosition": "Розташування гравців",
+    "settings.playersPosition": "Розміщення гравців",
     "settings.playersPosition.default": "Симетричне",
     "settings.playersPosition.random": "Випадкове",
     "settings.gridSize": "Розмір сітки",
@@ -89,30 +98,35 @@
     "settings.humansAmount": "Кількість людей-гравців",
     "settings.botsType": "Вид ботів",
     "settings.botsType.random": "Випадковий",
-    "settings.botsType.default": "Стандартний",
+    "settings.botsType.default": "Звичайний",
     "settings.botsType.powder_keg": "Порохова бочка",
     "settings.botsType.aggressive": "Загарбницький",
     
-    "settings.gameOptions.header": "Ігрові параметри",
+    "settings.gameOptions.header": "Ігрові налаштування",
     "settings.gameSpeed": "Швидкість гри",
     "settings.gameSpeed.slow": "Повільна",
     "settings.gameSpeed.normal": "Звичайна",
     "settings.gameSpeed.fast": "Швидка",
     "settings.gameSpeed.instant": "Миттєва",
-    "settings.maximalOptimization": "Увімкнути максимальну оптимізацію",
+    "settings.maximalOptimization": "Увімкнути найвищу швидкодію",
     "settings.blastCircles": "Увімкнути кола вибухів",
     "settings.pointerOnBotTurn": "Показувати вказівник, коли бот робить свій хід",
 
     "settings.gameRules.header": "Ігрові правила",
-    "settings.homelandDefense": "Захист вітчизни",
+    "settings.homelandDefense": "Захист столиці",
 
     "settings.presets.header": "Передстановлення",
     "settings.choosePreset": "Виберіть передстановлення",
     "settings.preset.none": "немає",
-    "settings.preset.default": "За замовчуванням",
-    "settings.preset.duel": "Дуель",
+    "settings.preset.default": "Типова гра",
+    "settings.preset.duel": "Поєдинок",
     "settings.preset.bigBotFight": "Велика битва ботів",
     "settings.preset.hugeBotFight": "Величезна битва ботів",
+
+    "settings.statistics.header": "Ститистика",
+    "settings.gatherPlayersData": "Збирати основні відомості про гравців",
+    "settings.gatherLinechartsData": "Збирати статистику для лінійних графіків",
+    "settings.gatherHeatmapData": "",
 
     "settings.description.header": "Опис",
     "settings.disableDescription.start": "Натисніть, щоб ",
@@ -120,23 +134,39 @@
     "settings.disableDescription.off": "вимкнути",
     "settings.disableDescription.end": " опис",
 
-    "settings.gridAndPlayers.desc": "Налаштування розміру сітки, кількості гравців та їх розташування. Знизу відділу можна побачити зведення.",
-    "settings.playersPosition.desc": "Стандартне розташування гравців — симетричне. Випадкове — для випадкового розташування.",
-    "settings.gridSize.desc": "Установлює розмір ігрової карти.",
-    "settings.playersAmount.desc": "Кількість гравців - це сума ботів і кількості людей-гравців.",
-    "settings.humansAmount.desc": "Люди-гравці — це реальні люди, які грають у гру. Встановіть значення на 0, якщо ви хочете влаштувати бій ботів, установіть значення на 1, щоб битися з ботами, а значення 2 і більше, якщо ви хочете грати з кимось на тому самому пристрої.",
-    "settings.botsTypes.desc": "Існує кілька типів ботів. Випадковий розставляє крапки на випадкових клітинках. Стандартний — це бот, який не такий розумний, але щось то він може зробити. Порохова бочка намагатиметься накопичувати якомога більше клітинок із 3-ма крапками. Агресивний — найрозумніший бот, який може випробувати ваші навички в цій грі.",
+    "settings.gridAndPlayers.desc": "Налаштування розміру сітки, кількости гравців та їх розміщення. Знизу відділу можна побачити зведення.",
+    "settings.playersPosition.desc": "Типове розміщення гравців — симетричне. Випадкове — для випадкового розміщення.",
+    "settings.gridSize.desc": "Встановлює розмір ігрової мапи.",
+    "settings.playersAmount.desc": "Кількість гравців — це сума кількости ботів і людей-гравців.",
+    "settings.humansAmount.desc": "Люди-гравці — це справжні люди, які грають у гру. Встановіть значення на 0, якщо ви хочете влаштувати бій ботів, встановіть значення на 1, щоби битися з ботами, а значення 2 і більше, якщо ви хочете грати з кимось на одному пристрої.",
+    "settings.botsTypes.desc": "Існує кілька видів ботів. Випадковий розставляє крапки на випадкових клітинках. Звичайний — це бот, який не такий розумний, але щось то він може зробити. Порохова бочка намагатиметься накопичувати якомога більше клітинок із 3-ма крапками. Загарбницький — найрозумніший бот, який може випробувати ваші навички в цій грі.",
     
-    "settings.gameOptions.desc": "Ігрові параметри не змінюють механіки гри. Вони змінюють зовнішній вигляд або швидкість гри.",
-    "settings.gameSpeed.desc": "Встановлює тривалість затримки між ходами гравців. Нормальна для звичайних ігор. Миттєва підходить для великих битв ботів.",
-    "settings.maximalOptimization.desc": "Підходить для великих битв ботів.",
-    "settings.blastCircles.desc": "Коло, яке з'являється при активації \"четвірки\".",
-    "settings.pointerOnBotTurn.desc": "Показує вказівник на клітинці бота, який зробив хід.",
+    "settings.gameOptions.desc": "Ігрові налаштування не змінюють механіки гри. Вони змінюють зовнішній вигляд або швидкість гри.",
+    "settings.gameSpeed.desc": "Встановлює тривалість затримки між ходами гравців. Звичайна для звичайних ігор. Миттєва підходить для великих битв ботів.",
+    "settings.maximalOptimization.desc": "Підходить для великих битв ботів. Прибирає додаткові видимі ефекти.",
+    "settings.blastCircles.desc": "Коло, яке з'являється після задієння «четвірки».",
+    "settings.pointerOnBotTurn.desc": "Показує вказівник на клітинці бота, коли той робить хід.",
 
     "settings.gameRules.desc": "Правила гри змінюють механіки гри.",
-    "settings.homelandDefense.desc": "За замовчуванням гравець програє, коли втрачає всі клітинки. З цим правилом, якщо у вашій «корінній зоні» немає жодної захопленої клітинки, ви програєте. Корінна зона — це область із 9 клітинок, де ви з'явилися.",
-    "settings.presets.desc": "Можна використати для встановлення параметрів.",
+    "settings.homelandDefense.desc": "Типово гравець програє, коли втрачає всі клітинки. Із цим правилом ви програєте, лише якщо у вашій «столиці» не лишається жодної вашої клітинки. Столиця — це ділянка із 9 клітинок, де ви з'явилися.",
+    
+    "settings.statistics.desc": "Тут можна вибрати, яку статистику треба збирати. Статистика оновлюється у кінці кожного кола. Зауважте, що збір будь-якої статистики може вплинути на швидкодію.",
+    "settings.gatherPlayersData.desc": "Збиратиме відомості про вид гравця, колір, кількість клітинок та крапок.",
+    "settings.gatherLinechartsData.desc": "Збиратиме відомості для відображення лінійних графіків, які показують кількість клітинок гравців кінця кожного кола.",
+    "settings.gatherHeatmapData.desc": "",
 
-    "settings.play": "Грати"
+    "settings.presets.desc": "Можна використати для встановлення налаштувань.",
+
+    "settings.play": "Грати",
+
+
+    "game.sharedChart": "Спільний графік",
+    "game.players": "Гравці",
+    "game.playerColor": "Колір гравця",
+    "game.amountOfCells": "Кількість клітинок",
+    "game.amountOfDots": "Кількість крапок",
+    "game.botOrHuman": "Бот чи людина",
+    "game.bot": "Бот",
+    "game.human": "Людина"
   }
 }

@@ -29,21 +29,21 @@ export default {
         window.localStorage.setItem('lastWindow', JSON.stringify(from.name))
       }
     },
-    // curLang() {
-    //   setTimeout(() => {
-    //     setAppData('lang', this.curLang)
-    //   }, 100)
-    //   window.localStorage.setItem('lang', JSON.stringify(this.curLang))
-    // }
+    curLang() {
+      setTimeout(() => {
+        setAppData('lang', this.curLang)
+      }, 100)
+      window.localStorage.setItem('lang', JSON.stringify(this.curLang))
+    }
   },
   mounted() {
     this.checkWindowData()
     setTimeout(() => {
       setAppData('lang', this.curLang)
     }, 100) 
-    // if (JSON.parse(window.localStorage.getItem('lang'))) {
-    //   this.curLang = JSON.parse(window.localStorage.getItem('lang'))
-    // }
+    if (JSON.parse(window.localStorage.getItem('lang'))) {
+      this.curLang = JSON.parse(window.localStorage.getItem('lang'))
+    }
     if (localStorage.getItem("globalSettings") === null) {
       window.localStorage.setItem('globalSettings', JSON.stringify(getDefaultGlobalSettings()))
     }

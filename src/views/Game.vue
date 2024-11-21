@@ -9,7 +9,7 @@
       >
         <collapsible-section
           v-if="globalSettings.gatherLinechartsData"
-          header="Shared chart"
+          :header="l('sharedChart')"
           v-model:is-open="isPlayersSectionOpened"
         >
           <div class="chart_wrapper">
@@ -19,7 +19,7 @@
           </div>
         </collapsible-section>
         <collapsible-section
-          header="Players"
+          :header="l('players')"
           v-model:is-open="isSharedChartSectionOpened"
         >
           <PlayersList
@@ -116,6 +116,9 @@ export default {
     winnerPanel.classList.add('hidden');
   },  
   methods: {
+    l(key) {
+      return this.$root.getLangString('game.' + key)
+    },
     initPlayersStatistics(event) {
       let playersData = event.detail;
       this.playersData = playersData;

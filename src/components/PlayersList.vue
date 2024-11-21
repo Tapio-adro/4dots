@@ -4,16 +4,16 @@
     <div class="row header_row">
       <div class="player_index">№</div>
       <div class="player_color">
-        <font-awesome-icon icon="fa-solid fa-palette" v-tooltip="'Player color'"/>
+        <font-awesome-icon icon="fa-solid fa-palette" v-tooltip="l('playerColor')"/>
       </div>
       <div class="player_type">
-        <font-awesome-icon icon="fa-solid fa-brain" v-tooltip="'Bot or human'"/>
+        <font-awesome-icon icon="fa-solid fa-brain" v-tooltip="l('botOrHuman')"/>
       </div>
       <div class="player_cells">
-        <font-awesome-icon icon="fa-regular fa-square" v-tooltip="'Amount of cells'"/>
+        <font-awesome-icon icon="fa-regular fa-square" v-tooltip="l('amountOfCells')"/>
       </div>
       <div class="player_dots small_squares">
-        <div class="small_squares_container" v-tooltip="'Amount of dots'">
+        <div class="small_squares_container" v-tooltip="l('amountOfDots')">
           <div></div>
           <div></div>
           <div></div>
@@ -40,13 +40,13 @@
             v-if="player.isHuman"
             icon="fa-user"  
             size="xs" 
-            v-tooltip="'Human'"
+            v-tooltip="l('human')"
           />
           <font-awesome-icon
             v-else
             icon="fa-robot"
             size="xs"
-            v-tooltip="'Bot'"
+            v-tooltip="l('bot')"
           />
         </div>
         <div class="player_cells number_td"> {{ player.cellsAmount }} </div>
@@ -85,6 +85,11 @@ export default {
     playersData: Array,
     playersStatistics: Object,
     globalSettings: Object
+  },
+  methods: {
+    l(key) {
+      return this.$root.getLangString('game.' + key)
+    }
   }
 };
 </script>
