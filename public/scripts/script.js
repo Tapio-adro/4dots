@@ -256,7 +256,7 @@ function checkOnStart() {
   gameRules.homeDef.createHomeAreaElements();
   setTimeout(() => {
     gameFeatures.scaleGameElements();
-    gameRules.homeDef.resizeHomeAreaElements();
+    gameRules.homeDef.resizeHomeAreaElements(players);
     gameRules.homeDef.resizeHomeAreaElements();
   }, 0);
 
@@ -404,6 +404,7 @@ function getBotBehavior (botType) {
 // when window is resized
 window.onresize = function () {
   if (appData.curWindow != 'game') return;
+
   gameFeatures.scaleGameElements();
   gameRules.homeDef.resizeHomeAreaElements();
 };

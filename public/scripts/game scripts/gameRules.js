@@ -14,13 +14,16 @@ gameRules.homeDef.createHomeAreaElements = function () {
     }
 }
 gameRules.homeDef.resizeHomeAreaElements = function () {
+    let root = document.querySelector(':root');
+    let zoomLevel = root.style.getPropertyValue("--zoomLevel");
+
     if (!gameRulesValues.homeDef) return;
 
     for (let player of players) {
         let div = player.homelandArea;
         let cellRect = player.coreCell.elem.getBoundingClientRect();
-        div.style.top = cellRect.top - 55 + 'px';
-        div.style.left = cellRect.left - 55 + 'px';
+        div.style.top = (cellRect.top) / zoomLevel - 55 + 'px';
+        div.style.left = (cellRect.left) / zoomLevel - 55 + 'px';
     }
 }
 gameRules.homeDef.removeHomeAreaElement = function (lostPlayers) {
