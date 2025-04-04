@@ -19,8 +19,10 @@ gameOptions.gameSpeed.setGameSpeed = function () {
 };
 
 gameOptions.boomCircles.spawnBoomCircle = function (cell) {
-  if (!gameOptionsValues.boomCircles || gameOptionsValues.maxOptimization)
-    return;
+  if (!gameOptionsValues.boomCircles || gameOptionsValues.maxOptimization) return;
+
+  let root = document.querySelector(':root');
+  let zoomLevel = root.style.getPropertyValue("--zoomLevel");
 
   let elemRect = cell.elem.getBoundingClientRect(),
     y = elemRect.y,
@@ -30,8 +32,8 @@ gameOptions.boomCircles.spawnBoomCircle = function (cell) {
   let circle = document.createElement("div");
   circle.classList.add("boom_circle");
 
-  circle.style.top = y + "px";
-  circle.style.left = x + "px";
+  circle.style.top = y / zoomLevel + "px";
+  circle.style.left = x / zoomLevel + "px";
   circle.style.backgroundColor = color;
 
   container.appendChild(circle);
@@ -56,6 +58,9 @@ gameOptions.maxOptimization.setMaxOptimization = function () {
 gameOptions.showPointerOnBotTurn = function (cell, player) {
   if (!gameOptionsValues.pointerOnBotTurn || player.isHuman) return;
 
+  let root = document.querySelector(':root');
+  let zoomLevel = root.style.getPropertyValue("--zoomLevel");
+
   let elemRect = cell.elem.getBoundingClientRect(),
     y = elemRect.y,
     x = elemRect.x;
@@ -65,8 +70,8 @@ gameOptions.showPointerOnBotTurn = function (cell, player) {
   pointer.classList.add("hidden");
   pointer.innerHTML = '<i class="fa fa-hand-pointer-o" aria-hidden="true"></i>';
 
-  pointer.style.top = y + 20 + "px";
-  pointer.style.left = x + 13 + "px";
+  pointer.style.top = (y) / zoomLevel + 20 + "px";
+  pointer.style.left = (x) / zoomLevel + 13 + "px";
   pointer.style.backgroundColor = color;
 
   container.appendChild(pointer);
